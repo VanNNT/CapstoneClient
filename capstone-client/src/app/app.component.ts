@@ -14,21 +14,7 @@ import { CompleterService, CompleterData } from 'ng2-completer';
 export class AppComponent implements OnInit, OnDestroy {
   public user;
   sub: any;
-  protected searchStr: string;
-  protected captain: string;
-  protected dataService: CompleterData;
-  protected searchData = [
-    { color: 'red', value: '#f00' },
-    { color: 'green', value: '#0f0' },
-    { color: 'blue', value: '#00f' },
-    { color: 'cyan', value: '#0ff' },
-    { color: 'magenta', value: '#f0f' },
-    { color: 'yellow', value: '#ff0' },
-    { color: 'black', value: '#000' }
-  ];
-  protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett' ];
-  constructor(private auth: AuthService, private loginService: LoginService, private completerService: CompleterService) {
-    this.dataService = completerService.local(this.searchData, 'color', 'color');
+  constructor(private auth: AuthService, private loginService: LoginService) {
   }
   ngOnInit() {
     $(window).scroll(function () {
