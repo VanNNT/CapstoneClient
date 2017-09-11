@@ -2,6 +2,7 @@ import {Component, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import * as $ from 'jquery';
 import {AuthService} from 'angular2-social-login';
 import {LoginService} from './service/login/login.service';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -42,7 +43,10 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+  onSubmit(registerForm : NgForm){
+    console.log(registerForm.value);
+    registerForm.reset();
+  }
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

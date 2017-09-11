@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import {appRoutes} from './app.routes';
-
 // Component
 import { AppComponent } from './app.component';
 import { CompanyDetailComponent } from './component/company-detail/company-detail.component';
@@ -45,7 +45,9 @@ const providers = {
     ReactiveFormsModule,
     HttpModule,
     MaterialModule,
-    Angular2SocialLoginModule
+    Angular2SocialLoginModule,
+    BrowserAnimationsModule
+
   ],
   providers: [LoginService, BaseService, CheckLoginGuard],
   bootstrap: [AppComponent]
