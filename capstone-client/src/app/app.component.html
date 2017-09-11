@@ -7,23 +7,23 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Boostrap</a>
+      <a class="navbar-brand" href="#"><img class="brand" src="https://cdn.itviec.com/assets/logo-itviec-65afac80e92140efa459545bc1c042ff4275f8f197535f147ed7614c2000ab0f.png" alt=""></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" id="top-nav">
         <li><a href="#" >Movie</a></li>
         <li><a href="#" >Page 2</a></li>
         <li><a href="#" >Page 3</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
+        <li *ngIf="true">
           <a data-toggle="modal" data-target="#myModal">
-            <span class="glyphicon glyphicon-log-in cursor-pointer"> Login</span>
+            <span class="glyphicon cursor-pointer"> Hello </span>
           </a>
         </li>
-        <li>
-          <a routerLink="/company">
-            <span class="glyphicon glyphicon-log-in cursor-pointer"> Company</span>
+        <li *ngIf="true">
+          <a data-toggle="modal" data-target="#myModal">
+            <span class="glyphicon glyphicon-log-in cursor-pointer"> Login</span>
           </a>
         </li>
       </ul>
@@ -65,4 +65,39 @@
   </div>
 </div>
 <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
-<footer></footer>
+<footer>
+  <div id="contact_info">
+    <div class="info_wrapper">
+      <div id="left_info">
+        <ul>
+          <div>
+            <li>&copy; Liên hệ để đăng tin tuyển dụng tại Hồ Chí Minh: (+84) 977 460 519 - Hà Nội: (+84) 964 618 859 - Email: love@fpt.edu.vn</li>
+          </div>
+          <div>
+            <li><a href="/">Liên Hệ</a></li>
+          <li><a href="/">SITE USE</a></li>
+          <li><a href="/">TERMS</a></li>
+          <li><a href="/">FAQS</a></li>
+          <li><a href="/">CONTACT</a></li>
+          <li><a href="/">SITE BY DuyTNB</a></li>
+          </div>
+        </ul>
+      </div>
+
+    </div>
+    <div class="info_wrapper">
+    <div id="right_info">
+      <ul>
+        <li><a href="/">SOCIAL HUB</a></li>
+        <li>
+          <a href="/"><i  style="color: blue" class="fa fa-facebook-square" aria-hidden="true"></i></a>
+        </li>
+        <li><a href="/"><i  style="color: #1da1f2" class="fa fa-twitter" aria-hidden="true"></i></a></li>
+        <li><a href="/"><i style="color: #ff7727" class="fa fa-google-wallet" aria-hidden="true"></i></a></li>
+        <li><a href="/"><i style="color: red" class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+        <li><a href="/"><i style="color: pink" class="fa fa-instagram" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
+    </div>
+  </div>
+</footer>
