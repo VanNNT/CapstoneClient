@@ -3,7 +3,6 @@ import * as $ from 'jquery';
 import {AuthService} from 'angular2-social-login';
 import {LoginService} from './service/login/login.service';
 import {NgForm} from "@angular/forms";
-import { CompleterService, CompleterData } from 'ng2-completer';
 
 @Component({
   selector: 'app-root',

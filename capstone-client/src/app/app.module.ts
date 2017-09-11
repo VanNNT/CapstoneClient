@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { CompanyDetailComponent } from './component/company-detail/company-detail.component';
 import { Angular2SocialLoginModule } from 'angular2-social-login';
 import { ReviewRatingComponent } from './component/review-rating/review-rating.component';
+import { MbtiTestComponent } from './component/mbti-test/mbti-test.component';
+
 // Service
 import {LoginService} from './service/login/login.service';
 import {BaseService} from './service/base-service/base.service';
@@ -31,7 +33,8 @@ const providers = {
   declarations: [
     AppComponent,
     CompanyDetailComponent,
-    ReviewRatingComponent
+    ReviewRatingComponent,
+    MbtiTestComponent
   ],
   imports: [
     BrowserModule,
