@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as $ from 'jquery';
 import {AuthService} from 'angular2-social-login';
 import {LoginService} from './service/login/login.service';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,8 @@ import {LoginService} from './service/login/login.service';
 export class AppComponent implements OnInit, OnDestroy {
   public user;
   sub: any;
-  constructor(private auth: AuthService, private loginService: LoginService) {}
+  constructor(private auth: AuthService, private loginService: LoginService) {
+  }
   ngOnInit() {
     $(window).scroll(function () {
     const height = $(window).scrollTop();
@@ -45,7 +47,10 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+  onSubmit(registerForm : NgForm){
+    console.log(registerForm.value);
+    registerForm.reset();
+  }
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
