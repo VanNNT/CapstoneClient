@@ -18,6 +18,7 @@ import {BaseService} from './service/base-service/base.service';
 
 // Guard
 import {CheckLoginGuard} from './guard/check-login/check-login.guard';
+import { HomeComponent } from './component/home/home.component';
 
 const providers = {
   'google': {
@@ -34,7 +35,8 @@ const providers = {
     AppComponent,
     CompanyDetailComponent,
     ReviewRatingComponent,
-    MbtiTestComponent
+    MbtiTestComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
