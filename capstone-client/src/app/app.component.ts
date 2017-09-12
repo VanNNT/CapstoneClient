@@ -47,6 +47,9 @@ export class AppComponent implements OnInit, OnDestroy {
     console.log(registerForm.value);
     registerForm.reset();
   }
+  onLogin(value){
+    console.log(value);
+  }
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

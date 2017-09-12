@@ -1,7 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 @color-uni-primary: #ff7727;
 body{
   padding-right: 0px !important;
+}
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: @color-uni-primary;
+}
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: @color-uni-primary;
 }
 .navbar-header{
   min-height: 80px;
