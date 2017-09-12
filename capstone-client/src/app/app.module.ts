@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import {appRoutes} from './app.routes';
+import { Ng2CompleterModule } from "ng2-completer";
 
 // Component
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import {BaseService} from './service/base-service/base.service';
 
 // Guard
 import {CheckLoginGuard} from './guard/check-login/check-login.guard';
+import { SearchComponent } from './component/search/search.component';
 
 const providers = {
   'google': {
@@ -32,10 +34,12 @@ const providers = {
   declarations: [
     AppComponent,
     CompanyDetailComponent,
-    ReviewRatingComponent
+    ReviewRatingComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
+    Ng2CompleterModule,
     appRoutes,
     FormsModule,
     ReactiveFormsModule,
