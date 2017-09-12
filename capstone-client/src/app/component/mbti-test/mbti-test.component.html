@@ -1,0 +1,163 @@
+<div id="main">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-8">
+        <div class="box box-white">
+          <div class="box-title title-mbit text-highlight">
+            Bài trắc nghiệm MBTI
+          </div>
+          <form #fMBTI="ngForm" id="form-quiz-mbti" (ngSubmit)="onSubmit(fMBTI.value)">
+            <div *ngFor="let item of questions" class="question" style="margin-bottom: 25px">
+              <span><strong>{{item.id}}.</strong></span>
+              <span><strong>{{item.question}}</strong></span>
+              <div ngModelGroup="question" style="background-color: #f7f7f7;margin-top: 10px;" class="row">
+                  <md-radio-group ngModel name="{{item.id}}">
+                    <div class="col-md-8 radio">
+                      <md-radio-button value="1">1. Luôn luôn</md-radio-button>
+                    </div>
+                    <div class="col-md-8 radio" style="margin-top: 10px">
+                      <md-radio-button value="2">2. Thường xuyên</md-radio-button>
+                    </div>
+                    <div class="col-md-8 radio" style="margin-top: 10px">
+                      <md-radio-button value="3">3. Bình thường</md-radio-button>
+                    </div>
+                   <div class="col-md-8 radio" style="margin-top: 10px">
+                     <md-radio-button value="5">4. Hiếm khi</md-radio-button>
+                   </div>
+                    <div class="col-md-8 radio" style="margin-top: 10px">
+                      <md-radio-button value="4">5. Không bao giờ</md-radio-button>
+                    </div>
+                  </md-radio-group>
+              </div>
+            </div>
+            <div style="margin-top: 10px" class="text-center">
+              <button type="submit" id="btn-submit-score" class="btn btn-uni-primary">Xem kết quả</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!--side bên tay phải-->
+      <div class="col-sm-4" style="background-color: #f7f7f7" id="sidebar">
+        <div class="box box-white text-center-sm">
+          <div class="row" style="margin: auto">
+            <h1 class="box-title title-right text-highlight">TRẮC NGHIỆM TÍNH CÁCH MBTI</h1>
+            <p>
+              MBTI (Myers-Briggs Type Indication) - Phân loại tính cách là phương pháp sử dụng những câu hỏi trắc nghiệm tâm lý để xác định tính cách của con người,
+              dựa vào đó chúng ta hiểu chính mình hơn, nếu biết được tính cách của người khác chúng ta có thể đoán được suy nghĩ, hành động của họ. MBTI được ứng dụng
+              nhiều trong việc: Xây dựng đội ngũ nhân viên, quản lý và đào tạo, đối phó với căng thẳng, giải quyết xung đột, đàm phán, hướng dẫn nghề nghiệp, xây dựng các mối quan hệ cá nhân tốt hơn.
+            </p>
+          </div>
+        </div>
+        <div class="box box-white">
+          <div class="row">
+            <div class="col-xs-12">
+              <h2 class="box-title bold text-dark-gray" style="font-size: 24px; margin-bottom: 20px;">16 tính cách MBTI</h2>
+            </div>
+            <div class="col-xs-12">
+              <ul class="mbti-personalities">
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ISTJ" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/istj.png" class="thumb">
+                    ISTJ - Người trách nhiệm
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ISFJ" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/isfj.png" class="thumb">
+                    ISFJ - Người nuôi dưỡng
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ISFP" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/isfp.png" class="thumb">
+                    ISFP - Người nghệ sĩ
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ISTP" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/istp.png" class="thumb">
+                    ISTP - Nhà kỹ thuật
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách INFP" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/infp.png" class="thumb">
+                    INFP - Người lý tưởng hóa
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách INFJ" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/infj.png" class="thumb">
+                    INFJ - Người che chở
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách INTJ" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/intj.png" class="thumb">
+                    INTJ - Nhà khoa học
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách INTP" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/intp.png" class="thumb">
+                    INTP - Nhà tư duy
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ENFJ" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/enfj.png" class="thumb">
+                    ENFJ - Người cho đi
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ENFP" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/enfp.png" class="thumb">
+                    ENFP - Người truyền cảm hứng
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ENTJ" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/entj.png" class="thumb">
+                    ENTJ - Nhà điều hành
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ENTP" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/entp.png" class="thumb">
+                    ENTP - Người nhìn xa
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ESFJ" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/esfj.png" class="thumb">
+                    ESFJ - Người quan tâm
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ESFP" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/esfp.png" class="thumb">
+                    ESFP - Người trình diễn
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ESTJ" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/entj.png" class="thumb">
+                    ESTJ - Người giám hộ
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ESTP" target="_blank">
+                    <img src="https://www.topcv.vn/images/mbti/web/estp.png" class="thumb">
+                    ESTP - Người thực thi
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,16 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import {appRoutes} from './app.routes';
 import { Ng2CompleterModule } from "ng2-completer";
-
 // Component
 import { AppComponent } from './app.component';
 import { CompanyDetailComponent } from './component/company-detail/company-detail.component';
 import { Angular2SocialLoginModule } from 'angular2-social-login';
 import { ReviewRatingComponent } from './component/review-rating/review-rating.component';
+import { MbtiTestComponent } from './component/mbti-test/mbti-test.component';
 
 // Service
 import {LoginService} from './service/login/login.service';
@@ -19,6 +20,7 @@ import {BaseService} from './service/base-service/base.service';
 // Guard
 import {CheckLoginGuard} from './guard/check-login/check-login.guard';
 import { SearchComponent } from './component/search/search.component';
+import { HomeComponent } from './component/home/home.component';
 
 const providers = {
   'google': {
@@ -35,7 +37,9 @@ const providers = {
     AppComponent,
     CompanyDetailComponent,
     ReviewRatingComponent,
-    SearchComponent
+    SearchComponent,
+    MbtiTestComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,9 @@ const providers = {
     ReactiveFormsModule,
     HttpModule,
     MaterialModule,
-    Angular2SocialLoginModule
+    Angular2SocialLoginModule,
+    BrowserAnimationsModule
+
   ],
   providers: [LoginService, BaseService, CheckLoginGuard],
   bootstrap: [AppComponent]
