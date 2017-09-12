@@ -16,10 +16,8 @@ export class CompanyDetailComponent implements OnInit {
       const isFollowed = false;
       if (height > 350 && !isFollowed) {
         $('#company-fixed-box').fadeIn('normal');
-        $('#nav-home').removeClass('.navbar-fixed-top');
       } else {
-        $('#company-fixed-box').hide();
-        $('#nav-home').addClass('.navbar-fixed-top');
+        $('#company-fixed-box').fadeOut('normal');
       }
     });
   }
