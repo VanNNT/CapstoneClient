@@ -21,6 +21,7 @@ import {BaseService} from './service/base-service/base.service';
 import {CheckLoginGuard} from './guard/check-login/check-login.guard';
 import { SearchComponent } from './component/search/search.component';
 import { HomeComponent } from './component/home/home.component';
+import {SearchService} from "./service/base-service/search.service";
 
 const providers = {
   'google': {
@@ -53,7 +54,7 @@ const providers = {
     BrowserAnimationsModule
 
   ],
-  providers: [LoginService, BaseService, CheckLoginGuard],
+  providers: [LoginService, BaseService, CheckLoginGuard, SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

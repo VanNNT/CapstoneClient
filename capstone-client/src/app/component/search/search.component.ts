@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CompleterData, CompleterService} from "ng2-completer";
+import {SearchService} from "../../service/base-service/search.service";
 
 @Component({
   selector: 'app-search',
@@ -7,6 +8,8 @@ import {CompleterData, CompleterService} from "ng2-completer";
   styleUrls: ['./search.component.less']
 })
 export class SearchComponent implements OnInit {
+  public pages: number[];
+  public show: boolean = false;
   protected searchStr: string;
   protected captain: string;
   protected dataService: CompleterData;
@@ -21,10 +24,20 @@ export class SearchComponent implements OnInit {
   ];
   protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett' ];
 
-  constructor(private completerService: CompleterService) {
+  constructor(private completerService: CompleterService, private searchService: SearchService) {
     this.dataService = completerService.local(this.searchData, 'color', 'color');
   }
-  ngOnInit() {
-  }
 
+ // ----------- Test API ----------- SearchService
+  public universityapi: any[];
+  ngOnInit() {
+  this.searchService.GetList().subscribe((response: any) => {
+    this.universityapi =response;
+  })
+    this.pages =[1, 2, 3, 4, 5];
+  }
+  //Click show table uniservity
+  showUniversity(agree: boolean){
+    this.show = true;
+  }
 }

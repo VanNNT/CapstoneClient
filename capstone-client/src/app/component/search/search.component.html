@@ -1,17 +1,64 @@
-
-<div class="row">
-  <span class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-    <ng2-completer class="ng2complete" id="abc"
-      placeholder="  - - Khu Vực - - " [(ngModel)]="searchStr"
-                   [datasource]="dataService"
-                   [minSearchLength]="0"></ng2-completer>
-  </span>
-  <span class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-    <ng2-completer class="ng2complete"
-      placeholder="  - - Nhóm Ngành - -" [(ngModel)]="captain"
-                   [datasource]="captains"
-                   [minSearchLength]="0"></ng2-completer>
-  </span>
+<div id="main">
+  <h1 style="text-align: center; color: #ff7727; font-family: 'inherit'">CÔNG CỤ</h1>
+  <h2 style="text-align: center; color: #ff7727; font-family: 'inherit'">Hỗ trợ tìm kiếm trường và ngành</h2>
+  <br><br>
+  <!--End Slogan-->
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <ng2-completer class="ng2complete" id="abc"
+                     placeholder="  - - Khu Vực - - " [(ngModel)]="searchStr"
+                     [datasource]="dataService"
+                     [minSearchLength]="0"></ng2-completer>
+    </div>
+    <div class="col-md-4">
+      <ng2-completer class="ng2complete"
+                     placeholder="  - - Nhóm Ngành - -" [(ngModel)]="captain"
+                     [datasource]="captains"
+                     [minSearchLength]="0"></ng2-completer>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-warning" (click)="showUniversity(true)" >Tìm Ngay</button>
+    </div>
+  </div>
+  <!--End seach-->
 </div>
-<br><br><br><br><br><br><br><br><br><br>
-<!--............................-->
+
+<div *ngIf="show">
+<div class="university">
+  <div *ngFor="let employee of universityapi" class="search-container">
+    <div>
+      <h4>{{employee.name}}</h4><br>
+      <span>{{employee.imageUrl}}</span>
+    </div>
+  </div>
+  <div class="pages">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item" *ngFor="let page of pages">
+          <a class="page-link" [routerLink]="['/search-university']" [queryParams]="{pageNumber:page}">
+            {{page}}
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+</div>
+<!-- End show search-->
+
+<div class="row" id="newsuni">
+  <div class="col-lg-12">
+    <!--<h1 style="text-align: center; color: #0BA25E; font-family: 'Showcard Gothic'">CÔNG CỤ</h1>-->
+    <h1 style="text-align: center; color: #ff7727; font-family: 'inherit'">Thông tin liên quan</h1>
+  </div>
+  <div class="col-lg-4 col-sm-6 text-center mb-4" *ngFor="let university of universityapi" >
+    <img class="rounded-circle img-fluid d-block mx-auto" src="http://images.cdn3.stockunlimited.net/clipart/atom-logo-element_1627953.jpg" alt="">
+    <h3>{{university.name}}
+      <small>{{university.age}}</small>
+    </h3>
+    <p>{{university.createdAt}}</p>
+  </div>
+</div>
