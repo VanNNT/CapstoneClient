@@ -25,7 +25,7 @@
             <ul class="dropdown-menu">
               <li><a>{{user.name}}</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="">Chỉnh sửa thông tin</a></li>
+              <li><a routerLink="/profile">Chỉnh sửa thông tin</a></li>
               <li><a href="https://www.topcv.vn/tai-khoan/mat-khau">Thay đổi mật khẩu</a></li>
               <li role="separator" class="divider"></li>
               <li><a (click)="logout()">Thoát tài khoản</a></li>
@@ -58,6 +58,8 @@
             <li class="tab-signin active" role="presentation">
               <a aria-expanded="false" data-toggle="tab" href="#signin-tab" role="tab">Đăng Nhập</a>
             </li>
+
+
           </ul>
           <div class="tab-content">
             <div aria-labelledby="signup-tab" class="fade tab-pane" id="signup-tab" role="tabpanel">
@@ -182,4 +184,6 @@
     </div>
   </div>
 </footer>
+
+
 
