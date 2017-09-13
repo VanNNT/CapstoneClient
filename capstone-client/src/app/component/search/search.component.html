@@ -25,11 +25,25 @@
 </div>
 
 <div *ngIf="show">
-<div class="university">
-  <div *ngFor="let employee of universityapi" class="search-container">
-    <div>
-      <h4>{{employee.name}}</h4><br>
-      <span>{{employee.imageUrl}}</span>
+<div class="container">
+  <!--<div *ngFor="let employee of universityapi" class="search-container">-->
+    <!--<div>-->
+      <!--<h4>{{employee.name}}</h4><br>-->
+      <!--<span>{{employee.imageUrl}}</span>-->
+    <!--</div>-->
+  <!--</div>-->
+  <div class="row text-center">
+    <div class="col-md-3 col-sm-6 hero-feature" *ngFor="let university of universityapi">
+      <div class="thumbnail">
+        <img src="http://placehold.it/800x500" alt="">
+        <div class="caption">
+          <h3>{{university.name}}</h3>
+          <p>{{university.imageUrl}}</p>
+          <p>
+            <a href="#" class="btn btn-primary">Quan Tâm</a> <a href="#" class="btn btn-default">Thông Tin</a>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
   <div class="pages">
@@ -62,3 +76,26 @@
     <p>{{university.createdAt}}</p>
   </div>
 </div>
+
+<!--End news unversity-->
+
+<!--Text show search-->
+
+<!--<div class="container">-->
+  <!--&lt;!&ndash; Page Features &ndash;&gt;-->
+  <!--<div class="row text-center">-->
+    <!--<div class="col-md-3 col-sm-6 hero-feature" *ngFor="let university of universityapi">-->
+      <!--<div class="thumbnail">-->
+        <!--<img src="http://placehold.it/800x500" alt="">-->
+        <!--<div class="caption">-->
+          <!--<h3>{{university.name}}</h3>-->
+          <!--<p>{{university.imageUrl}}</p>-->
+          <!--<p>-->
+            <!--<a href="#" class="btn btn-primary">Quan Tâm</a> <a href="#" class="btn btn-default">Thông Tin</a>-->
+          <!--</p>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--&lt;!&ndash; /.row &ndash;&gt;-->
+<!--</div>-->
