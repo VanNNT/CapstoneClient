@@ -6,13 +6,14 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import {appRoutes} from './app.routes';
 import { Ng2CompleterModule } from "ng2-completer";
+
 // Component
 import { AppComponent } from './app.component';
 import { CompanyDetailComponent } from './component/company-detail/company-detail.component';
 import { Angular2SocialLoginModule } from 'angular2-social-login';
 import { ReviewRatingComponent } from './component/review-rating/review-rating.component';
 import { MbtiTestComponent } from './component/mbti-test/mbti-test.component';
-
+import {UserDetailComponent} from './component/user-detail/user-detail.component'
 // Service
 import {LoginService} from './service/login/login.service';
 import {BaseService} from './service/base-service/base.service';
@@ -39,7 +40,8 @@ const providers = {
     ReviewRatingComponent,
     SearchComponent,
     MbtiTestComponent,
-    HomeComponent
+    HomeComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,7 @@ const providers = {
     MaterialModule,
     Angular2SocialLoginModule,
     BrowserAnimationsModule
+
 
   ],
   providers: [LoginService, BaseService, CheckLoginGuard],
