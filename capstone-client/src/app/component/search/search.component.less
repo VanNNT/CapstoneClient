@@ -1,3 +1,23 @@
+@color-0: white;
+@color-1: #652D34;
+@color-2: #929261;
+@color-3: #FD8814;
+@color-4: #FF661D;
+@color-5: #D2442C;
+
+h1 {
+  color: @color-5;
+  font-size: 33px;
+  letter-spacing: 2px;
+  text-align: center;
+  font-family: 'inherit';
+  font-weight: bold;
+}
+
+.thumbnail{
+  border-color: @color-2;
+}
+
 .row {
   margin-top: 50px;
 }
@@ -9,22 +29,9 @@
   vertical-align: middle;
 }
 
-.select2-container--default .select2-selection--single .select2-selection__rendered {
-  color: #444;
-  line-height: 28px;
-}
-.select2-container .select2-selection--single .select2-selection__rendered {
-  display: block;
-  padding-left: 8px;
-  padding-right: 20px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 
 //search ng2completer
 .ng2complete {
-  //margin: 20px;
   font-family: "fantasy";
   font-size: 23px;
   height: 400px;
@@ -32,53 +39,42 @@
 }
 
 //search button
-.btn {
+
+.btn#btnsearch{
+  width: auto;
   margin-top: 2px;
   margin-left: 10px;
-  padding: 6px 50px;
+  //padding: 6px 50px;
   font-weight: bold;
-  background-color: #ff7727;
-  border-radius: 20px;
+  background-color: @color-4;
+  border: 1px solid @color-5;
+  border-radius: 15px;
   font-family: "fantasy";
   font-size: 23px;
-  color: white;
-  border: 2px solid #ff7727;
+  letter-spacing: 2px;
+  color: @color-0;
   -webkit-transition-duration: 0.9s; /* Safari */
   transition-duration: 0.4s;
 }
+.btn#btnsearch:hover{
+  background-color: @color-5;
+}
+.btn-success{
+  height: 80%;
+  border: none;
+  background-color: @color-0;
+  border: 1px solid @color-4;
+  color: @color-4;
+}
 
 .btn:hover {
-    background-color: #eea236;
-    border: 2px solid #eea236;
-    color: white;
-}
-//end search
+    background-color: @color-4;
+    //border: 2px solid #eea236;
+    color: @color-0;
+} //end search
 
-// Demo Table University
-.search-container {
-  border: 1px solid #ff7727;
-  width: 100%;
-  margin: 10px;
-  padding: 5px 35px;
-  border-radius: 34px;
-  padding-bottom: 22px;
-  position: inherit;
-}
-
-//.university{
-//  border: none;
-//  border-radius: 50px 50px;
-//  margin-top: 50px;
-//  margin-left: 250px;
-//  margin-right: 250px;
-//}
 
 //Random show university
-
-body {
-  padding-top: 54px;
-}
-
 @media (min-width: 992px) {
   body {
     padding-top: 56px;
@@ -94,33 +90,15 @@ body {
 }}
 
 .row#newsuni{
+  border-top: 2px #666666;
   margin: 100px;
   margin-right: 150px;
   margin-left: 150px;
 }
 
-//Pages
-
-.pages ul{
-  width: 38%;
-  margin: auto;
-  margin-bottom: 40px;
+// Pagination ---------
+.pagination-controls{
+  padding: 90px;
 }
 
-// show search 2
-//
-//body {
-//  padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-//}
-//
-//.hero-spacer {
-//  margin-top: 50px;
-//}
-//
-//.hero-feature {
-//  margin-bottom: 30px;
-//}
-//
-//footer {
-//  margin: 50px 0;
-//}
+ //------------

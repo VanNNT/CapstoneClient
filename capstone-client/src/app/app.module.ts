@@ -22,6 +22,7 @@ import {CheckLoginGuard} from './guard/check-login/check-login.guard';
 import { SearchComponent } from './component/search/search.component';
 import { HomeComponent } from './component/home/home.component';
 import {SearchService} from "./service/base-service/search.service";
+import {NgxPaginationModule} from 'ngx-pagination';
 
 const providers = {
   'google': {
@@ -43,6 +44,7 @@ const providers = {
     HomeComponent
   ],
   imports: [
+    NgxPaginationModule,
     BrowserModule,
     Ng2CompleterModule,
     appRoutes,

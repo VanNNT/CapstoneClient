@@ -8,7 +8,6 @@ import {SearchService} from "../../service/base-service/search.service";
   styleUrls: ['./search.component.less']
 })
 export class SearchComponent implements OnInit {
-  public pages: number[];
   public show: boolean = false;
   protected searchStr: string;
   protected captain: string;
@@ -34,7 +33,7 @@ export class SearchComponent implements OnInit {
   this.searchService.GetList().subscribe((response: any) => {
     this.universityapi =response;
   })
-    this.pages =[1, 2, 3, 4, 5];
+
   }
   //Click show table uniservity
   showUniversity(agree: boolean){

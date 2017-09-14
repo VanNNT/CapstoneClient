@@ -1,12 +1,12 @@
 <div id="main">
-  <h1 style="text-align: center; color: #ff7727; font-family: 'inherit'">CÔNG CỤ</h1>
-  <h2 style="text-align: center; color: #ff7727; font-family: 'inherit'">Hỗ trợ tìm kiếm trường và ngành</h2>
+  <h1>CÔNG CỤ</h1>
+  <h1>Hỗ trợ tìm kiếm trường và ngành</h1>
   <br><br>
   <!--End Slogan-->
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-4">
-      <ng2-completer class="ng2complete" id="abc"
+      <ng2-completer class="ng2complete"
                      placeholder="  - - Khu Vực - - " [(ngModel)]="searchStr"
                      [datasource]="dataService"
                      [minSearchLength]="0"></ng2-completer>
@@ -18,7 +18,7 @@
                      [minSearchLength]="0"></ng2-completer>
     </div>
     <div class="col-md-2">
-      <button class="btn btn-warning" (click)="showUniversity(true)" >Tìm Ngay</button>
+      <button class="btn" id="btnsearch" (click)="showUniversity(true)" > <i class="fa fa-search" aria-hidden="true"></i> Tìm Ngay </button>
     </div>
   </div>
   <!--End seach-->
@@ -26,76 +26,44 @@
 
 <div *ngIf="show">
 <div class="container">
-  <!--<div *ngFor="let employee of universityapi" class="search-container">-->
-    <!--<div>-->
-      <!--<h4>{{employee.name}}</h4><br>-->
-      <!--<span>{{employee.imageUrl}}</span>-->
-    <!--</div>-->
-  <!--</div>-->
   <div class="row text-center">
-    <div class="col-md-3 col-sm-6 hero-feature" *ngFor="let university of universityapi">
+    <div class="col-md-3 col-sm-6 hero-feature" *ngFor="let university of universityapi | paginate: { itemsPerPage:8, currentPage: p }">
       <div class="thumbnail">
-        <img src="http://placehold.it/800x500" alt="">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnbsCdgHxRD6an4ZRvUXHcrhJXlsOo3fNhTiMaZIoEe1nA0fLSng" alt="">
         <div class="caption">
           <h3>{{university.name}}</h3>
           <p>{{university.imageUrl}}</p>
           <p>
-            <a href="#" class="btn btn-primary">Quan Tâm</a> <a href="#" class="btn btn-default">Thông Tin</a>
+            <a href="#" class="btn btn-success"><i class="fa fa-heart-o" aria-hidden="true"></i> Quan Tâm</a>
+            <a href="#" class="btn btn-success"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Thông Tin</a>
           </p>
         </div>
       </div>
     </div>
-  </div>
-  <div class="pages">
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item" *ngFor="let page of pages">
-          <a class="page-link" [routerLink]="['/search-university']" [queryParams]="{pageNumber:page}">
-            {{page}}
-          </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-      </ul>
-    </nav>
+    <pagination-controls (pageChange)="p =$event"> </pagination-controls>
   </div>
 </div>
+
 </div>
+
 <!-- End show search-->
 
 <div class="row" id="newsuni">
   <div class="col-lg-12">
     <!--<h1 style="text-align: center; color: #0BA25E; font-family: 'Showcard Gothic'">CÔNG CỤ</h1>-->
-    <h1 style="text-align: center; color: #ff7727; font-family: 'inherit'">Thông tin liên quan</h1>
+    <h1>Thông tin liên quan</h1>
   </div>
-  <div class="col-lg-4 col-sm-6 text-center mb-4" *ngFor="let university of universityapi" >
+  <div class="row text-center">
+  <div class="col-lg-4 col-sm-6 text-center mb-4" *ngFor="let university of universityapi | paginate: { itemsPerPage:6, currentPage: p }" >
     <img class="rounded-circle img-fluid d-block mx-auto" src="http://images.cdn3.stockunlimited.net/clipart/atom-logo-element_1627953.jpg" alt="">
     <h3>{{university.name}}
       <small>{{university.age}}</small>
     </h3>
     <p>{{university.createdAt}}</p>
   </div>
+  <pagination-controls (pageChange)="p =$event" style="padding: 40px"> </pagination-controls>
+  </div>
 </div>
 
-<!--End news unversity-->
+<!--End news university-->
 
-<!--Text show search-->
-
-<!--<div class="container">-->
-  <!--&lt;!&ndash; Page Features &ndash;&gt;-->
-  <!--<div class="row text-center">-->
-    <!--<div class="col-md-3 col-sm-6 hero-feature" *ngFor="let university of universityapi">-->
-      <!--<div class="thumbnail">-->
-        <!--<img src="http://placehold.it/800x500" alt="">-->
-        <!--<div class="caption">-->
-          <!--<h3>{{university.name}}</h3>-->
-          <!--<p>{{university.imageUrl}}</p>-->
-          <!--<p>-->
-            <!--<a href="#" class="btn btn-primary">Quan Tâm</a> <a href="#" class="btn btn-default">Thông Tin</a>-->
-          <!--</p>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--&lt;!&ndash; /.row &ndash;&gt;-->
-<!--</div>-->
