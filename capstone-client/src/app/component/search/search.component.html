@@ -3,6 +3,8 @@
   <h1>Hỗ trợ tìm kiếm trường và ngành</h1>
   <br><br>
   <!--End Slogan-->
+
+  <!--Search input-->
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-4">
@@ -18,52 +20,58 @@
                      [minSearchLength]="0"></ng2-completer>
     </div>
     <div class="col-md-2">
-      <button class="btn" id="btnsearch" (click)="showUniversity(true)" > <i class="fa fa-search" aria-hidden="true"></i> Tìm Ngay </button>
+      <button class="btn" id="btnsearch" (click)="showUniversity(true)"><i class="fa fa-search" aria-hidden="true"></i>
+        Tìm Ngay
+      </button>
     </div>
   </div>
-  <!--End seach-->
+  <!--End search input-->
 </div>
 
+<!--Show search-->
 <div *ngIf="show">
-<div class="container">
-  <div class="row text-center">
-    <div class="col-md-3 col-sm-6 hero-feature" *ngFor="let university of universityapi | paginate: { itemsPerPage:8, currentPage: p }">
-      <div class="thumbnail">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnbsCdgHxRD6an4ZRvUXHcrhJXlsOo3fNhTiMaZIoEe1nA0fLSng" alt="">
-        <div class="caption">
-          <h3>{{university.name}}</h3>
-          <p>{{university.imageUrl}}</p>
-          <p>
-            <a href="#" class="btn btn-success"><i class="fa fa-heart-o" aria-hidden="true"></i> Quan Tâm</a>
-            <a href="#" class="btn btn-success"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Thông Tin</a>
-          </p>
+  <div class="container">
+    <div class="row text-center" id="showsearch">
+      <div class="col-md-6 col-sm-6 hero-feature"
+           *ngFor="let university of universityapi | paginate: { itemsPerPage:4, currentPage: p }">
+        <div class="thumbnail">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnbsCdgHxRD6an4ZRvUXHcrhJXlsOo3fNhTiMaZIoEe1nA0fLSng"
+            alt="">
+          <div class="caption">
+            <h3>{{university.name}}</h3>
+            <p>{{university.imageUrl}}</p>
+            <p>
+              <a href="#" class="btn btn-success"><i class="fa fa-heart-o" aria-hidden="true"></i> Quan Tâm</a>
+              <a href="#" class="btn btn-success"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Thông Tin</a>
+            </p>
+          </div>
         </div>
       </div>
+      <pagination-controls (pageChange)="p =$event"></pagination-controls>
     </div>
-    <pagination-controls (pageChange)="p =$event"> </pagination-controls>
   </div>
 </div>
-
-</div>
-
 <!-- End show search-->
 
+<!--News university-->
 <div class="row" id="newsuni">
   <div class="col-lg-12">
     <!--<h1 style="text-align: center; color: #0BA25E; font-family: 'Showcard Gothic'">CÔNG CỤ</h1>-->
     <h1>Thông tin liên quan</h1>
   </div>
   <div class="row text-center">
-  <div class="col-lg-4 col-sm-6 text-center mb-4" *ngFor="let university of universityapi | paginate: { itemsPerPage:6, currentPage: p }" >
-    <img class="rounded-circle img-fluid d-block mx-auto" src="http://images.cdn3.stockunlimited.net/clipart/atom-logo-element_1627953.jpg" alt="">
-    <h3>{{university.name}}
-      <small>{{university.age}}</small>
-    </h3>
-    <p>{{university.createdAt}}</p>
-  </div>
-  <pagination-controls (pageChange)="p =$event" style="padding: 40px"> </pagination-controls>
+    <div class="col-lg-4 col-sm-6 text-center mb-4"
+         *ngFor="let university of universityapi | paginate: { itemsPerPage:6, currentPage: p }">
+      <img class="rounded-circle img-fluid d-block mx-auto"
+           src="http://images.cdn3.stockunlimited.net/clipart/atom-logo-element_1627953.jpg" alt="">
+      <h3>{{university.name}}
+        <small>{{university.age}}</small>
+      </h3>
+      <p>{{university.createdAt}}</p>
+    </div>
+    <pagination-controls (pageChange)="p =$event" style="padding: 40px"></pagination-controls>
   </div>
 </div>
-
 <!--End news university-->
 
