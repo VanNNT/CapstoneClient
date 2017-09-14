@@ -16,16 +16,17 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li class="text-li"><a href="#">Trang chủ</a></li>
-          <li class="text-li"><a href="" target="_blank">Blog</a></li>
+          <li class="text-li"><a target="_blank">Blog</a></li>
+          <a id="linkFake" [hidden]="true" routerLink="/profile"></a>
           <li *ngIf="logged" class="dropdown">
-            <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+            <a class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
                 <img src="{{user.image}}" alt="">
                 <span class="caret"></span>
               </a>
             <ul class="dropdown-menu">
               <li><a>{{user.name}}</a></li>
               <li role="separator" class="divider"></li>
-              <li><a routerLink="/profile">Chỉnh sửa thông tin</a></li>
+              <li><a (click)="clickLink()" >Chỉnh sửa thông tin</a></li>
               <li><a href="https://www.topcv.vn/tai-khoan/mat-khau">Thay đổi mật khẩu</a></li>
               <li role="separator" class="divider"></li>
               <li><a (click)="logout()">Thoát tài khoản</a></li>
@@ -146,7 +147,7 @@
     </div>
   </div>
 </div>
-<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>D
+<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
 <app-search></app-search>
 <footer class="">
   <div id="contact_info">

@@ -11,6 +11,6 @@ const routing: Routes = [
   { path: 'company', component: CompanyDetailComponent},
   {path: 'mbti-test', component: MbtiTestComponent},
   {path: '', component: HomeComponent},
-  {path: 'profile', component: UserDetailComponent}
+  {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]}
 ];
 export const appRoutes = RouterModule.forRoot(routing);

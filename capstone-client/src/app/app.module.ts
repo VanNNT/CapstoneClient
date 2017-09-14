@@ -13,15 +13,18 @@ import { CompanyDetailComponent } from './component/company-detail/company-detai
 import { Angular2SocialLoginModule } from 'angular2-social-login';
 import { ReviewRatingComponent } from './component/review-rating/review-rating.component';
 import { MbtiTestComponent } from './component/mbti-test/mbti-test.component';
-import {UserDetailComponent} from './component/user-detail/user-detail.component'
+import {UserDetailComponent} from './component/user-detail/user-detail.component';
+
 // Service
 import {LoginService} from './service/login/login.service';
 import {BaseService} from './service/base-service/base.service';
+import { SearchComponent } from './component/search/search.component';
+import { HomeComponent } from './component/home/home.component';
 
 // Guard
 import {CheckLoginGuard} from './guard/check-login/check-login.guard';
-import { SearchComponent } from './component/search/search.component';
-import { HomeComponent } from './component/home/home.component';
+
+import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
 
 const providers = {
   'google': {
@@ -41,7 +44,8 @@ const providers = {
     SearchComponent,
     MbtiTestComponent,
     HomeComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    EqualValidatorDirective
   ],
   imports: [
     BrowserModule,
