@@ -25,6 +25,7 @@ import { HomeComponent } from './component/home/home.component';
 import {CheckLoginGuard} from './guard/check-login/check-login.guard';
 
 import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
+import { HeaderComponent } from './component/header/header.component';
 
 const providers = {
   'google': {
@@ -45,7 +46,8 @@ const providers = {
     MbtiTestComponent,
     HomeComponent,
     UserDetailComponent,
-    EqualValidatorDirective
+    EqualValidatorDirective,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

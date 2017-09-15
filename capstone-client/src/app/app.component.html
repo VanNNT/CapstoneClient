@@ -1,189 +1,188 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<header>
-  <nav id="nav-home" class="navbar navbar-default navbar-fixed-top">
-    <div style="min-height: 80px" class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">
-          <img src="../assets/image/logo2.png" height="45" />
-        </a>
-      </div>
-      <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="text-li"><a href="#">Trang chủ</a></li>
-          <li class="text-li"><a target="_blank">Blog</a></li>
-          <a id="linkFake" [hidden]="true" routerLink="/profile"></a>
-          <li *ngIf="logged" class="dropdown">
-            <a class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-                <img src="{{user.image}}" alt="">
-                <span class="caret"></span>
-              </a>
-            <ul class="dropdown-menu">
-              <li><a>{{user.name}}</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a (click)="clickLink()" >Chỉnh sửa thông tin</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a (click)="logout()">Thoát tài khoản</a></li>
-            </ul>
-          </li>
-          <li class="text-li" *ngIf="!logged">
-            <a class="cursor-pointer" data-toggle="modal" data-target="#myModal">
-              <span class="glyphicon glyphicon-log-in"> Đăngnhập</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
+<!--<header>-->
+  <!--<nav id="nav-home" class="navbar navbar-default navbar-fixed-top">-->
+    <!--<div style="min-height: 80px" class="container">-->
+      <!--<div class="navbar-header">-->
+        <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">-->
+          <!--<span class="sr-only">Toggle navigation</span>-->
+          <!--<span class="icon-bar"></span>-->
+          <!--<span class="icon-bar"></span>-->
+          <!--<span class="icon-bar"></span>-->
+        <!--</button>-->
+        <!--<a class="navbar-brand" href="#">-->
+          <!--<img src="../assets/image/logo2.png" height="45" />-->
+        <!--</a>-->
+      <!--</div>-->
+      <!--<div id="navbar" class="navbar-collapse collapse">-->
+        <!--<ul class="nav navbar-nav navbar-right">-->
+          <!--<li class="text-li"><a href="#">Trang chủ</a></li>-->
+          <!--<li class="text-li"><a target="_blank">Blog</a></li>-->
+          <!--<a id="linkFake" [hidden]="true" routerLink="/profile"></a>-->
+          <!--<li *ngIf="logged" class="dropdown">-->
+            <!--<a class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">-->
+                <!--<img src="{{user.image}}" alt="">-->
+                <!--<span class="caret"></span>-->
+              <!--</a>-->
+            <!--<ul class="dropdown-menu">-->
+              <!--<li><a>{{user.name}}</a></li>-->
+              <!--<li role="separator" class="divider"></li>-->
+              <!--<li><a (click)="clickLink()" >Chỉnh sửa thông tin</a></li>-->
+              <!--<li role="separator" class="divider"></li>-->
+              <!--<li><a (click)="logout()">Thoát tài khoản</a></li>-->
+            <!--</ul>-->
+          <!--</li>-->
+          <!--<li class="text-li" *ngIf="!logged">-->
+            <!--<a class="cursor-pointer" data-toggle="modal" data-target="#myModal">-->
+              <!--<span class="glyphicon glyphicon-log-in"> Đăngnhập</span>-->
+            <!--</a>-->
+          <!--</li>-->
+        <!--</ul>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</nav>-->
+<!--</header>-->
+<!--<router-outlet></router-outlet>-->
+<!--<div id="myModal" class="modal fade" role="dialog">-->
+    <!--<div class="modal-dialog">-->
+      <!--&lt;!&ndash; Modal content&ndash;&gt;-->
+    <!--<div class="modal-content">-->
+      <!--<div style="height: 20px">-->
+        <!--<button style="font-size: 35px; margin: 0px 10px 0px 0px;" type="button" class="close" data-dismiss="modal">&times;</button>-->
+      <!--</div>-->
+      <!--<div class="modal-body">-->
+        <!--<div class="content">-->
+          <!--<ul class="login nav nav-tabs" role="tablist">-->
+            <!--<li class="tab-signup" role="presentation">-->
+              <!--<a aria-expanded="true" data-toggle="tab" href="#signup-tab" role="tab">Đăng Ký</a>-->
+            <!--</li>-->
+            <!--<li class="tab-signin active" role="presentation">-->
+              <!--<a aria-expanded="false" data-toggle="tab" href="#signin-tab" role="tab">Đăng Nhập</a>-->
+            <!--</li>-->
+
+
+          <!--</ul>-->
+          <!--<div class="tab-content">-->
+            <!--<div aria-labelledby="signup-tab" class="fade tab-pane" id="signup-tab" role="tabpanel">-->
+              <!--<div class="modal-body">-->
+                <!--<form id="register-form" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">-->
+                  <!--<div style="margin-top: 10px">-->
+                    <!--<div class="form-group">-->
+                      <!--<input class="form-control" name="registerEmail" ngModel required-->
+                             <!--pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$" type="email" placeholder="Email" #email="ngModel" >-->
+                      <!--<div *ngIf="email.errors && email.touched" class="alert alert-danger">-->
+                        <!--<div [hidden]="!email.errors.required">-->
+                          <!--Vui lòng nhập email.-->
+                        <!--</div>-->
+                        <!--<div [hidden]="!email.errors.pattern">-->
+                          <!--Email của bạn không đúng.-->
+                        <!--</div>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                      <!--<input name="nameRegister" class="form-control"  ngModel placeholder="Username" #name="ngModel" required >-->
+                      <!--<div *ngIf="name.errors && name.touched" class="alert alert-danger">-->
+                        <!--<div [hidden]="!name.errors.required">-->
+                          <!--Vui lòng nhập username.-->
+                        <!--</div>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                      <!--<input name="passResgiter" class="form-control" ngModel type="password" #password="ngModel" placeholder="Password" required>-->
+                      <!--<div *ngIf="password.errors && password.touched" class="alert alert-danger">-->
+                        <!--<div [hidden]="!password.errors.required">-->
+                          <!--Vui lòng nhập password-->
+                        <!--</div>-->
+                      <!--</div>-->
+                    <!--</div>-->
+
+                  <!--</div>-->
+                  <!--<div class="modal-footer">-->
+                    <!--<div>-->
+                      <!--<button type="summit" [disabled]="!registerForm.valid" class="btn btn-uni-primary btn-block">Đăng ký</button>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</form>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div aria-labelledby="signin-tab" class="fade tab-pane active in" id="signin-tab" role="tabpanel">-->
+              <!--<form id="login-form" #fLogin="ngForm">-->
+                <!--<div class="modal-body">-->
+                  <!--<div>-->
+                    <!--<button (click)="login('facebook')" class="btn btn-primary">Đăng nhập bằng Facebook</button>-->
+                    <!--<button (click)="login('google')" class="btn btn-danger">Đăng nhập bằng Google</button>-->
+                  <!--</div>-->
+                  <!--<div class="hr">-->
+                    <!--<span>hoặc</span>-->
+                  <!--</div>-->
+                  <!--<div>-->
+                    <!--<div class="form-group">-->
+                      <!--<input name="username" class="form-control"  ngModel placeholder="Username" #username="ngModel" required >-->
+                      <!--<div *ngIf="username.errors && username.touched" class="alert alert-danger">-->
+                        <!--<div [hidden]="!username.errors.required">-->
+                          <!--Vui lòng nhập username.-->
+                        <!--</div>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                      <!--<input name="password" class="form-control" ngModel type="password" #passLogin="ngModel" placeholder="Password" required>-->
+                      <!--<div *ngIf="passLogin.errors && passLogin.touched" class="alert alert-danger">-->
+                        <!--<div [hidden]="!passLogin.errors.required">-->
+                          <!--Vui lòng nhập password-->
+                        <!--</div>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                  <!--<div>-->
+                    <!--<button type="summit" [disabled]="!fLogin.valid" class="btn btn-uni-primary btn-block" (click)="onLogin(fLogin.value)">Đăng nhập</button>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</form>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<!--<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+<!--<app-search></app-search>-->
+<!--<footer class="">-->
+  <!--<div id="contact_info">-->
+    <!--<div class="info_wrapper">-->
+      <!--<div id="left_info">-->
+        <!--<ul>-->
+          <!--<div>-->
+            <!--<li>&copy; Liên hệ để đăng tin tuyển dụng tại Hồ Chí Minh: (+84) 977 460 519 - Hà Nội: (+84) 964 618 859 - Email: love@fpt.edu.vn</li>-->
+          <!--</div>-->
+          <!--<div>-->
+            <!--<li><a href="/">Liên Hệ</a></li>-->
+          <!--<li><a href="/">SITE USE</a></li>-->
+          <!--<li><a href="/">TERMS</a></li>-->
+          <!--<li><a href="/">FAQS</a></li>-->
+          <!--<li><a href="/">CONTACT</a></li>-->
+          <!--<li><a href="/">SITE BY Uni</a></li>-->
+          <!--</div>-->
+        <!--</ul>-->
+      <!--</div>-->
+
+    <!--</div>-->
+    <!--<div class="info_wrapper">-->
+    <!--<div id="right_info">-->
+      <!--<ul>-->
+        <!--<li><a href="/">SOCIAL HUB</a></li>-->
+        <!--<li>-->
+          <!--<a href="/"><i  style="color: blue" class="fa fa-facebook-square" aria-hidden="true"></i></a>-->
+        <!--</li>-->
+        <!--<li><a href="/"><i  style="color: #1da1f2" class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+        <!--<li><a href="/"><i style="color: #ff7727" class="fa fa-google-wallet" aria-hidden="true"></i></a></li>-->
+        <!--<li><a href="/"><i style="color: red" class="fa fa-google-plus" aria-hidden="true"></i></a></li>-->
+        <!--<li><a href="/"><i style="color: pink" class="fa fa-instagram" aria-hidden="true"></i></a></li>-->
+      <!--</ul>-->
+    <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</footer>-->
+
 <router-outlet></router-outlet>
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-    <div class="modal-content">
-      <div style="height: 20px">
-        <button style="font-size: 35px; margin: 0px 10px 0px 0px;" type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="content">
-          <ul class="login nav nav-tabs" role="tablist">
-            <li class="tab-signup" role="presentation">
-              <a aria-expanded="true" data-toggle="tab" href="#signup-tab" role="tab">Đăng Ký</a>
-            </li>
-            <li class="tab-signin active" role="presentation">
-              <a aria-expanded="false" data-toggle="tab" href="#signin-tab" role="tab">Đăng Nhập</a>
-            </li>
-
-
-          </ul>
-          <div class="tab-content">
-            <div aria-labelledby="signup-tab" class="fade tab-pane" id="signup-tab" role="tabpanel">
-              <div class="modal-body">
-                <form id="register-form" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
-                  <div style="margin-top: 10px">
-                    <div class="form-group">
-                      <input class="form-control" name="registerEmail" ngModel required
-                             pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$" type="email" placeholder="Email" #email="ngModel" >
-                      <div *ngIf="email.errors && email.touched" class="alert alert-danger">
-                        <div [hidden]="!email.errors.required">
-                          Vui lòng nhập email.
-                        </div>
-                        <div [hidden]="!email.errors.pattern">
-                          Email của bạn không đúng.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <input name="nameRegister" class="form-control"  ngModel placeholder="Username" #name="ngModel" required >
-                      <div *ngIf="name.errors && name.touched" class="alert alert-danger">
-                        <div [hidden]="!name.errors.required">
-                          Vui lòng nhập username.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <input name="passResgiter" class="form-control" ngModel type="password" #password="ngModel" placeholder="Password" required>
-                      <div *ngIf="password.errors && password.touched" class="alert alert-danger">
-                        <div [hidden]="!password.errors.required">
-                          Vui lòng nhập password
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                  <div class="modal-footer">
-                    <div>
-                      <button type="summit" [disabled]="!registerForm.valid" class="btn btn-uni-primary btn-block">Đăng ký</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div aria-labelledby="signin-tab" class="fade tab-pane active in" id="signin-tab" role="tabpanel">
-              <form id="login-form" #fLogin="ngForm">
-                <div class="modal-body">
-                  <div>
-                    <button (click)="login('facebook')" class="btn btn-primary">Đăng nhập bằng Facebook</button>
-                    <button (click)="login('google')" class="btn btn-danger">Đăng nhập bằng Google</button>
-                  </div>
-                  <div class="hr">
-                    <span>hoặc</span>
-                  </div>
-                  <div>
-                    <div class="form-group">
-                      <input name="username" class="form-control"  ngModel placeholder="Username" #username="ngModel" required >
-                      <div *ngIf="username.errors && username.touched" class="alert alert-danger">
-                        <div [hidden]="!username.errors.required">
-                          Vui lòng nhập username.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <input name="password" class="form-control" ngModel type="password" #passLogin="ngModel" placeholder="Password" required>
-                      <div *ngIf="passLogin.errors && passLogin.touched" class="alert alert-danger">
-                        <div [hidden]="!passLogin.errors.required">
-                          Vui lòng nhập password
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <div>
-                    <button type="summit" [disabled]="!fLogin.valid" class="btn btn-uni-primary btn-block" (click)="onLogin(fLogin.value)">Đăng nhập</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
-<app-search></app-search>
-<footer class="">
-  <div id="contact_info">
-    <div class="info_wrapper">
-      <div id="left_info">
-        <ul>
-          <div>
-            <li>&copy; Liên hệ để đăng tin tuyển dụng tại Hồ Chí Minh: (+84) 977 460 519 - Hà Nội: (+84) 964 618 859 - Email: love@fpt.edu.vn</li>
-          </div>
-          <div>
-            <li><a href="/">Liên Hệ</a></li>
-          <li><a href="/">SITE USE</a></li>
-          <li><a href="/">TERMS</a></li>
-          <li><a href="/">FAQS</a></li>
-          <li><a href="/">CONTACT</a></li>
-          <li><a href="/">SITE BY Uni</a></li>
-          </div>
-        </ul>
-      </div>
-
-    </div>
-    <div class="info_wrapper">
-    <div id="right_info">
-      <ul>
-        <li><a href="/">SOCIAL HUB</a></li>
-        <li>
-          <a href="/"><i  style="color: blue" class="fa fa-facebook-square" aria-hidden="true"></i></a>
-        </li>
-        <li><a href="/"><i  style="color: #1da1f2" class="fa fa-twitter" aria-hidden="true"></i></a></li>
-        <li><a href="/"><i style="color: #ff7727" class="fa fa-google-wallet" aria-hidden="true"></i></a></li>
-        <li><a href="/"><i style="color: red" class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-        <li><a href="/"><i style="color: pink" class="fa fa-instagram" aria-hidden="true"></i></a></li>
-      </ul>
-    </div>
-    </div>
-  </div>
-</footer>
-
-
-
