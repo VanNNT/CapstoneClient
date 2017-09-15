@@ -5,7 +5,7 @@
   <!--End Slogan-->
 
   <!--Search input-->
-  <div class="row">
+  <div class="row ">
     <div class="col-md-1"></div>
     <div class="col-md-4">
       <ng2-completer class="ng2complete"
@@ -24,6 +24,7 @@
         Tìm Ngay
       </button>
     </div>
+    <div class="col-md-1"></div>
   </div>
   <!--End search input-->
 </div>
@@ -48,8 +49,8 @@
           </div>
         </div>
       </div>
-      <pagination-controls (pageChange)="p =$event"></pagination-controls>
     </div>
+    <div class="text-center"><pagination-controls (pageChange)="p =$event"></pagination-controls></div>
   </div>
 </div>
 <!-- End show search-->
@@ -58,11 +59,11 @@
 <div class="row" id="newsuni">
   <div class="col-lg-12">
     <!--<h1 style="text-align: center; color: #0BA25E; font-family: 'Showcard Gothic'">CÔNG CỤ</h1>-->
-    <h1>Thông tin liên quan</h1>
+    <h1>MỘT SỐ TRƯỜNG</h1>
   </div>
   <div class="row text-center">
     <div class="col-lg-4 col-sm-6 text-center mb-4"
-         *ngFor="let university of universityapi | paginate: { itemsPerPage:6, currentPage: p }">
+         *ngFor="let university of universityapi">
       <img class="rounded-circle img-fluid d-block mx-auto"
            src="http://images.cdn3.stockunlimited.net/clipart/atom-logo-element_1627953.jpg" alt="">
       <h3>{{university.name}}
@@ -70,7 +71,6 @@
       </h3>
       <p>{{university.createdAt}}</p>
     </div>
-    <pagination-controls (pageChange)="p =$event" style="padding: 40px"></pagination-controls>
   </div>
 </div>
 <!--End news university-->
