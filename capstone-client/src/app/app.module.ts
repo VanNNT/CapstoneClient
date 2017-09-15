@@ -27,6 +27,7 @@ import {CheckLoginGuard} from './guard/check-login/check-login.guard';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
+import { HeaderComponent } from './component/header/header.component';
 
 
 const providers = {
@@ -48,7 +49,8 @@ const providers = {
     MbtiTestComponent,
     HomeComponent,
     UserDetailComponent,
-    EqualValidatorDirective
+    EqualValidatorDirective,
+    HeaderComponent
   ],
   imports: [
     NgxPaginationModule,
