@@ -51,7 +51,7 @@
                       <div [hidden]="!confirm.errors.required">
                         Vui lòng nhập password
                       </div>
-                      <div [hidden]="confirm.valid || (confirm.pristine && !f.submitted) || !confirm.value">
+                      <div [hidden]="confirm.valid || !confirm.value">
                         Password xác nhận không đúng
                       </div>
                     </div>
