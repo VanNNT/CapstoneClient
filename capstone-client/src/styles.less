@@ -103,13 +103,32 @@ a:focus, a:hover {
 @media (min-width: 1200px){
 
 }
+//Input Search
 input{
-  width: 500px;
+  margin: 2px;
+  width: 100%;
   border-radius: 15px 15px;
-  border: 2px solid #1da1f2;
+  border: 1.5px solid #FF661D;
 }
 
 button{
   outline: none;
 }
 :focus::-webkit-input-placeholder { color: transparent } /*Google Chrome */
+
+.ng2complete{
+  input{
+    outline: none;
+  }
+  .completer-dropdown {
+    width: 95% !important;
+      }
+  .completer-selected-row {
+    background-color: #FD8814 !important;
+  }
+  .completer-row {
+    width: 100% !important;
+  }
+}
+
+

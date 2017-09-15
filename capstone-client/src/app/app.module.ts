@@ -14,18 +14,21 @@ import { Angular2SocialLoginModule } from 'angular2-social-login';
 import { ReviewRatingComponent } from './component/review-rating/review-rating.component';
 import { MbtiTestComponent } from './component/mbti-test/mbti-test.component';
 import {UserDetailComponent} from './component/user-detail/user-detail.component';
+import { SearchComponent } from './component/search/search.component';
+import { HomeComponent } from './component/home/home.component';
 
 // Service
 import {LoginService} from './service/login/login.service';
 import {BaseService} from './service/base-service/base.service';
-import { SearchComponent } from './component/search/search.component';
-import { HomeComponent } from './component/home/home.component';
+import {SearchService} from "./service/base-service/search.service";
 
 // Guard
 import {CheckLoginGuard} from './guard/check-login/check-login.guard';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
 import { HeaderComponent } from './component/header/header.component';
+
 
 const providers = {
   'google': {
@@ -50,6 +53,7 @@ const providers = {
     HeaderComponent
   ],
   imports: [
+    NgxPaginationModule,
     BrowserModule,
     Ng2CompleterModule,
     appRoutes,
@@ -62,7 +66,7 @@ const providers = {
 
 
   ],
-  providers: [LoginService, BaseService, CheckLoginGuard],
+  providers: [LoginService, BaseService, CheckLoginGuard, SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
