@@ -32,6 +32,7 @@ export class MbtiTestComponent implements OnInit {
     },
   ];
   ngOnInit() {
+    console.log("aaaa");
   }
   onSubmit(value){
     console.log(value);
