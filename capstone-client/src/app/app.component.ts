@@ -29,6 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
         $('.modal-backdrop').remove();
         this.logged = true;
         this.cdRef.detectChanges();
+        localStorage.setItem('USER_INFO', JSON.stringify(this.user));
       }
     );
   }
@@ -49,6 +50,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   onLogin(value){
     console.log(value);
+  }
+  clickLink(){
+    document.getElementById('linkFake').click();
   }
   ngOnDestroy() {
     this.sub.unsubscribe();

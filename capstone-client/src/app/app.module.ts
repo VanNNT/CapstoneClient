@@ -6,23 +6,28 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import {appRoutes} from './app.routes';
 import { Ng2CompleterModule } from "ng2-completer";
+
 // Component
 import { AppComponent } from './app.component';
 import { CompanyDetailComponent } from './component/company-detail/company-detail.component';
 import { Angular2SocialLoginModule } from 'angular2-social-login';
 import { ReviewRatingComponent } from './component/review-rating/review-rating.component';
 import { MbtiTestComponent } from './component/mbti-test/mbti-test.component';
+import {UserDetailComponent} from './component/user-detail/user-detail.component';
+import { SearchComponent } from './component/search/search.component';
+import { HomeComponent } from './component/home/home.component';
 
 // Service
 import {LoginService} from './service/login/login.service';
 import {BaseService} from './service/base-service/base.service';
+import {SearchService} from "./service/base-service/search.service";
 
 // Guard
 import {CheckLoginGuard} from './guard/check-login/check-login.guard';
-import { SearchComponent } from './component/search/search.component';
-import { HomeComponent } from './component/home/home.component';
-import {SearchService} from "./service/base-service/search.service";
 import {NgxPaginationModule} from 'ngx-pagination';
+
+import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
+
 
 const providers = {
   'google': {
@@ -41,7 +46,9 @@ const providers = {
     ReviewRatingComponent,
     SearchComponent,
     MbtiTestComponent,
-    HomeComponent
+    HomeComponent,
+    UserDetailComponent,
+    EqualValidatorDirective
   ],
   imports: [
     NgxPaginationModule,
@@ -54,6 +61,7 @@ const providers = {
     MaterialModule,
     Angular2SocialLoginModule,
     BrowserAnimationsModule
+
 
   ],
   providers: [LoginService, BaseService, CheckLoginGuard, SearchService],
