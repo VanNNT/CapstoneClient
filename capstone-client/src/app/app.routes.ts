@@ -7,6 +7,9 @@ import {HomeComponent} from "./component/home/home.component";
 import {SearchComponent} from "./component/search/search.component";
 import {UserDetailComponent} from './component/user-detail/user-detail.component'
 import {HeaderComponent} from "./component/header/header.component";
+import {AdminComponent} from "./component/admin/admin.component";
+
+
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
@@ -18,6 +21,6 @@ const routing: Routes = [
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard]},
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]}
     ]},
-  {path: 'admin', component: ReviewRatingComponent},
+  {path: 'admin', component: AdminComponent},
 ];
 export const appRoutes = RouterModule.forRoot(routing);

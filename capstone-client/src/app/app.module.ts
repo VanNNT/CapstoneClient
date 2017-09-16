@@ -28,6 +28,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
 import { HeaderComponent } from './component/header/header.component';
+import { AdminComponent } from './component/admin/admin.component';
 
 
 const providers = {
@@ -50,7 +51,8 @@ const providers = {
     HomeComponent,
     UserDetailComponent,
     EqualValidatorDirective,
-    HeaderComponent
+    HeaderComponent,
+    AdminComponent
   ],
   imports: [
     NgxPaginationModule,
