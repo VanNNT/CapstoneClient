@@ -9,11 +9,8 @@ import {MBTIQuestion} from "../../model/MBTIModel";
   styleUrls: ['./mbti-test.component.less']
 })
 export class MbtiTestComponent implements OnInit {
-  private answerE: number = 0;
-  private answerS: number = 0;
-  private answerT: number = 0;
-  private answerJ: number = 0;
   private MBTIresult: string;
+  public tested: boolean;
   private questions: MBTIQuestion[];
   private scores = {
     E: 0,
@@ -109,6 +106,7 @@ export class MbtiTestComponent implements OnInit {
     }
   ];
   ngOnInit() {
+    this.tested = false;
     this.questions=[];
     this.aaa.forEach(x=>{
       this.questions.push(new MBTIQuestion(x));
@@ -165,5 +163,6 @@ export class MbtiTestComponent implements OnInit {
     }
     form.onReset();
     console.log(this.MBTIresult);
+    this.tested = true;
   }
 }
