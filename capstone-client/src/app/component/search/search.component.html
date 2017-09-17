@@ -7,15 +7,21 @@
   <!--Search input-->
   <div class="row ">
     <div class="col-md-1"></div>
-    <div class="col-md-4">
+    <div class="col-md-3">
+      <ng2-completer class="ng2complete"
+                     placeholder="  - - Nhóm Ngành - -" [(ngModel)]="captain"
+                     [datasource]="captains"
+                     [minSearchLength]="0"></ng2-completer>
+    </div>
+    <div class="col-md-3">
       <ng2-completer class="ng2complete"
                      placeholder="  - - Khu Vực - - " [(ngModel)]="searchStr"
                      [datasource]="dataService"
                      [minSearchLength]="0"></ng2-completer>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <ng2-completer class="ng2complete"
-                     placeholder="  - - Nhóm Ngành - -" [(ngModel)]="captain"
+                     placeholder="  - - Trường - -" [(ngModel)]="captain"
                      [datasource]="captains"
                      [minSearchLength]="0"></ng2-completer>
     </div>

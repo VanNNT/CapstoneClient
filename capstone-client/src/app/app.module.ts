@@ -32,7 +32,7 @@ import { HeaderComponent } from './component/header/header.component';
 
 const providers = {
   'google': {
-    'clientId': '583983350151-j9h70lfjearo27fd1ftjutghcsqs434a.apps.googleusercontent.com'
+    'clientId': '525175435249-fcon5618ugd00jij2o066g7k3266n3mb.apps.googleusercontent.com'
   },
   'facebook': {
     'clientId': '1947926578821346',
