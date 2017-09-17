@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-@color-uni-primary: #ff7727;
+@color-uni-primary: #f05f40;
 body{
   padding-right: 0px !important;
 }
@@ -116,6 +116,11 @@ input{
 
 button{
   outline: none;
+  &:hover{
+    border-color: @color-uni-primary;
+    background-color: white;
+    color: @color-uni-primary;
+  }
 }
 :focus::-webkit-input-placeholder { color: transparent } /*Google Chrome */
 

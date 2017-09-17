@@ -14,45 +14,38 @@ export class HeaderComponent implements OnInit,OnDestroy {
   public user;
   sub: any;
   public logged = false;
-  constructor(private auth: AuthService, private loginService: LoginService, private cdRef:ChangeDetectorRef,private router: Router) {}
+  constructor(private router: Router, private loginService: LoginService, private auth: AuthService,private cdRef:ChangeDetectorRef) {
+
+  }
   ngOnInit() {
-    // $( ".inner" ).append( "<app-home id='home'></app-home>" );
+    this.getUser();
     this.router.navigate(['home']);
   }
-  login(provider) {
-    this.sub = this.auth.login(provider).subscribe(
-      (data) => {
-        console.log(data);
-        this.user = data;
-        this.loginService.setLogin(true);
-        $('#myModal').hide();
-        $('body').removeClass('modal-open');
-        $('.modal-backdrop').remove();
-        this.logged = true;
-        this.cdRef.detectChanges();
-        localStorage.setItem('USER_INFO', JSON.stringify(this.user));
-      }
-    );
+  public getUser(): void {
+    this.loginService.space.subscribe(value => {
+      this.user = value;
+      this.cdRef.detectChanges();
+    });
   }
-  logout() {
+  public logout() {
     this.auth.logout().subscribe(
       (data) => {
-        this.logged=false;
-        this.cdRef.detectChanges();
-        console.log(this.logged);
         this.user = null;
+        this.cdRef.detectChanges();
         this.loginService.setLogin(false);
+        this.loginService.broadcastTextChange(this.user);
+        window.location.replace('/home');
       }
     );
   }
-  onSubmit(registerForm : NgForm){
+  public onSubmit(registerForm : NgForm){
     console.log(registerForm.value);
     registerForm.reset();
   }
-  onLogin(value){
+  public onLogin(value){
     console.log(value);
   }
-  clickLink(){
+  public clickLink(){
     document.getElementById('linkFake').click();
   }
   ngOnDestroy() {

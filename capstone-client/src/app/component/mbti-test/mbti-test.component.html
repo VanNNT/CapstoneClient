@@ -6,28 +6,19 @@
           <div class="box-title title-mbit text-highlight">
             Bài trắc nghiệm MBTI
           </div>
-          <form #fMBTI="ngForm" id="form-quiz-mbti" (ngSubmit)="onSubmit(fMBTI.value)">
-            <div *ngFor="let item of questions" class="question" style="margin-bottom: 25px">
+          <form #fMBTI="ngForm" id="form-quiz-mbti" (ngSubmit)="onSubmit(fMBTI)">
+            <div *ngFor="let item of questions; let i=index" class="question" style="margin-bottom: 25px">
               <span><strong>{{item.id}}.</strong></span>
               <span><strong>{{item.question}}</strong></span>
-              <div ngModelGroup="question" style="background-color: #f7f7f7;margin-top: 10px;" class="row">
-                  <md-radio-group ngModel name="{{item.id}}">
-                    <div class="col-md-8 radio">
-                      <md-radio-button value="1">1. Luôn luôn</md-radio-button>
-                    </div>
-                    <div class="col-md-8 radio" style="margin-top: 10px">
-                      <md-radio-button value="2">2. Thường xuyên</md-radio-button>
-                    </div>
-                    <div class="col-md-8 radio" style="margin-top: 10px">
-                      <md-radio-button value="3">3. Bình thường</md-radio-button>
-                    </div>
-                   <div class="col-md-8 radio" style="margin-top: 10px">
-                     <md-radio-button value="5">4. Hiếm khi</md-radio-button>
-                   </div>
-                    <div class="col-md-8 radio" style="margin-top: 10px">
-                      <md-radio-button value="4">5. Không bao giờ</md-radio-button>
-                    </div>
-                  </md-radio-group>
+              <div style="background-color: #f7f7f7;margin-top: 10px;" class="row">
+                <md-radio-group ngModel name="{{item.name}}">
+                  <div class="col-md-6 radio">
+                    <md-radio-button value="a" (click)="onChoose(item,'a')">{{item.option1}}</md-radio-button>
+                  </div>
+                  <div class="col-md-6 radio" style="margin-top: 10px">
+                    <md-radio-button value="b" (click)="onChoose(item,'b')">{{item.option2}}</md-radio-button>
+                  </div>
+                </md-radio-group>
               </div>
             </div>
             <div style="margin-top: 10px" class="text-center">

@@ -12,5 +12,5 @@ window.randomize = function() {
       $(this).find('.circle .fill.fix').css(transform_styles[i], 'rotate(' + fix_rotation + 'deg)');
     }
   });
-}
+};
 setTimeout(window.randomize, 200);
