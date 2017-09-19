@@ -22,7 +22,7 @@
           <div class="tab-content">
             <div aria-labelledby="signup-tab" class="fade tab-pane" id="signup-tab" role="tabpanel">
               <div class="modal-body">
-                <form id="register-form" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+                <form id="register-form" #registerForm="ngForm" (ngSubmit)="onRegister(registerForm)">
                   <div style="margin-top: 10px">
                     <div class="form-group">
                       <input class="form-control" name="registerEmail" ngModel required
@@ -52,7 +52,18 @@
                         </div>
                       </div>
                     </div>
-
+                    <div class="form-group">
+                      <input name="confirmPassword" class="form-control" ngModel type="password"
+                             #passConfirm="ngModel" placeholder="Xác nhận password" required validateEqual="passResgiter">
+                      <div *ngIf="passConfirm.errors && passConfirm.touched && password.value" class="alert alert-danger">
+                        <div [hidden]="!passConfirm.errors.required">
+                          Vui lòng nhập password
+                        </div>
+                        <div [hidden]="passConfirm.valid || !passConfirm.value">
+                          Password xác nhận không đúng
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div class="modal-footer">
                     <div>
@@ -105,3 +116,4 @@
   </div>
 </div>
 <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
+

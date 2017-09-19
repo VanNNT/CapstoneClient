@@ -14,12 +14,13 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="text-li"><a href="#">Trang chủ</a></li>
+          <li class="text-li"><a routerLink="/home">Trang chủ</a>
+          <li class="text-li"><a routerLink="/university">University</a>
           <li class="text-li"><a routerLink="/mbti-test">Trắc nghiệm tính cách MBTI</a></li>
           <a id="linkFake" [hidden]="true" routerLink="/profile"></a>
           <li *ngIf="user" class="dropdown">
             <a class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-              <img src="{{user.image}}" alt="">
+              <img src="{{user.image}}">
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
