@@ -7,13 +7,15 @@ import {HomeComponent} from "./component/home/home.component";
 import {SearchComponent} from "./component/search/search.component";
 import {UserDetailComponent} from './component/user-detail/user-detail.component'
 import {HeaderComponent} from "./component/header/header.component";
+import {NewReviewComponent} from "./component/new-review/new-review.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
     children:[
       {path: 'home', component: HomeComponent},
-      { path: 'review-rating', component: ReviewRatingComponent, canActivate: [CheckLoginGuard]},
-      { path: 'company', component: CompanyDetailComponent},
+      {path: 'university', component: CompanyDetailComponent},
+      {path: 'review-rating', component: ReviewRatingComponent},
+      {path: 'new-review', component: NewReviewComponent},
       {path: 'search-university', component: SearchComponent},
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard]},
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]}

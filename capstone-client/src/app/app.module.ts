@@ -1,3 +1,4 @@
+///<reference path="constants.ts"/>
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -16,6 +17,8 @@ import { MbtiTestComponent } from './component/mbti-test/mbti-test.component';
 import {UserDetailComponent} from './component/user-detail/user-detail.component';
 import { SearchComponent } from './component/search/search.component';
 import { HomeComponent } from './component/home/home.component';
+import { HeaderComponent } from './component/header/header.component';
+import { NewReviewComponent } from './component/new-review/new-review.component';
 
 // Service
 import {LoginService} from './service/login/login.service';
@@ -24,11 +27,12 @@ import {SearchService} from "./service/base-service/search.service";
 
 // Guard
 import {CheckLoginGuard} from './guard/check-login/check-login.guard';
+
 import {NgxPaginationModule} from 'ngx-pagination';
-
 import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
-import { HeaderComponent } from './component/header/header.component';
-
+import {RatingModule} from "ngx-bootstrap";
+import {Constants} from "./constants";
+import {ToastModule} from "ng2-toastr/ng2-toastr";
 
 const providers = {
   'google': {
@@ -50,7 +54,8 @@ const providers = {
     HomeComponent,
     UserDetailComponent,
     EqualValidatorDirective,
-    HeaderComponent
+    HeaderComponent,
+    NewReviewComponent
   ],
   imports: [
     NgxPaginationModule,
@@ -62,11 +67,11 @@ const providers = {
     HttpModule,
     MaterialModule,
     Angular2SocialLoginModule,
-    BrowserAnimationsModule
-
-
+    BrowserAnimationsModule,
+    RatingModule,
+    ToastModule.forRoot()
   ],
-  providers: [LoginService, BaseService, CheckLoginGuard, SearchService],
+  providers: [LoginService, BaseService, CheckLoginGuard, SearchService,Constants],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
