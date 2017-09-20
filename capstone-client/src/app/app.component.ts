@@ -4,6 +4,8 @@ import {AuthService} from 'angular2-social-login';
 import {LoginService} from './service/login/login.service';
 import {NgForm} from "@angular/forms";
 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

@@ -29,7 +29,10 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
 import { HeaderComponent } from './component/header/header.component';
 import { AdminComponent } from './component/admin/admin.component';
-
+import { ListuniversityComponent } from './component/admin/listuniversity/listuniversity.component';
+import { AdduniversityComponent } from './component/admin/adduniversity/adduniversity.component';
+import {Select2Module} from "ng2-select2";
+import { FileUploadComponent } from './component/file-upload/file-upload.component';
 
 const providers = {
   'google': {
@@ -52,9 +55,13 @@ const providers = {
     UserDetailComponent,
     EqualValidatorDirective,
     HeaderComponent,
-    AdminComponent
+    AdminComponent,
+    ListuniversityComponent,
+    AdduniversityComponent,
+    FileUploadComponent
   ],
   imports: [
+    Select2Module,
     NgxPaginationModule,
     BrowserModule,
     Ng2CompleterModule,
@@ -65,8 +72,6 @@ const providers = {
     MaterialModule,
     Angular2SocialLoginModule,
     BrowserAnimationsModule
-
-
   ],
   providers: [LoginService, BaseService, CheckLoginGuard, SearchService],
   bootstrap: [AppComponent]
