@@ -1,3 +1,4 @@
+///<reference path="constants.ts"/>
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -16,6 +17,8 @@ import { MbtiTestComponent } from './component/mbti-test/mbti-test.component';
 import {UserDetailComponent} from './component/user-detail/user-detail.component';
 import { SearchComponent } from './component/search/search.component';
 import { HomeComponent } from './component/home/home.component';
+import { HeaderComponent } from './component/header/header.component';
+import { NewReviewComponent } from './component/new-review/new-review.component';
 
 // Service
 import {LoginService} from './service/login/login.service';
@@ -24,19 +27,21 @@ import {SearchService} from "./service/base-service/search.service";
 
 // Guard
 import {CheckLoginGuard} from './guard/check-login/check-login.guard';
-import {NgxPaginationModule} from 'ngx-pagination';
 
+import {NgxPaginationModule} from 'ngx-pagination';
 import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
-import { HeaderComponent } from './component/header/header.component';
 import { AdminComponent } from './component/admin/admin.component';
 import { ListuniversityComponent } from './component/admin/listuniversity/listuniversity.component';
 import { AdduniversityComponent } from './component/admin/adduniversity/adduniversity.component';
 import {Select2Module} from "ng2-select2";
 import { FileUploadComponent } from './component/file-upload/file-upload.component';
+import {RatingModule} from "ngx-bootstrap";
+import {Constants} from "./constants";
+import {ToastModule} from "ng2-toastr/ng2-toastr";
 
 const providers = {
   'google': {
-    'clientId': '583983350151-j9h70lfjearo27fd1ftjutghcsqs434a.apps.googleusercontent.com'
+    'clientId': '525175435249-fcon5618ugd00jij2o066g7k3266n3mb.apps.googleusercontent.com'
   },
   'facebook': {
     'clientId': '1947926578821346',
@@ -58,7 +63,8 @@ const providers = {
     AdminComponent,
     ListuniversityComponent,
     AdduniversityComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    NewReviewComponent
   ],
   imports: [
     Select2Module,
@@ -71,9 +77,12 @@ const providers = {
     HttpModule,
     MaterialModule,
     Angular2SocialLoginModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    BrowserAnimationsModule,
+    RatingModule,
+    ToastModule.forRoot()
   ],
-  providers: [LoginService, BaseService, CheckLoginGuard, SearchService],
+  providers: [LoginService, BaseService, CheckLoginGuard, SearchService,Constants],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

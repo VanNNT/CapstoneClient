@@ -2,32 +2,23 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <div class="box box-white">
+        <div *ngIf="!tested" class="box box-white">
           <div class="box-title title-mbit text-highlight">
             Bài trắc nghiệm MBTI
           </div>
-          <form #fMBTI="ngForm" id="form-quiz-mbti" (ngSubmit)="onSubmit(fMBTI.value)">
-            <div *ngFor="let item of questions" class="question" style="margin-bottom: 25px">
+          <form #fMBTI="ngForm" id="form-quiz-mbti" (ngSubmit)="onSubmit(fMBTI)">
+            <div *ngFor="let item of questions; let i=index" class="question" style="margin-bottom: 25px">
               <span><strong>{{item.id}}.</strong></span>
               <span><strong>{{item.question}}</strong></span>
-              <div ngModelGroup="question" style="background-color: #f7f7f7;margin-top: 10px;" class="row">
-                  <md-radio-group ngModel name="{{item.id}}">
-                    <div class="col-md-8 radio">
-                      <md-radio-button value="1">1. Luôn luôn</md-radio-button>
-                    </div>
-                    <div class="col-md-8 radio" style="margin-top: 10px">
-                      <md-radio-button value="2">2. Thường xuyên</md-radio-button>
-                    </div>
-                    <div class="col-md-8 radio" style="margin-top: 10px">
-                      <md-radio-button value="3">3. Bình thường</md-radio-button>
-                    </div>
-                   <div class="col-md-8 radio" style="margin-top: 10px">
-                     <md-radio-button value="5">4. Hiếm khi</md-radio-button>
-                   </div>
-                    <div class="col-md-8 radio" style="margin-top: 10px">
-                      <md-radio-button value="4">5. Không bao giờ</md-radio-button>
-                    </div>
-                  </md-radio-group>
+              <div style="background-color: #f7f7f7;margin-top: 10px;" class="row">
+                <md-radio-group ngModel name="{{item.name}}">
+                  <div class="col-md-6 radio">
+                    <md-radio-button value="a" (click)="onChoose(item,'a')">{{item.option1}}</md-radio-button>
+                  </div>
+                  <div class="col-md-6 radio" style="margin-top: 10px">
+                    <md-radio-button value="b" (click)="onChoose(item,'b')">{{item.option2}}</md-radio-button>
+                  </div>
+                </md-radio-group>
               </div>
             </div>
             <div style="margin-top: 10px" class="text-center">
@@ -35,8 +26,35 @@
             </div>
           </form>
         </div>
+        <div *ngIf="tested" class="box box-white">
+          <div class="text-center">
+            <div>
+              <p style="font-size: 18px; text-transform: uppercase;">Nhóm tính cách của bạn là </p>
+              <h2 class="box-title bold text-highlight" style="font-size: 32px; margin: 25px auto;">ESTP</h2>
+              <a (click)="tested = !tested" class="btn btn-topcv-gray btn-sm"><i class="fa fa-pencil"></i> Làm lại Trắc nghiệm</a>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="tested" class="box box-white">
+          <h2 class="box-title bold text-highlight" style="font-size: 32px; margin: 25px auto;">Tổng Quan</h2>
+          <div>
+            <p>Có khoảng 4% dân số mang tính cách này, những người có các loại tính cách ESTP rất tập thể, tự phát và thẳng thắn. Đôi khi họ bị xem là thô lỗ hoặc thiếu thận trọng, nhưng thực sự các ESTP yêu thích hành động và luôn luôn nhảy ngay vào trung tâm của "cơn bão". Các ESTP không thích các cuộc tranh luận lý thuyết hoặc suy nghĩ về tương lai - họ chỉ quan tâm đến thời điểm hiện tại và tập trung tất cả nỗ lực của họ vào những thứ họ thích hơn là những suy nghĩ về những gì có thể.</p>
+            <p>Các ESTP thường ít khi lên kế hoạch hành động chi tiết, họ thường nhanh chóng lao vào công việc, họ tìm ra các sai sót và hành động ngay lập tức. Nếu cần thiết, họ không ngại quay lại và sửa chữa sai lầm của mình. Những người có loại tính cách này cũng có một khả năng bẩm sinh để nhận biết những suy nghĩ và động cơ của người khác, các ESTP có thể dễ dàng phát hiện những thay đổi nhỏ trong biểu hiện của một ai đó trên khuôn mặt, quần áo, hành vi,... Các loại tính cách khác không có khả năng bí ẩn này.</p>
+            <p>Những người mang tính cách ESTP cũng có xu hướng xem luật lệ, quy tắc và nghĩa vụ như là các khuyến cáo hoặc hướng dẫn chứ không phải là nguyên tắc cứng nhắc. Nếu ESTP tin rằng một cái gì đó phải được thực hiện và nguyên nhân chính là sự đúng đắng và xứng đáng, họ sẽ đi trước và làm điều đó, bất chấp những gì pháp luật hoặc quy tắc xã hội cảnh báo. Điều này không có nghĩa là để nói rằng ESTP là những người phạm pháp - họ thường có một sự hiểu biết rõ ràng về thiện và ác - đúng hơn, họ có xu hướng đưa giá trị cá nhân, ý ​​kiến ​​và nguyên tắc trên những gì người khác hay xã hội suy nghĩ.</p>
+            <p>Các ESTP rất thích xem phim, theo đuổi niềm đam mê và những thú vui vật chất khác. Tuy nhiên, những người có loại tính cách này nên biết rằng niềm đam mê của họ có thể thực hiện bằng nhiều cách khác nhau, trong đó có khá nhiều trò nguy hiểm hoặc không lành mạnh - ví dụ như cờ bạc, có nhiều con bạc là ESTP. Đặc điểm tính cách của ESTP cũng có thể khiến họ vô tình làm tổn thương người khác - ESTP rất thẳng thắn và dựa trên sự kiện và logic (đặc điểm T ) chứ không phải là cảm xúc (đặc điểm F), nên lời nói của họ có thể dễ dàng gây tổn thương những người mang loại tính cách nhạy cảm hơn.</p>
+            <p>Các ESTP không thích lý thuyết và tư duy trừu tượng, họ thường gặp khó khăn trong trường học, đặc biệt là trong những năm sau đó. Những người có loại tính cách này xem các cuộc thảo luận lý thuyết là nhàm chán và vô nghĩa. Ngược lại, năng lượng và niềm đam mê của họ hầu như không giới hạn khi nói đến các lĩnh vực mà họ cho là thực tế và thú vị. Các ESTP có thể rất truyền cảm và có sức thuyết phục - điều này làm cho họ trở nên xuất sắc với vị trí đại diện bán hàng, tư vấn và các doanh nhân. Loại tính cách này thực sự là rất nhiều tài năng - điều quan trọng là mỗi ESTP nhận ra tài năng, cũng như những điểm mạnh và điểm yếu của mình.</p>
+            <p><strong>Những người nổi tiếng mang tính cách ESTP:</strong></p>
+            <p>
+              - James Buchanan, một cựu Tổng thống Hoa Kỳ <br>
+              - Ernest Hemingway, nhà văn <br>
+              - Jack Nicholson, diễn viên <br>
+              - Eddie Murphy, diễn viên <br>
+              - Madonna, ca sĩ <br>
+              - Bruce Willis, diễn viên <br>
+              - Michael J. Fox, diễn viên</p>
+          </div>
+        </div>
       </div>
-
       <!--side bên tay phải-->
       <div class="col-sm-4" style="background-color: #f7f7f7" id="sidebar">
         <div class="box box-white text-center-sm">

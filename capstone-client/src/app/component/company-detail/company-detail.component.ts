@@ -11,6 +11,7 @@ export class CompanyDetailComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    $.getScript('../../../assets/file.js');
     $(window).scroll(function () {
       const height = $(window).scrollTop();
       const isFollowed = false;

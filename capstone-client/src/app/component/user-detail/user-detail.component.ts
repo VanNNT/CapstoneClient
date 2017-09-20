@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
 import {NgForm} from "@angular/forms";
-import {EqualValidatorDirective} from "../../directive/equal-validatior/equal-validator.directive";
+import {User} from "../../model/User";
+import {BaseService} from "../../service/base-service/base.service";
 
 @Component({
   selector: 'app-user-detail',
@@ -9,14 +9,11 @@ import {EqualValidatorDirective} from "../../directive/equal-validatior/equal-va
   styleUrls: ['./user-detail.component.less']
 })
 export class UserDetailComponent implements OnInit {
-  private user;
-  constructor() {}
+  private user : User;
+  constructor(private baseService: BaseService) {}
 
   ngOnInit(){
-    console.log("aaaaaaa");
-    this.user = JSON.parse(localStorage.getItem('USER_INFO'));
-    console.log(this.user.name);
-    console.log(this.user);
+    this.user = this.baseService.getUser();
   }
 
   onSubmit(form: NgForm){

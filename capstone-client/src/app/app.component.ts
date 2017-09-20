@@ -1,8 +1,13 @@
-import {Component, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, OnDestroy, ChangeDetectorRef, ViewContainerRef} from '@angular/core';
 import * as $ from 'jquery';
 import {AuthService} from 'angular2-social-login';
 import {LoginService} from './service/login/login.service';
 import {NgForm} from "@angular/forms";
+import {Constants} from "./constants";
+import {MdDialog, MdDialogRef} from "@angular/material";
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import {User} from "./model/User";
+import {BaseService} from "./service/base-service/base.service";
 
 
 
@@ -13,49 +18,78 @@ import {NgForm} from "@angular/forms";
 })
 
 export class AppComponent implements OnInit {
-  // public user;
-  // sub: any;
-  // public logged = false;
-  // constructor(private auth: AuthService, private loginService: LoginService, private cdRef:ChangeDetectorRef) {}
+  public user: User;
+  public message;
+  sub: any;
+  public title;
+  public content;
+  constructor(private auth: AuthService, private loginService: LoginService, private baseService: BaseService,
+              private contants: Constants,public toastr: ToastsManager, vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr);
+  }
   ngOnInit() {
 
   }
-  // login(provider) {
-  //   this.sub = this.auth.login(provider).subscribe(
-  //     (data) => {
-  //       console.log(data);
-  //       this.user = data;
-  //       this.loginService.setLogin(true);
-  //        $('#myModal').hide();
-  //       $('body').removeClass('modal-open');
-  //       $('.modal-backdrop').remove();
-  //       this.logged = true;
-  //       this.cdRef.detectChanges();
-  //       localStorage.setItem('USER_INFO', JSON.stringify(this.user));
-  //     }
-  //   );
-  // }
-  // logout() {
-  //   this.auth.logout().subscribe(
-  //     (data) => {
-  //       this.logged=false;
-  //       this.cdRef.detectChanges();
-  //       console.log(this.logged);
-  //       this.user = null;
-  //       this.loginService.setLogin(false);
-  //     }
-  //   );
-  // }
-  // onSubmit(registerForm : NgForm){
-  //   console.log(registerForm.value);
-  //   registerForm.reset();
-  // }
-  // onLogin(value){
-  //   console.log(value);
-  // }
-  // clickLink(){
-  //   document.getElementById('linkFake').click();
-  // }
+  public login(provider) {
+    this.sub = this.auth.login(provider).subscribe(
+      (data) => {
+        console.log(data);
+        this.baseService.setUser(data);
+        this.user = this.baseService.getUser();
+        this.loginService.setLogin(true);
+        $('#myModal').hide();
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+        this.loginService.broadcastTextChange(this.user);
+      }
+    );
+  }
+
+  public onRegister(registerForm: NgForm){
+    let data = {
+      'username': registerForm.value.nameRegister,
+      'password': registerForm.value.passResgiter,
+      'email': registerForm.value.registerEmail
+    };
+    this.loginService.register(this.contants.REGISTER,data).subscribe((response:any)=>{
+         if(response){
+           $('#myModal').hide();
+           $('body').removeClass('modal-open');
+           $('.modal-backdrop').remove();
+           this.toastr.success('Bạn đã đăng ký thành công', 'Thành công!');
+         }
+      },error=>{
+        if(error.status==403){
+          this.toastr.error('Tài khoản này đã tồn tại. Vui lòng thử lại', 'Thất bại');
+          registerForm.onReset();
+        }else{
+          this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
+        };
+      });
+  }
+  public onLogin(value){
+    let data = {
+      'username': value.username,
+      'password': value.password
+    };
+    this.loginService.register(this.contants.LOGIN,data).subscribe((response:any)=>{
+      if(response){
+        this.loginService.setLogin(true);
+        this.baseService.setUser(response);
+        this.user = this.baseService.getUser();
+        $('#myModal').hide();
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+        this.loginService.broadcastTextChange(this.user);
+      }
+    },error=>{
+      if(error.status==409){
+        this.toastr.error('Username/Password không đúng. Vui lòng thử lại.', 'Thất bại!');
+      }else{
+        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
+      };
+    });
+  }
   // ngOnDestroy() {
   //   this.sub.unsubscribe();
   // }
