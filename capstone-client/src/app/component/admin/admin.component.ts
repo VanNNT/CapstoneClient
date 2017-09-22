@@ -8,7 +8,7 @@ import {ViewEncapsulation} from "@angular/core";
   encapsulation: ViewEncapsulation.None,
 })
 export class AdminComponent implements OnInit {
-   @Input() title: string = 'Vui Long Chon Menu';
+   @Input() title: string = 'DANHLT';
   constructor() { }
 
   ngOnInit() {

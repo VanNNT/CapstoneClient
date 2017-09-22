@@ -107,13 +107,21 @@ a:focus, a:hover {
 
 }
 //Input Search
-
-input{
+.ng2complete input{
   margin: 2px;
   width: 100%;
   border-radius: 15px 15px;
   border: 1.5px solid #FF661D;
 }
+
+//Search admin page
+.ng2complete2 input{
+  margin: 2px;
+  width: 100%;
+  border-radius: 15px 15px;
+  border: 1.5px solid #34343c;
+}
+
 button{
   outline: none;
   &:hover{
@@ -147,4 +155,11 @@ button{
 //  }
 //}
 
-
+.select2-container--default .select2-selection--single{
+  padding: 0;
+  width: 100%;
+}
+.select2-container .select2-selection--multiple{
+  min-width: 300px;
+  width: fit-content;
+}
