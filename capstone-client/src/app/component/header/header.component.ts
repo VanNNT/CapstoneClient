@@ -27,23 +27,24 @@ export class HeaderComponent implements OnInit,OnDestroy {
       this.cdRef.detectChanges();
     });
   }
-  public logout() {
-    this.auth.logout().subscribe(
-      (data) => {
-        this.user = null;
-        this.cdRef.detectChanges();
-        this.loginService.setLogin(false);
-        this.loginService.broadcastTextChange(this.user);
-        window.location.replace('/home');
-      }
-    );
-  }
-  public onSubmit(registerForm : NgForm){
-    console.log(registerForm.value);
-    registerForm.reset();
-  }
-  public onLogin(value){
-    console.log(value);
+  public logout(value) {
+    if(value){
+      this.auth.logout().subscribe(
+        (data) => {
+          this.user = null;
+          this.cdRef.detectChanges();
+          this.loginService.setLogin(false);
+          this.loginService.broadcastTextChange(this.user);
+          window.location.replace('/home');
+        }
+      );
+    }else{
+      this.user = null;
+      this.cdRef.detectChanges();
+      this.loginService.setLogin(false);
+      this.loginService.broadcastTextChange(this.user);
+      window.location.replace('/home');
+    }
   }
   public clickLink(){
     document.getElementById('linkFake').click();
