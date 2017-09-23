@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {CompleterData, CompleterService} from "ng2-completer";
 import {SearchService} from "../../service/base-service/search.service";
+import {Constants} from "../../constants";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-search',
@@ -23,19 +25,19 @@ export class SearchComponent implements OnInit {
   ];
   protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett' ];
 
-  constructor(private completerService: CompleterService, private searchService: SearchService) {
+  constructor(private completerService: CompleterService, private searchService: SearchService, private constant: Constants) {
     this.dataService = completerService.local(this.searchData, 'color', 'color');
   }
 
+
+
  // ----------- Test API ----------- SearchService
-  public universityapi: any[];
+  public universityName = [];
+  public universityName2 = [];
   ngOnInit() {
-  this.searchService.GetList().subscribe((response: any) => {
-    this.universityapi =response;
-  })
 
   }
-  //Click show table uniservity
+  //Click show table university
   showUniversity(agree: boolean){
     this.show = true;
   }
