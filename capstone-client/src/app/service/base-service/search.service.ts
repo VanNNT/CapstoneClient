@@ -2,14 +2,21 @@ import {Injectable} from "@angular/core";
 import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map'
+import {Select2OptionData} from "ng2-select2";
+import {Constants} from "../../constants";
 @Injectable()
 export class SearchService {
-  private aipUrl = 'http://59b4ef7b44db800011a0c911.mockapi.io/api/employees';
-
-  constructor(private _http: Http){
+  constructor(private _http: Http, private constant: Constants){
 
   }
-GetList(): Observable<any[]>{
-    return this._http.get(this.aipUrl).map((response: Response) => response.json())
+  getList(): Observable<Select2OptionData[]>{
+      return this._http.get(this.constant.UNIVERSITY)
+        .map((response: Response) => response.json())
+        .map((users) => {
+        return users.map((user) => {
+          return {id : user.id , text : user.name};
+        });
+      })
+  }
 }
-}
+

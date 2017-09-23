@@ -9,6 +9,8 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import {User} from "./model/User";
 import {BaseService} from "./service/base-service/base.service";
 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -70,8 +72,9 @@ export class AppComponent implements OnInit, OnDestroy {
       'username': value.username,
       'password': value.password
     };
-    this.loginService.register(this.contants.LOGIN,data).subscribe((response:any)=>{
+    this.loginService.login(this.contants.LOGIN,data).subscribe((response:any)=>{
       if(response){
+        console.log(response);
         this.loginService.setLogin(true);
         this.baseService.setUser(response);
         this.user = this.baseService.getUser();

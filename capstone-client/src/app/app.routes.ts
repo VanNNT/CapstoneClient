@@ -7,6 +7,10 @@ import {HomeComponent} from "./component/home/home.component";
 import {SearchComponent} from "./component/search/search.component";
 import {UserDetailComponent} from './component/user-detail/user-detail.component'
 import {HeaderComponent} from "./component/header/header.component";
+import {AdminComponent} from "./component/admin/admin.component";
+import {ListuniversityComponent} from "./component/admin/listuniversity/listuniversity.component";
+import {AdduniversityComponent} from "./component/admin/adduniversity/adduniversity.component";
+
 import {NewReviewComponent} from "./component/new-review/new-review.component";
 
 const routing: Routes = [
@@ -18,8 +22,13 @@ const routing: Routes = [
       {path: 'new-review', component: NewReviewComponent},
       {path: 'search-university', component: SearchComponent},
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard]},
-      {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]}
+      {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]},
     ]},
-  {path: 'admin', component: ReviewRatingComponent},
+  {path: 'admin', component: AdminComponent,
+    children:[
+    {path: 'list-university', component: ListuniversityComponent},
+    {path: 'add-university', component: AdduniversityComponent},
+  ]},
+
 ];
 export const appRoutes = RouterModule.forRoot(routing);

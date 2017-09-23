@@ -23,7 +23,11 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a>{{user.name}}</a></li>
+              <li>
+                <!--<a *ngIf="user.role.id==1" routerLink="/admin">{{user.name}}</a> &lt;!&ndash;role user&ndash;&gt;-->
+                <!--<a *ngIf="user.role.id==2">{{user.name}}</a> &lt;!&ndash;role admin&ndash;&gt;-->
+                <a>{{user.name}}</a>
+              </li>
               <li role="separator" class="divider"></li>
               <li><a (click)="clickLink()" >Chỉnh sửa thông tin</a></li>
               <li role="separator" class="divider"></li>

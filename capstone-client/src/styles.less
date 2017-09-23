@@ -103,7 +103,15 @@ a:focus, a:hover {
 
 }
 //Input Search
-input{
+.ng2complete input{
+  margin: 2px;
+  width: 100%;
+  border-radius: 15px 15px;
+  border: 1px solid #FF661D;
+}
+
+//Search admin page
+.ng2complete2 input{
   margin: 2px;
   width: 100%;
   border-radius: 15px 15px;
@@ -122,9 +130,12 @@ button{
 
 .ng2complete{
   input{
+    padding: 5px;
+    font-size: 15px;
     outline: none;
   }
   .completer-dropdown {
+    font-size: 15px;
     width: 95% !important;
       }
   .completer-selected-row {
@@ -135,6 +146,23 @@ button{
   }
 }
 
-span{
+span {
   outline: none;
 }
+//Admin Page
+
+//@media (min-width: 992px){
+//  .container{
+//    max-width: 100%;
+//  }
+//}
+
+.select2-container--default .select2-selection--single{
+  padding: 0;
+  width: 100%;
+}
+.select2-container .select2-selection--multiple {
+  min-width: 300px;
+  width: fit-content;
+}
+

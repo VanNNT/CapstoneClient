@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.less']
 })
-export class HeaderComponent implements OnInit,OnDestroy {
+export class HeaderComponent implements OnInit {
   public user;
   sub: any;
   public logged = false;
@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
   }
   ngOnInit() {
     this.getUser();
+    console.log(this.user);
     this.router.navigate(['home']);
   }
   public getUser(): void {
@@ -49,7 +50,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
   public clickLink(){
     document.getElementById('linkFake').click();
   }
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.sub.unsubscribe();
+  // }
 }

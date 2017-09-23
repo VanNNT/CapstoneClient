@@ -4,9 +4,9 @@ import { NgModule} from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
 import {appRoutes} from './app.routes';
 import { Ng2CompleterModule } from "ng2-completer";
+import {MdRadioModule} from '@angular/material';
 
 // Component
 import { AppComponent } from './app.component';
@@ -30,6 +30,11 @@ import {CheckLoginGuard} from './guard/check-login/check-login.guard';
 
 import {NgxPaginationModule} from 'ngx-pagination';
 import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
+import { AdminComponent } from './component/admin/admin.component';
+import { ListuniversityComponent } from './component/admin/listuniversity/listuniversity.component';
+import { AdduniversityComponent } from './component/admin/adduniversity/adduniversity.component';
+import {Select2Module} from "ng2-select2";
+import { FileUploadComponent } from './component/file-upload/file-upload.component';
 import {RatingModule} from "ngx-bootstrap";
 import {Constants} from "./constants";
 import {ToastModule} from "ng2-toastr/ng2-toastr";
@@ -55,18 +60,24 @@ const providers = {
     UserDetailComponent,
     EqualValidatorDirective,
     HeaderComponent,
+    AdminComponent,
+    ListuniversityComponent,
+    AdduniversityComponent,
+    FileUploadComponent,
     NewReviewComponent
   ],
   imports: [
+    Select2Module,
     NgxPaginationModule,
     BrowserModule,
     Ng2CompleterModule,
     appRoutes,
     FormsModule,
+    MdRadioModule,
     ReactiveFormsModule,
     HttpModule,
-    MaterialModule,
     Angular2SocialLoginModule,
+    BrowserAnimationsModule,
     BrowserAnimationsModule,
     RatingModule,
     ToastModule.forRoot()

@@ -22,7 +22,7 @@
     <div class="col-md-3">
       <ng2-completer class="ng2complete"
                      placeholder="  - - Trường - -" [(ngModel)]="captain"
-                     [datasource]="captains"
+                     [datasource]="universityName"
                      [minSearchLength]="0"></ng2-completer>
     </div>
     <div class="col-md-2">
@@ -50,7 +50,7 @@
             <p>{{university.imageUrl}}</p>
             <p>
               <a href="#" class="btn btn-success"><i class="fa fa-heart-o" aria-hidden="true"></i> Quan Tâm</a>
-              <button data-toggle="modal" data-target="#modalDetail" (click)="getInfo()"  class="btn btn-success"><i class="fa fa-hand-o-right"></i> Thông Tin</button>
+              <button data-toggle="modal" data-target="#modalDetail" class="btn btn-success"><i class="fa fa-hand-o-right"></i> Thông Tin</button>
             </p>
           </div>
         </div>
@@ -83,7 +83,6 @@
 
 
 <!--Modal-->
-
 <div id="modalDetail" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">

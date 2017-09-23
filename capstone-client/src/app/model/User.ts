@@ -3,7 +3,7 @@ export class User {
   image: string;
   name: string;
   email: string;
-
+  role = {};
   constructor(data: any) {
     if (data) {
      if(data.image){
@@ -17,6 +17,7 @@ export class User {
        this.name = data.username;
      }
      this.email = data.email;
+     this.role = data.role;
     }
   }
 }
