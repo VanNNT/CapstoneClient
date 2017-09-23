@@ -4,9 +4,9 @@ import { NgModule} from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
 import {appRoutes} from './app.routes';
 import { Ng2CompleterModule } from "ng2-completer";
+import {MdRadioModule} from '@angular/material';
 
 // Component
 import { AppComponent } from './app.component';
@@ -73,9 +73,9 @@ const providers = {
     Ng2CompleterModule,
     appRoutes,
     FormsModule,
+    MdRadioModule,
     ReactiveFormsModule,
     HttpModule,
-    MaterialModule,
     Angular2SocialLoginModule,
     BrowserAnimationsModule,
     BrowserAnimationsModule,

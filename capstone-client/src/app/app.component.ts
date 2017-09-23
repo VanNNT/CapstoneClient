@@ -17,9 +17,8 @@ import {BaseService} from "./service/base-service/base.service";
   styleUrls: ['./app.component.less']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   public user: User;
-  public message;
   sub: any;
   public title;
   public content;
@@ -66,14 +65,16 @@ export class AppComponent implements OnInit {
           this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
         };
       });
+    registerForm.onReset();
   }
   public onLogin(value){
     let data = {
       'username': value.username,
       'password': value.password
     };
-    this.loginService.register(this.contants.LOGIN,data).subscribe((response:any)=>{
+    this.loginService.login(this.contants.LOGIN,data).subscribe((response:any)=>{
       if(response){
+        console.log(response);
         this.loginService.setLogin(true);
         this.baseService.setUser(response);
         this.user = this.baseService.getUser();
@@ -90,7 +91,8 @@ export class AppComponent implements OnInit {
       };
     });
   }
-  // ngOnDestroy() {
-  //   this.sub.unsubscribe();
-  // }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+    $("#myModal").html("");
+  }
 }

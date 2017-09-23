@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ViewEncapsulation} from "@angular/core";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin',
@@ -9,9 +10,10 @@ import {ViewEncapsulation} from "@angular/core";
 })
 export class AdminComponent implements OnInit {
    @Input() title: string = 'DANHLT';
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    this.router.navigate(['admin/list-university']);
   }
   setTitle(title: string){
     this.title = title;

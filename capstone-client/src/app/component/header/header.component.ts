@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.less']
 })
-export class HeaderComponent implements OnInit,OnDestroy {
+export class HeaderComponent implements OnInit {
   public user;
   sub: any;
   public logged = false;
@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
   }
   ngOnInit() {
     this.getUser();
+    console.log(this.user);
     this.router.navigate(['home']);
   }
   public getUser(): void {
@@ -27,28 +28,29 @@ export class HeaderComponent implements OnInit,OnDestroy {
       this.cdRef.detectChanges();
     });
   }
-  public logout() {
-    this.auth.logout().subscribe(
-      (data) => {
-        this.user = null;
-        this.cdRef.detectChanges();
-        this.loginService.setLogin(false);
-        this.loginService.broadcastTextChange(this.user);
-        window.location.replace('/home');
-      }
-    );
-  }
-  public onSubmit(registerForm : NgForm){
-    console.log(registerForm.value);
-    registerForm.reset();
-  }
-  public onLogin(value){
-    console.log(value);
+  public logout(value) {
+    if(value){
+      this.auth.logout().subscribe(
+        (data) => {
+          this.user = null;
+          this.cdRef.detectChanges();
+          this.loginService.setLogin(false);
+          this.loginService.broadcastTextChange(this.user);
+          window.location.replace('/home');
+        }
+      );
+    }else{
+      this.user = null;
+      this.cdRef.detectChanges();
+      this.loginService.setLogin(false);
+      this.loginService.broadcastTextChange(this.user);
+      window.location.replace('/home');
+    }
   }
   public clickLink(){
     document.getElementById('linkFake').click();
   }
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.sub.unsubscribe();
+  // }
 }

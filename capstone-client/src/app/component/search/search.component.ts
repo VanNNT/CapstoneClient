@@ -39,4 +39,8 @@ export class SearchComponent implements OnInit {
   showUniversity(agree: boolean){
     this.show = true;
   }
+
+  getInfo(){
+
+  }
 }

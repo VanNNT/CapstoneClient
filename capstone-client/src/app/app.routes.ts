@@ -24,9 +24,10 @@ const routing: Routes = [
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard]},
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]},
     ]},
-  {path: 'admin', component: AdminComponent, children:[
-    {path: 'listuniversity', component: ListuniversityComponent},
-    {path: 'adduniversity', component: AdduniversityComponent},
+  {path: 'admin', component: AdminComponent,
+    children:[
+    {path: 'list-university', component: ListuniversityComponent},
+    {path: 'add-university', component: AdduniversityComponent},
   ]},
 
 ];
