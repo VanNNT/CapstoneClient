@@ -32,17 +32,12 @@ export class SearchComponent implements OnInit {
 
 
  // ----------- Test API ----------- SearchService
-  public universityName = [];
-  public universityName2 = [];
   ngOnInit() {
 
   }
+
   //Click show table university
   showUniversity(agree: boolean){
     this.show = true;
-  }
-
-  getInfo(){
-
   }
 }
