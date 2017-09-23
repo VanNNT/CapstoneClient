@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Select2OptionData} from "ng2-select2";
 import * as $ from 'jquery';
 import {FileUploadComponent} from "../../file-upload/file-upload.component";
-
+import {SearchService} from "../../../service/base-service/search.service";
+import {Constants} from "../../../constants";
 @Component({
   selector: 'app-adduniversity',
   templateUrl: './adduniversity.component.html',
@@ -15,43 +16,49 @@ export class AdduniversityComponent implements OnInit {
   public options: Select2Options;
   public value: string[];
   public current: string;
-  constructor() { }
+  constructor(private searchService: SearchService, private constant: Constants) { }
 
+  public universityName = [];
   ngOnInit() {
+    this.searchService.GetList(this.constant.UNIVERSITY) .subscribe((response: any) => {
+      this.universityName = response;
+    })
+
     this.exampleData1 = [
       {
-        id: 'basic1',
-        text: 'TP. Hồ Chí Minh'
+        id: '1',
+        text: 'TP. Hồ Chí Minh '
       },
       {
-        id: 'Khu vực',
+        id: '2',
         // disabled: true,
-        text: 'Basic 2'
+        text: 'Basic 2 Hồ Chí MinhHồ Chí MinhHồ Chí MinhHồ Chí MinhHồ Chí Minh'
       },
       {
-        id: 'basic3',
+        id: '3',
         text: 'Basic 3'
       },
       {
-        id: 'basic4',
+        id: '4',
         text: 'Basic 4'
       }
     ];
+    console.log(this.exampleData1);
     this.exampleData = [
       {
-        id: 'multiple1',
+        id: '1',
         text: 'Multiple 1'
       },
       {
-        id: 'multiple2',
+        id: '2',
         text: 'Multiple 2'
       },
       {
-        id: 'multiple3',
+        id: '3',
         text: 'Multiple 3'
       },
       {
-        id: 'multiple4',
+        id: '4',
         text: 'Multiple 4'
       }
     ];
@@ -66,7 +73,10 @@ export class AdduniversityComponent implements OnInit {
   }
 
   changed(data: {value: string[]}) {
+    console.log(data);
     this.current = data.value.join(' | ');
   }
-
+  AAA(data){
+    console.log(data);
+  }
 }

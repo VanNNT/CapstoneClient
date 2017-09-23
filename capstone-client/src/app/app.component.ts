@@ -72,7 +72,7 @@ export class AppComponent implements OnInit {
       'username': value.username,
       'password': value.password
     };
-    this.loginService.register(this.contants.LOGIN,data).subscribe((response:any)=>{
+    this.loginService.login(this.contants.LOGIN,data).subscribe((response:any)=>{
       if(response){
         this.loginService.setLogin(true);
         this.baseService.setUser(response);

@@ -5,10 +5,11 @@
       <!--</div>-->
       <div class="col-md-2"></div>
       <div class="col-md-6">
-        <ng2-completer class="ng2complete2" id="adminpage"
-                       placeholder="  - - Chọn Trường - -" [(ngModel)]="captain"
-                       [datasource]="captains"
-                       [minSearchLength]="0"></ng2-completer>
+        <!--<ng2-completer class="ng2complete2" id="adminpage"-->
+                       <!--placeholder="  - - Chọn Trường - -" [(ngModel)]="captain"-->
+                       <!--[datasource]="captains"-->
+                       <!--[minSearchLength]="0"></ng2-completer>-->
+        <select2 [data]="universityName" ></select2>
       </div>
       <div class="col-md-2">
         <button class="btn" id="btnsearch"><i class="fa fa-search" aria-hidden="true"></i>
