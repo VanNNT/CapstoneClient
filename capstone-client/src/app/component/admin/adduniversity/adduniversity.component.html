@@ -34,7 +34,7 @@
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Khu Vực <span class="required">*</span>
       </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <select2 [data]="exampleData1" ></select2>
+        <select2 [data]="listLocation | async" ></select2>
       </div>
     </div>
     <div class="form-group">
@@ -42,7 +42,7 @@
       </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         <!--Multiple choice-->
-        <select2 [data]="exampleData"
+        <select2 [data]="listMajor | async"
                  [options]="options"
                  [width]="500"
                  [value]="value"

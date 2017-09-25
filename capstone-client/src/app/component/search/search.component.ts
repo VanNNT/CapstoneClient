@@ -3,6 +3,8 @@ import {CompleterData, CompleterService} from "ng2-completer";
 import {SearchService} from "../../service/base-service/search.service";
 import {Constants} from "../../constants";
 import {forEach} from "@angular/router/src/utils/collection";
+import {Observable} from "rxjs/Observable";
+import {Select2OptionData} from "ng2-select2";
 
 @Component({
   selector: 'app-search',
@@ -32,16 +34,26 @@ export class SearchComponent implements OnInit {
 
 
  // ----------- Test API ----------- SearchService
+  public listMajor: Observable<Select2OptionData[]>;
+  public listLocation: Observable<Select2OptionData[]>;
+  public listUniName: Observable<Select2OptionData[]>;
+  public allUniversity: any[];
+  public topUniversity: any[];
+
   ngOnInit() {
+
+    this.listMajor = this.searchService.getMajor();
+    this.listLocation = this.searchService.getLocation();
+    this.listUniName = this.searchService.getList();
+    this.searchService.getAllUni().subscribe((response: any) => {
+      this.allUniversity = response;
+    })
 
   }
 
   //Click show table university
   showUniversity(agree: boolean){
     this.show = true;
-  }
-
-  getInfo(){
-
+    console.log(this.allUniversity);
   }
 }
