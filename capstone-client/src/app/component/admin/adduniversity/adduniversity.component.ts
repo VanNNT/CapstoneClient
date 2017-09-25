@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import {FileUploadComponent} from "../../file-upload/file-upload.component";
 import {SearchService} from "../../../service/base-service/search.service";
 import {Constants} from "../../../constants";
+import {NgForm} from "@angular/forms";
 @Component({
   selector: 'app-adduniversity',
   templateUrl: './adduniversity.component.html',
@@ -76,5 +77,8 @@ export class AdduniversityComponent implements OnInit {
   }
   AAA(data){
     console.log(data);
+  }
+  onSave(form: NgForm){
+    console.log(form.value);
   }
 }

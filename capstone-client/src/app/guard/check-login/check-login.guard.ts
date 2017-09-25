@@ -10,7 +10,7 @@ export class CheckLoginGuard implements CanActivate {
     const status = this.loginService.checkLogged();
     if (!status) {
        this.baseService.showLoginForm();
-       //this.router.navigate(['home']);
+       this.router.navigate(['home']);
     }
     return status;
   }
