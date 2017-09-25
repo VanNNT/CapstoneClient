@@ -17,7 +17,11 @@ export class User {
        this.name = data.username;
      }
      this.email = data.email;
-     this.role = data.role;
+     if(data.role){
+       this.role = data.role;
+     }else{
+       this.role = '';
+     }
     }
   }
 }

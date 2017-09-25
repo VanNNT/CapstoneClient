@@ -13,10 +13,16 @@ export class SearchService {
       return this._http.get(this.constant.UNIVERSITY)
         .map((response: Response) => response.json())
         .map((users) => {
-        return users.map((user) => {
-          return {id : user.id , text : user.name};
+          users.unshift({id:'0', name: 'ahihi'});
+          return users.map((user) => {
+              return {id : user.id , text : user.name};
         });
       })
+  }
+
+  getListUniName(): Observable<any[]>{
+      return this._http.get(this.constant.UNIVERSITY)
+        .map((response: Response) => response.json())
   }
 }
 

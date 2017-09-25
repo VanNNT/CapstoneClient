@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {BaseService} from "../../service/base-service/base.service";
 
 @Component({
   selector: 'file-uploader',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
   inputs:['activeColor','baseColor','overlayColor']
 })
 export class FileUploadComponent {
+  @Input() name: string;
 
+  constructor(private baseService: BaseService){}
   activeColor: string = 'green';
   baseColor: string = '#ccc';
   overlayColor: string = 'rgba(255,255,255,0.5)';
@@ -16,7 +19,7 @@ export class FileUploadComponent {
   loaded: boolean = false;
   imageLoaded: boolean = false;
   imageSrc: string = '';
-
+  value: boolean = false;
   handleDragEnter() {
     this.dragging = true;
   }
@@ -33,7 +36,6 @@ export class FileUploadComponent {
 
   handleImageLoad() {
     this.imageLoaded = true;
-    //this.iconColor = this.overlayColor;
   }
 
   handleInputChange(e) {
@@ -56,21 +58,13 @@ export class FileUploadComponent {
   _handleReaderLoaded(e) {
     var reader = e.target;
     this.imageSrc = reader.result;
+    if(this.name === 'logo'){
+      this.baseService.setLogoUni(this.imageSrc);
+    }else{
+      this.value = true;
+      this.baseService.setImgUni(this.imageSrc);
+    }
     this.loaded = true;
-  }
-
-  _setActive() {
-   // this.borderColor = this.activeColor;
-    if (this.imageSrc.length === 0) {
-      //this.iconColor = this.activeColor;
-    }
-  }
-
-  _setInactive() {
-    //this.borderColor = this.baseColor;
-    if (this.imageSrc.length === 0) {
-      //this.iconColor = this.baseColor;
-    }
   }
 
 }

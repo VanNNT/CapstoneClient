@@ -3,7 +3,8 @@
        [style.outlineColor]="dragging ? activeColor : baseColor"
        (dragenter)="handleDragEnter()"
        (dragleave)="handleDragLeave()"
-       (drop)="handleDrop($event)">
+       (drop)="handleDrop($event)"
+       [style.width.%]="value ? 100 : null">
 
   <i class="icon fa fa-upload"
      [style.color]="dragging

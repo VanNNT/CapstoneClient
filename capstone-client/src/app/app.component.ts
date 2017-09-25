@@ -58,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
            this.toastr.success('Bạn đã đăng ký thành công', 'Thành công!');
          }
       },error=>{
-        if(error.status==403){
+        if(error.status==this.contants.CONFLICT){
           this.toastr.error('Tài khoản này đã tồn tại. Vui lòng thử lại', 'Thất bại');
           registerForm.onReset();
         }else{
@@ -84,7 +84,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.loginService.broadcastTextChange(this.user);
       }
     },error=>{
-      if(error.status==409){
+      if(error.status==this.contants.UNAUTHORIZED){
         this.toastr.error('Username/Password không đúng. Vui lòng thử lại.', 'Thất bại!');
       }else{
         this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
