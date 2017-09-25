@@ -3,6 +3,8 @@ import {CompleterData, CompleterService} from "ng2-completer";
 import {SearchService} from "../../service/base-service/search.service";
 import {Constants} from "../../constants";
 import {forEach} from "@angular/router/src/utils/collection";
+import {Observable} from "rxjs/Observable";
+import {Select2OptionData} from "ng2-select2";
 
 @Component({
   selector: 'app-search',
@@ -14,34 +16,58 @@ export class SearchComponent implements OnInit {
   protected searchStr: string;
   protected captain: string;
   protected dataService: CompleterData;
-  protected searchData = [
-    { color: 'red', value: '#f00' },
-    { color: 'green', value: '#0f0' },
-    { color: 'blue', value: '#00f' },
-    { color: 'cyan', value: '#0ff' },
-    { color: 'magenta', value: '#f0f' },
-    { color: 'yellow', value: '#ff0' },
-    { color: 'black', value: '#000' }
-  ];
-  protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett' ];
+  public optionMajor: Select2Options;
+  public optionUni: Select2Options;
+  public optionLocation: Select2Options;
 
-  constructor(private completerService: CompleterService, private searchService: SearchService, private constant: Constants) {
-    this.dataService = completerService.local(this.searchData, 'color', 'color');
+  constructor(private searchService: SearchService, private constant: Constants) {
+
   }
 
 
 
  // ----------- Test API ----------- SearchService
+  public listMajor: Observable<Select2OptionData[]>;
+  public listLocation: Observable<Select2OptionData[]>;
+  public listUniName: Observable<Select2OptionData[]>;
+  public allUniversity: any[];
+  public topUniversity: any[];
+
   ngOnInit() {
+
+    this.listMajor = this.searchService.getMajor();
+    this.listLocation = this.searchService.getLocation();
+    this.listUniName = this.searchService.getList();
+    this.searchService.getListUniName().subscribe((response: any) => {
+      this.allUniversity = response;
+    })
+    this.optionMajor = {
+      allowClear: true,
+      placeholder: {
+        id: '0',
+        text: 'Chọn một ngành'
+      }
+    };
+    this.optionUni = {
+      allowClear: true,
+      placeholder: {
+        id: '0',
+        text: 'Chọn một trường đại học'
+      }
+    };
+    this.optionLocation = {
+      allowClear: true,
+      placeholder: {
+        id: '0',
+        text: 'Chọn một địa điểm'
+      }
+    };
 
   }
 
   //Click show table university
   showUniversity(agree: boolean){
     this.show = true;
-  }
-
-  getInfo(){
-
+    console.log(this.allUniversity);
   }
 }

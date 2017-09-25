@@ -1,53 +1,41 @@
-<div id="main">
-  <h1>CÔNG CỤ</h1>
-  <h1>Hỗ trợ tìm kiếm trường và ngành</h1>
-  <br><br>
-  <!--End Slogan-->
-
-  <!--Search input-->
-  <div class="row ">
-    <div class="col-md-1"></div>
-    <div class="col-md-3">
-      <ng2-completer class="ng2complete"
-                     placeholder="  - - Nhóm Ngành - -" [(ngModel)]="captain"
-                     [datasource]="captains"
-                     [minSearchLength]="0"></ng2-completer>
+<section id="hero">
+  <div class="container" style="top:145px">
+    <div class="box-search-job box">
+      <form method="get" id="frm-search-job">
+        <div class="row">
+          <div class="col-xs-12">
+            <h1>Tìm kiếm  ngôi trường mơ ước của bạn cùng UniStart</h1>
+          </div>
+          <div class="" style="padding-bottom: 30px">
+              <select2 [data]="listMajor| async" [options]="optionMajor" style="padding: 15px"></select2>
+              <select2 [data]="listLocation| async" [options]="optionLocation" style="padding: 15px"></select2>
+              <select2 [data]="listUniName| async" [options]="optionUni" style="padding: 15px"></select2>
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="row">
+            <div class="col-xs-12">
+              <button class="btn" type="submit" (click)="showUniversity(true)"><i class="fa fa-search" aria-hidden="true"></i> Tìm Ngay</button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-    <div class="col-md-3">
-      <ng2-completer class="ng2complete"
-                     placeholder="  - - Khu Vực - - " [(ngModel)]="searchStr"
-                     [datasource]="dataService"
-                     [minSearchLength]="0"></ng2-completer>
-    </div>
-    <div class="col-md-3">
-      <ng2-completer class="ng2complete"
-                     placeholder="  - - Trường - -" [(ngModel)]="captain"
-                     [datasource]="universityName"
-                     [minSearchLength]="0"></ng2-completer>
-    </div>
-    <div class="col-md-2">
-      <button class="btn btn-uni-primary" id="btnsearch" (click)="showUniversity(true)"><i class="fa fa-search" aria-hidden="true"></i>
-        Tìm Ngay
-      </button>
-    </div>
-    <div class="col-md-1"></div>
   </div>
-  <!--End search input-->
-</div>
-
+</section>
 <!--Show search-->
 <div *ngIf="show">
   <div class="container">
     <div class="row text-center" id="showsearch">
       <div class="col-md-6 col-sm-6 hero-feature"
-           *ngFor="let university of universityapi | paginate: { itemsPerPage:4, currentPage: p }">
+           *ngFor="let university of allUniversity | paginate: { itemsPerPage:4, currentPage: p }">
         <div class="thumbnail">
           <a routerLink="/university">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnbsCdgHxRD6an4ZRvUXHcrhJXlsOo3fNhTiMaZIoEe1nA0fLSng" alt="">
           </a>
           <div class="caption">
-            <h3>{{university.name}}</h3>
-            <p>{{university.imageUrl}}</p>
+            <p class="uni-name">{{university.name}}</p>
+            <p>{{university.location}}</p>
             <p>
               <a href="#" class="btn btn-success"><i class="fa fa-heart-o" aria-hidden="true"></i> Quan Tâm</a>
               <button data-toggle="modal" data-target="#modalDetail" class="btn btn-success"><i class="fa fa-hand-o-right"></i> Thông Tin</button>
@@ -68,14 +56,15 @@
     <h1>MỘT SỐ TRƯỜNG</h1>
   </div>
   <div class="row text-center">
-    <div class="col-lg-4 col-sm-6 text-center mb-4"
-         *ngFor="let university of universityapi">
+    <div class="col-lg-4 col-sm-6 text-center"
+         *ngFor="let university of allUniversity">
       <img class="rounded-circle img-fluid d-block mx-auto"
            src="http://images.cdn3.stockunlimited.net/clipart/atom-logo-element_1627953.jpg" alt="">
-      <h3>{{university.name}}
-        <small>{{university.age}}</small>
-      </h3>
-      <p>{{university.createdAt}}</p>
+      <p>{{university.name}}<br>
+      </p>
+      <p>{{university.description}}
+        Decripstion:Feeling stuck? Need something more? You can hire a designer to help you with your project or to create a custom build of any theme
+      </p>
     </div>
   </div>
 </div>

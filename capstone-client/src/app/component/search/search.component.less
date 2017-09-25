@@ -21,51 +21,22 @@ h1 {
 
 .thumbnail{
   border-color: @color-2;
+  height: 320px;
 }
 
-.row {
-  margin-top: 50px;
-}
 .select2-container {
   box-sizing: border-box;
   display: inline-block;
   margin: 0;
   position: relative;
   vertical-align: middle;
+  height: 100px;
 }
 
-
-//Search input ng2completer
-.ng2complete {
-  //font-family: "fantasy";
-  font-size: 23px;
-  //height: 400px;
-  line-height: 2;
-}
 
 //search button
 
-.btn#btnsearch{
-  outline: none;
-  width: auto;
-  margin-top: 2px;
-  margin-left: 10px;
-  font-weight: bold;
-  background-color: @color-4;
-  border: 1px solid @color-5;
-  border-radius: 11px;
-  font-size: 23px;
-}
-.btn#btnsearch:hover{
-  background-color: @color-5;
-}
-.btn-success{
-  height: 80%;
-  border: none;
-  background-color: @color-0;
-  border: 1px solid @color-4;
-  color: @color-4;
-}
+
 
 .btn:hover {
     background-color: @color-4;
@@ -96,7 +67,7 @@ h1 {
 
 .row#newsuni{
   border-top: 2px #666666;
-  margin: 100px;
+  margin: 50px;
   margin-right: 150px;
   margin-left: 150px;
 }
@@ -122,5 +93,45 @@ h1 {
   font-weight: 600;
   width: 30%;
   display: inline-block;
+}
+
+#hero {
+  background-image: url('../../img/joseph-chan-256778.jpg');
+  background-size: cover;
+  background-position: center -175px;
+  background-repeat: no-repeat;
+  height: 450px;
+  overflow: hidden;
+  .container{
+    position: relative;
+  }
+  .box-search-job {
+    padding: 25px;
+    background-color: rgba(0, 0, 0, 0.42);
+  }
+  .btn{
+    padding: 10px 118px;
+    background-color: @color-4;
+    color: @color-0;
+  }
+  h1{
+    margin: 0;
+    font-size: 20px;
+    padding: 0;
+    color: @color-3;
+    margin-bottom: 20px;
+  }
+}
+
+//Top news university
+@media (min-width: 1200px){
+  .col-lg-4{
+    //border: 0.5px solid @color-2;
+    height: 350px;
+  }
+}
+//Show search university
+.uni-name{
+  height: 71px;
 }
 
