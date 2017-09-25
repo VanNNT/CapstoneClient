@@ -34,7 +34,7 @@
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnbsCdgHxRD6an4ZRvUXHcrhJXlsOo3fNhTiMaZIoEe1nA0fLSng" alt="">
           </a>
           <div class="caption">
-            <p>{{university.name}}</p>
+            <p class="uni-name">{{university.name}}</p>
             <p>{{university.location}}</p>
             <p>
               <a href="#" class="btn btn-success"><i class="fa fa-heart-o" aria-hidden="true"></i> Quan Tâm</a>
@@ -49,20 +49,22 @@
 </div>
 <!-- End show search-->
 
+<!--News university-->
 <div class="row" id="newsuni">
   <div class="col-lg-12">
     <!--<h1 style="text-align: center; color: #0BA25E; font-family: 'Showcard Gothic'">CÔNG CỤ</h1>-->
     <h1>MỘT SỐ TRƯỜNG</h1>
   </div>
   <div class="row text-center">
-    <div class="col-lg-4 col-sm-6 text-center mb-4"
+    <div class="col-lg-4 col-sm-6 text-center"
          *ngFor="let university of allUniversity">
       <img class="rounded-circle img-fluid d-block mx-auto"
            src="http://images.cdn3.stockunlimited.net/clipart/atom-logo-element_1627953.jpg" alt="">
       <p>{{university.name}}<br>
-        <small>{{university.priority}}</small>
       </p>
-      <p>{{university.createdAt}}</p>
+      <p>{{university.description}}
+        Decripstion:Feeling stuck? Need something more? You can hire a designer to help you with your project or to create a custom build of any theme
+      </p>
     </div>
   </div>
 </div>
