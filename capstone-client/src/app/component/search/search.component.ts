@@ -16,19 +16,12 @@ export class SearchComponent implements OnInit {
   protected searchStr: string;
   protected captain: string;
   protected dataService: CompleterData;
-  protected searchData = [
-    { color: 'red', value: '#f00' },
-    { color: 'green', value: '#0f0' },
-    { color: 'blue', value: '#00f' },
-    { color: 'cyan', value: '#0ff' },
-    { color: 'magenta', value: '#f0f' },
-    { color: 'yellow', value: '#ff0' },
-    { color: 'black', value: '#000' }
-  ];
-  protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett' ];
+  public optionMajor: Select2Options;
+  public optionUni: Select2Options;
+  public optionLocation: Select2Options;
 
-  constructor(private completerService: CompleterService, private searchService: SearchService, private constant: Constants) {
-    this.dataService = completerService.local(this.searchData, 'color', 'color');
+  constructor(private searchService: SearchService, private constant: Constants) {
+
   }
 
 
@@ -45,9 +38,30 @@ export class SearchComponent implements OnInit {
     this.listMajor = this.searchService.getMajor();
     this.listLocation = this.searchService.getLocation();
     this.listUniName = this.searchService.getList();
-    this.searchService.getAllUni().subscribe((response: any) => {
+    this.searchService.getListUniName().subscribe((response: any) => {
       this.allUniversity = response;
     })
+    this.optionMajor = {
+      allowClear: true,
+      placeholder: {
+        id: '0',
+        text: 'Chọn một ngành'
+      }
+    };
+    this.optionUni = {
+      allowClear: true,
+      placeholder: {
+        id: '0',
+        text: 'Chọn một trường đại học'
+      }
+    };
+    this.optionLocation = {
+      allowClear: true,
+      placeholder: {
+        id: '0',
+        text: 'Chọn một địa điểm'
+      }
+    };
 
   }
 

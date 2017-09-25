@@ -24,9 +24,8 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <!--<a *ngIf="user.role.id==1" routerLink="/admin">{{user.name}}</a> &lt;!&ndash;role user&ndash;&gt;-->
-                <!--<a *ngIf="user.role.id==2">{{user.name}}</a> &lt;!&ndash;role admin&ndash;&gt;-->
-                <a>{{user.name}}</a>
+                <a *ngIf="user.role && user.role.id==2" routerLink="/admin">{{user.name}}</a> <!--role admin-->
+                <a *ngIf="(user.role && user.role.id==1) || !user.role">{{user.name}}</a> <!--role user-->
               </li>
               <li role="separator" class="divider"></li>
               <li><a (click)="clickLink()" >Chỉnh sửa thông tin</a></li>

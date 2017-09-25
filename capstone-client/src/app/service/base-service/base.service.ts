@@ -9,6 +9,9 @@ export class BaseService {
   public title;
   public content;
   public user;
+  public logo;
+  public imgUni;
+  public list: any[];
   constructor() {
 
   }
@@ -20,5 +23,19 @@ export class BaseService {
   }
   getUser(){
     return this.user;
+  }
+  setLogoUni(data){
+    this.logo = data;
+    console.log('logo' + data);
+  }
+  getLogoUni(){
+    return this.logo;
+  }
+  setImgUni(data){
+    this.imgUni = data;
+    console.log('img' + data);
+  }
+  getImgUni(){
+    return this.logo;
   }
 }
