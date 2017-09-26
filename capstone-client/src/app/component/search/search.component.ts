@@ -25,49 +25,83 @@ export class SearchComponent implements OnInit {
   }
 
 
-
  // ----------- Test API ----------- SearchService
   public listMajor: Observable<Select2OptionData[]>;
   public listLocation: Observable<Select2OptionData[]>;
   public listUniName: Observable<Select2OptionData[]>;
   public allUniversity: any[];
-  public topUniversity: any[];
+  public topUniversity: any[] = [];
+  public valueMajor: string;
+  public valueLocation: string;
+  public valueUniversity: string;
+  public listSearch: any[] = [];
 
   ngOnInit() {
-
     this.listMajor = this.searchService.getMajor();
     this.listLocation = this.searchService.getLocation();
     this.listUniName = this.searchService.getList();
     this.searchService.getListUniName().subscribe((response: any) => {
       this.allUniversity = response;
-    })
+      for(let i = 0;i < this.allUniversity.length ;i++){
+        if(this.allUniversity[i].priority == 0){
+          this.topUniversity.push(this.allUniversity[i]);
+        }
+        if (this.topUniversity.length == 6){
+          return;
+        }
+      }
+    });
     this.optionMajor = {
       allowClear: true,
       placeholder: {
         id: '0',
-        text: 'Chọn một ngành'
+        text: 'Chọn ngành'
       }
     };
     this.optionUni = {
       allowClear: true,
       placeholder: {
         id: '0',
-        text: 'Chọn một trường đại học'
+        text: 'Chọn trường đại học'
       }
     };
     this.optionLocation = {
       allowClear: true,
       placeholder: {
         id: '0',
-        text: 'Chọn một địa điểm'
+        text: 'Chọn địa điểm'
       }
     };
 
   }
 
   //Click show table university
-  showUniversity(agree: boolean){
-    this.show = true;
-    console.log(this.allUniversity);
+  searchUniversity(){
+    this.listSearch = [];
+    this.show = false;
+    let data = {
+      "majorId": this.valueMajor,
+      "locationId": this.valueLocation,
+      "universityId": this.valueUniversity,
+    }
+
+    this.searchService.searchPage(data).subscribe((response: any) =>{
+        this.listSearch = response;
+        if(this.listSearch[0] != null){
+          this.show = true;
+        }
+
+    })
+
+  }
+
+  changedMajor(value){
+    this.valueMajor = value.value;
+  }
+  changedLocation(value){
+    this.valueLocation = value.value;
+  }
+  changedUniversity(value){
+    this.valueUniversity = value.value;
   }
 }

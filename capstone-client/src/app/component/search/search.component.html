@@ -1,21 +1,24 @@
 <section id="hero">
   <div class="container" style="top:145px">
     <div class="box-search-job box">
-      <form method="get" id="frm-search-job">
+      <form method="get" id="frm-search-job" #fSearch="ngForm" ngForm="SearchForm()">
         <div class="row">
           <div class="col-xs-12">
             <h1>Tìm kiếm  ngôi trường mơ ước của bạn cùng UniStart</h1>
           </div>
-          <div class="" style="padding-bottom: 30px">
-              <select2 [data]="listMajor| async" [options]="optionMajor" style="padding: 15px"></select2>
-              <select2 [data]="listLocation| async" [options]="optionLocation" style="padding: 15px"></select2>
-              <select2 [data]="listUniName| async" [options]="optionUni" style="padding: 15px"></select2>
+          <div class="search-page" style="padding-bottom: 30px">
+              <select2 class="form-group" [data]="listMajor| async" (valueChanged)="changedMajor($event)"
+                       [options]="optionMajor" style="padding: 15px"></select2>
+              <select2 class="form-group" [data]="listLocation| async" (valueChanged)="changedLocation($event)"
+                       [options]="optionLocation" style="padding: 15px"></select2>
+              <select2 class="form-group" [data]="listUniName| async" (valueChanged)="changedUniversity($event)"
+                       [options]="optionUni" style="padding: 15px"></select2>
           </div>
         </div>
         <div class="text-center">
           <div class="row">
             <div class="col-xs-12">
-              <button class="btn" type="submit" (click)="showUniversity(true)"><i class="fa fa-search" aria-hidden="true"></i> Tìm Ngay</button>
+              <button class="btn" type="submit" (click)="searchUniversity()"><i class="fa fa-search" aria-hidden="true"></i>Tìm Ngay</button>
             </div>
           </div>
         </div>
@@ -24,22 +27,28 @@
   </div>
 </section>
 <!--Show search-->
-<div *ngIf="show">
+<div *ngIf="show" id="main">
   <div class="container">
     <div class="row text-center" id="showsearch">
-      <div class="col-md-6 col-sm-6 hero-feature"
-           *ngFor="let university of allUniversity | paginate: { itemsPerPage:4, currentPage: p }">
+      <div class="col-lg-4 col-sm-6 portfolio-item hero-feature"
+           *ngFor="let university of listSearch | paginate: { itemsPerPage:6, currentPage: p }">
         <div class="thumbnail">
-          <a routerLink="/university">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnbsCdgHxRD6an4ZRvUXHcrhJXlsOo3fNhTiMaZIoEe1nA0fLSng" alt="">
-          </a>
+          <div style="padding: 20px" *ngIf="university && university.logo">
+            <a routerLink="/university">
+              <img src="{{university.logo}}" alt="">
+            </a>
+          </div>
+          <div style="padding: 20px" *ngIf="!university.logo">
+            <a routerLink="/university">
+              <img src="../../../assets/image/image-not-found.png">
+            </a>
+          </div>
           <div class="caption">
-            <p class="uni-name">{{university.name}}</p>
-            <p>{{university.location}}</p>
-            <p>
-              <a href="#" class="btn btn-success"><i class="fa fa-heart-o" aria-hidden="true"></i> Quan Tâm</a>
+            <div style="min-height: 55px; border: 1px solid white"><p class="">{{university.name}}</p></div>
+            <div style="min-height: 35px; border: 1px solid white"><p>{{university.phone}}</p></div>
+            <div><p><a href="#" class="btn btn-success"><i class="fa fa-heart-o" aria-hidden="true"></i> Quan Tâm</a>
               <button data-toggle="modal" data-target="#modalDetail" class="btn btn-success"><i class="fa fa-hand-o-right"></i> Thông Tin</button>
-            </p>
+            </p></div>
           </div>
         </div>
       </div>
@@ -50,14 +59,15 @@
 <!-- End show search-->
 
 <!--News university-->
-<div class="row" id="newsuni">
+
+<div class="row" id="news-uni">
   <div class="col-lg-12">
     <!--<h1 style="text-align: center; color: #0BA25E; font-family: 'Showcard Gothic'">CÔNG CỤ</h1>-->
     <h1>MỘT SỐ TRƯỜNG</h1>
   </div>
   <div class="row text-center">
     <div class="col-lg-4 col-sm-6 text-center"
-         *ngFor="let university of allUniversity">
+         *ngFor="let university of topUniversity">
       <img class="rounded-circle img-fluid d-block mx-auto"
            src="http://images.cdn3.stockunlimited.net/clipart/atom-logo-element_1627953.jpg" alt="">
       <p>{{university.name}}<br>
