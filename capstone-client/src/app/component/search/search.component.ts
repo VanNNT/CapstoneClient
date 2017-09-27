@@ -40,6 +40,7 @@ export class SearchComponent implements OnInit {
     this.listUniName = this.searchService.getList();
     this.searchService.getListUniName().subscribe((response: any) => {
       this.allUniversity = response;
+      console.log(response);
     })
     this.optionMajor = {
       allowClear: true,

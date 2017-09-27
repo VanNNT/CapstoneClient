@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BaseService} from "../../service/base-service/base.service";
+import {Http, RequestOptions,Headers} from "@angular/http";
+import {UniversityService} from "../../service/university/university.service";
 
 @Component({
   selector: 'file-uploader',
@@ -10,7 +12,7 @@ import {BaseService} from "../../service/base-service/base.service";
 export class FileUploadComponent {
   @Input() name: string;
 
-  constructor(private baseService: BaseService){}
+  constructor(private baseService: BaseService, private uniService : UniversityService){}
   activeColor: string = 'green';
   baseColor: string = '#ccc';
   overlayColor: string = 'rgba(255,255,255,0.5)';
@@ -58,11 +60,22 @@ export class FileUploadComponent {
   _handleReaderLoaded(e) {
     var reader = e.target;
     this.imageSrc = reader.result;
+    let url = "https://api.imgur.com/3/image";
+    var headers = new Headers();
+    headers.append('Authorization', 'Client-ID bf915d4106b6639');
+    let options = new RequestOptions({ headers: headers });
+    let data = {
+      'image': reader.result.split(',')[1]
+    };
     if(this.name === 'logo'){
-      this.baseService.setLogoUni(this.imageSrc);
+      this.uniService.uploadFile(url,data,options).subscribe((response:any)=>{
+        this.baseService.setLogoUni(response.data.link);
+      });
     }else{
       this.value = true;
-      this.baseService.setImgUni(this.imageSrc);
+      this.uniService.uploadFile(url,data,options).subscribe((response:any)=>{
+        this.baseService.setImgUni(response.data.link);
+      });
     }
     this.loaded = true;
   }
