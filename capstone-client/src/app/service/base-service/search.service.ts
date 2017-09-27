@@ -48,5 +48,10 @@ export class SearchService {
       return this._http.get(this.constant.UNIVERSITY)
         .map((response: Response) => response.json())
   }
+
+  searchPage(data): Observable<any[]>{
+    return this._http.post(this.constant.SEARCH,data)
+      .map((response: Response) => response.json())
+  }
 }
 

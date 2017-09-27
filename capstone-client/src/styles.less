@@ -102,22 +102,6 @@ a:focus, a:hover {
 @media (min-width: 1200px){
 
 }
-//Input Search
-.ng2complete input{
-  margin: 2px;
-  width: 100%;
-  border-radius: 15px 15px;
-  border: 1px solid #FF661D;
-}
-
-//Search admin page
-.ng2complete2 input{
-  margin: 2px;
-  width: 100%;
-  border-radius: 15px 15px;
-  border: 1px solid #FF661D;
-}
-
 button{
   outline: none;
   &:hover{
@@ -149,13 +133,6 @@ button{
 span {
   outline: none;
 }
-//Admin Page
-
-//@media (min-width: 992px){
-//  .container{
-//    max-width: 100%;
-//  }
-//}
 
 .select2-container--default .select2-selection--single{
   padding: 0;
@@ -164,4 +141,15 @@ span {
 .select2-container .select2-selection--multiple {
   min-width: 300px;
   width: fit-content;
+}
+.search-page {
+  .select2-container .select2-selection--single {
+    height: auto;
+    padding: 5px;
+  }
+}
+// Pagination Search Page
+.ngx-pagination{
+  margin-top: 0.6rem;
+  font-size: 20px;
 }
