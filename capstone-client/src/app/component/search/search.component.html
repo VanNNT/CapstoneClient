@@ -44,7 +44,7 @@
             </a>
           </div>
           <div class="caption">
-            <div style="min-height: 55px; border: 1px solid white"><p class="">{{university.name}}</p></div>
+            <div style="min-height: 55px; border: 1px solid white"><p class=""><b>{{university.name}}</b></p></div>
             <div style="min-height: 35px; border: 1px solid white"><p>{{university.phone}}</p></div>
             <div><p><a href="#" class="btn btn-success"><i class="fa fa-heart-o" aria-hidden="true"></i> Quan Tâm</a>
               <button data-toggle="modal" data-target="#modalDetail" class="btn btn-success"><i class="fa fa-hand-o-right"></i> Thông Tin</button>
@@ -69,9 +69,8 @@
     <div class="col-lg-4 col-sm-6 text-center"
          *ngFor="let university of topUniversity">
       <img class="rounded-circle img-fluid d-block mx-auto"
-           src="http://images.cdn3.stockunlimited.net/clipart/atom-logo-element_1627953.jpg" alt="">
-      <p>{{university.name}}<br>
-      </p>
+           src="http://www.fptindustrial.com/global/PublishingImages/FPTSharingLogo.jpg" alt="">
+      <p><b>{{university.name}}</b><br></p>
       <p>{{university.description}}
         Decripstion:Feeling stuck? Need something more? You can hire a designer to help you with your project or to create a custom build of any theme
       </p>

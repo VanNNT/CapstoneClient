@@ -20,12 +20,9 @@ export class SearchComponent implements OnInit {
   public optionUni: Select2Options;
   public optionLocation: Select2Options;
 
-  constructor(private searchService: SearchService, private constant: Constants) {
-
+  constructor(private searchService: SearchService) {
   }
 
-
- // ----------- Test API ----------- SearchService
   public listMajor: Observable<Select2OptionData[]>;
   public listLocation: Observable<Select2OptionData[]>;
   public listUniName: Observable<Select2OptionData[]>;
@@ -40,6 +37,7 @@ export class SearchComponent implements OnInit {
     this.listMajor = this.searchService.getMajor();
     this.listLocation = this.searchService.getLocation();
     this.listUniName = this.searchService.getList();
+    //Add top 6 universities priority 0
     this.searchService.getListUniName().subscribe((response: any) => {
       this.allUniversity = response;
       for(let i = 0;i < this.allUniversity.length ;i++){
@@ -51,6 +49,8 @@ export class SearchComponent implements OnInit {
         }
       }
     });
+
+    //Placeholder search input
     this.optionMajor = {
       allowClear: true,
       placeholder: {
@@ -72,10 +72,9 @@ export class SearchComponent implements OnInit {
         text: 'Chọn địa điểm'
       }
     };
-
   }
 
-  //Click show table university
+  // Click search university
   searchUniversity(){
     this.listSearch = [];
     this.show = false;
@@ -84,15 +83,13 @@ export class SearchComponent implements OnInit {
       "locationId": this.valueLocation,
       "universityId": this.valueUniversity,
     }
-
+// List search
     this.searchService.searchPage(data).subscribe((response: any) =>{
         this.listSearch = response;
         if(this.listSearch[0] != null){
           this.show = true;
         }
-
     })
-
   }
 
   changedMajor(value){
