@@ -38,6 +38,7 @@ import { FileUploadComponent } from './component/file-upload/file-upload.compone
 import {RatingModule} from "ngx-bootstrap";
 import {Constants} from "./constants";
 import {ToastModule} from "ng2-toastr/ng2-toastr";
+import {UniversityService} from "./service/university/university.service";
 
 const providers = {
   'google': {
@@ -82,7 +83,7 @@ const providers = {
     RatingModule,
     ToastModule.forRoot()
   ],
-  providers: [LoginService, BaseService, CheckLoginGuard, SearchService,Constants],
+  providers: [LoginService, BaseService, CheckLoginGuard, SearchService,Constants, UniversityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

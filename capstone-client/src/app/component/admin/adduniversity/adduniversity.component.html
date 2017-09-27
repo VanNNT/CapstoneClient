@@ -44,7 +44,8 @@
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Khu Vực</label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <select2 [data]="listLocation | async" ></select2>
+        <select2 [data]="listLocation | async"
+                 (valueChanged)="getValue($event)"></select2>
       </div>
     </div>
     <div class="form-group">
@@ -53,7 +54,6 @@
         <!--Multiple choice-->
         <select2 [data]="listMajor | async"
                  [options]="options"
-                 [width]="500"
                  [value]="value"
                  (valueChanged)="changed($event)"></select2>
       </div>
@@ -75,6 +75,18 @@
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Mô tả</label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         <textarea name="des" ngModel="" style="height: 150px" class="form-control" type="text"> </textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12">Độ ưu tiện</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+          <select class="form-control" name="pri" ngModel>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
       </div>
     </div>
     <div class="ln_solid"></div>

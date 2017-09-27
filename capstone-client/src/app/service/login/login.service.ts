@@ -4,7 +4,6 @@ import {Http, RequestOptions, Response, Headers} from "@angular/http";
 import {Observable} from "rxjs";
 import 'rxjs/add/operator/map';
 
-
 @Injectable()
 export class LoginService {
   public isLoggedIn = false;
@@ -26,6 +25,9 @@ export class LoginService {
     return this._http.post(apiUrl,data).map((res:Response)=>res.json());
   }
   login(apiUrl,data) : Observable<any>{
+    return this._http.post(apiUrl,data).map((res:Response)=>res.json());
+  }
+  loginProvider(apiUrl,data): Observable<any>{
     return this._http.post(apiUrl,data).map((res:Response)=>res.json());
   }
 }

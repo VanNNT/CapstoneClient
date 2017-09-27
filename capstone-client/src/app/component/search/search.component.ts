@@ -51,6 +51,8 @@ export class SearchComponent implements OnInit {
     });
 
     //Placeholder search input
+
+
     this.optionMajor = {
       allowClear: true,
       placeholder: {
