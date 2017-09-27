@@ -3,6 +3,8 @@ export class User {
   image: string;
   name: string;
   email: string;
+  id: string;
+  providerName: string;
   role = {};
   constructor(data: any) {
     if (data) {
@@ -15,6 +17,12 @@ export class User {
        this.name = data.name;
      }else{
        this.name = data.username;
+     }
+     if(data.uid){
+       this.id = data.uid;
+     }
+     if(data.provider){
+       this.providerName = data.provider;
      }
      this.email = data.email;
      if(data.role){

@@ -27,7 +27,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.toastr.setRootViewContainerRef(vcr);
   }
   ngOnInit() {
-
+      this.user = JSON.parse(localStorage.getItem('currentUser'));
+      if(this.user){
+        this.baseService.setUser(this.user);
+        this.loginService.setLogin(true);
+      }
   }
   public login(provider) {
     this.sub = this.auth.login(provider).subscribe(
@@ -40,6 +44,15 @@ export class AppComponent implements OnInit, OnDestroy {
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
         this.loginService.broadcastTextChange(this.user);
+        localStorage.setItem('currentUser', JSON.stringify(this.user));
+        let dataLogin= {
+          'email': this.user.email,
+          'image': this.user.image,
+          'name': this.user.name,
+          'providerId': this.user.id,
+          'providerName': this.user.providerName
+        };
+        this.loginService.loginProvider(this.contants.LOGIN_PROVIDER,dataLogin).subscribe();
       }
     );
   }
@@ -56,6 +69,7 @@ export class AppComponent implements OnInit, OnDestroy {
            $('body').removeClass('modal-open');
            $('.modal-backdrop').remove();
            this.toastr.success('Bạn đã đăng ký thành công', 'Thành công!');
+           registerForm.onReset();
          }
       },error=>{
         if(error.status==this.contants.CONFLICT){
@@ -74,10 +88,10 @@ export class AppComponent implements OnInit, OnDestroy {
     };
     this.loginService.login(this.contants.LOGIN,data).subscribe((response:any)=>{
       if(response){
-        console.log(response);
         this.loginService.setLogin(true);
         this.baseService.setUser(response);
         this.user = this.baseService.getUser();
+        localStorage.setItem('currentUser', JSON.stringify(this.user));
         $('#myModal').hide();
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();

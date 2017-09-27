@@ -19,6 +19,9 @@ export class HeaderComponent implements OnInit {
   }
   ngOnInit() {
     this.getUser();
+    if(!this.user){
+      this.user = JSON.parse(localStorage.getItem('currentUser'));
+    }
     console.log(this.user);
     this.router.navigate(['home']);
   }
@@ -37,6 +40,7 @@ export class HeaderComponent implements OnInit {
           this.loginService.setLogin(false);
           this.loginService.broadcastTextChange(this.user);
           window.location.replace('/home');
+          localStorage.removeItem('currentUser');
         }
       );
     }else{
@@ -45,6 +49,7 @@ export class HeaderComponent implements OnInit {
       this.loginService.setLogin(false);
       this.loginService.broadcastTextChange(this.user);
       window.location.replace('/home');
+      localStorage.removeItem('currentUser');
     }
   }
   public clickLink(){

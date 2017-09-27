@@ -26,16 +26,14 @@ export class BaseService {
   }
   setLogoUni(data){
     this.logo = data;
-    console.log('logo' + data);
   }
   getLogoUni(){
     return this.logo;
   }
   setImgUni(data){
     this.imgUni = data;
-    console.log('img' + data);
   }
   getImgUni(){
-    return this.logo;
+    return this.imgUni;
   }
 }
