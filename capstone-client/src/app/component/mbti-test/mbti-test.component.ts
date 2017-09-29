@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {NgForm} from "@angular/forms";
 import {MBTIQuestion} from "../../model/MBTIModel";
+import {MbtiService} from "../../service/mbti/mbti.service";
+
 
 @Component({
   selector: 'app-mbti-test',
@@ -9,9 +11,10 @@ import {MBTIQuestion} from "../../model/MBTIModel";
   styleUrls: ['./mbti-test.component.less']
 })
 export class MbtiTestComponent implements OnInit {
-  private MBTIresult: string;
+  public MBTIresult: string;
   public tested: boolean;
-  private questions: MBTIQuestion[];
+  public questions: MBTIQuestion[];
+  public listQuestion: any[];
   private scores = {
     E: 0,
     I: 0,
@@ -22,96 +25,20 @@ export class MbtiTestComponent implements OnInit {
     J: 0,
     P: 0
   };
-  constructor(private router: Router) { }
-  aaa=[
-    {
-      id : '1',
-      name:'q1',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'EI'
-    },
-    {
-      id : '2',
-      name: 'q2',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'EI'
-    },
-    {
-      id : '3',
-      name: 'q3',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'SN'
-    },
-    {
-      id : '4',
-      name: 'q4',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'SN'
-    },
-    {
-      id : '5',
-      name: 'q5',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'SN'
-    },
-    {
-      id : '6',
-      name:'q6',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'TF'
-    },
-    {
-      id : '7',
-      name: 'q7',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'TF'
-    },
-    {
-      id : '8',
-      name: 'q8',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'EI'
-    },
-    {
-      id : '9',
-      name: 'q9',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'JP'
-    },
-    {
-      id : '10',
-      name: 'q10',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'JP'
-    }
-  ];
+  constructor(private router: Router,private mbtiService: MbtiService) { }
   ngOnInit() {
     this.tested = false;
     this.questions=[];
-    this.aaa.forEach(x=>{
-      this.questions.push(new MBTIQuestion(x));
+    // this.aaa.forEach(x=>{
+    //   this.questions.push(new MBTIQuestion(x));
+    // });
+    this.mbtiService.getMbti().subscribe((response: any)=>{
+      this.listQuestion = response;
+      this.listQuestion.forEach(x=>{
+        this.questions.push(new MBTIQuestion(x));
+      });
+      // console.log(this.questions);
     });
-    console.log(this.questions);
   }
   public onChoose(item,option){
     if(option=='a' && !item.isChecked){
@@ -138,25 +65,25 @@ export class MbtiTestComponent implements OnInit {
       }
       item.isChecked=false;
     }
-    console.log(this.scores.J);
+    console.log(this.scores);
   }
   public onSubmit(form: NgForm){
-    if(this.scores.E>1){
+    if(this.scores.E>=5){
       this.MBTIresult = 'E';
     }else{
       this.MBTIresult = 'I';
     }
-    if(this.scores.S>1){
+    if(this.scores.S>=10){
       this.MBTIresult = this.MBTIresult + 'S';
     }else{
       this.MBTIresult = this.MBTIresult + 'N';
     }
-    if(this.scores.T>1){
+    if(this.scores.T>=10){
       this.MBTIresult = this.MBTIresult + 'T';
     }else{
       this.MBTIresult = this.MBTIresult + 'F';
     }
-    if(this.scores.J>1){
+    if(this.scores.J>=10){
       this.MBTIresult = this.MBTIresult + 'J';
     }else{
       this.MBTIresult = this.MBTIresult + 'P';

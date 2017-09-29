@@ -24,7 +24,7 @@ import { NewReviewComponent } from './component/new-review/new-review.component'
 import {LoginService} from './service/login/login.service';
 import {BaseService} from './service/base-service/base.service';
 import {SearchService} from "./service/base-service/search.service";
-
+import {MbtiService} from "./service/mbti/mbti.service";
 // Guard
 import {CheckLoginGuard} from './guard/check-login/check-login.guard';
 
@@ -85,7 +85,7 @@ const providers = {
     RatingModule,
     ToastModule.forRoot()
   ],
-  providers: [LoginService, BaseService, CheckLoginGuard, SearchService,Constants, UniversityService],
+  providers: [LoginService, BaseService, CheckLoginGuard, SearchService,Constants, UniversityService, MbtiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
