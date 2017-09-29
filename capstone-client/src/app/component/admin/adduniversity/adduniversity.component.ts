@@ -15,7 +15,7 @@ import {ToastsManager} from "ng2-toastr";
 })
 export class AdduniversityComponent implements OnInit {
   public options: Select2Options;
-  public value: string[];
+  public value: number[];
   public current: string;
   public listMajor: Observable<Select2OptionData[]>;
   public listLocation: Observable<Select2OptionData[]>;
@@ -25,10 +25,11 @@ export class AdduniversityComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.listMajor = this.searchService.getMajor();
     this.listLocation = this.searchService.getLocation();
 
-    this.value = [];
+    this.value = [4307,4308];
 
     this.options = {
       multiple: true
@@ -42,7 +43,7 @@ export class AdduniversityComponent implements OnInit {
   }
   getValue(data){
     this.current = data.value;
-    console.log(this.current);
+    // console.log(data);
   }
   onSave(form: NgForm){
     let data = {

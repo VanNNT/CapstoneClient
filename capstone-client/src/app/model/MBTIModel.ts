@@ -10,11 +10,11 @@ export class MBTIQuestion {
   constructor(data: any) {
     if (data) {
       this.id = data.id;
-      this.name = data.name;
-      this.question = data.question;
-      this.option1 = data.option1;
-      this.option2 = data.option2;
-      this.MBTIGroup = data.MBTIGroup;
+      this.name = data.code;
+      this.question = data.questionContent;
+      this.option1 = data.option1name;
+      this.option2 = data.option2name;
+      this.MBTIGroup = data.mbtigroup.mbtigroupName;
       this.isChecked = false;
     }
   }

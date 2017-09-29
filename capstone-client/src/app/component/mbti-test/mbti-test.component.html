@@ -29,8 +29,8 @@
         <div *ngIf="tested" class="box box-white">
           <div class="text-center">
             <div>
-              <p style="font-size: 18px; text-transform: uppercase;">Nhóm tính cách của bạn là </p>
-              <h2 class="box-title bold text-highlight" style="font-size: 32px; margin: 25px auto;">ESTP</h2>
+              <p style="font-size: 18px; text-transform: uppercase;">Nhóm tính cách của bạn là: </p>
+              <h2 class="box-title bold text-highlight" style="font-size: 32px; margin: 25px auto;">{{MBTIresult}}</h2>
               <a (click)="tested = !tested" class="btn btn-topcv-gray btn-sm"><i class="fa fa-pencil"></i> Làm lại Trắc nghiệm</a>
             </div>
           </div>
