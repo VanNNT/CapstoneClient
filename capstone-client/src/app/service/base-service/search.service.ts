@@ -11,6 +11,11 @@ export class SearchService {
   }
 
   getMajor(): Observable<Select2OptionData[]> {
+    // sao dùng map 2 lần ở chổ này
+    // phải map qua format của thằng Select2OptionData u
+    // nó bắt buộc dùng kiểu này hả
+    // ko e. tại chị ko biết làm cách khác
+    // format của nó là id vs text
     return this._http.get(this.constant.MAJOR)
       .map((response: Response) => response.json())
       .map((majors) => {

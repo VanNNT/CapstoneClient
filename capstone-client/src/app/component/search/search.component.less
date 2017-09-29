@@ -143,8 +143,16 @@ h1 {
 
 // Img Search page
 
-.hero-feature img{
-  height: 210px;
-  width: 210px;
-  padding-top: 30px
+.hero-feature{
+  img {
+    height: 210px;
+    width: 210px;
+    padding-top: 30px;
+  }
+  &:hover {
+    text-decoration: none;
+    cursor: pointer;
+    color: #333;
+    box-shadow: 0 0 5px 1px #bcbcbc;
+  }
 }

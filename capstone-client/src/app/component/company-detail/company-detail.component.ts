@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import {Subscription} from "rxjs/Subscription";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-company-detail',
@@ -7,8 +9,9 @@ import * as $ from 'jquery';
   styleUrls: ['./company-detail.component.less']
 })
 export class CompanyDetailComponent implements OnInit {
-
-  constructor() { }
+  public id: number;
+  public sub: Subscription;
+  constructor(private activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
     $.getScript('../../../assets/file.js');
@@ -20,6 +23,10 @@ export class CompanyDetailComponent implements OnInit {
       } else {
         $('#company-fixed-box').fadeOut('normal');
       }
+    });
+    this.sub = this.activateRoute.params.subscribe(params=>{
+      this.id=params['id'];
+      alert(this.id);
     });
   }
 

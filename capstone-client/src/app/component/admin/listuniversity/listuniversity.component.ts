@@ -5,6 +5,7 @@ import {SearchService} from "../../../service/base-service/search.service";
 import {Select2OptionData} from "ng2-select2";
 import {Observable} from "rxjs/Observable";
 import {ToastsManager} from "ng2-toastr";
+import {UniversityService} from "../../../service/university/university.service";
 
 @Component({
   selector: 'app-listuniversity',
@@ -13,7 +14,9 @@ import {ToastsManager} from "ng2-toastr";
 })
 export class ListuniversityComponent implements OnInit {
   // public title: 'List University';
-  constructor(private router: Router, private searchService: SearchService, private constant: Constants, public toastr: ToastsManager) {
+  constructor(private router: Router, private universityService: UniversityService,
+              private searchService: SearchService,
+              private constant: Constants, public toastr: ToastsManager) {
   }
 
   public listUniNameSelect2: Observable<Select2OptionData[]>;
@@ -22,6 +25,7 @@ export class ListuniversityComponent implements OnInit {
   private uniId: string;
 
   ngOnInit() {
+    this.universityService.broadcastTextChange("DANH SÁCH TRƯỜNG");
     this.listUniNameSelect2 = this.searchService.getList();
     this.searchService.getListUniName().subscribe((response: any) => {
         if (response) {
@@ -46,7 +50,7 @@ export class ListuniversityComponent implements OnInit {
     const backUplist = JSON.parse(localStorage.getItem('LIST_UNI'));
     this.listUniName = backUplist;
     if (this.uniId && this.uniId != '0') {
-      for (let i = 0; i < this.listUniName.length - 1; i++) {
+      for (let i = 0; i < this.listUniName.length; i++) {
         if (this.uniId == this.listUniName[i].id) {
           let a = this.listUniName[i];
           this.listUniName.length = 0;

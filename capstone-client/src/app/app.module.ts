@@ -39,6 +39,7 @@ import {RatingModule} from "ngx-bootstrap";
 import {Constants} from "./constants";
 import {ToastModule} from "ng2-toastr/ng2-toastr";
 import {UniversityService} from "./service/university/university.service";
+import { EditUniversityComponent } from './component/admin/edit-university/edit-university.component';
 
 const providers = {
   'google': {
@@ -65,7 +66,8 @@ const providers = {
     ListuniversityComponent,
     AdduniversityComponent,
     FileUploadComponent,
-    NewReviewComponent
+    NewReviewComponent,
+    EditUniversityComponent
   ],
   imports: [
     Select2Module,

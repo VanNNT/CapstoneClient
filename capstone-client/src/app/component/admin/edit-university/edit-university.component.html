@@ -1,22 +1,17 @@
 <div class="x_content">
-  <form #form="ngForm" (ngSubmit)="onSave(form)" class="form-horizontal form-label-left">
+  <form #form="ngForm" class="form-horizontal form-label-left">
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Mã Trường<span class="required">*</span>
       </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <input name="code" ngModel required #code="ngModel" class="form-control">
-        <div *ngIf="code.errors && code.touched" class="alert alert-danger">
-          <div [hidden]="!code.errors.required">
-            Vui lòng nhập mã trường
-          </div>
-        </div>
+        <input disabled name="code" ngModel [value]="university?.code" required #code="ngModel" class="form-control">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Tên Trường<span class="required">*</span>
       </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <input name="name" type="text"  ngModel #nameUni="ngModel" required class="form-control">
+        <input name="name" ngModel [value]="university?.name" #nameUni="ngModel" required class="form-control">
         <div *ngIf="nameUni.errors && nameUni.touched" class="alert alert-danger">
           <div [hidden]="!nameUni.errors.required">
             Vui lòng nhập tên trường
@@ -27,7 +22,8 @@
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <input pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$" type="email" name="email" #email="ngModel" ngModel class="form-control" >
+        <input pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$" type="email" name="email" #email="ngModel"
+               ngModel [value]="university?.email" class="form-control">
         <div *ngIf="email.errors && email.touched" class="alert alert-danger">
           <div [hidden]="!email.errors.pattern">
             Email của bạn không đúng.
@@ -38,49 +34,83 @@
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Số điện thoại</label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <input class="form-control" name="phone" ngModel>
+        <input class="form-control" name="phone" ngModel [value]="university?.phone">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Khu Vực</label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         <select2 [data]="listLocation | async"
-                 (valueChanged)="getValueLocation($event)"></select2>
+                 [value]="university?.location.id"
+                 (valueChanged)="getValue($event)"></select2>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Ngành học</label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         <!--Multiple choice-->
-        <select2 [data]="listMajor | async"
+        <select2 [data]="listMajor"
                  [options]="options"
-                 [value]="value"
-                 (valueChanged)="getValueMajor($event)"></select2>
+                 [value]="valueMajor">
+        </select2>
       </div>
     </div>
-    <!--Upload IMG-->
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Logo Trường</label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <file-uploader [name]="'logo'"></file-uploader>
+        <label class="uploader" ondragover="return false;"
+               [class.loaded]="loaded"
+               [style.outlineColor]="dragging ? activeColor : baseColor"
+               (dragenter)="handleDragEnter()"
+               (dragleave)="handleDragLeave()"
+               (drop)="handleDrop($event)"
+               [style.width.%]="value ? 100 : null">
+
+          <i class="icon fa fa-upload"></i>
+
+          <img
+            [src]="logoSrc"
+            (load)="handleImageLoad()"
+            [class.loaded]="imageLoaded"/>
+
+          <input type="file" name="avtUni" accept="image/*"
+                 (change)="handleInputChange($event,true)">
+        </label>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Hình ảnh Trường</label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <file-uploader [name]=""></file-uploader>
+        <label class="uploader" ondragover="return false;"
+               [class.loaded]="loaded"
+               [style.outlineColor]="dragging ? activeColor : baseColor"
+               (dragenter)="handleDragEnter()"
+               (dragleave)="handleDragLeave()"
+               (drop)="handleDrop($event)"
+               [style.width.%]="value ? 100 : null">
+
+          <i class="icon fa fa-upload"></i>
+
+          <img
+            [src]="imageSrc"
+            (load)="handleImageLoad()"
+            [class.loaded]="imageLoaded"/>
+
+          <input type="file" name="avtUni" accept="image/*"
+                 (change)="handleInputChange($event,true)">
+        </label>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Mô tả</label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <textarea name="des" ngModel="" style="height: 150px" class="form-control" type="text"> </textarea>
+        <textarea name="des" ngModel [value]="university?.description" style="height: 150px" class="form-control" type="text"> </textarea>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Độ ưu tiện</label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-          <select class="form-control" name="pri" ngModel>
+        <select class="form-control" name="pri" [value]="university?.priority" ngModel>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>

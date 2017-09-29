@@ -34,12 +34,12 @@
            *ngFor="let university of listSearch | paginate: { itemsPerPage:6, currentPage: p }">
         <div class="thumbnail">
           <div style="padding: 20px" *ngIf="university && university.logo">
-            <a routerLink="/university">
+            <a [routerLink]="['/university',university.id]">
               <img src="{{university.logo}}" alt="">
             </a>
           </div>
           <div style="padding: 20px" *ngIf="!university.logo">
-            <a routerLink="/university">
+            <a [routerLink]="['/university',university.id]">
               <img src="../../../assets/image/image-not-found.png">
             </a>
           </div>

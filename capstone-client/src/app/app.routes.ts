@@ -12,12 +12,13 @@ import {ListuniversityComponent} from "./component/admin/listuniversity/listuniv
 import {AdduniversityComponent} from "./component/admin/adduniversity/adduniversity.component";
 
 import {NewReviewComponent} from "./component/new-review/new-review.component";
+import {EditUniversityComponent} from "./component/admin/edit-university/edit-university.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
     children:[
       {path: 'home', component: HomeComponent},
-      {path: 'university', component: CompanyDetailComponent},
+      {path: 'university/:id', component: CompanyDetailComponent},
       {path: 'review-rating', component: ReviewRatingComponent},
       {path: 'new-review', component: NewReviewComponent},
       {path: 'search-university', component: SearchComponent},
@@ -28,6 +29,8 @@ const routing: Routes = [
     children:[
     {path: 'list-university', component: ListuniversityComponent},
     {path: 'add-university', component: AdduniversityComponent},
+     // {path: 'edit-university', component: EditUniversityComponent},
+     {path: 'edit-university/:id', component: EditUniversityComponent},
   ]},
 
 ];
