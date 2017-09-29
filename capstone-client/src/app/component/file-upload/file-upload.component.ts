@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
 import {BaseService} from "../../service/base-service/base.service";
 import {Http, RequestOptions,Headers} from "@angular/http";
 import {UniversityService} from "../../service/university/university.service";
+import {ToastsManager} from "ng2-toastr";
 
 @Component({
   selector: 'file-uploader',
@@ -9,10 +10,13 @@ import {UniversityService} from "../../service/university/university.service";
   styleUrls: ['./file-upload.component.less'],
   inputs:['activeColor','baseColor','overlayColor']
 })
-export class FileUploadComponent {
+export class FileUploadComponent implements OnInit{
   @Input() name: string;
-
-  constructor(private baseService: BaseService, private uniService : UniversityService){}
+  @Input() imgUrl: string;
+  constructor(private baseService: BaseService, private uniService : UniversityService,
+    public toastr: ToastsManager, vcr: ViewContainerRef){
+    this.toastr.setRootViewContainerRef(vcr);
+  }
   activeColor: string = 'green';
   baseColor: string = '#ccc';
   overlayColor: string = 'rgba(255,255,255,0.5)';
@@ -22,6 +26,9 @@ export class FileUploadComponent {
   imageLoaded: boolean = false;
   imageSrc: string = '';
   value: boolean = false;
+  ngOnInit(){
+
+  }
   handleDragEnter() {
     this.dragging = true;
   }
@@ -75,6 +82,8 @@ export class FileUploadComponent {
       this.value = true;
       this.uniService.uploadFile(url,data,options).subscribe((response:any)=>{
         this.baseService.setImgUni(response.data.link);
+      },err=>{
+        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
       });
     }
     this.loaded = true;

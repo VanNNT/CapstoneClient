@@ -15,36 +15,42 @@ import {ToastsManager} from "ng2-toastr";
 })
 export class AdduniversityComponent implements OnInit {
   public options: Select2Options;
-  public value: string[];
-  public current: string;
+  public value: string[] = [];
+  public currentLocation: string;
+  public currentMajor: any = [];
   public listMajor: Observable<Select2OptionData[]>;
   public listLocation: Observable<Select2OptionData[]>;
-  constructor(private searchService: SearchService,private uniService: UniversityService,
+  constructor(private searchService: SearchService,private uniService: UniversityService,private contants: Constants,
               private constant: Constants, private baseService: BaseService,public toastr: ToastsManager, vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
+    this.uniService.broadcastTextChange("THÊM TRƯỜNG MỚI");
     this.listMajor = this.searchService.getMajor();
     this.listLocation = this.searchService.getLocation();
-
-    this.value = [];
-
     this.options = {
       multiple: true
     };
-
-    this.current = this.value.join(' | ');
   }
 
-  changed(data: {value: string[]}) {
-    this.current = data.value.join(' | ');
+  getValueMajor(data) {
+    this.currentMajor = data;
+
+    console.log(this.currentMajor);
   }
-  getValue(data){
-    this.current = data.value;
-    console.log(this.current);
+  getValueLocation(data){
+    this.currentLocation = data.value;
+    console.log(this.currentLocation);
   }
   onSave(form: NgForm){
+    if(this.currentMajor.value){
+      for(var i = 0; i < this.currentMajor.value.length; i++){
+        this.currentMajor.value[i] = parseInt(this.currentMajor.value[i]);
+      }
+    }
+    //this.currentMajor = this.currentMajor.value.split(",").map((x)=>parseInt(x));
+    console.log(this.currentMajor);
     let data = {
       'code': form.value.code,
       'name': form.value.name,
@@ -52,23 +58,42 @@ export class AdduniversityComponent implements OnInit {
       'phone': form.value.phone,
       'logo': this.baseService.getLogoUni(),
       'image': this.baseService.getImgUni(),
-      'description': form.value.des
+      'description': form.value.des,
+      'priority': form.value.pri
     };
     this.uniService.createUniversity(this.constant.CREATE_UNIVESITY,data).subscribe((response:any)=>{
       if(response){
+        if(this.currentLocation || this.currentMajor.value){
           let dataLocation = {
             'location': {
-              'id': this.current? parseInt(this.current) : null,
+              'id': this.currentLocation? parseInt(this.currentLocation) : null,
             },
-            'id': response.id ? response.id : null
+            'majorId': this.currentMajor.value,
+            'university':{
+              'id': response.id ? response.id : null
+            }
           };
           this.uniService.addLocation(this.constant.ADD_LOCATION,dataLocation).subscribe((res:any)=>{
-            console.log(res);
-            console.log('ahihi');
+            if(res){
+              this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!');
+            }
+          },error=>{
+            if(error.status==this.contants.NOT_FOUND){
+              this.toastr.error('Trường đại học này không tồn tại. Vui lòng thử lại', 'Thất bại');
+            }else{
+              this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
+            };
           });
+        }else{
+          this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!');
+        }
       }
     },error=>{
-      this.toastr.error('Trường học này đã tồn tại. Vui lòng thử lại', 'Thất bại');
+      if(error.status==this.contants.CONFLICT){
+        this.toastr.error('Trường đại học này đã tồn tại. Vui lòng thử lại', 'Thất bại');
+      }else{
+        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
+      };
     });
     console.log(form.value);
   }
