@@ -117,9 +117,8 @@ export class EditUniversityComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  _handleReaderLoaded(e, boolean) {
+  _handleReaderLoaded(boolean,e) {
     var reader = e.target;
-    this.imageSrc = reader.result;
     let url = "https://api.imgur.com/3/image";
     var headers = new Headers();
     headers.append('Authorization', 'Client-ID bf915d4106b6639');
@@ -128,10 +127,12 @@ export class EditUniversityComponent implements OnInit {
       'image': reader.result.split(',')[1]
     };
     if (boolean === true) {
+      this.logoSrc = reader.result;
       this.universityService.uploadFile(url, data, options).subscribe((response: any) => {
         this.baseService.setLogoUni(response.data.link);
       });
     } else {
+      this.imageSrc = reader.result;
       this.value = true;
       this.universityService.uploadFile(url, data, options).subscribe((response: any) => {
         this.baseService.setImgUni(response.data.link);

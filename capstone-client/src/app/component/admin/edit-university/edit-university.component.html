@@ -63,8 +63,7 @@
                [style.outlineColor]="dragging ? activeColor : baseColor"
                (dragenter)="handleDragEnter()"
                (dragleave)="handleDragLeave()"
-               (drop)="handleDrop($event)"
-               [style.width.%]="value ? 100 : null">
+               (drop)="handleDrop($event)">
 
           <i class="icon fa fa-upload"></i>
 
@@ -97,7 +96,7 @@
             [class.loaded]="imageLoaded"/>
 
           <input type="file" name="avtUni" accept="image/*"
-                 (change)="handleInputChange($event,true)">
+                 (change)="handleInputChange($event,false)">
         </label>
       </div>
     </div>

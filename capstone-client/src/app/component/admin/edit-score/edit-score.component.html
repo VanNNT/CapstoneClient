@@ -1,3 +1,11 @@
-<div *ngFor="let item of majorUniversities">
-  <div>{{majorUniversities.major.majorName}}</div>
+<div class="major-group" style="width: 100%" *ngFor="let item of majorUniversities">
+  <button (click)="showDiv('major' + item.id)" class="btn btn-default">{{item.major.majorName}}</button>
+  <div class="display-none" [attr.id]="'major' + item.id">
+    <div>
+      <select2 [data]=""
+               [options]=""
+               [value]=""></select2>
+    </div>
+
+  </div>
 </div>

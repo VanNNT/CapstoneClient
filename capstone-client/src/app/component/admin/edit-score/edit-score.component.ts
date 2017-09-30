@@ -34,5 +34,12 @@ export class EditScoreComponent implements OnInit {
           this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
         });
   }
-
+  showDiv(value){
+    var x = document.getElementById(value);
+    if (x.style.display === 'none') {
+      x.style.display = 'block';
+    } else {
+      x.style.display = 'none';
+    }
+  }
 }

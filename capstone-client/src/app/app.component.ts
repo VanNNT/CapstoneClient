@@ -28,6 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
       this.user = JSON.parse(localStorage.getItem('currentUser'));
+      console.log(this.user);
       if(this.user){
         this.baseService.setUser(this.user);
         this.loginService.setLogin(true);
