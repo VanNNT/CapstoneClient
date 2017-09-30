@@ -13,6 +13,7 @@ import {AdduniversityComponent} from "./component/admin/adduniversity/addunivers
 
 import {NewReviewComponent} from "./component/new-review/new-review.component";
 import {EditUniversityComponent} from "./component/admin/edit-university/edit-university.component";
+import {EditScoreComponent} from "./component/admin/edit-score/edit-score.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
@@ -31,6 +32,7 @@ const routing: Routes = [
     {path: 'add-university', component: AdduniversityComponent},
      // {path: 'edit-university', component: EditUniversityComponent},
      {path: 'edit-university/:id', component: EditUniversityComponent},
+     {path: 'edit-score/:id', component: EditScoreComponent},
   ]},
 
 ];

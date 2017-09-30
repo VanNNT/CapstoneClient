@@ -40,6 +40,7 @@ import {Constants} from "./constants";
 import {ToastModule} from "ng2-toastr/ng2-toastr";
 import {UniversityService} from "./service/university/university.service";
 import { EditUniversityComponent } from './component/admin/edit-university/edit-university.component';
+import { EditScoreComponent } from './component/admin/edit-score/edit-score.component';
 
 const providers = {
   'google': {
@@ -67,7 +68,9 @@ const providers = {
     AdduniversityComponent,
     FileUploadComponent,
     NewReviewComponent,
-    EditUniversityComponent
+    EditScoreComponent,
+    EditUniversityComponent,
+    EditScoreComponent
   ],
   imports: [
     Select2Module,
