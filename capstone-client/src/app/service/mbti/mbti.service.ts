@@ -15,5 +15,19 @@ export class MbtiService {
     return this._http.get(this.constant.MBTI)
       .map((response: Response) => response.json())
   }
+  saveMbti(data): Observable<any[]>{
+    return this._http.post(this.constant.SAVE_MBTI_RESULT,data)
+      .map((response: Response) => response.json())
+  }
+
+  getMbtiresult(data: any): Observable<any[]>{
+    return this._http.get(this.constant.GET_MBTI_RESULT+"?userId="+ data)
+      .map((response: Response) => response.json())
+  }
+
+  updateMbti(data): Observable<any[]>{
+    return this._http.post(this.constant.UPDATE_MBTI_RESULT,data)
+      .map((response: Response) => response.json())
+  }
 }
 

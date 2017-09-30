@@ -18,6 +18,12 @@ export class User {
      }else{
        this.name = data.username;
      }
+     if(data.userId){
+       this.id = data.userId;
+     }else{
+       this.id = data.id;
+     }
+
      if(data.uid){
        this.id = data.uid;
      }

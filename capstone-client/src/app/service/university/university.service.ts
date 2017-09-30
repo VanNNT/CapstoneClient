@@ -29,4 +29,8 @@ export class UniversityService {
   getUniversityById(data: string): Observable<any>{
     return this._http.get(this.contant.GET_UNI_BY_ID+"?universityId="+ data).map((res:Response)=> res.json());
   }
+
+  deleteUniversity(data): Observable<any[]>{
+    return this._http.post(this.contant.DELETE_UNIVERSITY,data).map((response: Response) => response.json());
+  }
 }
