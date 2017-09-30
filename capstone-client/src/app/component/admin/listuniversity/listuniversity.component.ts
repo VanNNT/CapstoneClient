@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {Router} from "@angular/router";
 import {Constants} from "../../../constants";
 import {SearchService} from "../../../service/base-service/search.service";
@@ -16,7 +16,8 @@ export class ListuniversityComponent implements OnInit {
   // public title: 'List University';
   constructor(private router: Router, private universityService: UniversityService,
               private searchService: SearchService,
-              private constant: Constants, public toastr: ToastsManager) {
+              private constant: Constants, public toastr: ToastsManager, vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr)
   }
 
   public listUniNameSelect2: Observable<Select2OptionData[]>;
@@ -61,4 +62,25 @@ export class ListuniversityComponent implements OnInit {
     }
     return;
   }
+
+  deleteUniversity(data) {
+    let deleteId = {
+      "id": data,
+    };
+    this.universityService.deleteUniversity(deleteId).subscribe((response: any) => {
+      if (response) {
+        for (let i = 0; i < this.listUniName.length; i++) {
+          if (data == this.listUniName[i].id) {
+            let a = this.listUniName[i];
+            this.listUniName.splice(i, 1);
+            this.toastr.success("Đã xoá thành công","Thành công")
+            return;
+          }
+        }
+      }
+    },error => {
+      this.toastr.error("Vui lòng kiểm tra lại", "Thất bại")
+    });
+  }
+
 }

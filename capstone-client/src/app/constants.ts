@@ -19,9 +19,11 @@ export class Constants{
   public ADD_LOCATION = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/update-location-major";
   public GET_UNI_BY_ID = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-university";
   public MBTI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/mbti/show-mbti-question";
-
-
-
+  public SAVE_MBTI_RESULT = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/mbti/save-mbti-result";
+  public GET_MBTI_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/mbti/get-mbti-major";
+  public UPDATE_MBTI_RESULT = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/mbti/update-mbti-result";
+  public GET_MBTI_RESULT = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/mbti/get-mbti-results";
+  public DELETE_UNIVERSITY = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/delete";
   //ERROR
   public UNAUTHORIZED = 401;
   public CONFLICT = 409;

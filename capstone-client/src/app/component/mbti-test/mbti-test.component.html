@@ -30,11 +30,21 @@
           <div class="text-center">
             <div>
               <p style="font-size: 18px; text-transform: uppercase;">Nhóm tính cách của bạn là </p>
-              <h2 class="box-title bold text-highlight" style="font-size: 32px; margin: 25px auto;">ESTP</h2>
-              <a (click)="tested = !tested" class="btn btn-topcv-gray btn-sm"><i class="fa fa-pencil"></i> Làm lại Trắc nghiệm</a>
+              <h2 class="box-title bold text-highlight" style="font-size: 32px; margin: 25px auto;">{{mbtiResult?.mbtitype.mbtitypeName}} - {{mbtiResult?.mbtitype.description}}</h2>
+              <a (click)="tested = !tested; update = true" class="btn btn-topcv-gray btn-sm"><i class="fa fa-pencil"></i> Làm lại Trắc nghiệm</a>
             </div>
           </div>
         </div>
+        <div *ngIf="tested" class="box box-white">
+          <div class="text-center">
+            <div>
+              <p style="font-size: 18px; text-transform: uppercase;"> Ngành phù hợp:  </p>
+              <h2 *ngFor="let major of majorResult"
+                class="box-title bold text-highlight" style="font-size: 12px; margin: 25px auto;">{{major.major.majorName}}</h2>
+            </div>
+          </div>
+        </div>
+
         <div *ngIf="tested" class="box box-white">
           <h2 class="box-title bold text-highlight" style="font-size: 32px; margin: 25px auto;">Tổng Quan</h2>
           <div>
