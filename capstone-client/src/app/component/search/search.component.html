@@ -6,7 +6,7 @@
           <div class="col-xs-12">
             <h1>Tìm kiếm  ngôi trường mơ ước của bạn cùng UniStart</h1>
           </div>
-          <div class="search-page" style="padding-bottom: 30px">
+          <div class="search-page col-md-12" style="padding-bottom: 30px">
               <select2 class="form-group" [data]="listMajor| async" (valueChanged)="changedMajor($event)"
                        [options]="optionMajor" style="padding: 15px"></select2>
               <select2 class="form-group" [data]="listLocation| async" (valueChanged)="changedLocation($event)"
