@@ -23,7 +23,6 @@ export class User {
      }else{
        this.id = data.id;
      }
-
      if(data.uid){
        this.id = data.uid;
      }

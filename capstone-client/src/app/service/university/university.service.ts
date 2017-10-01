@@ -14,19 +14,23 @@ export class UniversityService {
   public broadcastTextChange(value:any) {
     this.title.next(value);
   }
-  createUniversity(apiUrl,data): Observable<any[]> {
+  createUniversity(apiUrl,data): Observable<any> {
     return this._http.post(apiUrl,data).map((res:Response) => res.json());
   }
-
-  addLocation(apiUrl,data): Observable<any[]>{
+  updateUniversity(apiUrl,data): Observable<any>{
     return this._http.post(apiUrl,data).map((res:Response) => res.json());
   }
-
+  updateLocationMajor(apiUrl,data): Observable<any[]>{
+    return this._http.post(apiUrl,data).map((res:Response) => res.json());
+  }
+  removeMajor(apiUrl,data): Observable<any>{
+    return this._http.post(apiUrl,data).map((res:Response) => res.json());
+  }
   uploadFile(apiUrl,data,options): Observable<any[]>{
     return this._http.post(apiUrl,data,options).map((res:Response) => res.json());
   }
 
-  getUniversityById(data: string): Observable<any>{
+  getUniversityById(data: any): Observable<any>{
     return this._http.get(this.contant.GET_UNI_BY_ID+"?universityId="+ data).map((res:Response)=> res.json());
   }
 

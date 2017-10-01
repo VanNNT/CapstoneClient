@@ -40,6 +40,7 @@ import {Constants} from "./constants";
 import {ToastModule} from "ng2-toastr/ng2-toastr";
 import {UniversityService} from "./service/university/university.service";
 import { EditUniversityComponent } from './component/admin/edit-university/edit-university.component';
+import { EditScoreComponent } from './component/admin/edit-score/edit-score.component';
 import { AddNewsComponent } from './component/admin/add-news/add-news.component';
 import { ShowNewsComponent } from './component/show-news/show-news.component';
 
@@ -69,6 +70,7 @@ const providers = {
     AdduniversityComponent,
     FileUploadComponent,
     NewReviewComponent,
+    EditScoreComponent,
     EditUniversityComponent,
     AddNewsComponent,
     ShowNewsComponent
