@@ -22,7 +22,6 @@ export class HeaderComponent implements OnInit {
     if(!this.user){
       this.user = JSON.parse(localStorage.getItem('currentUser'));
     }
-    console.log(this.user);
     this.router.navigate(['home']);
   }
   public getUser(): void {
