@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgForm} from "@angular/forms";
 import {MBTIQuestion} from "../../model/MBTIModel";
+import {MbtiService} from "../../service/mbti/mbti.service";
+import {BaseService} from "../../service/base-service/base.service";
+import {Constants} from "../../constants";
+import {ToastsManager} from "ng2-toastr";
+
 
 @Component({
   selector: 'app-mbti-test',
@@ -9,9 +14,13 @@ import {MBTIQuestion} from "../../model/MBTIModel";
   styleUrls: ['./mbti-test.component.less']
 })
 export class MbtiTestComponent implements OnInit {
-  private MBTIresult: string;
+  public MBTIresult: string;
   public tested: boolean;
-  private questions: MBTIQuestion[];
+  public questions: MBTIQuestion[];
+  public listQuestion: any[];
+  public mbtiResult: any;
+  public majorResult: any;
+  public update: boolean = false;
   private scores = {
     E: 0,
     I: 0,
@@ -22,147 +31,122 @@ export class MbtiTestComponent implements OnInit {
     J: 0,
     P: 0
   };
-  constructor(private router: Router) { }
-  aaa=[
-    {
-      id : '1',
-      name:'q1',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'EI'
-    },
-    {
-      id : '2',
-      name: 'q2',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'EI'
-    },
-    {
-      id : '3',
-      name: 'q3',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'SN'
-    },
-    {
-      id : '4',
-      name: 'q4',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'SN'
-    },
-    {
-      id : '5',
-      name: 'q5',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'SN'
-    },
-    {
-      id : '6',
-      name:'q6',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'TF'
-    },
-    {
-      id : '7',
-      name: 'q7',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'TF'
-    },
-    {
-      id : '8',
-      name: 'q8',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'EI'
-    },
-    {
-      id : '9',
-      name: 'q9',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'JP'
-    },
-    {
-      id : '10',
-      name: 'q10',
-      question: 'Bạn Có Lên Danh Sách Cho Các Việc Cần Làm Không?',
-      option1: 'Nói chuyện với tất cả mọi người, kể cả người lạ',
-      option2: 'Nói chuyện với những người bạn quen',
-      MBTIGroup: 'JP'
-    }
-  ];
+
+  constructor(private router: Router, private mbtiService: MbtiService, private baseService: BaseService,
+              private constanst: Constants, public toastr: ToastsManager, vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr)
+  }
+
   ngOnInit() {
     this.tested = false;
-    this.questions=[];
-    this.aaa.forEach(x=>{
-      this.questions.push(new MBTIQuestion(x));
+    this.questions = [];
+
+    this.mbtiService.getMbtiresult(this.baseService.getUser().id).subscribe((response: any) => {
+      this.mbtiResult = response;
+      this.majorResult = response.mbtitype.majorMbtis;
+      if (this.mbtiResult != []) {
+        this.tested = true;
+      }
+    }, error => {
+      if (error.status == this.constanst.CONFLICT) {
+        this.tested = false;
+      }
+      ;
+    })
+
+    this.mbtiService.getMbti().subscribe((response: any) => {
+      this.listQuestion = response;
+      this.listQuestion.forEach(x => {
+        this.questions.push(new MBTIQuestion(x));
+      });
     });
-    console.log(this.questions);
   }
-  public onChoose(item,option){
-    if(option=='a' && !item.isChecked){
-      if(item.MBTIGroup=='EI'){
-        this.scores.E = this.scores.E +1;
-      }else if(item.MBTIGroup=='SN'){
-        this.scores.S = this.scores.S +1;
-      }else if(item.MBTIGroup=='TF'){
-        this.scores.T = this.scores.T +1;
-      }else{
+
+  public onChoose(item, option) {
+    if (option == 'a' && !item.isChecked) {
+      if (item.MBTIGroup == 'EI') {
+        this.scores.E = this.scores.E + 1;
+      } else if (item.MBTIGroup == 'SN') {
+        this.scores.S = this.scores.S + 1;
+      } else if (item.MBTIGroup == 'TF') {
+        this.scores.T = this.scores.T + 1;
+      } else {
         this.scores.J = this.scores.J + 1;
       }
-      item.isChecked=true;
+      item.isChecked = true;
     }
-    if(option=='b' && item.isChecked){
-      if(item.MBTIGroup=='EI'){
-        this.scores.E = this.scores.E -1;
-      }else if(item.MBTIGroup=='SN'){
-        this.scores.S = this.scores.S -1;
-      }else if(item.MBTIGroup=='TF'){
-        this.scores.T = this.scores.T -1;
-      }else{
-        this.scores.J = this.scores.J -1;
+    if (option == 'b' && item.isChecked) {
+      if (item.MBTIGroup == 'EI') {
+        this.scores.E = this.scores.E - 1;
+      } else if (item.MBTIGroup == 'SN') {
+        this.scores.S = this.scores.S - 1;
+      } else if (item.MBTIGroup == 'TF') {
+        this.scores.T = this.scores.T - 1;
+      } else {
+        this.scores.J = this.scores.J - 1;
       }
-      item.isChecked=false;
+      item.isChecked = false;
     }
-    console.log(this.scores.J);
+    console.log(this.scores);
   }
-  public onSubmit(form: NgForm){
-    if(this.scores.E>1){
-      this.MBTIresult = 'E';
-    }else{
-      this.MBTIresult = 'I';
+
+  public onSubmit(form: NgForm) {
+    for(let i = 0; i < this.questions.length;i++){
+      if(this.questions[i].isChecked==false){
+        this.toastr.error("Xin vui lòng hoàn thành");
+        return;
+      }
     }
-    if(this.scores.S>1){
-      this.MBTIresult = this.MBTIresult + 'S';
-    }else{
-      this.MBTIresult = this.MBTIresult + 'N';
+      if (this.scores.E >= 5) {
+        this.MBTIresult = 'E';
+      } else {
+        this.MBTIresult = 'I';
+      }
+      if (this.scores.S >= 10) {
+        this.MBTIresult = this.MBTIresult + 'S';
+      } else {
+        this.MBTIresult = this.MBTIresult + 'N';
+      }
+      if (this.scores.T >= 10) {
+        this.MBTIresult = this.MBTIresult + 'T';
+      } else {
+        this.MBTIresult = this.MBTIresult + 'F';
+      }
+      if (this.scores.J >= 10) {
+        this.MBTIresult = this.MBTIresult + 'J';
+      } else {
+        this.MBTIresult = this.MBTIresult + 'P';
+      }
+      console.log(this.MBTIresult);
+      form.onReset();
+      let data = {
+        mbtiType: {
+          "mbtitypeName": this.MBTIresult
+        },
+        user: {
+          "id": this.baseService.getUser().id,
+        }
+      };
+      if (this.update === false) {
+        this.mbtiService.saveMbti(data).subscribe((response: any) => {
+          if (response) {
+            this.mbtiService.getMbtiresult(this.baseService.getUser().id).subscribe((response: any) => {
+              this.mbtiResult = response;
+              this.majorResult = response.mbtitype.majorMbtis;
+            })
+          }
+        });
+      } else {
+        this.mbtiService.updateMbti(data).subscribe((response: any) => {
+          if (response) {
+            this.mbtiService.getMbtiresult(this.baseService.getUser().id).subscribe((response: any) => {
+              this.mbtiResult = response;
+              this.majorResult = response.mbtitype.majorMbtis;
+            })
+          }
+        });
+      }
+      this.tested = true;
     }
-    if(this.scores.T>1){
-      this.MBTIresult = this.MBTIresult + 'T';
-    }else{
-      this.MBTIresult = this.MBTIresult + 'F';
-    }
-    if(this.scores.J>1){
-      this.MBTIresult = this.MBTIresult + 'J';
-    }else{
-      this.MBTIresult = this.MBTIresult + 'P';
-    }
-    form.onReset();
-    console.log(this.MBTIresult);
-    this.tested = true;
   }
-}
+

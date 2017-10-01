@@ -24,7 +24,7 @@ import { NewReviewComponent } from './component/new-review/new-review.component'
 import {LoginService} from './service/login/login.service';
 import {BaseService} from './service/base-service/base.service';
 import {SearchService} from "./service/base-service/search.service";
-
+import {MbtiService} from "./service/mbti/mbti.service";
 // Guard
 import {CheckLoginGuard} from './guard/check-login/check-login.guard';
 
@@ -41,6 +41,8 @@ import {ToastModule} from "ng2-toastr/ng2-toastr";
 import {UniversityService} from "./service/university/university.service";
 import { EditUniversityComponent } from './component/admin/edit-university/edit-university.component';
 import { EditScoreComponent } from './component/admin/edit-score/edit-score.component';
+import { AddNewsComponent } from './component/admin/add-news/add-news.component';
+import { ShowNewsComponent } from './component/show-news/show-news.component';
 
 const providers = {
   'google': {
@@ -70,7 +72,8 @@ const providers = {
     NewReviewComponent,
     EditScoreComponent,
     EditUniversityComponent,
-    EditScoreComponent
+    AddNewsComponent,
+    ShowNewsComponent
   ],
   imports: [
     Select2Module,
@@ -88,7 +91,7 @@ const providers = {
     RatingModule,
     ToastModule.forRoot()
   ],
-  providers: [LoginService, BaseService, CheckLoginGuard, SearchService,Constants, UniversityService],
+  providers: [LoginService, BaseService, CheckLoginGuard, SearchService,Constants, UniversityService, MbtiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

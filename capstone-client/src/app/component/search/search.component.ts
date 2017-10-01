@@ -85,6 +85,7 @@ export class SearchComponent implements OnInit {
       "locationId": this.valueLocation,
       "universityId": this.valueUniversity,
     }
+    console.log(data)
 // List search
     this.searchService.searchPage(data).subscribe((response: any) =>{
         this.listSearch = response;
