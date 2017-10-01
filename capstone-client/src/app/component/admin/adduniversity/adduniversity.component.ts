@@ -68,7 +68,7 @@ export class AdduniversityComponent implements OnInit {
               'id': response.id ? response.id : null
             }
           };
-          this.uniService.addLocation(this.constant.UPDATE_LOCATION_MAJOR,dataLocation).subscribe((res:any)=>{
+          this.uniService.updateLocationMajor(this.constant.UPDATE_LOCATION_MAJOR,dataLocation).subscribe((res:any)=>{
             if(res){
               this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!');
             }
