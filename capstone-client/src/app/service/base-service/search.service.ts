@@ -32,7 +32,6 @@ export class SearchService {
       })
   }
 
-
   getLocation(): Observable<Select2OptionData[]>{
     return this._http.get(this.constant.LOCATION)
       .map((response: Response) => response.json())
@@ -40,6 +39,17 @@ export class SearchService {
         locations.unshift({id:'0',name:''});
         return locations.map((location) => {
           return {id: location.id, text: location.locationName};
+        });
+      })
+  }
+
+  getBlock(): Observable<Select2OptionData[]>{
+    return this._http.get(this.constant.BLOCK)
+      .map((response: Response) => response.json())
+      .map((blocks) => {
+        blocks.unshift({id:'0',name:''});
+        return blocks.map((block) => {
+          return {id: block.blockName, text: block.blockName};
         });
       })
   }

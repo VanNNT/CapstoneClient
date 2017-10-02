@@ -37,4 +37,8 @@ export class UniversityService {
   deleteUniversity(data): Observable<any[]>{
     return this._http.post(this.contant.DELETE_UNIVERSITY,data).map((response: Response) => response.json());
   }
+
+  updateScore(data): Observable<any>{
+    return this._http.post(this.contant.UPDATE_SCORE,data).map((response: Response) => response.json());
+  }
 }

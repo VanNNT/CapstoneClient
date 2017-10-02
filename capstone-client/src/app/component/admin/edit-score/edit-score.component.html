@@ -1,15 +1,28 @@
-<div class="major-group" style="width: 100%" *ngFor="let item of majorUniversities">
-  <button (click)="showDiv('major' + item.id)" class="btn btn-default">{{item.major.majorName}}</button>
-  <div class="display-none" [attr.id]="'major' + item.id">
-    <div style="text-align: center">
-      <div class="col-md-3"></div>
+<div style="width: 100%" *ngFor="let itemMU of majorUniversities">
+  <div class="major-group row">
+    <div class="col-md-5 major-title">{{itemMU.major.majorName}}</div>
+    <div class="col-md-5" [attr.id]="'major' + itemMU.id">
       <div class="col-md-6">
-        <select2 [data]=""
-                 [options]=""
-                 [value]=""></select2>
+        <select2 [data]="listBlock"
+                 [options]="options"
+                 [value]=""
+                 [width]="100"
+                 (valueChanged)="getValueMajor($event,itemMU.id)"></select2>
       </div>
-      <div class="col-md-3"></div>
     </div>
-
+  </div>
+  <div style="padding-bottom: 20px;"  class="row" *ngFor="let item of currentMajor[itemMU.id]">
+    <form #scoreForm="ngForm" (ngSubmit)="onSaveScore(scoreForm,itemMU.id,item)">
+      <div class="col-md-2" style="padding: 4px 4px 4px 40px;font-size: 17px;">{{item}}</div>
+      <div class="col-md-2">
+        <input class="form-control" ngModel name="year1" placeholder="2016"/>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control" ngModel name="year2" placeholder="2017"/>
+      </div>
+      <div>
+        <button type="submit" [disabled]="!scoreForm.dirty" class="btn btn-primary" >Lưu</button>
+      </div>
+    </form>
   </div>
 </div>
