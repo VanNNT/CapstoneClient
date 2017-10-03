@@ -20,7 +20,7 @@ export class AdduniversityComponent implements OnInit {
   public currentMajor: any = [];
   public listMajor: Observable<Select2OptionData[]>;
   public listLocation: Observable<Select2OptionData[]>;
-  constructor(private searchService: SearchService,private uniService: UniversityService,private contants: Constants,
+  constructor(private searchService: SearchService,private uniService: UniversityService,
               private constant: Constants, private baseService: BaseService,public toastr: ToastsManager, vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
@@ -36,12 +36,9 @@ export class AdduniversityComponent implements OnInit {
 
   getValueMajor(data) {
     this.currentMajor = data;
-
-    console.log(this.currentMajor);
   }
   getValueLocation(data){
     this.currentLocation = data.value;
-    console.log(this.currentLocation);
   }
   onSave(form: NgForm){
     if(this.currentMajor.value){
@@ -49,8 +46,6 @@ export class AdduniversityComponent implements OnInit {
         this.currentMajor.value[i] = parseInt(this.currentMajor.value[i]);
       }
     }
-    //this.currentMajor = this.currentMajor.value.split(",").map((x)=>parseInt(x));
-    console.log(this.currentMajor);
     let data = {
       'code': form.value.code,
       'name': form.value.name,
@@ -73,12 +68,12 @@ export class AdduniversityComponent implements OnInit {
               'id': response.id ? response.id : null
             }
           };
-          this.uniService.addLocation(this.constant.ADD_LOCATION,dataLocation).subscribe((res:any)=>{
+          this.uniService.updateLocationMajor(this.constant.UPDATE_LOCATION_MAJOR,dataLocation).subscribe((res:any)=>{
             if(res){
               this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!');
             }
           },error=>{
-            if(error.status==this.contants.NOT_FOUND){
+            if(error.status==this.constant.NOT_FOUND){
               this.toastr.error('Trường đại học này không tồn tại. Vui lòng thử lại', 'Thất bại');
             }else{
               this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
@@ -89,13 +84,12 @@ export class AdduniversityComponent implements OnInit {
         }
       }
     },error=>{
-      if(error.status==this.contants.CONFLICT){
+      if(error.status==this.constant.CONFLICT){
         this.toastr.error('Trường đại học này đã tồn tại. Vui lòng thử lại', 'Thất bại');
       }else{
         this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
       };
     });
-    console.log(form.value);
   }
 
 }

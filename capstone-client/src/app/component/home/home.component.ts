@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.router.navigate(['home']);
+
   }
   ngOnDestroy() {
     //$("#home").remove();
