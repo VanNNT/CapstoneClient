@@ -50,7 +50,6 @@
                   <i class="fa fa-star active"></i>
                 </div>
                 <span style="display:none" class="obj-data" obj-id="39" data="5"></span>
-                <span id="39">Tuyệt vời!</span>
               </div>
             </div>
             <div class="col-md-6 col-xs-12">
@@ -106,146 +105,92 @@
               <div class="row rating">
                 <div class="col-xs-9">
                   <label class="text-dark-gray">Đánh giá chung</label>
-                  <div style="margin-top: 5px;">
-<span class="star-bar">
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<span style="width:100%" class="active-star">
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-</span>
-</span>
+                  <div class="star-rating" style="margin-top: 5px;">
+                    <rating [(ngModel)]="starsFacilities"
+                            name="starsFacilities"
+                            [max]="5" style="color: #f05f40;"
+                            [readonly]=true>
+                    </rating>
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="overall-rate">5.0</span>
+                  <span class="overall-rate">{{starsFacilities}}</span>
                 </div>
               </div>
               <br>
               <div class="row rating rating-small">
                 <div class="col-xs-9">
-                  <label class="text-dark-gray">Cơ hội thăng tiến</label>
-                  <div style="margin-top: 5px;">
-<span class="star-bar">
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<span style="width:100%" class="active-star">
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-</span>
-</span>
+                  <label class="text-dark-gray">Trình độ giảng dạy</label>
+                  <div  class="star-rating-small" style="margin-top: 5px;">
+                    <rating [(ngModel)]="starsTeaching"
+                            name="starsTeaching"
+                            [max]="5" style="color: #f05f40;"
+                            [readonly]=true>
+                    </rating>
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="score-rate">5.0</span>
+                  <span class="score-rate">{{starsTeaching}}</span>
                 </div>
               </div>
               <div class="row rating rating-small">
                 <div class="col-xs-9">
-                  <label class="text-dark-gray">Văn phòng, công cụ làm việc</label>
-                  <div style="margin-top: 5px;">
-<span class="star-bar">
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<span style="width:100%" class="active-star">
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-</span>
-</span>
+                  <label class="text-dark-gray">Cơ sở vật chất</label>
+                  <div  class="star-rating-small" style="margin-top: 5px;">
+                    <rating [(ngModel)]="starsFacilities"
+                            name="starsFacilities"
+                            [max]="5" style="color: #f05f40;"
+                            [readonly]=true>
+                    </rating>
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="score-rate">5.0</span>
+                  <span class="score-rate">{{starsFacilities}}</span>
                 </div>
               </div>
               <div class="row rating rating-small">
                 <div class="col-xs-9">
-                  <label for="" class="text-dark-gray">Chế độ lương, thưởng</label>
-                  <div style="margin-top: 5px;">
-<span class="star-bar">
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<span style="width:80%" class="active-star">
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-</span>
-</span>
+                  <label class="text-dark-gray">Công tác sinh viên</label>
+                  <div  class="star-rating-small" style="margin-top: 5px;">
+                    <rating [(ngModel)]="starCare"
+                            name="starCare"
+                            [max]="5" style="color: #f05f40;"
+                            [readonly]=true>
+                    </rating>
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="score-rate">4.0</span>
+                  <span class="score-rate">{{starCare}}</span>
                 </div>
               </div>
               <div class="row rating rating-small">
                 <div class="col-xs-9">
-                  <label class="text-dark-gray">Văn hóa công ty</label>
-                  <div style="margin-top: 5px;">
-<span class="star-bar">
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<span style="width:100%" class="active-star">
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-</span>
-</span>
+                  <label class="text-dark-gray">Hoạt động xã hội</label>
+                  <div  class="star-rating-small" style="margin-top: 5px;">
+                    <rating [(ngModel)]="starSocieties"
+                            name="starSocieties"
+                            [max]="5" style="color: #f05f40;"
+                            [readonly]=true>
+                    </rating>
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="score-rate">5.0</span>
+                  <span class="score-rate">{{starSocieties}}</span>
                 </div>
               </div>
               <div class="row rating rating-small">
                 <div class="col-xs-9">
-                  <label class="text-dark-gray">Đào tạo, học hỏi, trao đổi</label>
-                  <div style="margin-top: 5px;">
-<span class="star-bar">
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<span style="width:100%" class="active-star">
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-</span>
-</span>
+                  <label class="text-dark-gray">Cơ hội nghề nghiệp</label>
+                  <div  class="star-rating-small" style="margin-top: 5px;">
+                    <rating [(ngModel)]="starCareer"
+                            name="starCareer"
+                            [max]="5" style="color: #f05f40;"
+                            [readonly]=true>
+                    </rating>
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="score-rate">5.0</span>
+                  <span class="score-rate">{{starCareer}}</span>
                 </div>
               </div>
             </div>

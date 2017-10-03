@@ -7,7 +7,7 @@
     </div>
     <div class="box box-white" id="company-title">
       <div class="company-avatar">
-        <span class="company-logo-helper"></span><a href="#" title="Global CyberSoft"><img class="company-logo"
+        <span class="company-logo-helper"></span><a title="Global CyberSoft"><img class="company-logo"
                                                                                            src="https://static.topcv.vn/company_logos/global-cybersoft-57982df965c6b.jpg"
                                                                                            alt="Global CyberSoft"></a>
       </div>
@@ -24,7 +24,7 @@
             <a>
               <button class="btn btn-default pull-right btn-follow">Theo dõi</button>
             </a>
-            <a  routerLink="/new-review">
+            <a [routerLink]="['/new-review',id]">
               <button class="btn btn-uni-primary pull-right">Đánh giá</button>
             </a>
           </div>

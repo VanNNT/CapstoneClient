@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import {appRoutes} from './app.routes';
-import { Ng2CompleterModule } from "ng2-completer";
 import {MdRadioModule} from '@angular/material';
 
 // Component
@@ -79,7 +78,6 @@ const providers = {
     Select2Module,
     NgxPaginationModule,
     BrowserModule,
-    Ng2CompleterModule,
     appRoutes,
     FormsModule,
     MdRadioModule,

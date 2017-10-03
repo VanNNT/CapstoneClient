@@ -12,7 +12,7 @@ import * as _ from 'underscore';
 import {BaseService} from "../../../service/base-service/base.service";
 import {NgForm} from "@angular/forms";
 import {Constants} from "../../../constants";
-
+declare var $: any;
 @Component({
   selector: 'app-edit-university',
   templateUrl: './edit-university.component.html',
@@ -43,6 +43,18 @@ export class EditUniversityComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('#summernote').summernote({
+      height: 150,
+      toolbar: false
+      // toolbar: [
+      //   ['style', ['bold', 'italic', 'underline']],
+      //   ['fontsize', ['fontsize','color']],
+      //   ['insert',['picture', 'link', 'video', 'table']],
+      //   ['para', ['ul', 'ol', 'paragraph']],
+      //   ['height', ['height']],
+      //   ['fullscreen',['fullscreen']]
+      // ]
+    });
     this.universityService.broadcastTextChange("CHỈNH SỬA THÔNG TIN TRƯỜNG");
     this.sub = this.activateRoute.params.subscribe(params=>{
       this.id = params['id'];
@@ -90,7 +102,7 @@ export class EditUniversityComponent implements OnInit {
     }
     listMajorRemove = _.difference(this.valueMajor, this.currentMajor.value);
     console.log(listMajorRemove);
-    console.log(this.currentMajor);
+    console.log($('#summernote').summernote('code'));
     let data = {
       'id': this.id,
       'code': this.university.code,
@@ -99,7 +111,7 @@ export class EditUniversityComponent implements OnInit {
       'phone': form.value.phone,
       'logo': this.baseService.getLogoUni()? this.baseService.getLogoUni(): this.logoSrc,
       'image': this.baseService.getImgUni()? this.baseService.getImgUni(): this.imageSrc,
-      'description': form.value.des,
+      'description': $('#summernote').summernote('code'),
       'priority': form.value.pri
     };
     this.universityService.updateUniversity(this.constant.UPDATE_UNIVESITY,data).subscribe((response:any)=>{

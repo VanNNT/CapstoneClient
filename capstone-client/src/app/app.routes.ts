@@ -23,7 +23,7 @@ const routing: Routes = [
       {path: 'home', component: HomeComponent},
       {path: 'university/:id', component: CompanyDetailComponent},
       {path: 'review-rating', component: ReviewRatingComponent},
-      {path: 'new-review', component: NewReviewComponent},
+      {path: 'new-review/:id', component: NewReviewComponent},
       {path: 'search-university', component: SearchComponent},
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard]},
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]},
