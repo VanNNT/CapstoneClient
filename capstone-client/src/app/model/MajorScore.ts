@@ -1,15 +1,14 @@
 export class MajorScore {
   private blockName;
-  private majorUniId;
-  private score;
+  private scoreHistories = [] ;
   private year;
   constructor(data: any) {
-    if (data) {
-      this.blockName = data.blockName;
-      this.majorUniId = data.majorUniId;
-      this.score = data.score;
-      this.year = data.year;
+    console.log(data);
+    if (data.block.blockName) {
+      this.blockName = data.block.blockName;
     }
-
+    if(data.scoreHistories){
+      this.scoreHistories.push(data.scoreHistories);
+    }
   }
 }

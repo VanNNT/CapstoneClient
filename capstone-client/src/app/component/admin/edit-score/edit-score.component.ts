@@ -5,6 +5,7 @@ import {SearchService} from "../../../service/base-service/search.service";
 import {ToastsManager} from "ng2-toastr";
 import {NgForm} from "@angular/forms";
 import {Constants} from "../../../constants";
+import {MajorScore} from "../../../model/MajorScore";
 
 @Component({
   selector: 'app-edit-score',
@@ -16,6 +17,7 @@ export class EditScoreComponent implements OnInit {
   public majorUniversities: any;
   public options: Select2Options;
   public currentMajor: any = [];
+  public listMajorBlock: any = [];
   constructor( private universityService: UniversityService,
                private activateRoute: ActivatedRoute,
                private searchService: SearchService,
@@ -34,19 +36,20 @@ export class EditScoreComponent implements OnInit {
         (university: any) => {
           this.majorUniversities = university.majorUniversities;
           console.log(this.majorUniversities);
+          this.majorUniversities.forEach(x => {
+            this.currentMajor[x.id] = [];
+            if(x.blockMajorUniversities.length != 0) {
+              x.blockMajorUniversities.forEach(y=>{
+                this.currentMajor[x.id].push(new MajorScore(y));
+              });
+            }
+          });
+          console.log(this.currentMajor[146]);
         }, (err) => {
           this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
         });
     this.searchService.getBlock().subscribe((value: any) => {
         this.listBlock = value;
-      }, (err) => console.log(err),
-      () => {
-        // this.valueMajor = [];
-        // for (let i = 0; i < this.university.majorUniversities.length; i++) {
-        //   if(this.university.majorUniversities[i].isActive){
-        //     this.valueMajor.push(this.university.majorUniversities[i].major.id);
-        //   }
-        // }
       });
     this.options = {
       multiple: true,
@@ -54,7 +57,7 @@ export class EditScoreComponent implements OnInit {
     }
   }
   getValueMajor(data, id){
-    this.currentMajor[id] = data.value;
+    this.listMajorBlock[id] = data.value;
   }
 
   onSaveScore(form:NgForm,majorUniId,blockName){
@@ -64,10 +67,10 @@ export class EditScoreComponent implements OnInit {
       "blockName": blockName,
       "majorScore": [
         {
-          "score": form.value.year1,
+          "score": form.value.A2016,
           "year": 2016
         }, {
-          "score": form.value.year2,
+          "score": form.value.A2017,
           "year": 2017
         }
       ]
