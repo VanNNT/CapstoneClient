@@ -24,7 +24,7 @@ export class ListuniversityComponent implements OnInit {
   public listUniName: any[];
   public options: Select2Options;
   private uniId: string;
-
+  public selectIndex: number;
   ngOnInit() {
     this.universityService.broadcastTextChange("DANH SÁCH TRƯỜNG");
     this.listUniNameSelect2 = this.searchService.getList();
@@ -63,14 +63,14 @@ export class ListuniversityComponent implements OnInit {
     return;
   }
 
-  deleteUniversity(data) {
+  deleteUniversity() {
     let deleteId = {
-      "id": data,
+      "id": this.selectIndex,
     };
     this.universityService.deleteUniversity(deleteId).subscribe((response: any) => {
       if (response) {
         for (let i = 0; i < this.listUniName.length; i++) {
-          if (data == this.listUniName[i].id) {
+          if (this.selectIndex == this.listUniName[i].id) {
             let a = this.listUniName[i];
             this.listUniName.splice(i, 1);
             this.toastr.success("Đã xoá thành công","Thành công")
