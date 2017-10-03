@@ -53,7 +53,6 @@ export class MbtiTestComponent implements OnInit {
       }
       ;
     })
-
     this.mbtiService.getMbti().subscribe((response: any) => {
       this.listQuestion = response;
       this.listQuestion.forEach(x => {
@@ -63,6 +62,9 @@ export class MbtiTestComponent implements OnInit {
   }
 
   public onChoose(item, option) {
+    if((option == 'a' || option == 'b')&& !item.isChecked){
+      item.fullChecked = true;
+    }
     if (option == 'a' && !item.isChecked) {
       if (item.MBTIGroup == 'EI') {
         this.scores.E = this.scores.E + 1;
@@ -86,13 +88,15 @@ export class MbtiTestComponent implements OnInit {
         this.scores.J = this.scores.J - 1;
       }
       item.isChecked = false;
+
     }
     console.log(this.scores);
   }
 
   public onSubmit(form: NgForm) {
+
     for(let i = 0; i < this.questions.length;i++){
-      if(this.questions[i].isChecked==false){
+      if(this.questions[i].fullChecked==false){
         this.toastr.error("Xin vui lòng hoàn thành");
         return;
       }
@@ -147,6 +151,20 @@ export class MbtiTestComponent implements OnInit {
         });
       }
       this.tested = true;
+    this.scores = {
+      E: 0,
+      I: 0,
+      S: 0,
+      N: 0,
+      T: 0,
+      F: 0,
+      J: 0,
+      P: 0
+    };
+      for( let i = 0; i < this.questions.length; i++){
+        this.questions[i].isChecked = false;
+        this.questions[i].fullChecked = false;
+      }
     }
   }
 
