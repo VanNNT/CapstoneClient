@@ -29,8 +29,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.user = JSON.parse(localStorage.getItem('currentUser'));
       if(this.user){
         this.loginService.setRole(this.user.role.id);
-      }
-      if(this.user){
         this.baseService.setUser(this.user);
         this.loginService.setLogin(true);
       }
