@@ -38,16 +38,11 @@ export class AppComponent implements OnInit, OnDestroy {
   public login(provider) {
     this.sub = this.auth.login(provider).subscribe(
       (data) => {
-        console.log(data);
         this.baseService.setUser(data);
         this.user = this.baseService.getUser();
-        this.loginService.setLogin(true);
-        this.loginService.setRole(this.user.role.id);
         $('#myModal').hide();
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
-        this.loginService.broadcastTextChange(this.user);
-        localStorage.setItem('currentUser', JSON.stringify(this.user));
         let dataLogin= {
           'email': this.user.email,
           'image': this.user.image,
@@ -55,7 +50,16 @@ export class AppComponent implements OnInit, OnDestroy {
           'providerId': this.user.id,
           'providerName': this.user.providerName
         };
-        this.loginService.loginProvider(this.contants.LOGIN_PROVIDER,dataLogin).subscribe();
+        this.loginService.loginProvider(this.contants.LOGIN_PROVIDER,dataLogin).subscribe((res:Response)=>{
+          if(res){
+            this.baseService.setUser(res);
+            this.user = this.baseService.getUser();
+            this.loginService.setLogin(true);
+            this.loginService.setRole(this.user.role.id);
+            this.loginService.broadcastTextChange(this.user);
+            localStorage.setItem('currentUser', JSON.stringify(this.user));
+          }
+        });
       }
     );
   }

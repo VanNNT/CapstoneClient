@@ -90,7 +90,9 @@ const providers = {
     RatingModule,
     ToastModule.forRoot()
   ],
-  providers: [LoginService, BaseService, CheckLoginGuard, CheckRoleGuard, SearchService,Constants, UniversityService, MbtiService],
+  providers: [LoginService, BaseService, CheckLoginGuard,
+    CheckRoleGuard, SearchService,Constants,
+    UniversityService, MbtiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
