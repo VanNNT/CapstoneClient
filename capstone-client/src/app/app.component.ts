@@ -4,7 +4,6 @@ import {AuthService} from 'angular2-social-login';
 import {LoginService} from './service/login/login.service';
 import {NgForm} from "@angular/forms";
 import {Constants} from "./constants";
-import {MdDialog, MdDialogRef} from "@angular/material";
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import {User} from "./model/User";
 import {BaseService} from "./service/base-service/base.service";
@@ -28,7 +27,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
       this.user = JSON.parse(localStorage.getItem('currentUser'));
-      console.log(this.user);
+      if(this.user){
+        this.loginService.setRole(this.user.role.id);
+      }
       if(this.user){
         this.baseService.setUser(this.user);
         this.loginService.setLogin(true);
@@ -41,6 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.baseService.setUser(data);
         this.user = this.baseService.getUser();
         this.loginService.setLogin(true);
+        this.loginService.setRole(this.user.role.id);
         $('#myModal').hide();
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
@@ -92,6 +94,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.loginService.setLogin(true);
         this.baseService.setUser(response);
         this.user = this.baseService.getUser();
+        this.loginService.setRole(this.user.role.id);
         localStorage.setItem('currentUser', JSON.stringify(this.user));
         $('#myModal').hide();
         $('body').removeClass('modal-open');

@@ -42,6 +42,7 @@ import { EditUniversityComponent } from './component/admin/edit-university/edit-
 import { EditScoreComponent } from './component/admin/edit-score/edit-score.component';
 import { AddNewsComponent } from './component/admin/add-news/add-news.component';
 import { ShowNewsComponent } from './component/show-news/show-news.component';
+import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
 
 const providers = {
   'google': {
@@ -89,7 +90,7 @@ const providers = {
     RatingModule,
     ToastModule.forRoot()
   ],
-  providers: [LoginService, BaseService, CheckLoginGuard, SearchService,Constants, UniversityService, MbtiService],
+  providers: [LoginService, BaseService, CheckLoginGuard, CheckRoleGuard, SearchService,Constants, UniversityService, MbtiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

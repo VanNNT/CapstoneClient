@@ -5,7 +5,9 @@ export class User {
   email: string;
   id: string;
   providerName: string;
-  role = {};
+  role = {
+    id: ''
+  };
   constructor(data: any) {
     if (data) {
      if(data.image){
@@ -31,10 +33,13 @@ export class User {
      }
      this.email = data.email;
      if(data.role){
-       this.role = data.role;
+       this.role.id = data.role.id;
      }else{
-       this.role = '';
+       this.role.id = "1";
      }
     }
   }
+  // public getRole(){
+  //   return this.role;
+  // }
 }

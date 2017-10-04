@@ -15,6 +15,7 @@ import {EditUniversityComponent} from "./component/admin/edit-university/edit-un
 import {EditScoreComponent} from "./component/admin/edit-score/edit-score.component";
 import {ShowNewsComponent} from "./component/show-news/show-news.component";
 import {AddNewsComponent} from "./component/admin/add-news/add-news.component";
+import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
@@ -25,7 +26,7 @@ const routing: Routes = [
       {path: 'review-rating', component: ReviewRatingComponent},
       {path: 'new-review/:id', component: NewReviewComponent},
       {path: 'search-university', component: SearchComponent},
-      {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard]},
+      {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]},
     ]},
   {path: 'admin', component: AdminComponent,canActivate: [CheckLoginGuard],
