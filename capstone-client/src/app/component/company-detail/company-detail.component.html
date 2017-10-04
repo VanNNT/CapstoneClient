@@ -1,23 +1,34 @@
 <div id="main" style="margin-top: 0px;">
   <div class="container" id="company-detail">
-    <div class="company-cover">
+    <div class="company-cover" *ngIf="!university?.image">
       <div style="position: relative; border-radius: 15px">
-        <img src="https://www.topcv.vn/images/default_cover/topcv_cover_vp1.png" class="img-responsive">
+        <img src="https://managingtheuniversitycampus.files.wordpress.com/2011/01/header.jpg" class="img-responsive">
+      </div>
+    </div>
+    <div class="company-cover" *ngIf="university?.image">
+      <div style="position: relative; border-radius: 15px">
+        <img src="{{university?.image}}" class="img-responsive">
       </div>
     </div>
     <div class="box box-white" id="company-title">
-      <div class="company-avatar">
+      <div class="company-avatar" *ngIf="!university?.logo">
+      <span class="company-logo-helper"></span><a href="#" title="Global CyberSoft"><img class="company-logo"
+                    src="http://www.yimintv.com/wp-content/uploads/2013/03/image-alignment-150x150-320x320.jpg"
+                    alt="Global CyberSoft"></a>
+    </div>
+      <div class="company-avatar" *ngIf="university?.logo">
         <span class="company-logo-helper"></span><a href="#" title="Global CyberSoft"><img class="company-logo"
-                                                                                           src="https://static.topcv.vn/company_logos/global-cybersoft-57982df965c6b.jpg"
+                                                                                           src="{{university?.logo}}"
                                                                                            alt="Global CyberSoft"></a>
       </div>
       <div class="company-overview">
         <div class="row">
           <div class="col-xs-9">
-            <p class="company-name text-highlight">Global CyberSoft</p>
+            <p class="company-name text-highlight">{{university?.name}}</p>
             <div class="row">
-              <div class="col-xs-6 detail-item"><i class="fa fa-phone detail-icon"></i>+84 8 5437 1199</div>
-              <div class="col-xs-6 detail-item"><i class="fa fa-map-marker detail-icon"></i>1000+ nhân viên</div>
+              <div class="col-xs-12 detail-item"><i class="fa fa-phone detail-icon"></i>{{university?.phone}}</div>
+              <div class="col-xs-12 detail-item"><i class="fa fa-envelope-open detail-icon"></i>{{university?.email}}</div>
+              <!--<div class="col-xs-6 detail-item"><i class="fa fa-map-marker detail-icon"></i>1000+ nhân viên</div>-->
             </div>
           </div>
           <div class="col-xs-3 pull-right">
@@ -36,61 +47,29 @@
         <div class="company-profile">
           <div class="box-group-header">
             <div class="row">
-              <div class="box-group-title col-xs-8"><a>Giới thiệu công ty</a></div>
+              <div class="box-group-title col-xs-8"><a><strong>Danh Sách Ngành</strong></a></div>
             </div>
           </div>
           <div class="box box-white" id="company-about">
             <div class="text-dark-gray">
-              <p>Global CyberSoft (GCS) is a leading global IT solutions provider founded in California in July 2000,
-                Global CyberSoft’s equity is currently provided by institutional investors such as Stone Apple. With
-                extensive experiences and rich expertise, Global CyberSoft poses to be a major IT pioneer and trusted
-                partner in Vietnam.
-              </p>
-              <p>
-              </p>
-              <p>As a testament to our continuous development, Global CyberSoft has expanded its business into new
-                endeavors and spread its presence over the world, aiming to meet the diversified demands of our clients.
-                The following are significant dates in GCS’ history.
-              </p>
-              <p>
-              </p>
-              <p>2008: Established Embedded System (EMB) division; celebrated the 500th employee.
-              </p>
-              <p>2007: Established Enterprise Business Solution (EBS) division; opened the third representative office
-                in Paris (France); moved the Global Development Center to Quang Trung Software City (Vietnam).
-              </p>
-              <p>2006: Established Testing Services (TS) division.
-              </p>
-              <p>2004: Opened a second representative office in Singapore.
-              </p>
-              <p>2003: Opened the first representative office in Tokyo (Japan).
-              </p>
-              <p>2000: Established Information &amp; Communication Technology (ICT), and Factory Automation (FA)
-                division.
-              </p>
-              <p>Global CyberSoft is committed to delivering the highest quality for our clients and improving our
-                operations following international standards and best practices. As a result, the company has achieved
-                valuable certificates and awards over the years including:
-              </p>
-              <p>
-              </p>
-              <p>ISO-9001
-              </p>
-              <p>ISO 27001
-              </p>
-              <p>CMMi level 5
-              </p>
-              <p>SAP’s Strategic Partner
-              </p>
-              <p>Sao Khue Award in 2012, 2013
-              </p>
-              <p>Vietnam Gold Medal &amp; Top 5 ICT Outsourcing company in 2010, 2011 and 2012
-              </p>
-              <p>Vietnam's 30 Leading IT Companies 2014
-              </p>
-              <p>Global CyberSoft now employs more than 700 highly skilled professional engineers, guided from top
-                management, all dedicated to supplying total solutions and outsourcing services for valued local and
-                global clients.</p>
+              <ul>
+                <li *ngFor="let major of valueMajor"
+                    class="box-title bold list-major">
+                  {{major}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="company-profile">
+          <div class="box-group-header">
+            <div class="row">
+              <div class="box-group-title col-xs-8"><a><strong>Giới thiệu công ty</strong></a></div>
+            </div>
+          </div>
+          <div class="box box-white" id="company-about">
+            <div class="text-dark-gray">
+              <p>{{university?.description}}</p>
             </div>
           </div>
         </div>
@@ -180,10 +159,13 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-xs-12">
-          <div class="fixed-box-logo pull-left">
+          <div class="fixed-box-logo pull-left" *ngIf="!university?.logo">
             <img src="https://static.topcv.vn/company_logos/global-cybersoft-57982df965c6b.jpg" alt="">
           </div>
-          <div id="fixed-box-name">Global CyberSoft</div>
+          <div class="fixed-box-logo pull-left" *ngIf="university?.logo">
+            <img src="{{university?.logo}}" alt="">
+          </div>
+          <div id="fixed-box-name">{{university?.name}}</div>
         </div>
         <div class="col-md-3 col-md-offset-1 col-xs-12 text-center">
           <a href="https://www.topcv.vn/cong-ty/theo-doi/253">
