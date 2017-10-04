@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import {appRoutes} from './app.routes';
-import { Ng2CompleterModule } from "ng2-completer";
 import {MdRadioModule} from '@angular/material';
 
 // Component
@@ -43,6 +42,7 @@ import { EditUniversityComponent } from './component/admin/edit-university/edit-
 import { EditScoreComponent } from './component/admin/edit-score/edit-score.component';
 import { AddNewsComponent } from './component/admin/add-news/add-news.component';
 import { ShowNewsComponent } from './component/show-news/show-news.component';
+import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
 
 const providers = {
   'google': {
@@ -79,7 +79,6 @@ const providers = {
     Select2Module,
     NgxPaginationModule,
     BrowserModule,
-    Ng2CompleterModule,
     appRoutes,
     FormsModule,
     MdRadioModule,
@@ -91,7 +90,9 @@ const providers = {
     RatingModule,
     ToastModule.forRoot()
   ],
-  providers: [LoginService, BaseService, CheckLoginGuard, SearchService,Constants, UniversityService, MbtiService],
+  providers: [LoginService, BaseService, CheckLoginGuard,
+    CheckRoleGuard, SearchService,Constants,
+    UniversityService, MbtiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -29,7 +29,6 @@ export class CompanyDetailComponent implements OnInit {
     });
     this.sub = this.activateRoute.params.subscribe(params=>{
       this.id=params['id'];
-      // alert(this.id);
     });
     this.universityService.getUniversityById(this.id).subscribe((university: any)=>{
       this.university = university;
