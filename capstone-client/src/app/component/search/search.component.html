@@ -68,8 +68,10 @@
   <div class="row text-center">
     <div class="col-lg-4 col-sm-6 text-center"
          *ngFor="let university of topUniversity">
-      <img class="rounded-circle img-fluid d-block mx-auto"
-           src="http://www.fptindustrial.com/global/PublishingImages/FPTSharingLogo.jpg" alt="">
+      <img class="rounded-circle img-fluid d-block mx-auto" *ngIf="!university.logo" style="margin-bottom: 35px"
+           src="../../../assets/image/image-not-found.png" alt="">
+      <img class="rounded-circle img-fluid d-block mx-auto" *ngIf="university.logo" style="margin-bottom: 35px"
+           src="{{university.logo}}" alt="">
       <p><b>{{university.name}}</b><br></p>
       <p>{{university.description}}
         Decripstion:Feeling stuck? Need something more? You can hire a designer to help you with your project or to create a custom build of any theme
