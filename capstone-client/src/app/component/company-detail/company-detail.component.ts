@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import {Subscription} from "rxjs/Subscription";
 import {ActivatedRoute} from "@angular/router";
+import {UniversityService} from "../../service/university/university.service";
 
 @Component({
   selector: 'app-company-detail',
@@ -11,7 +12,9 @@ import {ActivatedRoute} from "@angular/router";
 export class CompanyDetailComponent implements OnInit {
   public id: number;
   public sub: Subscription;
-  constructor(private activateRoute: ActivatedRoute) { }
+  public university: any;
+  public valueMajor: any;
+  constructor(private activateRoute: ActivatedRoute, private universityService: UniversityService) { }
 
   ngOnInit() {
     $.getScript('../../../assets/file.js');
@@ -26,8 +29,19 @@ export class CompanyDetailComponent implements OnInit {
     });
     this.sub = this.activateRoute.params.subscribe(params=>{
       this.id=params['id'];
-      alert(this.id);
+      // alert(this.id);
     });
-  }
+    this.universityService.getUniversityById(this.id).subscribe((university: any)=>{
+      this.university = university;
+      this.valueMajor = [];
+      for (let i = 0; i < this.university.majorUniversities.length; i++) {
+        if(this.university.majorUniversities[i].isActive){
+          this.valueMajor.push(this.university.majorUniversities[i].major.majorName);
+        }
+      }
+      console.log(this.valueMajor);
+    })
 
+
+  }
 }
