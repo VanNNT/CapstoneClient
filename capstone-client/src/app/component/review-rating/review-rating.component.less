@@ -4,7 +4,7 @@
   font-size: 20px;
   text-transform: uppercase;
   font-weight: 600;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 #review-all .rating-container {
   text-align: left;
@@ -39,7 +39,7 @@ div.rating-container div.stars i {
   display: inline-block;
   padding-top: 0;
   margin-left: 5px;
-  color: #666;
+  //color: #666;
 }
 #review-box{
   .active-star{
@@ -65,7 +65,7 @@ div.rating-container div.stars i {
   .overall-rate{
     font-size: 27px;
     display: block;
-    margin-top: 26px;
+    margin-top: 45px;
     color: @color-uni-primary;
     font-weight: 600;
   }
@@ -102,19 +102,36 @@ div.rating-container div.stars i {
 }
 
 .star-rating{
-  font-size: 30px;
+  .star-star-rating{
+    font-size: 45px;
+  }
 }
 .star-rating-small{
-  font-size: 28px;
+  .star-star-rating{
+    font-size: 38px;
+  }
 }
 .score-rate{
   color: #f05f40;
-  font-size: 20px;
+  font-size: 23px;
   font-weight: 700;
   display: block;
-  margin-top: 35px;
+  margin-top: 45px;
 }
-
+.star-star-rating {
+  position: relative;
+  display: inline-block;
+  color: #d3d3d3;
+}
+.full-star-rating {
+  color: @color-uni-primary;
+}
+.half-star-star-rating {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: @color-uni-primary;
+}
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic);
 
 .radial-progress {

@@ -45,15 +45,15 @@ export class EditUniversityComponent implements OnInit {
   ngOnInit() {
     $('#summernote').summernote({
       height: 150,
-      toolbar: false
-      // toolbar: [
-      //   ['style', ['bold', 'italic', 'underline']],
-      //   ['fontsize', ['fontsize','color']],
-      //   ['insert',['picture', 'link', 'video', 'table']],
-      //   ['para', ['ul', 'ol', 'paragraph']],
-      //   ['height', ['height']],
-      //   ['fullscreen',['fullscreen']]
-      // ]
+      //toolbar: false
+       toolbar: [
+        ['style', ['bold', 'italic', 'underline']],
+        ['fontsize', ['fontsize','color']],
+        ['insert',['picture', 'link', 'video', 'table']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+         ['fullscreen',['fullscreen']]
+       ]
     });
     this.universityService.broadcastTextChange("CHỈNH SỬA THÔNG TIN TRƯỜNG");
     this.sub = this.activateRoute.params.subscribe(params=>{

@@ -12,8 +12,7 @@ declare var $: any;
 @Component({
   selector: 'app-new-review',
   templateUrl: './new-review.component.html',
-  styleUrls: ['./new-review.component.less'],
-  providers: [ReviewService]
+  styleUrls: ['./new-review.component.less']
 })
 export class NewReviewComponent implements OnInit {
   public sub: Subscription;
