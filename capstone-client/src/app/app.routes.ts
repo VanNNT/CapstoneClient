@@ -23,7 +23,7 @@ const routing: Routes = [
       {path: 'view-news', component: ShowNewsComponent},
       {path: 'home', component: HomeComponent},
       {path: 'university/:id', component: CompanyDetailComponent},
-      {path: 'review-rating', component: ReviewRatingComponent},
+      {path: 'review-rating/:id', component: ReviewRatingComponent},
       {path: 'new-review/:id', component: NewReviewComponent},
       {path: 'search-university', component: SearchComponent},
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard, CheckRoleGuard]},

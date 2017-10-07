@@ -7,6 +7,7 @@ import {NgForm} from "@angular/forms";
 import {BaseService} from "../../../service/base-service/base.service";
 import {UniversityService} from "../../../service/university/university.service";
 import {ToastsManager} from "ng2-toastr";
+declare var $: any;
 
 @Component({
   selector: 'app-adduniversity',
@@ -26,6 +27,18 @@ export class AdduniversityComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('#summernote').summernote({
+      height: 150,
+      //toolbar: false
+      toolbar: [
+        //   ['style', ['bold', 'italic', 'underline']],
+        //   ['fontsize', ['fontsize','color']],
+        //   ['insert',['picture', 'link', 'video', 'table']],
+        //   ['para', ['ul', 'ol', 'paragraph']],
+        //   ['height', ['height']],
+        ['fullscreen',['fullscreen']]
+      ]
+    });
     this.uniService.broadcastTextChange("THÊM TRƯỜNG MỚI");
     this.listMajor = this.searchService.getMajor();
     this.listLocation = this.searchService.getLocation();

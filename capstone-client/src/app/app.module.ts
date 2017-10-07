@@ -43,6 +43,8 @@ import { EditScoreComponent } from './component/admin/edit-score/edit-score.comp
 import { AddNewsComponent } from './component/admin/add-news/add-news.component';
 import { ShowNewsComponent } from './component/show-news/show-news.component';
 import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
+import {ReviewService} from "./service/review/review.service";
+import {NgbModule, NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 
 const providers = {
   'google': {
@@ -86,13 +88,13 @@ const providers = {
     HttpModule,
     Angular2SocialLoginModule,
     BrowserAnimationsModule,
-    BrowserAnimationsModule,
     RatingModule,
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
+    NgbModule
   ],
   providers: [LoginService, BaseService, CheckLoginGuard,
     CheckRoleGuard, SearchService,Constants,
-    UniversityService, MbtiService],
+    UniversityService, MbtiService, ReviewService,NgbRatingConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

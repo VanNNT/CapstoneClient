@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import * as $ from 'jquery';
 import {Subscription} from "rxjs/Subscription";
 import {ActivatedRoute} from "@angular/router";
 import {UniversityService} from "../../service/university/university.service";
+import {ReviewService} from "../../service/review/review.service";
+import {BaseService} from "../../service/base-service/base.service";
 
 @Component({
   selector: 'app-company-detail',
@@ -13,9 +15,16 @@ export class CompanyDetailComponent implements OnInit {
   public id: number;
   public sub: Subscription;
   public university: any;
+  public des: any;
   public valueMajor: any;
-  constructor(private activateRoute: ActivatedRoute, private universityService: UniversityService) { }
-
+  public totalStar:number;
+  public recommentPoint:number;
+  public starPoint: any;
+  constructor(private activateRoute: ActivatedRoute,
+              private universityService: UniversityService,
+              private  reviewService: ReviewService,
+              private baseService : BaseService) { }
+  @ViewChild('dataContainer') dataContainer: ElementRef;
   ngOnInit() {
     $.getScript('../../../assets/file.js');
     $(window).scroll(function () {
@@ -32,15 +41,25 @@ export class CompanyDetailComponent implements OnInit {
     });
     this.universityService.getUniversityById(this.id).subscribe((university: any)=>{
       this.university = university;
+      this.baseService.setUniversity(university);
+      this.des = university.description;
       this.valueMajor = [];
       for (let i = 0; i < this.university.majorUniversities.length; i++) {
         if(this.university.majorUniversities[i].isActive){
           this.valueMajor.push(this.university.majorUniversities[i].major.majorName);
         }
       }
-      console.log(this.valueMajor);
-    })
-
+    });
+    this.reviewService.getStarPoint(this.id).subscribe((res:any)=>{
+      if(res){
+        this.starPoint = res;
+        localStorage.setItem('STAR_POINT', JSON.stringify(res));
+        this.totalStar = (res.starCare + res.starTeaching + res.starSocieties +
+          res.starFacilities + res.starCareer)/5;
+        this.recommentPoint = res.recommentPoint;
+        console.log(this.totalStar);
+      }
+    });
 
   }
 }
