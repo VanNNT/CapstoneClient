@@ -13,18 +13,16 @@ import {AdduniversityComponent} from "./component/admin/adduniversity/addunivers
 import {NewReviewComponent} from "./component/new-review/new-review.component";
 import {EditUniversityComponent} from "./component/admin/edit-university/edit-university.component";
 import {EditScoreComponent} from "./component/admin/edit-score/edit-score.component";
-import {ShowNewsComponent} from "./component/show-news/show-news.component";
-import {AddNewsComponent} from "./component/admin/add-news/add-news.component";
 import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
+import {ApproveReivewComponent} from "./component/admin/approve-reivew/approve-reivew.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
     children:[
-      {path: 'view-news', component: ShowNewsComponent},
       {path: 'home', component: HomeComponent},
       {path: 'university/:id', component: CompanyDetailComponent},
       {path: 'review-rating/:id', component: ReviewRatingComponent},
-      {path: 'new-review/:id', component: NewReviewComponent},
+      {path: 'new-review/:id', component: NewReviewComponent, canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'search-university', component: SearchComponent},
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]},
@@ -35,7 +33,7 @@ const routing: Routes = [
       {path: 'add-university', component: AdduniversityComponent},
       {path: 'edit-university/:id', component: EditUniversityComponent},
       {path: 'edit-score/:id', component: EditScoreComponent},
-      {path: 'add-news', component: AddNewsComponent}
+      {path: 'approve-reivew', component: ApproveReivewComponent},
   ]},
 
 ];

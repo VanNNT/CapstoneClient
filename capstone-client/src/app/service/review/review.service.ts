@@ -18,4 +18,8 @@ export class ReviewService {
   getStarPoint(data){
     return this._http.get(this.contant.GET_STAR_POINT+"?universityId="+ data).map((res:Response)=>res.json());
   }
+
+  getReivewNeedApprove(){
+    return this._http.get(this.contant.GET_REVIEW_NEED_APPROVE).map((res:Response)=>res.json());
+  }
 }

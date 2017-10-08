@@ -20,11 +20,15 @@ export class CompanyDetailComponent implements OnInit {
   public totalStar:number;
   public recommentPoint:number;
   public starPoint: any;
+  public majorDetail = {
+    majorName : '',
+    blockYear1 : [],
+    blockYear2 : [],
+  };
   constructor(private activateRoute: ActivatedRoute,
               private universityService: UniversityService,
               private  reviewService: ReviewService,
               private baseService : BaseService) { }
-  @ViewChild('dataContainer') dataContainer: ElementRef;
   ngOnInit() {
     $.getScript('../../../assets/file.js');
     $(window).scroll(function () {
@@ -46,10 +50,11 @@ export class CompanyDetailComponent implements OnInit {
       this.valueMajor = [];
       for (let i = 0; i < this.university.majorUniversities.length; i++) {
         if(this.university.majorUniversities[i].isActive){
-          this.valueMajor.push(this.university.majorUniversities[i].major.majorName);
+          this.valueMajor.push(this.university.majorUniversities[i]);
         }
       }
     });
+
     this.reviewService.getStarPoint(this.id).subscribe((res:any)=>{
       if(res){
         this.starPoint = res;
@@ -60,6 +65,33 @@ export class CompanyDetailComponent implements OnInit {
         console.log(this.totalStar);
       }
     });
+  }
 
+  showDetail(value){
+    if(value.blockMajorUniversities.length == 0){
+      document.getElementById('openNotDetail').click();
+    }else{
+      this.majorDetail.blockYear1 = [];
+      this.majorDetail.blockYear2 = [];
+      this.majorDetail.majorName = value.major.majorName;
+      for(let i =0; i<value.blockMajorUniversities.length;i++){
+        for(let j =0; j<value.blockMajorUniversities[i].scoreHistories.length;j++){
+          if(value.blockMajorUniversities[i].scoreHistories[j].year == 2016){
+            let year1 = {
+              blockName: value.blockMajorUniversities[i].block.blockName,
+              score: value.blockMajorUniversities[i].scoreHistories[j].score
+            };
+            this.majorDetail.blockYear1.push(year1);
+          }else{
+            let year2 = {
+              blockName: value.blockMajorUniversities[i].block.blockName,
+              score: value.blockMajorUniversities[i].scoreHistories[j].score
+            };
+            this.majorDetail.blockYear2.push(year2);
+          }
+        }
+      }
+      document.getElementById('openMajorDetail').click();
+    }
   }
 }

@@ -9,7 +9,7 @@
   <div class="container" id="review-all">
     <div class="row">
       <div class="col-md-8">
-        <div class="box box-white" *ngFor="let item of review">
+        <div class="box box-white" *ngFor="let item of review | orderBy: '-id'">
           <div class="row">
             <div class="col-xs-12 review-title text-dark-gray">
               {{item.title}}
