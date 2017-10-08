@@ -21,7 +21,7 @@
           </div>
         </div>
       <div style="padding-top: 24px;">
-        <button type="submit" [disabled]="!scoreForm.dirty" class="btn btn-primary" >Lưu</button>
+        <button type="submit" [disabled]="!scoreForm.dirty || scoreForm.submitted" class="btn btn-primary" >Lưu</button>
       </div>
     </form>
   </div>

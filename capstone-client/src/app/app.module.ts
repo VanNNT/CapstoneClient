@@ -6,6 +6,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import {appRoutes} from './app.routes';
 import {MdRadioModule} from '@angular/material';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {ToastModule} from "ng2-toastr/ng2-toastr";
+import {Select2Module} from "ng2-select2";
+import {RatingModule} from "ngx-bootstrap";
+import {NgbModule, NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 
 // Component
 import { AppComponent } from './app.component';
@@ -18,33 +23,29 @@ import { SearchComponent } from './component/search/search.component';
 import { HomeComponent } from './component/home/home.component';
 import { HeaderComponent } from './component/header/header.component';
 import { NewReviewComponent } from './component/new-review/new-review.component';
+import { EditUniversityComponent } from './component/admin/edit-university/edit-university.component';
+import { EditScoreComponent } from './component/admin/edit-score/edit-score.component';
+import { FileUploadComponent } from './component/file-upload/file-upload.component';
+import { AdminComponent } from './component/admin/admin.component';
+import { ListuniversityComponent } from './component/admin/listuniversity/listuniversity.component';
+import { AdduniversityComponent } from './component/admin/adduniversity/adduniversity.component';
+import { ApproveReivewComponent } from './component/admin/approve-reivew/approve-reivew.component';
 
 // Service
 import {LoginService} from './service/login/login.service';
 import {BaseService} from './service/base-service/base.service';
 import {SearchService} from "./service/base-service/search.service";
 import {MbtiService} from "./service/mbti/mbti.service";
+import {ReviewService} from "./service/review/review.service";
+import {UniversityService} from "./service/university/university.service";
+
 // Guard
 import {CheckLoginGuard} from './guard/check-login/check-login.guard';
-
-import {NgxPaginationModule} from 'ngx-pagination';
-import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
-import { AdminComponent } from './component/admin/admin.component';
-import { ListuniversityComponent } from './component/admin/listuniversity/listuniversity.component';
-import { AdduniversityComponent } from './component/admin/adduniversity/adduniversity.component';
-import {Select2Module} from "ng2-select2";
-import { FileUploadComponent } from './component/file-upload/file-upload.component';
-import {RatingModule} from "ngx-bootstrap";
-import {Constants} from "./constants";
-import {ToastModule} from "ng2-toastr/ng2-toastr";
-import {UniversityService} from "./service/university/university.service";
-import { EditUniversityComponent } from './component/admin/edit-university/edit-university.component';
-import { EditScoreComponent } from './component/admin/edit-score/edit-score.component';
-import { AddNewsComponent } from './component/admin/add-news/add-news.component';
-import { ShowNewsComponent } from './component/show-news/show-news.component';
 import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
-import {ReviewService} from "./service/review/review.service";
-import {NgbModule, NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+
+import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
+import {Constants} from "./constants";
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 const providers = {
   'google': {
@@ -74,8 +75,8 @@ const providers = {
     NewReviewComponent,
     EditScoreComponent,
     EditUniversityComponent,
-    AddNewsComponent,
-    ShowNewsComponent
+    ApproveReivewComponent,
+    OrderByPipe
   ],
   imports: [
     Select2Module,

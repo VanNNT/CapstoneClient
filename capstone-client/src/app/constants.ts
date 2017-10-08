@@ -31,6 +31,8 @@ export class Constants{
   public SAVE_REVIEW = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/save-review";
   public GET_REVIEW_BY_UNI_ID = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/show-review";
   public GET_STAR_POINT = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/star-point";
+  public GET_REVIEW_NEED_APPROVE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/need-accept-review";
+
   //ERROR
   public UNAUTHORIZED = 401;
   public CONFLICT = 409;
