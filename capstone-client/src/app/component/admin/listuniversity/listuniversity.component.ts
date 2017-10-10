@@ -34,7 +34,7 @@ export class ListuniversityComponent implements OnInit {
           localStorage.setItem('LIST_UNI', JSON.stringify(response));
         }
       }, error => {
-        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
+        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
       }
     );
     this.options = {
@@ -73,13 +73,13 @@ export class ListuniversityComponent implements OnInit {
           if (this.selectIndex == this.listUniName[i].id) {
             let a = this.listUniName[i];
             this.listUniName.splice(i, 1);
-            this.toastr.success("Đã xoá thành công","Thành công")
+            this.toastr.success("Đã xoá thành công","Thành công",{showCloseButton: true});
             return;
           }
         }
       }
     },error => {
-      this.toastr.error("Vui lòng kiểm tra lại", "Thất bại")
+      this.toastr.error("Vui lòng kiểm tra lại", "Thất bại",{showCloseButton: true})
     });
   }
 

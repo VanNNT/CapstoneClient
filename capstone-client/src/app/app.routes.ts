@@ -12,9 +12,10 @@ import {ListuniversityComponent} from "./component/admin/listuniversity/listuniv
 import {AdduniversityComponent} from "./component/admin/adduniversity/adduniversity.component";
 import {NewReviewComponent} from "./component/new-review/new-review.component";
 import {EditUniversityComponent} from "./component/admin/edit-university/edit-university.component";
-import {EditScoreComponent} from "./component/admin/edit-score/edit-score.component";
+import {EditScoreComponent} from "./component/admin/edit-major-detail/edit-score.component";
 import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
 import {ApproveReivewComponent} from "./component/admin/approve-reivew/approve-reivew.component";
+import {EditMajorComponent} from "./component/admin/edit-major/edit-major.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
@@ -32,7 +33,8 @@ const routing: Routes = [
       {path: 'list-university', component: ListuniversityComponent},
       {path: 'add-university', component: AdduniversityComponent},
       {path: 'edit-university/:id', component: EditUniversityComponent},
-      {path: 'edit-score/:id', component: EditScoreComponent},
+      {path: 'edit-detail-major/:id', component: EditScoreComponent},
+      {path: 'edit-major/:id', component: EditMajorComponent},
       {path: 'approve-reivew', component: ApproveReivewComponent},
   ]},
 

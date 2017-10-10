@@ -9,7 +9,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let item of listReview | paginate: { itemsPerPage:10, currentPage: p }; let i = index">
-      <td>{{i}}</td>
+      <td>{{i+1}}</td>
       <td>
         <a>{{item.title}}</a>
       </td>

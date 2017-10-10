@@ -24,7 +24,7 @@ import { HomeComponent } from './component/home/home.component';
 import { HeaderComponent } from './component/header/header.component';
 import { NewReviewComponent } from './component/new-review/new-review.component';
 import { EditUniversityComponent } from './component/admin/edit-university/edit-university.component';
-import { EditScoreComponent } from './component/admin/edit-score/edit-score.component';
+import { EditScoreComponent } from './component/admin/edit-major-detail/edit-score.component';
 import { FileUploadComponent } from './component/file-upload/file-upload.component';
 import { AdminComponent } from './component/admin/admin.component';
 import { ListuniversityComponent } from './component/admin/listuniversity/listuniversity.component';
@@ -46,6 +46,7 @@ import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
 import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
 import {Constants} from "./constants";
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { EditMajorComponent } from './component/admin/edit-major/edit-major.component';
 
 const providers = {
   'google': {
@@ -76,7 +77,8 @@ const providers = {
     EditScoreComponent,
     EditUniversityComponent,
     ApproveReivewComponent,
-    OrderByPipe
+    OrderByPipe,
+    EditMajorComponent
   ],
   imports: [
     Select2Module,

@@ -97,7 +97,7 @@ export class MbtiTestComponent implements OnInit {
 
     for(let i = 0; i < this.questions.length;i++){
       if(this.questions[i].fullChecked==false){
-        this.toastr.error("Xin vui lòng hoàn thành");
+        this.toastr.error("Vui lòng hoàn thành tất cả câu hỏi",'',{showCloseButton: true});
         return;
       }
     }

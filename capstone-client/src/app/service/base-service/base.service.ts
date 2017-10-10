@@ -15,7 +15,7 @@ export class BaseService {
   public review;
   public logo;
   public imgUni;
-  public list: any[];
+  public listMajorUni: any;
   constructor() {
 
   }
@@ -48,5 +48,11 @@ export class BaseService {
   }
   getImgUni(){
     return this.imgUni;
+  }
+  setMajorUni(value){
+    this.listMajorUni = value;
+  }
+  getMajorUni(){
+    return this.listMajorUni;
   }
 }
