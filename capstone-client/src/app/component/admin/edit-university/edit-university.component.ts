@@ -45,13 +45,11 @@ export class EditUniversityComponent implements OnInit {
   ngOnInit() {
     $('#summernote').summernote({
       height: 150,
-      //toolbar: false
+      // toolbar: false
        toolbar: [
-        ['style', ['bold', 'italic', 'underline']],
-        ['fontsize', ['fontsize','color']],
-        ['insert',['picture', 'link', 'video', 'table']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']],
+         ['style', ['bold', 'italic', 'underline']],
+         ['fontsize', ['fontsize','color']],
+         ['para', ['ul', 'ol', 'paragraph']],
          ['fullscreen',['fullscreen']]
        ]
     });
@@ -63,6 +61,7 @@ export class EditUniversityComponent implements OnInit {
     this.universityService.getUniversityById(this.id).subscribe(
         (university: any) => {
           this.university = university;
+          $('#summernote').summernote('code', this.university.description);
           this.logoSrc = university.logo;
           this.imageSrc = university.image;
           this.searchService.getMajor()
@@ -78,7 +77,7 @@ export class EditUniversityComponent implements OnInit {
                     }
               });
         }, (err) => {
-          this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
+          this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
         });
     this.options = {
       multiple: true
@@ -95,12 +94,14 @@ export class EditUniversityComponent implements OnInit {
 
   onEdit(form: NgForm){
     let listMajorRemove: any[]= [];
+    let listMajorAdd: any[] = [];
     if(this.currentMajor.value){
       for(var i = 0; i < this.currentMajor.value.length; i++){
         this.currentMajor.value[i] = parseInt(this.currentMajor.value[i]);
       }
     }
     listMajorRemove = _.difference(this.valueMajor, this.currentMajor.value);
+    listMajorAdd = _.difference(this.valueMajor, this.currentMajor.value);
     console.log(listMajorRemove);
     console.log($('#summernote').summernote('code'));
     let data = {
@@ -116,7 +117,7 @@ export class EditUniversityComponent implements OnInit {
     };
     this.universityService.updateUniversity(this.constant.UPDATE_UNIVESITY,data).subscribe((response:any)=>{
       if(response){
-        if(this.valueLocation || this.currentMajor.value){
+        if((this.valueLocation != this.university.location.id) || listMajorRemove.length != 0 || listMajorAdd.length != 0){
           let dataLocation = {
             'location': {
               'id': this.valueLocation? parseInt(this.valueLocation) : null,
@@ -137,29 +138,28 @@ export class EditUniversityComponent implements OnInit {
                 };
                 this.universityService.removeMajor(this.constant.REMOVE_MAJOR_UNI,dataMajor).subscribe((res:any)=>{
                   if(res){
-                    this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!');
-                    //this.router.navigate(['/admin/list-university']);
+                    this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!',{showCloseButton: true});
                   }
                 })
               }
             }
           },error=>{
             if(error.status==this.constant.NOT_FOUND){
-              this.toastr.error('Trường đại học này không tồn tại. Vui lòng thử lại', 'Thất bại');
+              this.toastr.error('Trường đại học này không tồn tại. Vui lòng thử lại', 'Thất bại',{showCloseButton: true});
             }else{
-              this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
+              this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
             };
           });
         }else{
-          this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!');
+          this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!',{showCloseButton: true});
           //this.router.navigate(['/admin/list-university']);
         }
       }
     },error=>{
       if(error.status==this.constant.CONFLICT){
-        this.toastr.error('Trường đại học này đã tồn tại. Vui lòng thử lại', 'Thất bại');
+        this.toastr.error('Trường đại học này đã tồn tại. Vui lòng thử lại', 'Thất bại',{showCloseButton: true});
       }else{
-        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
+        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
       };
     });
   }

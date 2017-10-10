@@ -19,6 +19,7 @@ export class ApproveReivewComponent implements OnInit {
           console.log(this.listReview);
         }
       });
+      this.reviewService.numberReviewChange(-1);
   }
 
 }

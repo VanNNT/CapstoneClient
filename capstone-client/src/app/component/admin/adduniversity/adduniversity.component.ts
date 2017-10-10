@@ -83,24 +83,24 @@ export class AdduniversityComponent implements OnInit {
           };
           this.uniService.updateLocationMajor(this.constant.UPDATE_LOCATION_MAJOR,dataLocation).subscribe((res:any)=>{
             if(res){
-              this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!');
+              this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!',{showCloseButton: true});
             }
           },error=>{
             if(error.status==this.constant.NOT_FOUND){
-              this.toastr.error('Trường đại học này không tồn tại. Vui lòng thử lại', 'Thất bại');
+              this.toastr.error('Trường đại học này không tồn tại. Vui lòng thử lại', 'Thất bại',{showCloseButton: true});
             }else{
-              this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
+              this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
             };
           });
         }else{
-          this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!');
+          this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!',{showCloseButton: true});
         }
       }
     },error=>{
       if(error.status==this.constant.CONFLICT){
-        this.toastr.error('Trường đại học này đã tồn tại. Vui lòng thử lại', 'Thất bại');
+        this.toastr.error('Trường đại học này đã tồn tại. Vui lòng thử lại', 'Thất bại',{showCloseButton: true});
       }else{
-        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
+        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
       };
     });
   }

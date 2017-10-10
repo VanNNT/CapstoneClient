@@ -41,4 +41,12 @@ export class UniversityService {
   updateScore(data): Observable<any>{
     return this._http.post(this.contant.UPDATE_SCORE,data).map((response: Response) => response.json());
   }
+
+  saveMajorUniDetail(data): Observable<any>{
+    return this._http.post(this.contant.SAVE_MAJOR_UNI_DETAIL,data).map((response:Response) => response.json());
+  }
+
+  deleteBlockMajorUni(data): Observable<any>{
+    return this._http.post(this.contant.DELETE_BLOCK_SCORE,data).map((response:Response) => response.json());
+  }
 }

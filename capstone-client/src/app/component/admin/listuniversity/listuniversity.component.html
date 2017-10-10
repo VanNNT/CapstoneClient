@@ -21,14 +21,14 @@
     </thead>
     <tbody>
     <tr *ngFor="let item of listUniName | paginate: { itemsPerPage:10, currentPage: p }; let i = index">
-      <td>{{i}}</td>
+      <td>{{i+1}}</td>
       <td>
         <a>{{item.name}}</a>
       </td>
       <td>
         <a [routerLink]="['/admin/edit-university',item.id]" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Sửa </a>
         <a class="btn btn-danger btn-xs" data-toggle="modal" id="id-button" data-target="#myModal" (click)="selectIndex = item.id"><i class="fa fa-trash-o"></i> Xoá </a>
-        <a class="btn btn-warning btn-xs" [routerLink]="['/admin/edit-score',item.id]"><i class="fa fa-plus"></i> Chỉnh sửa điểm </a>
+        <a class="btn btn-warning btn-xs" [routerLink]="['/admin/edit-major',item.id]"><i class="fa fa-plus"></i> Chỉnh sửa ngành </a>
       </td>
     </tr>
     </tbody>
