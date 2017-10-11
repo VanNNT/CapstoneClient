@@ -78,7 +78,7 @@
             <div class="box-group-title col-xs-8">Đánh giá</div>
           </div>
         </div>
-        <div *ngIf="!starPoint" class="box box-white" id="no-review-box">
+        <div *ngIf="starPoint?.totalReview == 0" class="box box-white" id="no-review-box">
           <div>
             <div class="mess text-dark-gray" style="margin-bottom:10px">Hiện chưa có đánh giá nào. Hãy là người đầu
               tiên đưa ra đánh giá
@@ -99,7 +99,7 @@
             <button class="btn btn-uni-primary">Đánh giá ngay</button>
           </a></div>
         </div>
-        <div *ngIf="starPoint" class="box box-white" id="review-box">
+        <div *ngIf="starPoint?.totalReview != 0" class="box box-white" id="review-box">
           <div class="row">
             <div class="col-md-4" style="float: left">
               <div class="radial-progress" [attr.data-score]="recommentPoint">
