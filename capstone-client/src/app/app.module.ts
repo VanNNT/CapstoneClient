@@ -43,6 +43,7 @@ import { EditUniversityComponent } from './component/admin/edit-university/edit-
 import { EditScoreComponent } from './component/admin/edit-score/edit-score.component';
 import { AddNewsComponent } from './component/admin/add-news/add-news.component';
 import { ShowNewsComponent } from './component/show-news/show-news.component';
+import { ViewMajorUnversityComponent } from './component/search/view-major-unversity/view-major-university.component';
 
 const providers = {
   'google': {
@@ -73,7 +74,8 @@ const providers = {
     EditScoreComponent,
     EditUniversityComponent,
     AddNewsComponent,
-    ShowNewsComponent
+    ShowNewsComponent,
+    ViewMajorUnversityComponent
   ],
   imports: [
     Select2Module,

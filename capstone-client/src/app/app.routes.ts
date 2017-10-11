@@ -15,6 +15,7 @@ import {EditUniversityComponent} from "./component/admin/edit-university/edit-un
 import {EditScoreComponent} from "./component/admin/edit-score/edit-score.component";
 import {ShowNewsComponent} from "./component/show-news/show-news.component";
 import {AddNewsComponent} from "./component/admin/add-news/add-news.component";
+import {ViewMajorUnversityComponent} from "./component/search/view-major-unversity/view-major-university.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
@@ -24,7 +25,10 @@ const routing: Routes = [
       {path: 'university/:id', component: CompanyDetailComponent},
       {path: 'review-rating', component: ReviewRatingComponent},
       {path: 'new-review', component: NewReviewComponent},
-      {path: 'search-university', component: SearchComponent},
+      {path: 'search-university', component: SearchComponent,
+        children: [
+        {path: 'app-view-major-university/:id', component: ViewMajorUnversityComponent}
+      ]},
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard]},
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]},
     ]},

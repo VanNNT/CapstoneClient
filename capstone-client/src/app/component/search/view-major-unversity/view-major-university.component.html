@@ -1,0 +1,15 @@
+<p>
+  view-major-unversity works!
+</p>
+<div class="row" id="news-uni">
+<div class="row text-center">
+  <div class="col-lg-4 col-sm-6 text-center"
+       *ngFor="let university of searchMajor">
+    <img class="rounded-circle img-fluid d-block mx-auto" *ngIf="!university.logo" style="margin-bottom: 35px"
+         src="../../../assets/image/image-not-found.png" alt="">
+    <img class="rounded-circle img-fluid d-block mx-auto" *ngIf="university.logo" style="margin-bottom: 35px"
+         src="{{university.logo}}" alt="">
+    <p><b>{{university.name}}</b><br></p>
+  </div>
+</div>
+</div>
