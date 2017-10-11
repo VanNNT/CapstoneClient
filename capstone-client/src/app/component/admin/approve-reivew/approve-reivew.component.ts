@@ -8,7 +8,7 @@ import {UniversityService} from "../../../service/university/university.service"
   styleUrls: ['./approve-reivew.component.less']
 })
 export class ApproveReivewComponent implements OnInit {
-  public listReview: any[]
+  public listReview: any[];
   constructor(private reviewService: ReviewService, private universityService: UniversityService) { }
 
   ngOnInit() {
@@ -21,5 +21,7 @@ export class ApproveReivewComponent implements OnInit {
       });
       this.reviewService.numberReviewChange(-1);
   }
-
+  viewDetail(value){
+    console.log(value);
+  }
 }

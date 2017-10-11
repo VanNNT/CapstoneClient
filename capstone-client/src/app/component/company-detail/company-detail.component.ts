@@ -58,6 +58,7 @@ export class CompanyDetailComponent implements OnInit {
     this.reviewService.getStarPoint(this.id).subscribe((res:any)=>{
       if(res){
         this.starPoint = res;
+        console.log(this.starPoint);
         localStorage.setItem('STAR_POINT', JSON.stringify(res));
         this.totalStar = (res.starCare + res.starTeaching + res.starSocieties +
           res.starFacilities + res.starCareer)/5;
