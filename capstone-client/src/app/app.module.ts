@@ -47,6 +47,7 @@ import { EqualValidatorDirective } from './directive/equal-validatior/equal-vali
 import {Constants} from "./constants";
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { EditMajorComponent } from './component/admin/edit-major/edit-major.component';
+import {DecimalPipe} from "@angular/common";
 
 const providers = {
   'google': {
@@ -97,7 +98,7 @@ const providers = {
   ],
   providers: [LoginService, BaseService, CheckLoginGuard,
     CheckRoleGuard, SearchService,Constants,
-    UniversityService, MbtiService, ReviewService,NgbRatingConfig],
+    UniversityService, MbtiService, ReviewService,NgbRatingConfig,DecimalPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

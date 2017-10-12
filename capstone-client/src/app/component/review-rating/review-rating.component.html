@@ -9,7 +9,7 @@
   <div class="container" id="review-all">
     <div class="row">
       <div class="col-md-8">
-        <div class="box box-white" *ngFor="let item of review | orderBy: '-id'">
+        <div class="box box-white" *ngFor="let item of review | orderBy: '-id' | paginate: { itemsPerPage:4, currentPage: p }">
           <div class="row">
             <div class="col-xs-12 review-title text-dark-gray">
               {{item.title}}
@@ -46,6 +46,10 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="text-center">
+          <pagination-controls (pageChange)="p =$event" previousLabel=""
+                               nextLabel=""></pagination-controls>
         </div>
       </div>
       <div class="col-md-4">
@@ -88,7 +92,7 @@
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="overall-rate">{{totalStar}}</span>
+                  <span class="overall-rate">{{totalStar | number:'1.1-2'}}</span>
                 </div>
               </div>
               <br>
@@ -100,7 +104,7 @@
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="score-rate">{{starsTeaching}}</span>
+                  <span class="score-rate">{{starsTeaching | number:'1.1-2'}}</span>
                 </div>
               </div>
               <div class="row rating rating-small">
@@ -111,7 +115,7 @@
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="score-rate">{{starsFacilities}}</span>
+                  <span class="score-rate">{{starsFacilities | number:'1.1-2'}}</span>
                 </div>
               </div>
               <div class="row rating rating-small">
@@ -122,7 +126,7 @@
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="score-rate">{{starCare}}</span>
+                  <span class="score-rate">{{starCare | number:'1.1-2'}}</span>
                 </div>
               </div>
               <div class="row rating rating-small">
@@ -133,7 +137,7 @@
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="score-rate">{{starSocieties}}</span>
+                  <span class="score-rate">{{starSocieties | number:'1.1-2'}}</span>
                 </div>
               </div>
               <div class="row rating rating-small">
@@ -144,7 +148,7 @@
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="score-rate">{{starCareer}}</span>
+                  <span class="score-rate">{{starCareer | number:'1.1-2'}}</span>
                 </div>
               </div>
             </div>

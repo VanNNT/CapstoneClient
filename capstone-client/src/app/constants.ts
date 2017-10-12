@@ -35,6 +35,7 @@ export class Constants{
   public GET_REVIEW_NEED_APPROVE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/need-accept-review";
   public SAVE_MAJOR_UNI_DETAIL = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/save-detail-major";
   public DELETE_BLOCK_SCORE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/score/delete-block-score";
+  public CHANGE_REVIEW_STATUS = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/change-review-status";
 
   //ERROR
   public UNAUTHORIZED = 401;
