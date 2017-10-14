@@ -14,7 +14,7 @@ import {NgbModule, NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 
 // Component
 import { AppComponent } from './app.component';
-import { CompanyDetailComponent } from './component/company-detail/company-detail.component';
+import { CompanyDetailComponent } from './component/university-detail/company-detail.component';
 import { Angular2SocialLoginModule } from 'angular2-social-login';
 import { ReviewRatingComponent } from './component/review-rating/review-rating.component';
 import { MbtiTestComponent } from './component/mbti-test/mbti-test.component';
@@ -48,6 +48,7 @@ import {Constants} from "./constants";
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { EditMajorComponent } from './component/admin/edit-major/edit-major.component';
 import {DecimalPipe} from "@angular/common";
+import { MajorDetailComponent } from './component/major-detail/major-detail.component';
 
 const providers = {
   'google': {
@@ -79,7 +80,8 @@ const providers = {
     EditUniversityComponent,
     ApproveReivewComponent,
     OrderByPipe,
-    EditMajorComponent
+    EditMajorComponent,
+    MajorDetailComponent
   ],
   imports: [
     Select2Module,
