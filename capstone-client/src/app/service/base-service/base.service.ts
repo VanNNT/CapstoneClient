@@ -16,6 +16,7 @@ export class BaseService {
   public logo;
   public imgUni;
   public listMajorUni: any;
+  public major: any;
   constructor() {
 
   }
@@ -54,5 +55,12 @@ export class BaseService {
   }
   getMajorUni(){
     return this.listMajorUni;
+  }
+
+  setValueMajorUni(value){
+    this.major = value;
+  }
+  getValueMajorUni(){
+    return this.major;
   }
 }

@@ -69,6 +69,7 @@ export class CompanyDetailComponent implements OnInit {
   }
 
   showDetail(value){
+    this.baseService.setValueMajorUni(value);
     if(value.blockMajorUniversities.length == 0){
       document.getElementById('openNotDetail').click();
     }else{
@@ -92,7 +93,7 @@ export class CompanyDetailComponent implements OnInit {
           }
         }
       }
-      document.getElementById('openMajorDetail').click();
+      //document.getElementById('openMajorDetail').click();
     }
   }
 }

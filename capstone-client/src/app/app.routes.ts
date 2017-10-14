@@ -1,6 +1,6 @@
 import {Routes, RouterModule} from '@angular/router';
 import {ReviewRatingComponent} from './component/review-rating/review-rating.component';
-import {CompanyDetailComponent} from './component/company-detail/company-detail.component';
+import {CompanyDetailComponent} from './component/university-detail/company-detail.component';
 import {CheckLoginGuard} from './guard/check-login/check-login.guard';
 import { MbtiTestComponent } from './component/mbti-test/mbti-test.component';
 import {HomeComponent} from "./component/home/home.component";
@@ -16,6 +16,7 @@ import {EditScoreComponent} from "./component/admin/edit-major-detail/edit-score
 import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
 import {ApproveReivewComponent} from "./component/admin/approve-reivew/approve-reivew.component";
 import {EditMajorComponent} from "./component/admin/edit-major/edit-major.component";
+import {MajorDetailComponent} from "./component/major-detail/major-detail.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
@@ -25,6 +26,7 @@ const routing: Routes = [
       {path: 'review-rating/:id', component: ReviewRatingComponent},
       {path: 'new-review/:id', component: NewReviewComponent, canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'search-university', component: SearchComponent},
+      {path: 'major-detail', component: MajorDetailComponent},
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]},
     ]},
