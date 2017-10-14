@@ -79,13 +79,9 @@ export class SearchComponent implements OnInit {
 
   searchtopMajor(){
     this.searchMajor = [];
-    let data = {
-      "majorId": this.valueCurrent,
-      "locationId": "0",
-      "universityId": "0",
-    }
-    this.searchService.searchPage(data).subscribe((response: any)=>{
+    this.searchService.getMajorByID(this.valueCurrent).subscribe((response: any)=>{
       this.searchMajor = response;
+      console.log(response);
     });
   }
 
@@ -107,7 +103,7 @@ export class SearchComponent implements OnInit {
       "locationId": this.valueLocation,
       "universityId": this.valueUniversity,
     }
-// List search
+  // List search
     this.searchService.searchPage(data).subscribe((response: any) =>{
         this.listSearch = response;
         if(this.listSearch[0] != null){

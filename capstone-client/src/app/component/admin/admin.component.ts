@@ -3,6 +3,7 @@ import {ViewEncapsulation} from "@angular/core";
 import {Router} from "@angular/router";
 import {BaseService} from "../../service/base-service/base.service";
 import {UniversityService} from "../../service/university/university.service";
+import {ReviewService} from "../../service/review/review.service";
 
 @Component({
   selector: 'app-admin',
@@ -12,14 +13,21 @@ import {UniversityService} from "../../service/university/university.service";
 })
 export class AdminComponent implements OnInit {
    title: string;
-  constructor(private router: Router, private baseService: BaseService, private uniService: UniversityService) { }
+   public numberOfReview: number;
+  constructor(private router: Router, private baseService: BaseService,
+              private uniService: UniversityService, private reviewService: ReviewService) { }
  public user;
   ngOnInit() {
     this.user = this.baseService.getUser();
-    console.log(this.user);
     this.router.navigate(['admin/list-university']);
     this.uniService.title.subscribe(value=>{
       this.title = value;
     });
+    this.reviewService.numberOfReviewNeedApprove().subscribe(res=>{
+      this.numberOfReview = res;
+    });
+    this.reviewService.numberOfReview.subscribe(value=>{
+      this.numberOfReview = this.numberOfReview + value ;
+    })
   }
 }

@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
   public getUser(): void {
     this.loginService.space.subscribe(value => {
       this.user = value;
+      this.cdRef.detectChanges();
     });
   }
   public logout(value) {

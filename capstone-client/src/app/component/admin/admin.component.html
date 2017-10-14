@@ -31,8 +31,10 @@
             <ul class="nav side-menu">
               <li><a routerLink="list-university"><i class="fa fa-home"></i> Quản Lý Trường <span class="fa fa-chevron-right"></span></a></li>
               <li><a routerLink="add-university"><i class="fa fa-edit"></i> Thêm Trường <span class="fa fa-chevron-right"></span></a></li>
-              <li><a routerLink="add-news"><i class="fa fa-newspaper-o"></i> Thêm Bảng Tin <span class="fa fa-chevron-right"></span></a></li>
-              <li><a><i class="fa fa-desktop"></i> Duyệt đánh giá <span class="fa fa-chevron-right"></span></a></li>
+              <li>
+                <a routerLink="approve-reivew"><i class="fa fa-desktop"></i> Duyệt đánh giá
+                  <span *ngIf="numberOfReview != 0" class="badge bg-green">{{numberOfReview}}</span>
+                  <span class="fa fa-chevron-right"></span></a></li>
               <!--<li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-right"></span></a></li>-->
               <!--<li><a><i class="fa fa-bar-chart-o"></i> Cài Đặt <span class="fa fa-chevron-right"></span></a></li>-->
               <!--<li><a><i class="fa fa-clone"></i> Thùng Rác <span class="fa fa-chevron-right"></span></a></li>-->
@@ -60,76 +62,76 @@
           </div>
 
           <ul class="nav navbar-nav navbar-right">
-            <li class="">
-              <a class="user-profile ">
-                <img src="{{user.image}}" alt="">{{user.name}}
-                <span class=" fa fa-angle-down"></span>
-              </a>
-            </li>
-            <li role="presentation" class="dropdown">
-              <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-envelope-o"></i>
-                <span class="badge bg-green">6</span>
-              </a>
-              <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                <li>
-                  <a>
-                    <span class="image"><img  alt="Profile Image" /></span>
-                    <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                    <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                  </a>
-                </li>
-                <li>
-                  <a>
-                    <span class="image"><img alt="Profile Image" /></span>
-                    <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                    <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                  </a>
-                </li>
-                <li>
-                  <a>
-                    <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                    <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                    <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                  </a>
-                </li>
-                <li>
-                  <a>
-                    <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                    <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                    <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                  </a>
-                </li>
-                <li>
-                  <div class="text-center">
-                    <a>
-                      <strong>See All Alerts</strong>
-                      <i class="fa fa-angle-right"></i>
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </li>
+            <!--<li class="">-->
+              <!--<a class="user-profile ">-->
+                <!--<img src="{{user.image}}" alt="">{{user.name}}-->
+                <!--<span class=" fa fa-angle-down"></span>-->
+              <!--</a>-->
+            <!--</li>-->
+            <!--<li role="presentation" class="dropdown">-->
+              <!--<a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">-->
+                <!--<i class="fa fa-envelope-o"></i>-->
+                <!--<span class="badge bg-green">6</span>-->
+              <!--</a>-->
+              <!--<ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">-->
+                <!--<li>-->
+                  <!--<a>-->
+                    <!--<span class="image"><img  alt="Profile Image" /></span>-->
+                    <!--<span>-->
+                          <!--<span>John Smith</span>-->
+                          <!--<span class="time">3 mins ago</span>-->
+                        <!--</span>-->
+                    <!--<span class="message">-->
+                          <!--Film festivals used to be do-or-die moments for movie makers. They were where...-->
+                        <!--</span>-->
+                  <!--</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                  <!--<a>-->
+                    <!--<span class="image"><img alt="Profile Image" /></span>-->
+                    <!--<span>-->
+                          <!--<span>John Smith</span>-->
+                          <!--<span class="time">3 mins ago</span>-->
+                        <!--</span>-->
+                    <!--<span class="message">-->
+                          <!--Film festivals used to be do-or-die moments for movie makers. They were where...-->
+                        <!--</span>-->
+                  <!--</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                  <!--<a>-->
+                    <!--<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>-->
+                    <!--<span>-->
+                          <!--<span>John Smith</span>-->
+                          <!--<span class="time">3 mins ago</span>-->
+                        <!--</span>-->
+                    <!--<span class="message">-->
+                          <!--Film festivals used to be do-or-die moments for movie makers. They were where...-->
+                        <!--</span>-->
+                  <!--</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                  <!--<a>-->
+                    <!--<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>-->
+                    <!--<span>-->
+                          <!--<span>John Smith</span>-->
+                          <!--<span class="time">3 mins ago</span>-->
+                        <!--</span>-->
+                    <!--<span class="message">-->
+                          <!--Film festivals used to be do-or-die moments for movie makers. They were where...-->
+                        <!--</span>-->
+                  <!--</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                  <!--<div class="text-center">-->
+                    <!--<a>-->
+                      <!--<strong>See All Alerts</strong>-->
+                      <!--<i class="fa fa-angle-right"></i>-->
+                    <!--</a>-->
+                  <!--</div>-->
+                <!--</li>-->
+              <!--</ul>-->
+            <!--</li>-->
           </ul>
         </nav>
       </div>
@@ -141,14 +143,14 @@
       <div class="">
         <div class="page-title">
           <div class="title_left">
-            <h3 style="font-size: 38px">{{title}}</h3>
+            <h3>{{title}}</h3>
           </div>
         </div>
 
         <div class="clearfix"></div>
 
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12 col-xs-12">
             <div class="x_panel">
               <div class="x_content">
                 <div>

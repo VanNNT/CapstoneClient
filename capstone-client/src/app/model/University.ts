@@ -1,12 +1,11 @@
 export class University {
   id: number;
-  text: string;
+  name: string;
 
   constructor(data: any) {
     if (data) {
       this.id = data.id;
-      this.text = data.name;
+      this.name = data.name;
       }
-
     }
 }

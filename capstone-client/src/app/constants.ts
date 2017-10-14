@@ -29,6 +29,16 @@ export class Constants{
   public DELETE_UNIVERSITY = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/delete";
   public UPDATE_SCORE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/score/save-score";
   public GET_TOP_THREE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-by-group";
+  public SAVE_REVIEW = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/save-review";
+  public GET_REVIEW_BY_UNI_ID = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/show-review";
+  public GET_STAR_POINT = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/star-point";
+  public GET_NUMBER_REVIEW_NEED_APPROVE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/number-need-accept-review";
+  public GET_REVIEW_NEED_APPROVE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/need-accept-review";
+  public SAVE_MAJOR_UNI_DETAIL = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/save-detail-major";
+  public DELETE_BLOCK_SCORE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/score/delete-block-score";
+  public FIND_BY_MAJOR_ID = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/university/find-by-major-id";
+
+
   //ERROR
   public UNAUTHORIZED = 401;
   public CONFLICT = 409;

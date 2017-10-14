@@ -1,70 +1,47 @@
+<ng-template #t let-fill="fill">
+  <span *ngIf="fill === 100" class="star-star-rating full-star-rating">★</span>
+  <span *ngIf="fill === 0" class="star-star-rating">★</span>
+  <span *ngIf="fill < 100 && fill > 0" class="star-star-rating">
+    <span class="half-star-star-rating" [style.width.%]="fill">★</span>★
+  </span>
+</ng-template>
 <div id="main">
   <div class="container" id="review-all">
     <div class="row">
       <div class="col-md-8">
-        <div class="box box-white">
+        <div class="box box-white" *ngFor="let item of review | orderBy: '-id'">
           <div class="row">
             <div class="col-xs-12 review-title text-dark-gray">
-              "Môi trường làm việc đáng thử nhất Việt Nam"
+              {{item.title}}
             </div>
-            <div class="col-md-6 col-xs-12">
-              <label class="text-dark-gray">Đánh giá chung</label>
-              <div class="rating-container">
-                <div class="stars">
-                  <i class="fa fa-star active"></i>
-                  <i class="fa fa-star active"></i>
-                  <i class="fa fa-star active"></i>
+            <div class="col-xs-12 row" style="margin-bottom: 20px">
+              <div class="col-md-6 col-xs-12">
+                <label class="text-dark-gray">Đánh giá chung</label>
+                <div class="rating-container">
+                  <ngb-rating style="font-size: 20px" [(rate)]= "item.starFacilities*0.2 + item.starTeaching*0.2 + item.starCare*0.2
+                + item.starSocieties*0.2 + 0.2*item.starCareer" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
                 </div>
-                <span style="display:none" class="obj-data" obj-id="39" data="5"></span>
-                <span id="39">Tuyệt vời!</span>
               </div>
-            </div>
-            <div class="col-md-6 col-xs-12">
-              <div class="row">
-                <div class="review-recommend">
-                  <p><i class="fa fa-thumbs-o-up" style="color:#f05f40; margin-right: 10px; font-size: 25px"></i><strong
-                    class="text-dark-gray">Sẵn sàng giới thiệu cho bạn bè</strong></p>
+              <div class="col-md-6 col-xs-12" *ngIf="item.isRecomment">
+                <div class="row">
+                  <div class="review-recommend">
+                    <p><i class="fa fa-thumbs-o-up" style="color:#f05f40; margin-right: 10px; font-size: 25px"></i><strong
+                      class="text-dark-gray">Sẵn sàng giới thiệu cho bạn bè</strong></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12" *ngIf="!item.isRecomment">
+                <div class="row">
+                  <div class="review-recommend">
+                    <p><i class="fa fa-thumbs-o-down" style="margin-right: 10px; font-size: 25px"></i><strong
+                      class="text-dark-gray">Không muốn giới thiệu cho bạn bè</strong></p>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="col-xs-12">
               <div class="review-text">
-                <blockquote>Văn phòng thiết kế đẹp, mở. Nhân viên được tự do bày tỏ ý kiến với leader. Teamwork tốt. Đc
-                  tiếp xúc với nhiều người giỏi, thăng tiến rõ ràng.
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="box box-white">
-          <div class="row">
-            <div class="col-xs-12 review-title text-dark-gray">
-              "Môi trường làm việc đáng thử nhất Việt Nam"
-            </div>
-            <div class="col-md-6 col-xs-12">
-              <label class="text-dark-gray">Đánh giá chung</label>
-              <div class="rating-container">
-                <div class="stars">
-                  <i class="fa fa-star active"></i>
-                  <i class="fa fa-star active"></i>
-                  <i class="fa fa-star active"></i>
-                </div>
-                <span style="display:none" class="obj-data" obj-id="39" data="5"></span>
-                <span id="39">Tuyệt vời!</span>
-              </div>
-            </div>
-            <div class="col-md-6 col-xs-12">
-              <div class="row">
-                <div class="review-recommend">
-                  <p><i class="fa fa-thumbs-o-up" style="color:#f05f40; margin-right: 10px; font-size: 25px"></i><strong
-                    class="text-dark-gray">Sẵn sàng giới thiệu cho bạn bè</strong></p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12">
-              <div class="review-text">
-                <blockquote>Văn phòng thiết kế đẹp, mở. Nhân viên được tự do bày tỏ ý kiến với leader. Teamwork tốt. Đc
-                  tiếp xúc với nhiều người giỏi, thăng tiến rõ ràng.
+                <blockquote style="font-size: 16px;line-height: 28px;" [innerHTML]="item.description">
                 </blockquote>
               </div>
             </div>
@@ -74,14 +51,14 @@
       <div class="col-md-4">
         <div class="box box-white">
           <div class="box-company-title"><a class="text-highlight bold"
-                                            href="https://www.topcv.vn/cong-ty/fpt-software/3.html">FPT Software</a>
+                                            href="https://www.topcv.vn/cong-ty/fpt-software/3.html">{{university?.name}}</a>
           </div>
           <div class="box-company-content">
-            <div id="review-count" class="text-dark-gray">Tổng lượt đánh giá: 1</div>
+            <div id="review-count" class="text-dark-gray">Tổng lượt đánh giá: {{totalReview}}</div>
             <div id="review-box">
               <div class="row">
                 <div class="col-md-4" style="float: left">
-                  <div class="radial-progress" data-score="3">
+                  <div class="radial-progress" [attr.data-score]="recommentPoint">
                     <div class="circle">
                       <div class="mask full">
                         <div class="fill"></div>
@@ -106,146 +83,68 @@
               <div class="row rating">
                 <div class="col-xs-9">
                   <label class="text-dark-gray">Đánh giá chung</label>
-                  <div style="margin-top: 5px;">
-<span class="star-bar">
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<span style="width:100%" class="active-star">
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-</span>
-</span>
+                  <div class="star-rating" style="margin-top: 5px;">
+                    <ngb-rating [(rate)]="totalStar" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="overall-rate">5.0</span>
+                  <span class="overall-rate">{{totalStar}}</span>
                 </div>
               </div>
               <br>
               <div class="row rating rating-small">
                 <div class="col-xs-9">
-                  <label class="text-dark-gray">Cơ hội thăng tiến</label>
-                  <div style="margin-top: 5px;">
-<span class="star-bar">
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<span style="width:100%" class="active-star">
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-</span>
-</span>
+                  <label class="text-dark-gray">Trình độ giảng dạy</label>
+                  <div  class="star-rating-small" style="margin-top: 5px;">
+                    <ngb-rating [(rate)]="starsTeaching" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="score-rate">5.0</span>
+                  <span class="score-rate">{{starsTeaching}}</span>
                 </div>
               </div>
               <div class="row rating rating-small">
                 <div class="col-xs-9">
-                  <label class="text-dark-gray">Văn phòng, công cụ làm việc</label>
-                  <div style="margin-top: 5px;">
-<span class="star-bar">
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<span style="width:100%" class="active-star">
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-</span>
-</span>
+                  <label class="text-dark-gray">Cơ sở vật chất</label>
+                  <div  class="star-rating-small" style="margin-top: 5px;">
+                    <ngb-rating [(rate)]="starsFacilities" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="score-rate">5.0</span>
+                  <span class="score-rate">{{starsFacilities}}</span>
                 </div>
               </div>
               <div class="row rating rating-small">
                 <div class="col-xs-9">
-                  <label for="" class="text-dark-gray">Chế độ lương, thưởng</label>
-                  <div style="margin-top: 5px;">
-<span class="star-bar">
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<span style="width:80%" class="active-star">
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-</span>
-</span>
+                  <label class="text-dark-gray">Công tác sinh viên</label>
+                  <div  class="star-rating-small" style="margin-top: 5px;">
+                      <ngb-rating [(rate)]="starCare" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="score-rate">4.0</span>
+                  <span class="score-rate">{{starCare}}</span>
                 </div>
               </div>
               <div class="row rating rating-small">
                 <div class="col-xs-9">
-                  <label class="text-dark-gray">Văn hóa công ty</label>
-                  <div style="margin-top: 5px;">
-<span class="star-bar">
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<span style="width:100%" class="active-star">
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-</span>
-</span>
+                  <label class="text-dark-gray">Hoạt động xã hội</label>
+                  <div  class="star-rating-small" style="margin-top: 5px;">
+                    <ngb-rating [(rate)]="starSocieties" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="score-rate">5.0</span>
+                  <span class="score-rate">{{starSocieties}}</span>
                 </div>
               </div>
               <div class="row rating rating-small">
                 <div class="col-xs-9">
-                  <label class="text-dark-gray">Đào tạo, học hỏi, trao đổi</label>
-                  <div style="margin-top: 5px;">
-<span class="star-bar">
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<span style="width:100%" class="active-star">
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-<i class="fa fa-star active"></i>
-</span>
-</span>
+                  <label class="text-dark-gray">Cơ hội nghề nghiệp</label>
+                  <div  class="star-rating-small" style="margin-top: 5px;">
+                    <ngb-rating [(rate)]="starCareer" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
                   </div>
                 </div>
                 <div class="col-xs-3">
-                  <span class="score-rate">5.0</span>
+                  <span class="score-rate">{{starCareer}}</span>
                 </div>
               </div>
             </div>

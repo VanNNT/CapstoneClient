@@ -3,7 +3,7 @@ window.randomize = function() {
     var transform_styles = ['-webkit-transform', '-ms-transform', 'transform'];
     $(this).find('span').fadeTo('slow', 1);
     var score = $(this).data('score');
-    var deg = (((100 / 5) * score) / 100) * 180;
+    var deg = ((score) / 100) * 180;
     var rotation = deg;
     var fill_rotation = rotation;
     var fix_rotation = rotation * 2;

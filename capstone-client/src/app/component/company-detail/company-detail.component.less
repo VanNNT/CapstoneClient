@@ -99,7 +99,7 @@
     .overall-rate{
       font-size: 27px;
       display: block;
-      margin-top: 26px;
+      margin-top: 35px;
       color: @color-uni-primary;
       font-weight: 600;
     }
@@ -127,6 +127,7 @@
 }
 #company-about {
   text-align: justify;
+  line-height: 25px;
 }
 .text-dark-gray li:hover{
   transition: 0.2s;
@@ -218,7 +219,21 @@
     }
   }
 }
-
+.star-star-rating {
+  position: relative;
+  display: inline-block;
+  font-size: 45px;
+  color: #d3d3d3;
+}
+.full-star-rating {
+  color: @color-uni-primary;
+}
+.half-star-star-rating {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: @color-uni-primary;
+}
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic);
 
 .radial-progress {
