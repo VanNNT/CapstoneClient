@@ -30,6 +30,7 @@ import { AdminComponent } from './component/admin/admin.component';
 import { ListuniversityComponent } from './component/admin/listuniversity/listuniversity.component';
 import { AdduniversityComponent } from './component/admin/adduniversity/adduniversity.component';
 import { ApproveReivewComponent } from './component/admin/approve-reivew/approve-reivew.component';
+import { ViewMajorUnversityComponent } from './component/search/view-major-unversity/view-major-university.component';
 
 // Service
 import {LoginService} from './service/login/login.service';
@@ -49,6 +50,7 @@ import { OrderByPipe } from './pipes/order-by.pipe';
 import { EditMajorComponent } from './component/admin/edit-major/edit-major.component';
 import {DecimalPipe} from "@angular/common";
 import { MajorDetailComponent } from './component/major-detail/major-detail.component';
+
 
 const providers = {
   'google': {
@@ -78,6 +80,7 @@ const providers = {
     NewReviewComponent,
     EditScoreComponent,
     EditUniversityComponent,
+    ViewMajorUnversityComponent,
     ApproveReivewComponent,
     OrderByPipe,
     EditMajorComponent,

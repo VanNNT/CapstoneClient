@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CompleterData, CompleterService} from "ng2-completer";
 import {SearchService} from "../../service/base-service/search.service";
-import {Constants} from "../../constants";
-import {forEach} from "@angular/router/src/utils/collection";
+import * as $ from 'jquery';
 import {Observable} from "rxjs/Observable";
 import {Select2OptionData} from "ng2-select2";
 
@@ -13,13 +12,10 @@ import {Select2OptionData} from "ng2-select2";
 })
 export class SearchComponent implements OnInit {
   public show: boolean = false;
-  protected searchStr: string;
-  protected captain: string;
-  protected dataService: CompleterData;
   public optionMajor: Select2Options;
   public optionUni: Select2Options;
   public optionLocation: Select2Options;
-
+  public valueCurrent: any;
   constructor(private searchService: SearchService) {
   }
 
@@ -32,6 +28,8 @@ export class SearchComponent implements OnInit {
   public valueLocation: string;
   public valueUniversity: string;
   public listSearch: any[] = [];
+  public searchMajor: any[];
+  isActive: boolean = false;
 
   ngOnInit() {
     this.listMajor = this.searchService.getMajor();
@@ -72,6 +70,28 @@ export class SearchComponent implements OnInit {
         text: 'Chọn địa điểm'
       }
     };
+    this.getTopThreeMajor(4314);
+    $('#news-uni li').click(function(){
+      $('#news-uni li').removeClass("active");
+      $(this).addClass("active");
+    });
+  }
+
+  searchtopMajor(){
+    this.searchMajor = [];
+    this.searchService.getMajorByID(this.valueCurrent).subscribe((response: any)=>{
+      this.searchMajor = response;
+      console.log(response);
+    });
+  }
+
+  getTopThreeMajor(value){
+    this.isActive = true;
+    this.valueCurrent = value;
+    this.searchMajor = [];
+    this.searchService.getTopThreeMajor(value).subscribe((response: any)=>{
+      this.searchMajor = response;
+    });
   }
 
   // Click search university
@@ -83,8 +103,7 @@ export class SearchComponent implements OnInit {
       "locationId": this.valueLocation,
       "universityId": this.valueUniversity,
     }
-    console.log(data)
-// List search
+  // List search
     this.searchService.searchPage(data).subscribe((response: any) =>{
         this.listSearch = response;
         if(this.listSearch[0] != null){
@@ -102,4 +121,7 @@ export class SearchComponent implements OnInit {
   changedUniversity(value){
     this.valueUniversity = value.value;
   }
+
+
 }
+

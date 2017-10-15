@@ -12,6 +12,7 @@ import {ListuniversityComponent} from "./component/admin/listuniversity/listuniv
 import {AdduniversityComponent} from "./component/admin/adduniversity/adduniversity.component";
 import {NewReviewComponent} from "./component/new-review/new-review.component";
 import {EditUniversityComponent} from "./component/admin/edit-university/edit-university.component";
+import {ViewMajorUnversityComponent} from "./component/search/view-major-unversity/view-major-university.component";
 import {EditScoreComponent} from "./component/admin/edit-major-detail/edit-score.component";
 import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
 import {ApproveReivewComponent} from "./component/admin/approve-reivew/approve-reivew.component";
@@ -23,9 +24,12 @@ const routing: Routes = [
     children:[
       {path: 'home', component: HomeComponent},
       {path: 'university/:id', component: CompanyDetailComponent},
+      {path: 'search-university', component: SearchComponent,
+        children: [
+        {path: 'app-view-major-university/:id', component: ViewMajorUnversityComponent}
+      ]},
       {path: 'review-rating/:id', component: ReviewRatingComponent},
       {path: 'new-review/:id', component: NewReviewComponent, canActivate: [CheckLoginGuard, CheckRoleGuard]},
-      {path: 'search-university', component: SearchComponent},
       {path: 'major-detail', component: MajorDetailComponent},
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]},
