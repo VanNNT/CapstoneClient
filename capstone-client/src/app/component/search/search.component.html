@@ -4,7 +4,7 @@
       <form method="get" id="frm-search-job" #fSearch="ngForm" ngForm="SearchForm()">
         <div class="row">
           <div class="col-xs-12">
-            <h1>Tìm kiếm  ngôi trường mơ ước của bạn cùng UniStart</h1>
+            <h1 class="text-center">Tìm kiếm  ngôi trường mơ ước của bạn cùng UniStart</h1>
           </div>
           <div class="search-page" style="padding-bottom: 30px">
               <select2 class="form-group" [data]="listMajor| async" (valueChanged)="changedMajor($event)"
@@ -57,8 +57,7 @@
         </div>
       </div>
     </div>
-    <div class="text-center"><pagination-controls (pageChange)="p =$event" previousLabel=""
-                                                  nextLabel=""></pagination-controls></div>
+    <div class="text-center"><pagination-controls (pageChange)="p =$event"></pagination-controls></div>
   </div>
 </div>
 <!-- End show search-->
@@ -82,78 +81,45 @@
     <hr class="featurette-divider">
   </div>
   <div class="row">
-    <div (click)="searchtopMajor()"><a style="float: right; margin-bottom: 20px; margin-right: 30px; font-size: 20px" >Xem thêm</a></div>
+    <!--<div (click)="searchtopMajor()">-->
+      <a [routerLink]="['/app-view-major-university',valueCurrent]" class="see-more" >
+      Xem thêm <i class="fa fa-caret-right"></i></a>
+    <!--</div>-->
   </div>
-  <div class="row text-center" style="height: 375px">
-    <div class="col-lg-4 col-sm-6 text-center"
-         *ngFor="let university of searchMajor">
-      <img class="rounded-circle img-fluid d-block mx-auto" *ngIf="!university.logo" style="margin-bottom: 35px"
-           src="../../../assets/image/image-not-found.png" alt="">
-      <img class="rounded-circle img-fluid d-block mx-auto" *ngIf="university.logo" style="margin-bottom: 35px"
-           src="{{university.logo}}" alt="">
-      <p><b>{{university.name}}</b><br></p>
-    </div>
-  </div>
-  <!--<router-outlet></router-outlet>-->
+  <!--Show List Uni From Top Major-->
+
+      <div class="row text-center">
+        <div class="col-lg-4 col-sm-6 portfolio-item hero-feature"
+             *ngFor="let university of searchMajor">
+          <div class="thumbnail">
+            <div style="padding: 20px" *ngIf="university && university.logo">
+              <a [routerLink]="['/university',university.id]">
+                <img src="{{university.logo}}" alt="">
+              </a>
+            </div>
+            <div style="padding: 20px" *ngIf="!university.logo">
+              <a [routerLink]="['/university',university.id]">
+                <img src="../../../assets/image/image-not-found.png">
+              </a>
+            </div>
+            <div class="caption">
+              <div style="min-height: 55px; border: 1px solid white"><p class=""><b>{{university.name}}</b></p></div>
+              <div>
+                <p>
+                  <button [routerLink]="['/university',university.id]" class="btn btn-success"><i
+                    class="fa fa-hand-o-right"></i> Thông Tin
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>
 <!--End news university-->
 
-
 <!--Modal-->
-<div id="modalDetail" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>×</span></button>
-        <br>
-        <h3 style="display: inline-block;" data-role="university-name">Trường Đại học Ngoại thương - Cơ sở phía Nam</h3>
-      </div>
-      <div class="modal-body">
-        <div class="form-horizontal">
-          <div>
-            <span class="title">Mã trường: </span><span data-role="university-code">NTS</span>
-          </div>
-          <div>
-            <span class="title">Ngành: </span><span data-role="major-name">Tài chính – Ngân hàng</span><br>
-          </div>
-          <div style="padding-top: 20px;">
-            <span style="font-size: 14px; font-weight: 600;">Thông tin năm 2016:</span>
-          </div>
-          <table class="table" style="margin-left: 20px;">
-            <thead>
-            <tr>
-              <td>Khối ngành</td>
-              <td>Điểm chuẩn</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <td>A</td>
-              <td>10</td>
-            </tr>
-            </tbody>
-          </table>
-          <div style="padding-top: 20px;">
-            <span style="font-size: 14px; font-weight: 600;">Thông tin năm 2016:</span>
-          </div>
-          <table class="table" style="margin-left: 20px;">
-            <thead>
-            <tr>
-              <td>Khối ngành</td>
-              <td>Điểm chuẩn</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <td>A</td>
-              <td>10</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+
 
 
