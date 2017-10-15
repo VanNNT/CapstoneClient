@@ -12,14 +12,13 @@
     </div>
     <div class="box box-white" id="company-title">
       <div class="company-avatar" *ngIf="!university?.logo">
-      <span class="company-logo-helper"></span><a href="#" title="Global CyberSoft"><img class="company-logo"
-                    src="http://www.yimintv.com/wp-content/uploads/2013/03/image-alignment-150x150-320x320.jpg"
-                    alt="Global CyberSoft"></a>
-    </div>
+        <span class="company-logo-helper"></span><a title="Global CyberSoft"><img class="company-logo"
+                                                                                  src="http://www.yimintv.com/wp-content/uploads/2013/03/image-alignment-150x150-320x320.jpg"></a>
+      </div>
       <div class="company-avatar" *ngIf="university?.logo">
-        <span class="company-logo-helper"></span><a href="#" title="Global CyberSoft"><img class="company-logo"
-                                                                                           src="{{university?.logo}}"
-                                                                                           alt="Global CyberSoft"></a>
+        <span class="company-logo-helper"></span><a title="Global CyberSoft"><img class="company-logo"
+                                                                                  src="{{university?.logo}}"
+                                                                                  alt=""></a>
       </div>
       <div class="company-overview">
         <div class="row">
@@ -35,7 +34,7 @@
             <a>
               <button class="btn btn-default pull-right btn-follow">Theo dõi</button>
             </a>
-            <a  routerLink="/new-review">
+            <a  [routerLink]="['/new-review',id]">
               <button class="btn btn-uni-primary pull-right">Đánh giá</button>
             </a>
           </div>
@@ -50,12 +49,12 @@
               <div class="box-group-title col-xs-8"><a><strong>Danh Sách Ngành</strong></a></div>
             </div>
           </div>
-          <div class="box box-white" id="company-about">
+          <div class="box box-white">
             <div class="text-dark-gray">
               <ul>
                 <li *ngFor="let major of valueMajor"
-                    class="box-title bold list-major">
-                  {{major}}
+                    class="box-title bold list-major" (click)="showDetail(major)" [routerLink]="['/major-detail']">
+                  {{major.major.majorName}}
                 </li>
               </ul>
             </div>
@@ -64,12 +63,11 @@
         <div class="company-profile">
           <div class="box-group-header">
             <div class="row">
-              <div class="box-group-title col-xs-8"><a><strong>Giới thiệu công ty</strong></a></div>
+              <div class="box-group-title col-xs-8"><a><strong>Giới thiệu trường học</strong></a></div>
             </div>
           </div>
           <div class="box box-white" id="company-about">
-            <div class="text-dark-gray">
-              <p>{{university?.description}}</p>
+            <div [innerHTML]="university?.description" class="text-dark-gray">
             </div>
           </div>
         </div>
@@ -80,7 +78,7 @@
             <div class="box-group-title col-xs-8">Đánh giá</div>
           </div>
         </div>
-        <div class="box box-white" id="no-review-box">
+        <div *ngIf="!starPoint" class="box box-white" id="no-review-box">
           <div>
             <div class="mess text-dark-gray" style="margin-bottom:10px">Hiện chưa có đánh giá nào. Hãy là người đầu
               tiên đưa ra đánh giá
@@ -97,14 +95,14 @@
               <span>Đánh giá của bạn về công ty này?</span></div>
           </div>
           <br>
-          <div class="text-center"><a routerLink="/new-review">
+          <div class="text-center"><a [routerLink]="['/new-review',id]">
             <button class="btn btn-uni-primary">Đánh giá ngay</button>
           </a></div>
         </div>
-        <div class="box box-white" id="review-box">
+        <div *ngIf="starPoint" class="box box-white" id="review-box">
           <div class="row">
             <div class="col-md-4" style="float: left">
-              <div class="radial-progress" data-score="3">
+              <div class="radial-progress" [attr.data-score]="recommentPoint">
                 <div class="circle">
                   <div class="mask full">
                     <div class="fill"></div>
@@ -117,7 +115,7 @@
                 </div>
                 <div class="inset">
                   <div class="percentage">
-                    <div class=""><span>10%</span></div>
+                    <div class=""><span>{{recommentPoint}}%</span></div>
                   </div>
                 </div>
               </div>
@@ -129,26 +127,22 @@
           <div class="row rating-overall">
             <div class="col-xs-9">
               <span class="text-dark-gray">Đánh giá chung</span>
-              <div style="margin-top: 5px;">
-                  <span class="star-bar">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <span style="width:100%" class="active-star">
-                          <i class="fa fa-star active"></i>
-                          <i class="fa fa-star active"></i>
-                          <i class="fa fa-star active"></i>
-                      </span>
-                  </span>
+              <div>
+                <ng-template #t let-fill="fill">
+                  <span *ngIf="fill === 100" class="star-star-rating full-star-rating">★</span>
+                  <span *ngIf="fill === 0" class="star-star-rating">★</span>
+                  <span *ngIf="fill < 100 && fill > 0" class="star-star-rating">
+    <span class="half-star-star-rating" [style.width.%]="fill">★</span>★
+  </span>
+                </ng-template>
+                <ngb-rating [(rate)]="totalStar" [starTemplate]="t" [readonly]="true" max="5"></ngb-rating>
               </div>
             </div>
             <div class="col-xs-3">
-              <span class="overall-rate">5.0</span>
+              <span class="overall-rate">{{totalStar | number:'1.0-1'}}</span>
             </div>
           </div>
-          <div class="pull-left"><a class="text-dark-gray" routerLink="/review-rating">Xem
+          <div class="pull-left"><a class="text-dark-gray" [routerLink]="['/review-rating',id]">Xem
             chi tiết&nbsp;&nbsp;<i class="fa fa-caret-right"></i></a></div>
           <div class="clearfix"></div>
         </div>
@@ -159,17 +153,14 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-xs-12">
-          <div class="fixed-box-logo pull-left" *ngIf="!university?.logo">
-            <img src="https://static.topcv.vn/company_logos/global-cybersoft-57982df965c6b.jpg" alt="">
-          </div>
           <div class="fixed-box-logo pull-left" *ngIf="university?.logo">
             <img src="{{university?.logo}}" alt="">
           </div>
           <div id="fixed-box-name">{{university?.name}}</div>
         </div>
         <div class="col-md-3 col-md-offset-1 col-xs-12 text-center">
-          <a href="https://www.topcv.vn/cong-ty/theo-doi/253">
-            <button class="btn btn-default btn-follow">Theo dõi</button>
+          <a [routerLink]="['/new-review',id]">
+            <button class="btn btn-uni-primary pull-right">Đánh giá</button>
           </a>
         </div>
         <div style="clear:both"></div>
@@ -177,3 +168,73 @@
     </div>
   </div>
 </div>
+
+<!--Modal-->
+<div id="modalDetail" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center" style="font-weight: 600;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>×</span></button>
+        <br>
+        <h3 style="display: inline-block;" data-role="university-name">{{majorDetail.majorName}}</h3>
+      </div>
+      <div class="modal-body">
+        <div class="form-horizontal">
+          <div style="padding-bottom: 20px;">
+            <span style="font-size: 20px; font-weight: 600;">Thông tin năm 2016:</span>
+          </div>
+          <table class="table">
+            <thead>
+            <tr>
+              <td>Khối ngành</td>
+              <td>Điểm chuẩn</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let i of majorDetail.blockYear1">
+              <td>{{i.blockName}}</td>
+              <td>{{i.score}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div style="padding-top: 20px; padding-bottom: 20px">
+            <span style="font-size: 20px; font-weight: 600;">Thông tin năm 2017:</span>
+          </div>
+          <table class="table">
+            <thead>
+            <tr>
+              <td>Khối ngành</td>
+              <td>Điểm chuẩn</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let j of majorDetail.blockYear2">
+              <td>{{j.blockName}}</td>
+              <td>{{j.score}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="notDetail" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>×</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-horizontal">
+          <h3>Hiện chưa có thông tin về ngành. Chúng tôi sẽ cập nhật trong thời gian sớm nhất.</h3>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+<button id="openMajorDetail" [hidden]="true" data-toggle="modal" data-target="#modalDetail"></button>
+<button id="openNotDetail" [hidden]="true" data-toggle="modal" data-target="#notDetail"></button>

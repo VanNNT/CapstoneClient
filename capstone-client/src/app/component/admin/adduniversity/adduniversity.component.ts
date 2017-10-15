@@ -7,6 +7,7 @@ import {NgForm} from "@angular/forms";
 import {BaseService} from "../../../service/base-service/base.service";
 import {UniversityService} from "../../../service/university/university.service";
 import {ToastsManager} from "ng2-toastr";
+declare var $: any;
 
 @Component({
   selector: 'app-adduniversity',
@@ -26,6 +27,18 @@ export class AdduniversityComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('#summernote').summernote({
+      height: 150,
+      //toolbar: false
+      toolbar: [
+        //   ['style', ['bold', 'italic', 'underline']],
+        //   ['fontsize', ['fontsize','color']],
+        //   ['insert',['picture', 'link', 'video', 'table']],
+        //   ['para', ['ul', 'ol', 'paragraph']],
+        //   ['height', ['height']],
+        ['fullscreen',['fullscreen']]
+      ]
+    });
     this.uniService.broadcastTextChange("THÊM TRƯỜNG MỚI");
     this.listMajor = this.searchService.getMajor();
     this.listLocation = this.searchService.getLocation();
@@ -70,24 +83,24 @@ export class AdduniversityComponent implements OnInit {
           };
           this.uniService.updateLocationMajor(this.constant.UPDATE_LOCATION_MAJOR,dataLocation).subscribe((res:any)=>{
             if(res){
-              this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!');
+              this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!',{showCloseButton: true});
             }
           },error=>{
             if(error.status==this.constant.NOT_FOUND){
-              this.toastr.error('Trường đại học này không tồn tại. Vui lòng thử lại', 'Thất bại');
+              this.toastr.error('Trường đại học này không tồn tại. Vui lòng thử lại', 'Thất bại',{showCloseButton: true});
             }else{
-              this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
+              this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
             };
           });
         }else{
-          this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!');
+          this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!',{showCloseButton: true});
         }
       }
     },error=>{
       if(error.status==this.constant.CONFLICT){
-        this.toastr.error('Trường đại học này đã tồn tại. Vui lòng thử lại', 'Thất bại');
+        this.toastr.error('Trường đại học này đã tồn tại. Vui lòng thử lại', 'Thất bại',{showCloseButton: true});
       }else{
-        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
+        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
       };
     });
   }

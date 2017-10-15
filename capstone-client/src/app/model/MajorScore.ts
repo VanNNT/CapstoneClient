@@ -1,9 +1,12 @@
 export class MajorScore {
+  private id;
   private blockName;
   private scoreHistories = [] ;
   private year;
   constructor(data: any) {
-    console.log(data);
+    if(data.id){
+      this.id = data.id;
+    }
     if (data.block.blockName) {
       this.blockName = data.block.blockName;
     }

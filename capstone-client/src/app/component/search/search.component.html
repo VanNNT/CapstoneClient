@@ -27,8 +27,8 @@
   </div>
 </section>
 <!--Show search-->
-<div *ngIf="show">
-  <div class="container">
+<div *ngIf="show" id="main">
+  <div class="container" style="margin-top: -65px;">
     <div class="row text-center" id="showsearch">
       <div class="col-lg-4 col-sm-6 portfolio-item hero-feature"
            *ngFor="let university of listSearch | paginate: { itemsPerPage:6, currentPage: p }">
@@ -46,14 +46,19 @@
           <div class="caption">
             <div style="min-height: 55px; border: 1px solid white"><p class=""><b>{{university.name}}</b></p></div>
             <div style="min-height: 35px; border: 1px solid white"><p>{{university.phone}}</p></div>
-            <div><p><a href="#" class="btn btn-success"><i class="fa fa-heart-o" aria-hidden="true"></i> Quan Tâm</a>
-              <button data-toggle="modal" data-target="#modalDetail" class="btn btn-success"><i class="fa fa-hand-o-right"></i> Thông Tin</button>
-            </p></div>
+            <div>
+              <p>
+                <button [routerLink]="['/university',university.id]" class="btn btn-success"><i
+                  class="fa fa-hand-o-right"></i> Thông Tin
+                </button>
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="text-center"><pagination-controls (pageChange)="p =$event"></pagination-controls></div>
+    <div class="text-center"><pagination-controls (pageChange)="p =$event" previousLabel=""
+                                                  nextLabel=""></pagination-controls></div>
   </div>
 </div>
 <!-- End show search-->
@@ -92,6 +97,7 @@
   <!--<router-outlet></router-outlet>-->
 </div>
 <!--End news university-->
+
 
 <!--Modal-->
 <div id="modalDetail" class="modal fade" role="dialog">
@@ -149,4 +155,5 @@
     </div>
   </div>
 </div>
+
 

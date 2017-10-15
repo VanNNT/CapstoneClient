@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class LoginService {
   public isLoggedIn = false;
+  public isRole: any;
   constructor(private _http: Http) { }
   public space = new BehaviorSubject<any>(null);
 
@@ -20,7 +21,12 @@ export class LoginService {
   public setLogin(isLoggedIn: boolean) {
     this.isLoggedIn = isLoggedIn;
   }
-
+  public setRole(isRole:any){
+    this.isRole = isRole;
+  }
+  public checkRole(){
+    return this.isRole;
+  }
   register(apiUrl,data): Observable<any[]> {
     return this._http.post(apiUrl,data).map((res:Response)=>res.json());
   }
