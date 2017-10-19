@@ -28,7 +28,7 @@
                 <label>Đánh giá của bạn</label>
                 <textarea ngModel id="summernote" #content="ngModel" type="text" class="form-control" name="description"></textarea>
                 <div *ngIf="isCheck" class="alert alert-danger">
-                  <div>
+                  <div *ngIf="isCheck">
                     Tối thiểu 100 ký tự
                   </div>
                 </div>

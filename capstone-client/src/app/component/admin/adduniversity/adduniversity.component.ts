@@ -66,8 +66,11 @@ export class AdduniversityComponent implements OnInit {
       'phone': form.value.phone,
       'logo': this.baseService.getLogoUni(),
       'image': this.baseService.getImgUni(),
-      'description': form.value.des,
-      'priority': form.value.pri
+      'description':  $('#summernote').summernote('code'),
+      'priority': form.value.pri? form.value.pri : 0,
+      'trainSystem':{
+        'id': form.value.train
+      }
     };
     this.uniService.createUniversity(this.constant.CREATE_UNIVESITY,data).subscribe((response:any)=>{
       if(response){
