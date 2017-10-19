@@ -24,10 +24,8 @@ const routing: Routes = [
     children:[
       {path: 'home', component: HomeComponent},
       {path: 'university/:id', component: CompanyDetailComponent},
-      {path: 'search-university', component: SearchComponent,
-        children: [
-        {path: 'app-view-major-university/:id', component: ViewMajorUnversityComponent}
-      ]},
+      {path: 'search-university', component: SearchComponent},
+      {path: 'app-view-major-university/:id', component: ViewMajorUnversityComponent},
       {path: 'review-rating/:id', component: ReviewRatingComponent},
       {path: 'new-review/:id', component: NewReviewComponent, canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'major-detail', component: MajorDetailComponent},

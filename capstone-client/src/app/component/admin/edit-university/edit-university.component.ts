@@ -112,7 +112,10 @@ export class EditUniversityComponent implements OnInit {
       'logo': this.baseService.getLogoUni()? this.baseService.getLogoUni(): this.logoSrc,
       'image': this.baseService.getImgUni()? this.baseService.getImgUni(): this.imageSrc,
       'description': $('#summernote').summernote('code'),
-      'priority': form.value.pri
+      'priority': form.value.pri,
+      'trainSystem':{
+        'id': parseInt(form.value.train)
+      }
     };
     this.universityService.updateUniversity(this.constant.UPDATE_UNIVESITY,data).subscribe((response:any)=>{
       if(response){

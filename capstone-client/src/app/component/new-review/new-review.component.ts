@@ -32,6 +32,7 @@ export class NewReviewComponent implements OnInit {
   }
 
   ngOnInit() {
+    let seft = this;
     this.university = this.baseService.getUniversity();
     this.sub = this.activateRoute.params.subscribe(params=>{
       this.id=params['id'];
@@ -46,15 +47,16 @@ export class NewReviewComponent implements OnInit {
           var t = e.currentTarget.innerText;
           if (t.length >= 400) {
             //delete key
-            if (e.keyCode != 8)
+            if (e.keyCode != 8){
               e.preventDefault();
+            }
           }
         },
         onKeyup: function (e) {
           var t = e.currentTarget.innerText;
           $('#maxContentPost').text(400 - t.length);
           if(t.length >= 100){
-            this.isCheck = false;
+            seft.isCheck = false;
           }
         },
         onPaste: function (e) {

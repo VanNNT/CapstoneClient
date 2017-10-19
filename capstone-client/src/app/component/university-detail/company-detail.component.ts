@@ -77,7 +77,7 @@ export class CompanyDetailComponent implements OnInit {
   showDetail(value){
     this.baseService.setValueMajorUni(value);
     if(value.blockMajorUniversities.length == 0){
-      document.getElementById('openNotDetail').click();
+      //document.getElementById('openNotDetail').click();
     }else{
       this.majorDetail.blockYear1 = [];
       this.majorDetail.blockYear2 = [];
