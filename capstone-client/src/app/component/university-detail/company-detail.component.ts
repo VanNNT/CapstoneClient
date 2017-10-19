@@ -5,6 +5,7 @@ import {ActivatedRoute} from "@angular/router";
 import {UniversityService} from "../../service/university/university.service";
 import {ReviewService} from "../../service/review/review.service";
 import {BaseService} from "../../service/base-service/base.service";
+import {Constants} from "../../constants";
 
 @Component({
   selector: 'app-company-detail',
@@ -28,6 +29,7 @@ export class CompanyDetailComponent implements OnInit {
   constructor(private activateRoute: ActivatedRoute,
               private universityService: UniversityService,
               private  reviewService: ReviewService,
+              private constant : Constants,
               private baseService : BaseService) { }
   ngOnInit() {
     $.getScript('../../../assets/file.js');
@@ -58,40 +60,47 @@ export class CompanyDetailComponent implements OnInit {
     this.reviewService.getStarPoint(this.id).subscribe((res:any)=>{
       if(res){
         this.starPoint = res;
+        console.log(this.starPoint);
         localStorage.setItem('STAR_POINT', JSON.stringify(res));
         this.totalStar = (res.starCare + res.starTeaching + res.starSocieties +
           res.starFacilities + res.starCareer)/5;
         this.recommentPoint = res.recommentPoint;
         console.log(this.totalStar);
       }
+    },error=>{
+      if(error.status == this.constant.NOT_FOUND){
+        this.starPoint = null;
+      }
     });
   }
 
   showDetail(value){
-    if(value.blockMajorUniversities.length == 0){
-      document.getElementById('openNotDetail').click();
-    }else{
-      this.majorDetail.blockYear1 = [];
-      this.majorDetail.blockYear2 = [];
-      this.majorDetail.majorName = value.major.majorName;
-      for(let i =0; i<value.blockMajorUniversities.length;i++){
-        for(let j =0; j<value.blockMajorUniversities[i].scoreHistories.length;j++){
-          if(value.blockMajorUniversities[i].scoreHistories[j].year == 2016){
-            let year1 = {
-              blockName: value.blockMajorUniversities[i].block.blockName,
-              score: value.blockMajorUniversities[i].scoreHistories[j].score
-            };
-            this.majorDetail.blockYear1.push(year1);
-          }else{
-            let year2 = {
-              blockName: value.blockMajorUniversities[i].block.blockName,
-              score: value.blockMajorUniversities[i].scoreHistories[j].score
-            };
-            this.majorDetail.blockYear2.push(year2);
-          }
-        }
-      }
-      document.getElementById('openMajorDetail').click();
-    }
+    this.baseService.setValueMajorUni(value);
+    // console.log(value);
+    // if(value.blockMajorUniversities.length == 0){
+    //   // document.getElementById('openNotDetail').click();
+    // }else{
+    //   this.majorDetail.blockYear1 = [];
+    //   this.majorDetail.blockYear2 = [];
+    //   this.majorDetail.majorName = value.major.majorName;
+    //   for(let i =0; i<value.blockMajorUniversities.length;i++){
+    //     for(let j =0; j<value.blockMajorUniversities[i].scoreHistories.length;j++){
+    //       if(value.blockMajorUniversities[i].scoreHistories[j].year == 2016){
+    //         let year1 = {
+    //           blockName: value.blockMajorUniversities[i].block.blockName,
+    //           score: value.blockMajorUniversities[i].scoreHistories[j].score
+    //         };
+    //         this.majorDetail.blockYear1.push(year1);
+    //       }else{
+    //         let year2 = {
+    //           blockName: value.blockMajorUniversities[i].block.blockName,
+    //           score: value.blockMajorUniversities[i].scoreHistories[j].score
+    //         };
+    //         this.majorDetail.blockYear2.push(year2);
+    //       }
+    //     }
+    //   }
+    //   //document.getElementById('openMajorDetail').click();
+    // }
   }
 }

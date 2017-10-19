@@ -30,7 +30,6 @@ export class EditUniversityComponent implements OnInit {
   public logoSrc: any = '';
   public imageSrc: any = '';
   public valueMajor: number[] = [];
-
   constructor(private activateRoute: ActivatedRoute,
               private universityService: UniversityService,
               private baseService: BaseService,
@@ -101,9 +100,9 @@ export class EditUniversityComponent implements OnInit {
       }
     }
     listMajorRemove = _.difference(this.valueMajor, this.currentMajor.value);
-    listMajorAdd = _.difference(this.valueMajor, this.currentMajor.value);
-    console.log(listMajorRemove);
-    console.log($('#summernote').summernote('code'));
+    listMajorAdd = _.difference(this.currentMajor.value, this.valueMajor);
+    console.log("remove: " + listMajorRemove);
+    console.log("add: " + listMajorAdd);
     let data = {
       'id': this.id,
       'code': this.university.code,
@@ -138,9 +137,13 @@ export class EditUniversityComponent implements OnInit {
                 };
                 this.universityService.removeMajor(this.constant.REMOVE_MAJOR_UNI,dataMajor).subscribe((res:any)=>{
                   if(res){
-                    this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!',{showCloseButton: true});
+                    this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+                    this.router.navigate(['admin/list-university']);
                   }
                 })
+              }else{
+                this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+                this.router.navigate(['admin/list-university']);
               }
             }
           },error=>{
@@ -151,8 +154,8 @@ export class EditUniversityComponent implements OnInit {
             };
           });
         }else{
-          this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!',{showCloseButton: true});
-          //this.router.navigate(['/admin/list-university']);
+          this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+          this.router.navigate(['/admin/list-university']);
         }
       }
     },error=>{

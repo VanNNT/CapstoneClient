@@ -7,6 +7,7 @@ import {NgForm} from "@angular/forms";
 import {BaseService} from "../../../service/base-service/base.service";
 import {UniversityService} from "../../../service/university/university.service";
 import {ToastsManager} from "ng2-toastr";
+import {Router} from "@angular/router";
 declare var $: any;
 
 @Component({
@@ -21,7 +22,7 @@ export class AdduniversityComponent implements OnInit {
   public currentMajor: any = [];
   public listMajor: Observable<Select2OptionData[]>;
   public listLocation: Observable<Select2OptionData[]>;
-  constructor(private searchService: SearchService,private uniService: UniversityService,
+  constructor(private searchService: SearchService,private uniService: UniversityService,private router: Router,
               private constant: Constants, private baseService: BaseService,public toastr: ToastsManager, vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
@@ -84,6 +85,7 @@ export class AdduniversityComponent implements OnInit {
           this.uniService.updateLocationMajor(this.constant.UPDATE_LOCATION_MAJOR,dataLocation).subscribe((res:any)=>{
             if(res){
               this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!',{showCloseButton: true});
+              this.router.navigate(['admin/list-university']);
             }
           },error=>{
             if(error.status==this.constant.NOT_FOUND){
@@ -94,6 +96,7 @@ export class AdduniversityComponent implements OnInit {
           });
         }else{
           this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!',{showCloseButton: true});
+          this.router.navigate(['admin/list-university']);
         }
       }
     },error=>{

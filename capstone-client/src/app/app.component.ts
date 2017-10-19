@@ -115,4 +115,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
     $("#myModal").html("");
   }
+
+
 }

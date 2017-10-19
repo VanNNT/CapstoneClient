@@ -53,7 +53,7 @@
             <div class="text-dark-gray">
               <ul>
                 <li *ngFor="let major of valueMajor"
-                    class="box-title bold list-major" (click)="showDetail(major)">
+                    class="box-title bold list-major" (click)="showDetail(major)" [routerLink]="['/major-detail',major.major.id]">
                   {{major.major.majorName}}
                 </li>
               </ul>
@@ -139,7 +139,7 @@
               </div>
             </div>
             <div class="col-xs-3">
-              <span class="overall-rate">{{totalStar}}</span>
+              <span class="overall-rate">{{totalStar | number:'1.0-1'}}</span>
             </div>
           </div>
           <div class="pull-left"><a class="text-dark-gray" [routerLink]="['/review-rating',id]">Xem

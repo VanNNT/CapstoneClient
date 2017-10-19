@@ -32,6 +32,7 @@ export class NewReviewComponent implements OnInit {
   }
 
   ngOnInit() {
+    let seft = this;
     this.university = this.baseService.getUniversity();
     this.sub = this.activateRoute.params.subscribe(params=>{
       this.id=params['id'];
@@ -54,7 +55,7 @@ export class NewReviewComponent implements OnInit {
           var t = e.currentTarget.innerText;
           $('#maxContentPost').text(400 - t.length);
           if(t.length >= 100){
-            this.isCheck = false;
+            seft.isCheck = false;
           }
         },
         onPaste: function (e) {
@@ -70,7 +71,7 @@ export class NewReviewComponent implements OnInit {
   }
 
   public onSubmit(form: NgForm){
-    if($('#summernote').summernote('code').length < 100){
+    if($('#summernote').summernote('code').length < 100 || $('#summernote').summernote('code').length > 400){
       this.isCheck = true;
     }else{
       this.isCheck = false;

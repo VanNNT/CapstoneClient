@@ -31,4 +31,16 @@ export class ReviewService {
   numberOfReviewNeedApprove(){
     return this._http.get(this.contant.GET_NUMBER_REVIEW_NEED_APPROVE).map((res:Response)=>res.json());
   }
+
+  changeReviewStatus(data){
+    return this._http.post(this.contant.CHANGE_REVIEW_STATUS,data).map((res:Response)=>res.json());
+  }
+
+  saveMajorReview(data){
+    return this._http.post(this.contant.SAVE_REVIEW_MAJOR_UNI,data).map((res: Response)=>res.json());
+  }
+  getStarReviewMajor(data){
+    return this._http.get(this.contant.STAR_REIVEW_MAJOR+"?majorUniId="+data).map((res: Response) => res.json());
+  }
+
 }

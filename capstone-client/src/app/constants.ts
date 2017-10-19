@@ -23,7 +23,7 @@ export class Constants{
   public GET_UNI_BY_ID = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-university";
   public MBTI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/mbti/show-mbti-question";
   public SAVE_MBTI_RESULT = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/mbti/save-mbti-result";
-  public GET_MBTI_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/mbti/get-mbti-major";
+  // public GET_MBTI_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/mbti/get-mbti-major";
   public UPDATE_MBTI_RESULT = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/mbti/update-mbti-result";
   public GET_MBTI_RESULT = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/mbti/get-mbti-results";
   public DELETE_UNIVERSITY = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/delete";
@@ -37,6 +37,10 @@ export class Constants{
   public SAVE_MAJOR_UNI_DETAIL = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/save-detail-major";
   public DELETE_BLOCK_SCORE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/score/delete-block-score";
   public FIND_BY_MAJOR_ID = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/university/find-by-major-id";
+  public CHANGE_REVIEW_STATUS = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/change-review-status";
+  public STAR_REIVEW_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review//star-review-major";
+  public SAVE_REVIEW_MAJOR_UNI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/save-review-major-uni";
+
 
 
   //ERROR
