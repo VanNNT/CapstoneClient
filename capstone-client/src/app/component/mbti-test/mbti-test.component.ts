@@ -43,6 +43,7 @@ export class MbtiTestComponent implements OnInit {
 
     this.mbtiService.getMbtiresult(this.baseService.getUser().id).subscribe((response: any) => {
       this.mbtiResult = response;
+      console.log(this.mbtiResult);
       this.majorResult = response.mbtitype.majorMbtis;
       if (this.mbtiResult != []) {
         this.tested = true;
@@ -51,8 +52,7 @@ export class MbtiTestComponent implements OnInit {
       if (error.status == this.constanst.CONFLICT) {
         this.tested = false;
       }
-      ;
-    })
+    });
     this.mbtiService.getMbti().subscribe((response: any) => {
       this.listQuestion = response;
       this.listQuestion.forEach(x => {
@@ -88,9 +88,7 @@ export class MbtiTestComponent implements OnInit {
         this.scores.J = this.scores.J - 1;
       }
       item.isChecked = false;
-
     }
-    console.log(this.scores);
   }
 
   public onSubmit(form: NgForm) {

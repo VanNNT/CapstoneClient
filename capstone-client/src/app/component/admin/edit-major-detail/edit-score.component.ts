@@ -69,7 +69,6 @@ export class EditScoreComponent implements OnInit {
         }
       })
     }
-    console.log(this.currentMajor);
     this.searchService.getBlock().subscribe((value: any) => {
         this.listBlock = value;
       });
@@ -78,6 +77,7 @@ export class EditScoreComponent implements OnInit {
       width: '100px'
     }
   }
+
   getValueMajor(data){
     if(data.value){
         data.value.forEach(y=>{

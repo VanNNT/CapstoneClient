@@ -11,7 +11,7 @@ import {Select2OptionData} from "ng2-select2";
   styleUrls: ['./search.component.less']
 })
 export class SearchComponent implements OnInit {
-  public show: boolean = false;
+  public show;
   public optionMajor: Select2Options;
   public optionUni: Select2Options;
   public optionLocation: Select2Options;
@@ -22,8 +22,6 @@ export class SearchComponent implements OnInit {
   public listMajor: Observable<Select2OptionData[]>;
   public listLocation: Observable<Select2OptionData[]>;
   public listUniName: Observable<Select2OptionData[]>;
-  public allUniversity: any[];
-  public topUniversity: any[] = [];
   public valueMajor: string;
   public valueLocation: string;
   public valueUniversity: string;
@@ -35,18 +33,6 @@ export class SearchComponent implements OnInit {
     this.listMajor = this.searchService.getMajor();
     this.listLocation = this.searchService.getLocation();
     this.listUniName = this.searchService.getList();
-    //Add top 6 universities priority 0
-    this.searchService.getListUniName().subscribe((response: any) => {
-      this.allUniversity = response;
-      for(let i = 0;i < this.allUniversity.length ;i++){
-        if(this.allUniversity[i].priority == 0){
-          this.topUniversity.push(this.allUniversity[i]);
-        }
-        if (this.topUniversity.length == 6){
-          return;
-        }
-      }
-    });
 
     //Placeholder search input
     this.optionMajor = {
@@ -71,17 +57,10 @@ export class SearchComponent implements OnInit {
       }
     };
     this.getTopThreeMajor(4314);
+
     $('#news-uni li').click(function(){
       $('#news-uni li').removeClass("active");
       $(this).addClass("active");
-    });
-  }
-
-  searchtopMajor(){
-    this.searchMajor = [];
-    this.searchService.getMajorByID(this.valueCurrent).subscribe((response: any)=>{
-      this.searchMajor = response;
-      console.log(response);
     });
   }
 
@@ -97,17 +76,18 @@ export class SearchComponent implements OnInit {
   // Click search university
   searchUniversity(){
     this.listSearch = [];
-    this.show = false;
     let data = {
       "majorId": this.valueMajor,
       "locationId": this.valueLocation,
       "universityId": this.valueUniversity,
-    }
+    };
   // List search
     this.searchService.searchPage(data).subscribe((response: any) =>{
         this.listSearch = response;
         if(this.listSearch[0] != null){
           this.show = true;
+        }else{
+          this.show = false;
         }
     })
   }
@@ -121,7 +101,5 @@ export class SearchComponent implements OnInit {
   changedUniversity(value){
     this.valueUniversity = value.value;
   }
-
-
 }
 
