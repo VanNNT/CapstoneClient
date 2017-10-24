@@ -30,6 +30,8 @@ export class EditUniversityComponent implements OnInit {
   public logoSrc: any = '';
   public imageSrc: any = '';
   public valueMajor: number[] = [];
+  public isLoadLogo: boolean = false;
+  public isLoadImage: boolean = false;
   constructor(private activateRoute: ActivatedRoute,
               private universityService: UniversityService,
               private baseService: BaseService,
@@ -40,11 +42,9 @@ export class EditUniversityComponent implements OnInit {
               private searchService: SearchService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-
   ngOnInit() {
     $('#summernote').summernote({
       height: 150,
-      // toolbar: false
        toolbar: [
          ['style', ['bold', 'italic', 'underline']],
          ['fontsize', ['fontsize','color']],
@@ -57,32 +57,35 @@ export class EditUniversityComponent implements OnInit {
       this.id = params['id'];
     });
     this.listLocation = this.searchService.getLocation();
-    this.universityService.getUniversityById(this.id).subscribe(
-        (university: any) => {
-          this.university = university;
-          $('#summernote').summernote('code', this.university.description);
-          this.logoSrc = university.logo;
-          this.imageSrc = university.image;
-          this.searchService.getMajor()
-            .subscribe((value: any) => {
-                this.listMajor = value;
-              }, (err) => console.log(err),
-              () => {
-                this.valueMajor = [];
-                for (let i = 0; i < this.university.majorUniversities.length; i++) {
-                  if(this.university.majorUniversities[i].isActive){
-                    this.valueMajor.push(this.university.majorUniversities[i].major.id);
-                  }
-                    }
-              });
-        }, (err) => {
-          this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
-        });
+   this.getUniversity();
     this.options = {
       multiple: true
     }
   }
 
+  getUniversity(){
+    this.universityService.getUniversityById(this.id).subscribe(
+      (university: any) => {
+        this.university = university;
+        $('#summernote').summernote('code', this.university.description);
+        this.logoSrc = university.logo;
+        this.imageSrc = university.image;
+        this.searchService.getMajor()
+          .subscribe((value: any) => {
+              this.listMajor = value;
+            }, (err) => console.log(err),
+            () => {
+              this.valueMajor = [];
+              for (let i = 0; i < this.university.majorUniversities.length; i++) {
+                if(this.university.majorUniversities[i].isActive){
+                  this.valueMajor.push(this.university.majorUniversities[i].major.id);
+                }
+              }
+            });
+      }, (err) => {
+        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
+      });
+  }
 
   getValueLocation(data) {
     this.valueLocation = data.value;
@@ -99,11 +102,8 @@ export class EditUniversityComponent implements OnInit {
         this.currentMajor.value[i] = parseInt(this.currentMajor.value[i]);
       }
     }
-    console.log(this.currentMajor.value);
     listMajorRemove = _.difference(this.valueMajor, this.currentMajor.value);
     listMajorAdd = _.difference(this.currentMajor.value, this.valueMajor);
-    console.log("remove: " + listMajorRemove);
-    console.log("add: " + listMajorAdd);
     let data = {
       'id': this.id,
       'code': this.university.code,
@@ -118,48 +118,16 @@ export class EditUniversityComponent implements OnInit {
         'id': parseInt(form.value.train)
       }
     };
+    let seft = this;
     this.universityService.updateUniversity(this.constant.UPDATE_UNIVESITY,data).subscribe((response:any)=>{
       if(response){
         if((this.valueLocation != this.university.location.id) || listMajorRemove.length != 0 || listMajorAdd.length != 0){
-          let dataLocation = {
-            'location': {
-              'id': this.valueLocation? parseInt(this.valueLocation) : null,
-            },
-            'majorId': this.currentMajor.value.length !=0 ? this.currentMajor.value : null,
-            'university':{
-              'id': this.id
-            }
-          };
-          this.universityService.updateLocationMajor(this.constant.UPDATE_LOCATION_MAJOR,dataLocation).subscribe((res:any)=>{
-            if(res){
-              if(listMajorRemove.length != 0){
-                let dataMajor = {
-                  'majorId': listMajorRemove,
-                  'university': {
-                    'id': this.id
-                  }
-                };
-                this.universityService.removeMajor(this.constant.REMOVE_MAJOR_UNI,dataMajor).subscribe((res:any)=>{
-                  if(res){
-                    //this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
-                    this.router.navigate(['admin/list-university']);
-                  }
-                })
-              }else{
-                //this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
-                this.router.navigate(['admin/list-university']);
-              }
-            }
-          },error=>{
-            if(error.status==this.constant.NOT_FOUND){
-              this.toastr.error('Trường đại học này không tồn tại. Vui lòng thử lại', 'Thất bại',{showCloseButton: true});
-            }else{
-              this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
-            };
-          });
+         this.updateLocationMajor(listMajorRemove);
         }else{
-          //this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
-          this.router.navigate(['/admin/list-university']);
+          this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+          setTimeout(function () {
+            seft.router.navigate(['/admin/list-university'])
+          }, 1000);
         }
       }
     },error=>{
@@ -170,6 +138,57 @@ export class EditUniversityComponent implements OnInit {
       };
     });
   }
+
+  removeMajor(listMajorRemove){
+    let dataMajor = {
+      'majorId': listMajorRemove,
+      'university': {
+        'id': this.id
+      }
+    };
+    let seft = this;
+    this.universityService.removeMajor(this.constant.REMOVE_MAJOR_UNI,dataMajor).subscribe((res:any)=>{
+      if(res){
+        this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+        setTimeout(function () {
+          seft.router.navigate(['/admin/list-university'])
+        }, 1000);
+      }
+    })
+  }
+
+  updateLocationMajor(listMajorRemove){
+    let dataLocation = {
+      'location': {
+        'id': this.valueLocation? parseInt(this.valueLocation) : null,
+      },
+      'majorId': this.currentMajor.value.length !=0 ? this.currentMajor.value : null,
+      'university':{
+        'id': this.id
+      }
+    };
+    let seft = this;
+    this.universityService.updateLocationMajor(this.constant.UPDATE_LOCATION_MAJOR,dataLocation).subscribe((res:any)=>{
+      if(res){
+        if(listMajorRemove.length != 0){
+          this.removeMajor(listMajorRemove);
+        }else{
+          this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+          setTimeout(function () {
+            seft.router.navigate(['/admin/list-university'])
+          }, 1000);
+        }
+      }
+    },error=>{
+      if(error.status==this.constant.NOT_FOUND){
+        this.toastr.error('Trường đại học này không tồn tại. Vui lòng thử lại', 'Thất bại',{showCloseButton: true});
+      }else{
+        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
+      };
+    });
+  }
+
+
 
   // Upload image
   activeColor: string = 'green';
@@ -194,17 +213,18 @@ export class EditUniversityComponent implements OnInit {
   }
   handleInputChange(e, boolean) {
     var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-
     var pattern = /image-*/;
     var reader = new FileReader();
-
     if (!file.type.match(pattern)) {
       alert('invalid format');
       return;
     }
-
     this.loaded = false;
-
+    if(boolean === true){
+      this.isLoadLogo = true;
+    }else{
+      this.isLoadImage = true;
+    }
     reader.onload = this._handleReaderLoaded.bind(this, boolean);
     reader.readAsDataURL(file);
   }
@@ -218,15 +238,17 @@ export class EditUniversityComponent implements OnInit {
       'image': reader.result.split(',')[1]
     };
     if (boolean === true) {
-      this.logoSrc = reader.result;
       this.universityService.uploadFile(url, data, options).subscribe((response: any) => {
+        this.logoSrc = response.data.link;
         this.baseService.setLogoUni(response.data.link);
+        this.isLoadLogo = false;
       });
     } else {
-      this.imageSrc = reader.result;
       this.value = true;
       this.universityService.uploadFile(url, data, options).subscribe((response: any) => {
+        this.imageSrc = response.data.link;
         this.baseService.setImgUni(response.data.link);
+        this.isLoadImage = false;
       });
     }
     this.loaded = true;

@@ -54,7 +54,4 @@ export class HeaderComponent implements OnInit {
   public clickLink(){
     document.getElementById('linkFake').click();
   }
-  // ngOnDestroy() {
-  //   this.sub.unsubscribe();
-  // }
 }

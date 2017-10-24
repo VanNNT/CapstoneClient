@@ -51,21 +51,7 @@
 
         <div *ngIf="tested" class="box box-white">
           <h2 class="box-title bold text-highlight" style="font-size: 32px; margin: 25px auto;">Tổng Quan</h2>
-          <div>
-            <p>Có khoảng 4% dân số mang tính cách này, những người có các loại tính cách ESTP rất tập thể, tự phát và thẳng thắn. Đôi khi họ bị xem là thô lỗ hoặc thiếu thận trọng, nhưng thực sự các ESTP yêu thích hành động và luôn luôn nhảy ngay vào trung tâm của "cơn bão". Các ESTP không thích các cuộc tranh luận lý thuyết hoặc suy nghĩ về tương lai - họ chỉ quan tâm đến thời điểm hiện tại và tập trung tất cả nỗ lực của họ vào những thứ họ thích hơn là những suy nghĩ về những gì có thể.</p>
-            <p>Các ESTP thường ít khi lên kế hoạch hành động chi tiết, họ thường nhanh chóng lao vào công việc, họ tìm ra các sai sót và hành động ngay lập tức. Nếu cần thiết, họ không ngại quay lại và sửa chữa sai lầm của mình. Những người có loại tính cách này cũng có một khả năng bẩm sinh để nhận biết những suy nghĩ và động cơ của người khác, các ESTP có thể dễ dàng phát hiện những thay đổi nhỏ trong biểu hiện của một ai đó trên khuôn mặt, quần áo, hành vi,... Các loại tính cách khác không có khả năng bí ẩn này.</p>
-            <p>Những người mang tính cách ESTP cũng có xu hướng xem luật lệ, quy tắc và nghĩa vụ như là các khuyến cáo hoặc hướng dẫn chứ không phải là nguyên tắc cứng nhắc. Nếu ESTP tin rằng một cái gì đó phải được thực hiện và nguyên nhân chính là sự đúng đắng và xứng đáng, họ sẽ đi trước và làm điều đó, bất chấp những gì pháp luật hoặc quy tắc xã hội cảnh báo. Điều này không có nghĩa là để nói rằng ESTP là những người phạm pháp - họ thường có một sự hiểu biết rõ ràng về thiện và ác - đúng hơn, họ có xu hướng đưa giá trị cá nhân, ý ​​kiến ​​và nguyên tắc trên những gì người khác hay xã hội suy nghĩ.</p>
-            <p>Các ESTP rất thích xem phim, theo đuổi niềm đam mê và những thú vui vật chất khác. Tuy nhiên, những người có loại tính cách này nên biết rằng niềm đam mê của họ có thể thực hiện bằng nhiều cách khác nhau, trong đó có khá nhiều trò nguy hiểm hoặc không lành mạnh - ví dụ như cờ bạc, có nhiều con bạc là ESTP. Đặc điểm tính cách của ESTP cũng có thể khiến họ vô tình làm tổn thương người khác - ESTP rất thẳng thắn và dựa trên sự kiện và logic (đặc điểm T ) chứ không phải là cảm xúc (đặc điểm F), nên lời nói của họ có thể dễ dàng gây tổn thương những người mang loại tính cách nhạy cảm hơn.</p>
-            <p>Các ESTP không thích lý thuyết và tư duy trừu tượng, họ thường gặp khó khăn trong trường học, đặc biệt là trong những năm sau đó. Những người có loại tính cách này xem các cuộc thảo luận lý thuyết là nhàm chán và vô nghĩa. Ngược lại, năng lượng và niềm đam mê của họ hầu như không giới hạn khi nói đến các lĩnh vực mà họ cho là thực tế và thú vị. Các ESTP có thể rất truyền cảm và có sức thuyết phục - điều này làm cho họ trở nên xuất sắc với vị trí đại diện bán hàng, tư vấn và các doanh nhân. Loại tính cách này thực sự là rất nhiều tài năng - điều quan trọng là mỗi ESTP nhận ra tài năng, cũng như những điểm mạnh và điểm yếu của mình.</p>
-            <p><strong>Những người nổi tiếng mang tính cách ESTP:</strong></p>
-            <p>
-              - James Buchanan, một cựu Tổng thống Hoa Kỳ <br>
-              - Ernest Hemingway, nhà văn <br>
-              - Jack Nicholson, diễn viên <br>
-              - Eddie Murphy, diễn viên <br>
-              - Madonna, ca sĩ <br>
-              - Bruce Willis, diễn viên <br>
-              - Michael J. Fox, diễn viên</p>
+          <div [innerHTML]="mbtiResult?.mbtitype.contentType" class="text-dark-gray">
           </div>
         </div>
       </div>
@@ -89,100 +75,100 @@
             <div class="col-xs-12">
               <ul class="mbti-personalities">
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ISTJ" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/istj.png" class="thumb">
                     ISTJ - Người trách nhiệm
-                  </a>
+                  </div>
                 </li>
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ISFJ" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/isfj.png" class="thumb">
                     ISFJ - Người nuôi dưỡng
-                  </a>
+                  </div>
                 </li>
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ISFP" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/isfp.png" class="thumb">
                     ISFP - Người nghệ sĩ
-                  </a>
+                  </div>
                 </li>
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ISTP" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/istp.png" class="thumb">
                     ISTP - Nhà kỹ thuật
-                  </a>
+                  </div>
                 </li>
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách INFP" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/infp.png" class="thumb">
                     INFP - Người lý tưởng hóa
-                  </a>
+                  </div>
                 </li>
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách INFJ" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/infj.png" class="thumb">
                     INFJ - Người che chở
-                  </a>
+                  </div>
                 </li>
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách INTJ" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/intj.png" class="thumb">
                     INTJ - Nhà khoa học
-                  </a>
+                  </div>
                 </li>
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách INTP" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/intp.png" class="thumb">
                     INTP - Nhà tư duy
-                  </a>
+                  </div>
                 </li>
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ENFJ" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/enfj.png" class="thumb">
                     ENFJ - Người cho đi
-                  </a>
+                  </div>
                 </li>
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ENFP" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/enfp.png" class="thumb">
                     ENFP - Người truyền cảm hứng
-                  </a>
+                  </div>
                 </li>
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ENTJ" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/entj.png" class="thumb">
                     ENTJ - Nhà điều hành
-                  </a>
+                  </div>
                 </li>
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ENTP" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/entp.png" class="thumb">
                     ENTP - Người nhìn xa
-                  </a>
+                  </div>
                 </li>
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ESFJ" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/esfj.png" class="thumb">
                     ESFJ - Người quan tâm
-                  </a>
+                  </div>
                 </li>
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ESFP" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/esfp.png" class="thumb">
                     ESFP - Người trình diễn
-                  </a>
+                  </div>
                 </li>
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ESTJ" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/entj.png" class="thumb">
                     ESTJ - Người giám hộ
-                  </a>
+                  </div>
                 </li>
                 <li class="">
-                  <a href="" title="Tổng quan &amp; sự nghiệp dành cho nhóm tính cách ESTP" target="_blank">
+                  <div>
                     <img src="https://www.topcv.vn/images/mbti/web/estp.png" class="thumb">
                     ESTP - Người thực thi
-                  </a>
+                  </div>
                 </li>
               </ul>
             </div>

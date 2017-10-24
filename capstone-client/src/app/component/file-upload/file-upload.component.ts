@@ -26,6 +26,7 @@ export class FileUploadComponent implements OnInit{
   imageLoaded: boolean = false;
   imageSrc: string = '';
   value: boolean = false;
+  isLoading: boolean = false;
   ngOnInit(){
 
   }
@@ -49,24 +50,21 @@ export class FileUploadComponent implements OnInit{
 
   handleInputChange(e) {
     var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-
     var pattern = /image-*/;
     var reader = new FileReader();
-
     if (!file.type.match(pattern)) {
       alert('invalid format');
       return;
     }
-
     this.loaded = false;
-
     reader.onload = this._handleReaderLoaded.bind(this);
     reader.readAsDataURL(file);
+    this.isLoading = true;
   }
 
   _handleReaderLoaded(e) {
     var reader = e.target;
-    this.imageSrc = reader.result;
+    // this.imageSrc = reader.result;
     let url = "https://api.imgur.com/3/image";
     var headers = new Headers();
     headers.append('Authorization', 'Client-ID bf915d4106b6639');
@@ -76,12 +74,16 @@ export class FileUploadComponent implements OnInit{
     };
     if(this.name === 'logo'){
       this.uniService.uploadFile(url,data,options).subscribe((response:any)=>{
+        this.imageSrc = response.data.link;
         this.baseService.setLogoUni(response.data.link);
+        this.isLoading = false;
       });
     }else{
-      this.value = true;
       this.uniService.uploadFile(url,data,options).subscribe((response:any)=>{
+        this.imageSrc = response.data.link;
         this.baseService.setImgUni(response.data.link);
+        this.isLoading = false;
+        this.value = true;
       },err=>{
         this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
       });

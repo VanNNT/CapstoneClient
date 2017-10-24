@@ -70,7 +70,6 @@ export class EditScoreComponent implements OnInit {
         }
       })
     }
-    console.log(this.currentMajor);
     this.searchService.getBlock().subscribe((value: any) => {
         this.listBlock = value;
       });
@@ -79,6 +78,7 @@ export class EditScoreComponent implements OnInit {
       width: '100px'
     }
   }
+
   getValueMajor(data){
     if(data.value){
         data.value.forEach(y=>{
@@ -107,9 +107,7 @@ export class EditScoreComponent implements OnInit {
     };
     this.universityService.updateScore(data).subscribe((res:any)=>{
       if(res){
-        this.toastr.success("",'Thành công',{showCloseButton: true});
-        let universityId = this.baseService.getUniversity().id;
-        this.router.navigate(['edit-major/' + universityId]);
+        this.toastr.success("Đã cập nhật điểm",'Thành công',{showCloseButton: true});
       }
     },(error)=>{
       this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
@@ -128,7 +126,7 @@ export class EditScoreComponent implements OnInit {
       };
       this.universityService.saveMajorUniDetail(data).subscribe(res=>{
         if(res){
-          this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+          this.toastr.success('Bạn đã chỉnh sửa thông tin ngành', 'Thành công!',{showCloseButton: true});
         }
       },err=>{
         if(err.status == this.constant.CONFLICT){
@@ -147,7 +145,13 @@ export class EditScoreComponent implements OnInit {
     };
     this.universityService.deleteBlockMajorUni(data).subscribe(res=>{
       if(res){
-        this.toastr.success('Bạn đã xóa thành công', 'Thành công!',{showCloseButton: true});
+        for(let i = 0; i< this.currentMajor.length;i++){
+          if(this.selectIndex == this.currentMajor[i].id){
+            this.currentMajor.splice(i,1);
+            this.toastr.success('Bạn đã xóa thành công', 'Thành công!',{showCloseButton: true});
+            return;
+          }
+        }
       }
     },err=>{
       this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});

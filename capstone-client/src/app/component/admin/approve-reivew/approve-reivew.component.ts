@@ -28,6 +28,7 @@ export class ApproveReivewComponent implements OnInit {
         }
       });
   }
+
   viewDetail(value){
     this.currentId = value;
     this.listReview.forEach(x=>{

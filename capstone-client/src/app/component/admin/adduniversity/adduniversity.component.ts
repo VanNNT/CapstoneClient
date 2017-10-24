@@ -22,7 +22,7 @@ export class AdduniversityComponent implements OnInit {
   public currentMajor: any = [];
   public listMajor: Observable<Select2OptionData[]>;
   public listLocation: Observable<Select2OptionData[]>;
-  constructor(private searchService: SearchService,private uniService: UniversityService,private router: Router,
+  constructor(private searchService: SearchService,private uniService: UniversityService,  private router: Router,
               private constant: Constants, private baseService: BaseService,public toastr: ToastsManager, vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
@@ -30,13 +30,10 @@ export class AdduniversityComponent implements OnInit {
   ngOnInit() {
     $('#summernote').summernote({
       height: 150,
-      //toolbar: false
       toolbar: [
-        //   ['style', ['bold', 'italic', 'underline']],
-        //   ['fontsize', ['fontsize','color']],
-        //   ['insert',['picture', 'link', 'video', 'table']],
-        //   ['para', ['ul', 'ol', 'paragraph']],
-        //   ['height', ['height']],
+        ['style', ['bold', 'italic', 'underline']],
+        ['fontsize', ['fontsize','color']],
+        ['para', ['ul', 'ol', 'paragraph']],
         ['fullscreen',['fullscreen']]
       ]
     });
@@ -73,33 +70,16 @@ export class AdduniversityComponent implements OnInit {
         'id': form.value.train
       }
     };
+    let seft = this;
     this.uniService.createUniversity(this.constant.CREATE_UNIVESITY,data).subscribe((response:any)=>{
       if(response){
         if(this.currentLocation || this.currentMajor.value){
-          let dataLocation = {
-            'location': {
-              'id': this.currentLocation? parseInt(this.currentLocation) : null,
-            },
-            'majorId': this.currentMajor.value,
-            'university':{
-              'id': response.id ? response.id : null
-            }
-          };
-          this.uniService.updateLocationMajor(this.constant.UPDATE_LOCATION_MAJOR,dataLocation).subscribe((res:any)=>{
-            if(res){
-              this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!',{showCloseButton: true});
-              this.router.navigate(['admin/list-university']);
-            }
-          },error=>{
-            if(error.status==this.constant.NOT_FOUND){
-              this.toastr.error('Trường đại học này không tồn tại. Vui lòng thử lại', 'Thất bại',{showCloseButton: true});
-            }else{
-              this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
-            };
-          });
+          this.updateLocationMajor(response);
         }else{
           this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!',{showCloseButton: true});
-          this.router.navigate(['admin/list-university']);
+          setTimeout(function () {
+            seft.router.navigate(['/admin/list-university'])
+          }, 1000);
         }
       }
     },error=>{
@@ -111,4 +91,30 @@ export class AdduniversityComponent implements OnInit {
     });
   }
 
+  updateLocationMajor(response){
+    let dataLocation = {
+      'location': {
+        'id': this.currentLocation? parseInt(this.currentLocation) : null,
+      },
+      'majorId': this.currentMajor.value,
+      'university':{
+        'id': response.id ? response.id : null
+      }
+    };
+    let seft = this;
+    this.uniService.updateLocationMajor(this.constant.UPDATE_LOCATION_MAJOR,dataLocation).subscribe((res:any)=>{
+      if(res){
+        this.toastr.success('Bạn đã tạo mới thành công', 'Thành công!',{showCloseButton: true});
+        setTimeout(function () {
+          seft.router.navigate(['/admin/list-university'])
+        }, 1000);
+      }
+    },error=>{
+      if(error.status==this.constant.NOT_FOUND){
+        this.toastr.error('Trường đại học này không tồn tại. Vui lòng thử lại', 'Thất bại',{showCloseButton: true});
+      }else{
+        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
+      };
+    });
+  }
 }

@@ -11,6 +11,16 @@
           <div class="box-group-body">
             <div  class="box box-white clearfix">
               <form  id="form-user-detail"  #fDetail="ngForm" class="" (ngSubmit)="onSubmit(fDetail)">
+                <div class="form-group text-center">
+                  <label class="uploader" ondragover="return false;">
+                    <i class="icon fa fa-upload"></i>
+                    <img [src]="imageSrc"/>
+                    <input type="file" name="avtUni" accept="image/*"
+                           (change)="handleInputChange($event)">
+                    <img *ngIf="isLoadImage" class="loading" src="../../../../assets/image/Spinner.gif" height="50"
+                         width="50"/>
+                  </label>
+                </div>
                 <div  class="form-group">
                   <label  class="col-sm-4 control-label text-dark-gray" style="text-align:center; margin-top: 10px">Tên
                     Người Dùng</label>
