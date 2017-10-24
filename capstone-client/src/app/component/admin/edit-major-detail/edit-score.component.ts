@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {UniversityService} from "../../../service/university/university.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {SearchService} from "../../../service/base-service/search.service";
 import {ToastsManager} from "ng2-toastr";
 import {NgForm} from "@angular/forms";
@@ -34,6 +34,7 @@ export class EditScoreComponent implements OnInit {
                private baseService: BaseService,
                public toastr: ToastsManager,
                private constant: Constants,
+               private router: Router,
                vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
@@ -107,6 +108,8 @@ export class EditScoreComponent implements OnInit {
     this.universityService.updateScore(data).subscribe((res:any)=>{
       if(res){
         this.toastr.success("",'Thành công',{showCloseButton: true});
+        let universityId = this.baseService.getUniversity().id;
+        this.router.navigate(['edit-major/' + universityId]);
       }
     },(error)=>{
       this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});

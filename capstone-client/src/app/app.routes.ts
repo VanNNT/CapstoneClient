@@ -24,11 +24,12 @@ const routing: Routes = [
     children:[
       {path: 'home', component: HomeComponent},
       {path: 'university/:id', component: CompanyDetailComponent},
+      {path: 'new-review', component: NewReviewComponent},
       {path: 'search-university', component: SearchComponent},
       {path: 'app-view-major-university/:id', component: ViewMajorUnversityComponent},
       {path: 'review-rating/:id', component: ReviewRatingComponent},
       {path: 'new-review/:id', component: NewReviewComponent, canActivate: [CheckLoginGuard, CheckRoleGuard]},
-      {path: 'major-detail', component: MajorDetailComponent},
+      {path: 'major-detail/:id', component: MajorDetailComponent},
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]},
     ]},

@@ -99,6 +99,7 @@ export class EditUniversityComponent implements OnInit {
         this.currentMajor.value[i] = parseInt(this.currentMajor.value[i]);
       }
     }
+    console.log(this.currentMajor.value);
     listMajorRemove = _.difference(this.valueMajor, this.currentMajor.value);
     listMajorAdd = _.difference(this.currentMajor.value, this.valueMajor);
     console.log("remove: " + listMajorRemove);
@@ -140,11 +141,13 @@ export class EditUniversityComponent implements OnInit {
                 };
                 this.universityService.removeMajor(this.constant.REMOVE_MAJOR_UNI,dataMajor).subscribe((res:any)=>{
                   if(res){
-                    this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+                    //this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+                    this.router.navigate(['admin/list-university']);
                   }
                 })
               }else{
-                this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+                //this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+                this.router.navigate(['admin/list-university']);
               }
             }
           },error=>{
@@ -155,8 +158,8 @@ export class EditUniversityComponent implements OnInit {
             };
           });
         }else{
-          this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
-          //this.router.navigate(['/admin/list-university']);
+          //this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+          this.router.navigate(['/admin/list-university']);
         }
       }
     },error=>{

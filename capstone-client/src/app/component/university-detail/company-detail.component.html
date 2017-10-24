@@ -53,7 +53,7 @@
             <div class="text-dark-gray">
               <ul>
                 <li *ngFor="let major of valueMajor"
-                    class="box-title bold list-major" (click)="showDetail(major)" [routerLink]="['/major-detail']">
+                    class="box-title bold list-major" (click)="showDetail(major)" [routerLink]="['/major-detail',major.major.id]">
                   {{major.major.majorName}}
                 </li>
               </ul>

@@ -84,7 +84,7 @@ const providers = {
     ApproveReivewComponent,
     OrderByPipe,
     EditMajorComponent,
-    MajorDetailComponent
+    MajorDetailComponent,
   ],
   imports: [
     Select2Module,
