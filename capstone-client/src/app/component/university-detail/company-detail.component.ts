@@ -76,30 +76,32 @@ export class CompanyDetailComponent implements OnInit {
 
   showDetail(value){
     this.baseService.setValueMajorUni(value);
-    if(value.blockMajorUniversities.length == 0){
-      //document.getElementById('openNotDetail').click();
-    }else{
-      this.majorDetail.blockYear1 = [];
-      this.majorDetail.blockYear2 = [];
-      this.majorDetail.majorName = value.major.majorName;
-      for(let i =0; i<value.blockMajorUniversities.length;i++){
-        for(let j =0; j<value.blockMajorUniversities[i].scoreHistories.length;j++){
-          if(value.blockMajorUniversities[i].scoreHistories[j].year == 2016){
-            let year1 = {
-              blockName: value.blockMajorUniversities[i].block.blockName,
-              score: value.blockMajorUniversities[i].scoreHistories[j].score
-            };
-            this.majorDetail.blockYear1.push(year1);
-          }else{
-            let year2 = {
-              blockName: value.blockMajorUniversities[i].block.blockName,
-              score: value.blockMajorUniversities[i].scoreHistories[j].score
-            };
-            this.majorDetail.blockYear2.push(year2);
-          }
-        }
-      }
-      //document.getElementById('openMajorDetail').click();
-    }
+    // console.log(value);
+    // if(value.blockMajorUniversities.length == 0){
+    //   // document.getElementById('openNotDetail').click();
+    // }else{
+    //   this.majorDetail.blockYear1 = [];
+    //   this.majorDetail.blockYear2 = [];
+    //   this.majorDetail.majorName = value.major.majorName;
+    //   for(let i =0; i<value.blockMajorUniversities.length;i++){
+    //     for(let j =0; j<value.blockMajorUniversities[i].scoreHistories.length;j++){
+    //       if(value.blockMajorUniversities[i].scoreHistories[j].year == 2016){
+    //         let year1 = {
+    //           blockName: value.blockMajorUniversities[i].block.blockName,
+    //           score: value.blockMajorUniversities[i].scoreHistories[j].score
+    //         };
+    //         this.majorDetail.blockYear1.push(year1);
+    //       }else{
+    //         let year2 = {
+    //           blockName: value.blockMajorUniversities[i].block.blockName,
+    //           score: value.blockMajorUniversities[i].scoreHistories[j].score
+    //         };
+    //         this.majorDetail.blockYear2.push(year2);
+    //       }
+    //     }
+    //   }
+    //   //document.getElementById('openMajorDetail').click();
+    // }
+
   }
 }

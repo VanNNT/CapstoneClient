@@ -72,7 +72,7 @@ export class NewReviewComponent implements OnInit {
   }
 
   public onSubmit(form: NgForm){
-    if($('#summernote').summernote('code').length < 100){
+    if($('#summernote').summernote('code').length < 100 || $('#summernote').summernote('code').length > 400){
       this.isCheck = true;
     }else{
       this.isCheck = false;

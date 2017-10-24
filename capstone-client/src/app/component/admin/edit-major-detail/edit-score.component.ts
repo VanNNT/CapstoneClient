@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {UniversityService} from "../../../service/university/university.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {SearchService} from "../../../service/base-service/search.service";
 import {ToastsManager} from "ng2-toastr";
 import {NgForm} from "@angular/forms";
@@ -34,6 +34,7 @@ export class EditScoreComponent implements OnInit {
                private baseService: BaseService,
                public toastr: ToastsManager,
                private constant: Constants,
+               private router: Router,
                vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
@@ -106,7 +107,7 @@ export class EditScoreComponent implements OnInit {
     };
     this.universityService.updateScore(data).subscribe((res:any)=>{
       if(res){
-        this.toastr.success("",'Thành công',{showCloseButton: true});
+        this.toastr.success("Đã cập nhật điểm",'Thành công',{showCloseButton: true});
       }
     },(error)=>{
       this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
@@ -125,7 +126,7 @@ export class EditScoreComponent implements OnInit {
       };
       this.universityService.saveMajorUniDetail(data).subscribe(res=>{
         if(res){
-          this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+          this.toastr.success('Bạn đã chỉnh sửa thông tin ngành', 'Thành công!',{showCloseButton: true});
         }
       },err=>{
         if(err.status == this.constant.CONFLICT){
@@ -144,7 +145,13 @@ export class EditScoreComponent implements OnInit {
     };
     this.universityService.deleteBlockMajorUni(data).subscribe(res=>{
       if(res){
-        this.toastr.success('Bạn đã xóa thành công', 'Thành công!',{showCloseButton: true});
+        for(let i = 0; i< this.currentMajor.length;i++){
+          if(this.selectIndex == this.currentMajor[i].id){
+            this.currentMajor.splice(i,1);
+            this.toastr.success('Bạn đã xóa thành công', 'Thành công!',{showCloseButton: true});
+            return;
+          }
+        }
       }
     },err=>{
       this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});

@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="majorUniversities?.length != 0">
   <table class="table" id="myTable">
     <thead>
     <tr>
@@ -21,4 +21,7 @@
   </table>
   <div class="text-center"><pagination-controls (pageChange)="p =$event" previousLabel=""
                                                 nextLabel=""></pagination-controls></div>
+</div>
+<div *ngIf="majorUniversities?.length == 0">
+  Trường hiện tại không có ngành học
 </div>
