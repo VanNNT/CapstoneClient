@@ -102,5 +102,6 @@ export class CompanyDetailComponent implements OnInit {
     //   }
     //   //document.getElementById('openMajorDetail').click();
     // }
+
   }
 }

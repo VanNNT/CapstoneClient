@@ -99,6 +99,7 @@ export class EditUniversityComponent implements OnInit {
         this.currentMajor.value[i] = parseInt(this.currentMajor.value[i]);
       }
     }
+    console.log(this.currentMajor.value);
     listMajorRemove = _.difference(this.valueMajor, this.currentMajor.value);
     listMajorAdd = _.difference(this.currentMajor.value, this.valueMajor);
     console.log("remove: " + listMajorRemove);
@@ -112,7 +113,10 @@ export class EditUniversityComponent implements OnInit {
       'logo': this.baseService.getLogoUni()? this.baseService.getLogoUni(): this.logoSrc,
       'image': this.baseService.getImgUni()? this.baseService.getImgUni(): this.imageSrc,
       'description': $('#summernote').summernote('code'),
-      'priority': form.value.pri
+      'priority': form.value.pri,
+      'trainSystem':{
+        'id': parseInt(form.value.train)
+      }
     };
     this.universityService.updateUniversity(this.constant.UPDATE_UNIVESITY,data).subscribe((response:any)=>{
       if(response){
@@ -137,12 +141,12 @@ export class EditUniversityComponent implements OnInit {
                 };
                 this.universityService.removeMajor(this.constant.REMOVE_MAJOR_UNI,dataMajor).subscribe((res:any)=>{
                   if(res){
-                    this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+                    //this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
                     this.router.navigate(['admin/list-university']);
                   }
                 })
               }else{
-                this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+                //this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
                 this.router.navigate(['admin/list-university']);
               }
             }
@@ -154,7 +158,7 @@ export class EditUniversityComponent implements OnInit {
             };
           });
         }else{
-          this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
+          //this.toastr.success('Bạn đã chỉnh sửa thành công', 'Thành công!',{showCloseButton: true});
           this.router.navigate(['/admin/list-university']);
         }
       }

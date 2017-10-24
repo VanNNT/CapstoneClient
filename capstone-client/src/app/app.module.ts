@@ -30,6 +30,7 @@ import { AdminComponent } from './component/admin/admin.component';
 import { ListuniversityComponent } from './component/admin/listuniversity/listuniversity.component';
 import { AdduniversityComponent } from './component/admin/adduniversity/adduniversity.component';
 import { ApproveReivewComponent } from './component/admin/approve-reivew/approve-reivew.component';
+import { ViewMajorUnversityComponent } from './component/search/view-major-unversity/view-major-university.component';
 
 // Service
 import {LoginService} from './service/login/login.service';
@@ -45,12 +46,11 @@ import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
 
 import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
 import {Constants} from "./constants";
-import { ShowNewsComponent } from './component/show-news/show-news.component';
-import { ViewMajorUnversityComponent } from './component/search/view-major-unversity/view-major-university.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { EditMajorComponent } from './component/admin/edit-major/edit-major.component';
 import {DecimalPipe} from "@angular/common";
 import { MajorDetailComponent } from './component/major-detail/major-detail.component';
+
 
 const providers = {
   'google': {
@@ -80,7 +80,6 @@ const providers = {
     NewReviewComponent,
     EditScoreComponent,
     EditUniversityComponent,
-    ShowNewsComponent,
     ViewMajorUnversityComponent,
     ApproveReivewComponent,
     OrderByPipe,

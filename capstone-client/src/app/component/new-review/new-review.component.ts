@@ -47,8 +47,9 @@ export class NewReviewComponent implements OnInit {
           var t = e.currentTarget.innerText;
           if (t.length >= 400) {
             //delete key
-            if (e.keyCode != 8)
+            if (e.keyCode != 8){
               e.preventDefault();
+            }
           }
         },
         onKeyup: function (e) {

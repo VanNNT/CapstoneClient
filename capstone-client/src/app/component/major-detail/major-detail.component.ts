@@ -6,6 +6,7 @@ import {NgForm} from "@angular/forms";
 import {Subscription} from "rxjs/Subscription";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Constants} from "../../constants";
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-major-detail',
@@ -30,11 +31,16 @@ export class MajorDetailComponent implements OnInit {
   public recommentPoint:number;
   public isReviewed: boolean = false;
   public starPoint: any;
+  public showStarsTeaching;
+  public showStarCareer;
 
   constructor(private baseService: BaseService, private reviewService: ReviewService, private router: Router,
               private toastr: ToastsManager, private activateRoute: ActivatedRoute, private constants: Constants) { }
 
   ngOnInit() {
+    $.getScript('../../../assets/file.js');
+    // this.starPoint = JSON.parse(localStorage.getItem('STAR_POINT'));
+    // this.starsTeaching = this.starPoint.starsTeaching;
     this.sub = this.activateRoute.params.subscribe(params=>{
       this.id=params['id'];
     });
@@ -74,7 +80,8 @@ export class MajorDetailComponent implements OnInit {
         localStorage.setItem('STAR_POINT', JSON.stringify(res));
         this.totalStar = (res.starTeaching + res.starCareer)/2;
         this.recommentPoint = res.recommentPoint;
-        console.log(this.totalStar);
+        this.showStarsTeaching = res.starTeaching;
+        this.showStarCareer = res.starCareer;
       }
     },error=>{
       if(error.status == this.constants.NOT_FOUND){
