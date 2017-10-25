@@ -14,6 +14,8 @@ import {Constants} from "../../constants";
 })
 export class CompanyDetailComponent implements OnInit {
   public id: number;
+  public user;
+  public checkReviewUni: boolean;
   public sub: Subscription;
   public university: any;
   public des: any;
@@ -32,6 +34,7 @@ export class CompanyDetailComponent implements OnInit {
               private constant : Constants,
               private baseService : BaseService) { }
   ngOnInit() {
+
     $.getScript('../../../assets/file.js');
     $(window).scroll(function () {
       const height = $(window).scrollTop();
@@ -60,18 +63,34 @@ export class CompanyDetailComponent implements OnInit {
     this.reviewService.getStarPoint(this.id).subscribe((res:any)=>{
       if(res){
         this.starPoint = res;
-        console.log(this.starPoint);
         localStorage.setItem('STAR_POINT', JSON.stringify(res));
         this.totalStar = (res.starCare + res.starTeaching + res.starSocieties +
           res.starFacilities + res.starCareer)/5;
         this.recommentPoint = res.recommentPoint;
-        console.log(this.totalStar);
       }
     },error=>{
       if(error.status == this.constant.NOT_FOUND){
         this.starPoint = null;
       }
     });
+
+    //Check review
+    this.user = this.baseService.getUser();
+    if(this.user){
+    let data = {
+      "university":
+        {
+          "id": this.id
+        },
+      "users":
+        {
+          "id": this.user.id
+        }
+    }
+    this.reviewService.checkReviewUni(data).subscribe((res: any)=>{
+      this.checkReviewUni = res;
+    })
+    }
   }
 
   showDetail(value){

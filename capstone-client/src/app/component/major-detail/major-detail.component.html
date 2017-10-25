@@ -4,7 +4,7 @@
   <div class="major-title">
 
     <h1>{{majorDetail.majorName}}</h1>
-    <h3>{{university.name}}</h3>
+    <h3>{{university?.name}}</h3>
   </div>
   <div class="row" style="padding-left: 15px;">
     <div class="col-md-2 col-sm-1"></div>
@@ -29,16 +29,16 @@
             </div>
           </div>
           <div class="box box-white" id="company-about">
-            <p><b>Yêu Cầu Đầu Vào: </b></p>         <span>{{majorUniversity.requirement}}</span>               <br><br>
-            <p><b>Thời gian học: </b>               <span>{{majorUniversity.numberOfYear}} năm</span></p>      <br>
-            <p><b>Triển vọng nghề nghiệp: </b></p>  <span>{{majorUniversity.prospects}}</span>                 <br><br>
-            <p><b>Tổng Quan Về Ngành: </b></p>        <div [innerHTML]="majorUniversity.description"></div>    <br>
+            <p><b>Yêu Cầu Đầu Vào: </b></p>         <span>{{majorUniversity?.requirement}}</span>               <br><br>
+            <p><b>Thời gian học: </b>               <span>{{majorUniversity?.numberOfYear}} năm</span></p>      <br>
+            <p><b>Triển vọng nghề nghiệp: </b></p>  <span>{{majorUniversity?.prospects}}</span>                 <br><br>
+            <p><b>Tổng Quan Về Ngành: </b></p>        <div [innerHTML]="majorUniversity?.description"></div>    <br>
 
           </div>
 
 
         </div>
-        <div class="company-profile" *ngIf="majorUniversity.blockMajorUniversities.length != 0">
+        <div class="company-profile" *ngIf="majorUniversity?.blockMajorUniversities.length != 0">
           <div class="box-group-header">
             <div class="row">
               <div class="box-group-title col-xs-8"><a><strong>Thông Tin Điểm Của Các Khối Ngành</strong></a></div>
@@ -182,7 +182,7 @@
 
         <!--Danh gia Nganh-->
 
-        <div class="box box-white">
+        <div class="box box-white" *ngIf="!checkReviewUniMajor && user">
           <div id="review-form">
             <form #fReview="ngForm" (ngSubmit)="onSubmit(fReview)">
               <div class="form-group">
@@ -222,7 +222,9 @@
             </form>
           </div>
         </div>
-
+        <div class="box box-white" *ngIf="checkReviewUniMajor" style="text-align: center">
+          <a style="color: #0BA25E"><i class="fa fa-check fa-2x" aria-hidden="true" style="margin-right: 10px"></i>Đã Đánh Giá</a>
+        </div>
         <!--End Danh gia Nganh-->
       </div>
     </div>
