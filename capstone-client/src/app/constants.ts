@@ -38,7 +38,7 @@ export class Constants{
   public DELETE_BLOCK_SCORE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/score/delete-block-score";
   public FIND_BY_MAJOR_ID = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/university/find-by-major-id";
   public CHANGE_REVIEW_STATUS = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/change-review-status";
-  public STAR_REIVEW_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review//star-review-major";
+  public STAR_REIVEW_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/star-review-major";
   public SAVE_REVIEW_MAJOR_UNI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/save-review-major-uni";
 
 

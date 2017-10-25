@@ -30,7 +30,6 @@
                 <div *ngIf="isCheck" class="alert alert-danger">
                   <div [hidden]="!isCheck">
                     Tối thiểu 100 ký tự và tối đa 400 ký tự
-
                   </div>
                 </div>
                 <h5 id="maxContentPost" style="text-align:right;color: gray;"></h5>
@@ -90,7 +89,7 @@
                     <md-radio-button value="0">Không</md-radio-button>
                 </md-radio-group>
               </div>
-              <div class="text-center"><button class="btn btn-uni-primary" [disabled]="fReview.submitted && fReview.valid && !isCheck"
+              <div class="text-center"><button class="btn btn-uni-primary"
                                                type="submit">Gửi đánh giá</button></div>
             </form>
           </div>
