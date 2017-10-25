@@ -6,7 +6,6 @@ import {User} from "../../model/User";
 import {BaseService} from "../../service/base-service/base.service";
 import {ReviewService} from "../../service/review/review.service";
 import {ToastsManager} from "ng2-toastr";
-import {parse} from "querystring";
 import {University} from "../../model/University";
 declare var $: any;
 
