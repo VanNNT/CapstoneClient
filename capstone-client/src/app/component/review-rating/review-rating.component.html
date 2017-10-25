@@ -54,9 +54,12 @@
       </div>
       <div class="col-md-4">
         <div class="box box-white" id="no-review-box">
-          <div class="text-center"><a [routerLink]="['/new-review',id]">
+          <div class="text-center"><a [routerLink]="['/new-review',id]" *ngIf="!checkReviewUni">
             <button class="btn btn-uni-primary">Đánh giá ngay</button>
           </a></div>
+          <div class="box-white" *ngIf="checkReviewUni" style="text-align: center">
+            <a style="color: #0BA25E"><i class="fa fa-check fa-2x" aria-hidden="true" style="margin-right: 10px"></i>Đã Đánh Giá</a>
+          </div>
         </div>
         <div class="box box-white">
           <div class="box-company-title"><a class="text-highlight bold"

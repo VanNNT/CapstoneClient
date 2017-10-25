@@ -40,8 +40,8 @@ export class Constants{
   public CHANGE_REVIEW_STATUS = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/change-review-status";
   public STAR_REIVEW_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review//star-review-major";
   public SAVE_REVIEW_MAJOR_UNI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/save-review-major-uni";
-
-
+  public CHECK_REVIEWED_UNI_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/check-reviewed-uni-major";
+  public CHECK_REVIEWED_UNI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/check-reviewed-uni";
   //ERROR
   public UNAUTHORIZED = 401;
   public CONFLICT = 409;

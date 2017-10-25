@@ -23,6 +23,7 @@ export class MajorDetailComponent implements OnInit {
     blockYear2 : [],
   };
   public id: any;
+  public user;
   public sub: Subscription;
   public isCheck: boolean = false;
   public starsTeaching: number;
@@ -33,22 +34,23 @@ export class MajorDetailComponent implements OnInit {
   public starPoint: any;
   public showStarsTeaching;
   public showStarCareer;
+  public checkReviewUniMajor: boolean;
 
   constructor(private baseService: BaseService, private reviewService: ReviewService, private router: Router,
               private toastr: ToastsManager, private activateRoute: ActivatedRoute, private constants: Constants) { }
 
   ngOnInit() {
     $.getScript('../../../assets/file.js');
-    // this.starPoint = JSON.parse(localStorage.getItem('STAR_POINT'));
-    // this.starsTeaching = this.starPoint.starsTeaching;
     this.sub = this.activateRoute.params.subscribe(params=>{
       this.id=params['id'];
     });
+
     this.majorUniversity = this.baseService.getValueMajorUni();
     if(!this.majorUniversity){
       this.router.navigate(['home']);
       return;
     }
+
     this.university = this.baseService.getUniversity();
     this.majorDetail.blockYear1 = [];
     this.majorDetail.blockYear2 = [];
@@ -57,26 +59,46 @@ export class MajorDetailComponent implements OnInit {
     if(this.majorUniversity.blockMajorUniversities.length != 0){
       for(let i =0; i<this.majorUniversity.blockMajorUniversities.length;i++){
         for(let j =0; j<this.majorUniversity.blockMajorUniversities[i].scoreHistories.length;j++){
-          if(this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].year == 2016){
-            let year1 = {
-              blockName: this.majorUniversity.blockMajorUniversities[i].block.blockName,
-              score: this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].score
-            };
-            this.majorDetail.blockYear1.push(year1);
-          }else{
-            let year2 = {
-              blockName: this.majorUniversity.blockMajorUniversities[i].block.blockName,
-              score: this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].score
-            };
-            this.majorDetail.blockYear2.push(year2);
+          if(this.majorUniversity.blockMajorUniversities[i].isActive){
+            if(this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].year == 2016){
+              let year1 = {
+                blockName: this.majorUniversity.blockMajorUniversities[i].block.blockName,
+                score: this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].score
+              };
+              this.majorDetail.blockYear1.push(year1);
+            }else{
+              let year2 = {
+                blockName: this.majorUniversity.blockMajorUniversities[i].block.blockName,
+                score: this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].score
+              };
+              this.majorDetail.blockYear2.push(year2);
+            }
           }
         }
       }
     }
+    //check Review University Major
+    this.user = this.baseService.getUser();
+    if(this.user){
+    let data = {
+      "majorUniversity":
+        {
+          "id": this.majorUniversity.id
+        },
+      "users":
+        {
+          "id": this.user.id
+        }
+    }
+
+    this.reviewService.checkReviewUniMajor(data).subscribe((res: any)=>{
+      this.checkReviewUniMajor = res;
+    })
+    }
     this.reviewService.getStarReviewMajor(this.majorUniversity.id).subscribe((res:any)=>{
       if(res){
         this.starPoint = res;
-        console.log(this.starPoint);
+        // console.log(this.starPoint);
         localStorage.setItem('STAR_POINT', JSON.stringify(res));
         this.totalStar = (res.starTeaching + res.starCareer)/2;
         this.recommentPoint = res.recommentPoint;

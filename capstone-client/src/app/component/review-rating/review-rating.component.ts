@@ -24,6 +24,8 @@ export class ReviewRatingComponent implements OnInit {public sub: Subscription;
  public university;
  public review : any[];
  public totalStarOfReivew;
+ public user;
+ public checkReviewUni: boolean;
   constructor(private activateRoute: ActivatedRoute,
               private baseService : BaseService, private reviewService: ReviewService) { }
 
@@ -52,6 +54,22 @@ export class ReviewRatingComponent implements OnInit {public sub: Subscription;
         console.log(this.review);
       }
     });
-
+    //Check review
+    this.user = this.baseService.getUser();
+    if(this.user){
+      let data = {
+        "university":
+          {
+            "id": this.id
+          },
+        "users":
+          {
+            "id": this.user.id
+          }
+      }
+      this.reviewService.checkReviewUni(data).subscribe((res: any)=>{
+        this.checkReviewUni = res;
+      })
+    }
   }
 }

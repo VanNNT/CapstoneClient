@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Constants} from "../../constants";
 import {Http,Response} from "@angular/http";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class ReviewService {
@@ -41,6 +42,14 @@ export class ReviewService {
   }
   getStarReviewMajor(data){
     return this._http.get(this.contant.STAR_REIVEW_MAJOR+"?majorUniId="+data).map((res: Response) => res.json());
+  }
+
+  checkReviewUniMajor(data): Observable<any>{
+    return this._http.post(this.contant.CHECK_REVIEWED_UNI_MAJOR,data).map((res: Response)=>res.json());
+  }
+
+  checkReviewUni(data): Observable<any>{
+    return this._http.post(this.contant.CHECK_REVIEWED_UNI,data).map((res: Response)=>res.json());
   }
 
 }

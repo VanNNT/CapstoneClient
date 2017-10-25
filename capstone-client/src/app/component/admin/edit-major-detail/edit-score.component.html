@@ -133,14 +133,14 @@
         <form #scoreForm="ngForm" (ngSubmit)="onSaveScore(scoreForm,item)">
           <div class="col-md-2">
             <label>2016</label>
-            <input class="form-control" ngModel name="A2016"/>
+            <input type="number" class="form-control" ngModel name="A2016" [required]="true" />
           </div>
           <div class="col-md-2">
             <label>2017</label>
-            <input class="form-control" ngModel name="A2017"/>
+            <input type="number" class="form-control" ngModel name="A2017" [required]="true"/>
           </div>
           <div style="padding-top: 24px;">
-            <button type="submit" [disabled]="!scoreForm.dirty || scoreForm.submitted" class="btn btn-primary">Lưu</button>
+            <button type="submit" [disabled]="!scoreForm.dirty || scoreForm.submitted || scoreForm.invalid" class="btn btn-primary">Lưu</button>
           </div>
         </form>
       </div>

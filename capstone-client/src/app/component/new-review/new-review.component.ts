@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {Subscription} from "rxjs/Subscription";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {User} from "../../model/User";
 import {BaseService} from "../../service/base-service/base.service";
 import {ReviewService} from "../../service/review/review.service";
@@ -26,7 +26,7 @@ export class NewReviewComponent implements OnInit {
   public starCare: number;
   public starSocieties: number;
   public starCareer: number;
-  constructor(private activateRoute: ActivatedRoute, private baseService: BaseService,
+  constructor(private activateRoute: ActivatedRoute, private baseService: BaseService, private router: Router,
               private reviewService : ReviewService, public toastr: ToastsManager) {
 
   }
@@ -95,9 +95,13 @@ export class NewReviewComponent implements OnInit {
         'isRecomment': parseInt(form.value.radio),
         'status': false
       };
+      let seft = this;
       this.reviewService.saveReview(data).subscribe((res:Response)=>{
         if(res){
           this.toastr.success('Vui lòng chờ chúng tôi xem xét đánh giá của bạn', 'Thành công',{showCloseButton: true});
+          setTimeout(function () {
+            seft.router.navigate(['/university/' + seft.id]);
+          }, 1000);
         }
       },(error=>{
         this.toastr.error('Trường học hoặc user này không tồn tại', 'Thất bại',{showCloseButton: true});
