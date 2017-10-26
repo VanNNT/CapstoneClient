@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import * as $ from 'jquery';
 import {Subscription} from "rxjs/Subscription";
 import {ActivatedRoute} from "@angular/router";
@@ -12,7 +12,7 @@ import {Constants} from "../../constants";
   templateUrl: './company-detail.component.html',
   styleUrls: ['./company-detail.component.less']
 })
-export class CompanyDetailComponent implements OnInit {
+export class CompanyDetailComponent implements OnInit, OnDestroy{
   public id: number;
   public user;
   public checkReviewUni: boolean;
@@ -34,7 +34,7 @@ export class CompanyDetailComponent implements OnInit {
               private constant : Constants,
               private baseService : BaseService) { }
   ngOnInit() {
-
+    localStorage.removeItem("MAJOR_UNI");
     $.getScript('../../../assets/file.js');
     $(window).scroll(function () {
       const height = $(window).scrollTop();
@@ -51,6 +51,7 @@ export class CompanyDetailComponent implements OnInit {
     this.universityService.getUniversityById(this.id).subscribe((university: any)=>{
       this.university = university;
       this.baseService.setUniversity(university);
+      localStorage.setItem("UNI",JSON.stringify(university));
       this.des = university.description;
       this.valueMajor = [];
       for (let i = 0; i < this.university.majorUniversities.length; i++) {
@@ -59,7 +60,6 @@ export class CompanyDetailComponent implements OnInit {
         }
       }
     });
-
     this.reviewService.getStarPoint(this.id).subscribe((res:any)=>{
       if(res){
         this.starPoint = res;
@@ -95,7 +95,7 @@ export class CompanyDetailComponent implements OnInit {
 
   showDetail(value){
     this.baseService.setValueMajorUni(value);
-    // console.log(value);
+    localStorage.setItem("MAJOR_UNI",JSON.stringify(value));
     // if(value.blockMajorUniversities.length == 0){
     //   // document.getElementById('openNotDetail').click();
     // }else{
@@ -123,4 +123,6 @@ export class CompanyDetailComponent implements OnInit {
     // }
 
   }
+
+  ngOnDestroy(){}
 }

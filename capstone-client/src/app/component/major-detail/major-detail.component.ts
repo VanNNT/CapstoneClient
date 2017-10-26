@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BaseService} from "../../service/base-service/base.service";
 import {ReviewService} from "../../service/review/review.service";
 import {ToastsManager} from "ng2-toastr";
@@ -7,13 +7,14 @@ import {Subscription} from "rxjs/Subscription";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Constants} from "../../constants";
 import * as $ from 'jquery';
+import {UniversityService} from "../../service/university/university.service";
 
 @Component({
   selector: 'app-major-detail',
   templateUrl: './major-detail.component.html',
   styleUrls: ['./major-detail.component.less']
 })
-export class MajorDetailComponent implements OnInit {
+export class MajorDetailComponent implements OnInit, OnDestroy {
   public majorUniversity: any;
   public university: any;
   public majorDetail = {
@@ -30,14 +31,15 @@ export class MajorDetailComponent implements OnInit {
   public starCareer: number;
   public totalStar:number;
   public recommentPoint:number;
-  public isReviewed: boolean = false;
   public starPoint: any;
   public showStarsTeaching;
   public showStarCareer;
   public checkReviewUniMajor: boolean;
+  public valueMajor;
 
   constructor(private baseService: BaseService, private reviewService: ReviewService, private router: Router,
-              private toastr: ToastsManager, private activateRoute: ActivatedRoute, private constants: Constants) { }
+              private toastr: ToastsManager, private activateRoute: ActivatedRoute, private constants: Constants,
+              private universityService: UniversityService) { }
 
   ngOnInit() {
     $.getScript('../../../assets/file.js');
@@ -45,13 +47,14 @@ export class MajorDetailComponent implements OnInit {
       this.id=params['id'];
     });
 
-    this.majorUniversity = this.baseService.getValueMajorUni();
+    this.majorUniversity = JSON.parse(localStorage.getItem("MAJOR_UNI"));
     if(!this.majorUniversity){
       this.router.navigate(['home']);
       return;
     }
 
-    this.university = this.baseService.getUniversity();
+
+    this.university =  JSON.parse(localStorage.getItem("UNI"));
     this.majorDetail.blockYear1 = [];
     this.majorDetail.blockYear2 = [];
     this.majorDetail.id = this.majorUniversity.id;
@@ -77,8 +80,25 @@ export class MajorDetailComponent implements OnInit {
         }
       }
     }
+
+    //List Major University
+
+    this.universityService.getUniversityById(this.university.id).subscribe((university: any)=>{
+      this.university = university;
+      this.valueMajor = [];
+      for (let i = 0; i < this.university.majorUniversities.length; i++) {
+        if(this.university.majorUniversities[i].isActive){
+          this.valueMajor.push(this.university.majorUniversities[i]);
+        }
+      }
+      console.log(this.valueMajor);
+    });
+
+    //End List Major
+
     //check Review University Major
     this.user = this.baseService.getUser();
+
     if(this.user){
     let data = {
       "majorUniversity":
@@ -89,7 +109,7 @@ export class MajorDetailComponent implements OnInit {
         {
           "id": this.user.id
         }
-    }
+    };
 
     this.reviewService.checkReviewUniMajor(data).subscribe((res: any)=>{
       this.checkReviewUniMajor = res;
@@ -114,6 +134,7 @@ export class MajorDetailComponent implements OnInit {
   }
 
   public onSubmit(form: NgForm){
+      if(this.user.role.id == 1){
         if(form.valid && !this.isCheck){
       let data = {
         'majorUniversity': {
@@ -129,15 +150,24 @@ export class MajorDetailComponent implements OnInit {
       };
       this.reviewService.saveMajorReview(data).subscribe((res:Response)=>{
         if(res){
-          this.isReviewed = true;
+          this.checkReviewUniMajor = true;
           this.toastr.success('Vui lòng chờ chúng tôi xem xét đánh giá của bạn', 'Thành công',{showCloseButton: true});
         }
       },(error=>{
         this.toastr.error('Trường học hoặc user này không tồn tại', 'Thất bại',{showCloseButton: true});
       }))
     }
+  }else{
+        this.toastr.warning('Vui lòng đăng nhập với vai trò người dùng', 'Thất bại',{showCloseButton: true});
+      }
+
   }
-
-
+  showDetail(value){
+    this.baseService.setValueMajorUni(value);
+    localStorage.setItem("MAJOR_UNI",JSON.stringify(value));
+    //this.router.navigate(['/major-detail',value.major.id]);
+  }
+  ngOnDestroy(){
+  }
 
 }

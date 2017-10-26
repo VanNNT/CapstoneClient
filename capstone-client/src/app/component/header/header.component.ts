@@ -3,7 +3,7 @@ import * as $ from 'jquery';
 import {AuthService} from 'angular2-social-login';
 import {LoginService} from '../../service/login/login.service';
 import {NgForm} from "@angular/forms";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -13,16 +13,22 @@ import {Router} from "@angular/router";
 export class HeaderComponent implements OnInit {
   public user;
   sub: any;
+  private url;
   public logged = false;
-  constructor(private router: Router, private loginService: LoginService, private auth: AuthService,private cdRef:ChangeDetectorRef) {
-
+  constructor(private router: Router, private routeCurr:ActivatedRoute,
+              private loginService: LoginService,
+              private auth: AuthService,private cdRef:ChangeDetectorRef) {
+    router.events.subscribe((data:any) => { this.url = data.url; });
   }
   ngOnInit() {
     this.getUser();
     if(!this.user){
       this.user = JSON.parse(localStorage.getItem('currentUser'));
     }
-    this.router.navigate(['home']);
+    console.log(this.url);
+    if(this.url == '/'){
+      this.router.navigate(['home'])
+    }
   }
   public getUser(): void {
     this.loginService.space.subscribe(value => {
