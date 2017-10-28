@@ -10,6 +10,7 @@ import {Constants} from "../../constants";
 @Component({
   selector: 'app-company-detail',
   templateUrl: './company-detail.component.html',
+
   styleUrls: ['./company-detail.component.less']
 })
 export class CompanyDetailComponent implements OnInit, OnDestroy{
@@ -34,6 +35,7 @@ export class CompanyDetailComponent implements OnInit, OnDestroy{
               private constant : Constants,
               private baseService : BaseService) { }
   ngOnInit() {
+
     localStorage.removeItem("MAJOR_UNI");
     $.getScript('../../../assets/file.js');
     $(window).scroll(function () {
@@ -59,6 +61,7 @@ export class CompanyDetailComponent implements OnInit, OnDestroy{
           this.valueMajor.push(this.university.majorUniversities[i]);
         }
       }
+      console.log((this.valueMajor))
     });
     this.reviewService.getStarPoint(this.id).subscribe((res:any)=>{
       if(res){

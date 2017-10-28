@@ -54,12 +54,25 @@
           </div>
           <div class="box box-white">
             <div class="text-dark-gray">
-              <ul>
-                <li *ngFor="let major of valueMajor"
-                    class="box-title bold list-major" (click)="showDetail(major)" [routerLink]="['/major-detail',major.major.id]">
-                  {{major.major.majorName}}
-                </li>
-              </ul>
+
+              <div *ngFor="let majorGroup of valueMajor | groupBy">
+                <span style="font-size: 20px"
+                  [mdTooltip]="majorGroup.resources[0].major.groupMajor.name">Khối Ngành  {{majorGroup.name}}</span>
+                <br>
+                  <ul>
+                  <li  *ngFor="let resource of majorGroup.resources" (click)="showDetail(resource)"  class="list-major"
+                      [routerLink]="['/major-detail',resource.major.id]">
+                    {{resource.major.majorName}}
+                  </li>
+                  </ul>
+              </div>
+
+              <!--<ul>-->
+                <!--<li *ngFor="let major of valueMajor | groupBy"-->
+                    <!--class="box-title bold list-major" (click)="showDetail(major)" [routerLink]="['/major-detail',major.major.id]">-->
+                  <!--{{major.major.majorName}}-->
+                <!--</li>-->
+              <!--</ul>-->
             </div>
           </div>
         </div>
@@ -247,3 +260,4 @@
 </div>
 <button id="openMajorDetail" [hidden]="true" data-toggle="modal" data-target="#modalDetail"></button>
 <button id="openNotDetail" [hidden]="true" data-toggle="modal" data-target="#notDetail"></button>
+

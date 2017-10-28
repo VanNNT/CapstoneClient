@@ -34,3 +34,19 @@ export class OrderByPipe implements PipeTransform {
     return value;
   }
 }
+
+@Pipe({name: 'groupBy'})
+export class GroupByPipe implements PipeTransform {
+  transform(value, args:string[]) : any {
+    var groups = {};
+    if(value){
+    value.forEach(function(o) {
+      var group = o.major.groupMajor.code;
+      groups[group] = groups[group] ?
+        groups[group] : { name: group, resources: [] };
+      groups[group].resources.push(o);
+    });
+    }
+    return Object.keys(groups).map(function (key) {return groups[key]});
+  }
+}

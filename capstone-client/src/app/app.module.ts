@@ -11,6 +11,7 @@ import {ToastModule} from "ng2-toastr/ng2-toastr";
 import {Select2Module} from "ng2-select2";
 import {RatingModule} from "ngx-bootstrap";
 import {NgbModule, NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+import {MatTooltipModule} from '@angular/material'
 
 // Component
 import { AppComponent } from './app.component';
@@ -46,7 +47,7 @@ import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
 
 import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
 import {Constants} from "./constants";
-import { OrderByPipe } from './pipes/order-by.pipe';
+import { OrderByPipe, GroupByPipe } from './pipes/order-by.pipe';
 import { EditMajorComponent } from './component/admin/edit-major/edit-major.component';
 import {DecimalPipe} from "@angular/common";
 import { MajorDetailComponent } from './component/major-detail/major-detail.component';
@@ -82,7 +83,7 @@ const providers = {
     EditUniversityComponent,
     ViewMajorUnversityComponent,
     ApproveReivewComponent,
-    OrderByPipe,
+    OrderByPipe,GroupByPipe,
     EditMajorComponent,
     MajorDetailComponent,
   ],
@@ -99,7 +100,8 @@ const providers = {
     BrowserAnimationsModule,
     RatingModule,
     ToastModule.forRoot(),
-    NgbModule
+    NgbModule,
+    MatTooltipModule,
   ],
   providers: [LoginService, BaseService, CheckLoginGuard,
     CheckRoleGuard, SearchService,Constants,
