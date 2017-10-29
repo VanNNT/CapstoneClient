@@ -24,6 +24,7 @@ export class CompanyDetailComponent implements OnInit, OnDestroy{
   public totalStar:number;
   public recommentPoint:number;
   public starPoint: any;
+  public topCorrlateUni: any;
   public majorDetail = {
     majorName : '',
     blockYear1 : [],
@@ -94,6 +95,11 @@ export class CompanyDetailComponent implements OnInit, OnDestroy{
       this.checkReviewUni = res;
     })
     }
+    //Top Corrlate University
+    this.universityService.topCorrlateUni(this.id).subscribe((res: any)=>{
+      this.topCorrlateUni = res;
+      console.log(this.topCorrlateUni);
+    })
   }
 
   showDetail(value){

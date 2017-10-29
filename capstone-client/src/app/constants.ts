@@ -42,6 +42,8 @@ export class Constants{
   public SAVE_REVIEW_MAJOR_UNI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/save-review-major-uni";
   public CHECK_REVIEWED_UNI_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/check-reviewed-uni-major";
   public CHECK_REVIEWED_UNI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/check-reviewed-uni";
+  public TOP_CORRLATE_UNI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/corrlate/top-corrlate-uni";
+
   //ERROR
   public UNAUTHORIZED = 401;
   public CONFLICT = 409;

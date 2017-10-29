@@ -49,7 +49,7 @@
         <div class="company-profile">
           <div class="box-group-header">
             <div class="row">
-              <div class="box-group-title col-xs-8"><a><strong>Danh Sách Ngành</strong></a></div>
+              <div class="box-group-title col-xs-8"><span><strong>Danh Sách Ngành</strong></span></div>
             </div>
           </div>
           <div class="box box-white">
@@ -164,9 +164,27 @@
             chi tiết&nbsp;&nbsp;<i class="fa fa-caret-right"></i></a></div>
           <div class="clearfix"></div>
         </div>
+        
+        <!--Box Trường Tương Quan-->
+
+        <div class="box-group-header">
+          <div class="row">
+            <div class="box-group-title col-xs-8"><span><strong>Trường Tương Quan</strong></span></div>
+          </div>
+        </div>
+        <div class="box box-white" style="text-align: center" *ngFor="let topCorrelate of topCorrlateUni">
+                <div class="top-correlate" *ngIf="!topCorrelate.university.logo">
+                  <img src="../../../assets/image/image-not-found.png" class="thumb"> <br>
+                </div>
+          <div class="top-correlate" *ngIf="topCorrelate.university.logo">
+            <img src="{{topCorrelate.university.logo}}" class="thumb"> <br>
+          </div>
+            <a href="/university/{{topCorrelate.university.id}}" style="color: black"><b>{{topCorrelate.university.name}}</b></a>
+        </div>
       </div>
     </div>
   </div>
+
   <div id="company-fixed-box" class="col-xs-12" style="display:none">
     <div class="container">
       <div class="row">
