@@ -38,8 +38,8 @@ export class AdduniversityComponent implements OnInit {
       ]
     });
     this.uniService.broadcastTextChange("THÊM TRƯỜNG MỚI");
-    this.listMajor = this.searchService.getMajor();
-    this.listLocation = this.searchService.getLocation();
+    this.listMajor = this.searchService.getMajor(this.constant.MAJOR);
+    this.listLocation = this.searchService.getLocation(this.constant.LOCATION);
     this.options = {
       multiple: true
     };

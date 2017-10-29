@@ -1,4 +1,5 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import * as $ from 'jquery';
 import {Subscription} from "rxjs/Subscription";
 import {ActivatedRoute} from "@angular/router";
@@ -6,14 +7,16 @@ import {UniversityService} from "../../service/university/university.service";
 import {ReviewService} from "../../service/review/review.service";
 import {BaseService} from "../../service/base-service/base.service";
 import {Constants} from "../../constants";
-
+declare var window: any;
+declare var google: any;
 @Component({
   selector: 'app-company-detail',
   templateUrl: './company-detail.component.html',
 
   styleUrls: ['./company-detail.component.less']
 })
-export class CompanyDetailComponent implements OnInit, OnDestroy{
+
+export class CompanyDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   public id: number;
   public user;
   public checkReviewUni: boolean;
@@ -21,22 +24,25 @@ export class CompanyDetailComponent implements OnInit, OnDestroy{
   public university: any;
   public des: any;
   public valueMajor: any;
-  public totalStar:number;
-  public recommentPoint:number;
+  public totalStar: number;
+  public recommentPoint: number;
   public starPoint: any;
   public topCorrlateUni: any;
   public majorDetail = {
-    majorName : '',
-    blockYear1 : [],
-    blockYear2 : [],
+    majorName: '',
+    blockYear1: [],
+    blockYear2: [],
   };
+
+public currentUrl;
   constructor(private activateRoute: ActivatedRoute,
               private universityService: UniversityService,
               private  reviewService: ReviewService,
-              private constant : Constants,
-              private baseService : BaseService) { }
-  ngOnInit() {
+              private constant: Constants,
+              private baseService: BaseService) {
+  }
 
+  ngOnInit() {
     localStorage.removeItem("MAJOR_UNI");
     $.getScript('../../../assets/file.js');
     $(window).scroll(function () {
@@ -48,52 +54,65 @@ export class CompanyDetailComponent implements OnInit, OnDestroy{
         $('#company-fixed-box').fadeOut('normal');
       }
     });
-    this.sub = this.activateRoute.params.subscribe(params=>{
-      this.id=params['id'];
+    this.sub = this.activateRoute.params.subscribe(params => {
+      this.id = params['id'];
     });
-    this.universityService.getUniversityById(this.id).subscribe((university: any)=>{
+    this.currentUrl = this.constant.HTTP + this.constant.SERVER_IP + this.constant.CLIENT_PORT + '/university/' + this.id;
+    this.universityService.getUniversityById(this.id).subscribe((university: any) => {
       this.university = university;
       this.baseService.setUniversity(university);
       localStorage.setItem("UNI",JSON.stringify(university));
       this.des = university.description;
       this.valueMajor = [];
       for (let i = 0; i < this.university.majorUniversities.length; i++) {
-        if(this.university.majorUniversities[i].isActive){
+        if (this.university.majorUniversities[i].isActive) {
           this.valueMajor.push(this.university.majorUniversities[i]);
         }
       }
       console.log((this.valueMajor))
     });
-    this.reviewService.getStarPoint(this.id).subscribe((res:any)=>{
-      if(res){
+    this.reviewService.getStarPoint(this.id).subscribe((res: any) => {
+      if (res) {
         this.starPoint = res;
         localStorage.setItem('STAR_POINT', JSON.stringify(res));
         this.totalStar = (res.starCare + res.starTeaching + res.starSocieties +
-          res.starFacilities + res.starCareer)/5;
+          res.starFacilities + res.starCareer) / 5;
         this.recommentPoint = res.recommentPoint;
       }
-    },error=>{
-      if(error.status == this.constant.NOT_FOUND){
+    }, error => {
+      if (error.status == this.constant.NOT_FOUND) {
         this.starPoint = null;
       }
     });
-
     //Check review
+    this.checkIsReview();
+    this.getCommentFB();
+    // var uluru = {lat: 10.8048138, lng: 106.6257448};
+    // var map = new google.maps.Map(document.getElementById('map'), {
+    //   zoom: 10,
+    //   center: uluru
+    // });
+    // var marker = new google.maps.Marker({
+    //   position: uluru,
+    //   map: map
+    // });
+  }
+  checkIsReview(){
     this.user = this.baseService.getUser();
-    if(this.user){
-    let data = {
-      "university":
-        {
-          "id": this.id
-        },
-      "users":
-        {
-          "id": this.user.id
-        }
-    }
-    this.reviewService.checkReviewUni(data).subscribe((res: any)=>{
-      this.checkReviewUni = res;
-    })
+    if (this.user) {
+      let data = {
+        "university":
+          {
+            "id": this.id
+          },
+        "users":
+          {
+            "id": this.user.id
+          }
+      };
+      this.reviewService.checkReviewUni(data).subscribe((res: any) => {
+        this.checkReviewUni = res;
+      })
     }
     //Top Corrlate University
     this.universityService.topCorrlateUni(this.id).subscribe((res: any)=>{
@@ -101,8 +120,23 @@ export class CompanyDetailComponent implements OnInit, OnDestroy{
       console.log(this.topCorrlateUni);
     })
   }
+  getCommentFB() {
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id) && window.FB) {
+        window.FB.XFBML.parse();
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.10&appId=1947926578821346';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'))
+  }
+  ngAfterViewInit() {
 
-  showDetail(value){
+  }
+
+  showDetail(value) {
     this.baseService.setValueMajorUni(value);
     localStorage.setItem("MAJOR_UNI",JSON.stringify(value));
     // if(value.blockMajorUniversities.length == 0){
@@ -130,8 +164,8 @@ export class CompanyDetailComponent implements OnInit, OnDestroy{
     //   }
     //   //document.getElementById('openMajorDetail').click();
     // }
-
   }
 
-  ngOnDestroy(){}
+  ngOnDestroy() {
+  }
 }
