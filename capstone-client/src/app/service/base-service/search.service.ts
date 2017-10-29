@@ -10,19 +10,27 @@ export class SearchService {
 
   }
 
-  getMajor(): Observable<Select2OptionData[]> {
-    return this._http.get(this.constant.MAJOR)
+  getMajor(url): Observable<Select2OptionData[]> {
+    return this._http.get(url)
       .map((response: Response) => response.json())
       .map((majors) => {
-        majors.unshift({id:'0',name:''});
-        return majors.map((major) => {
-          return {id: major.id, text: major.majorName};
-        });
+        if (majors.length > 1) {
+          majors.unshift({id: '0', name: ''});
+          return majors.map((major) => {
+            return {id: major.id, text: major.majorName};
+          });
+        } else {
+          let array = [];
+          array.push(majors);
+          return array.map((major) => {
+            return {id: major.id, text: major.locationName};
+          });
+        }
       })
   }
 
-  getList(): Observable<Select2OptionData[]>{
-      return this._http.get(this.constant.UNIVERSITY)
+  getList(url): Observable<Select2OptionData[]>{
+      return this._http.get(url)
         .map((response: Response) => response.json())
         .map((users) => {
           users.unshift({id:'0', name: 'ahihi'});
@@ -32,17 +40,34 @@ export class SearchService {
       })
   }
 
-  getLocation(): Observable<Select2OptionData[]>{
-    return this._http.get(this.constant.LOCATION)
+  getLocation(url): Observable<Select2OptionData[]>{
+    return this._http.get(url)
       .map((response: Response) => response.json())
       .map((locations) => {
-        locations.unshift({id:'0',name:''});
-        return locations.map((location) => {
-          return {id: location.id, text: location.locationName};
-        });
+        if (locations.length > 1) {
+          locations.unshift({id: '0', name: ''});
+          return locations.map((location) => {
+            return {id: location.id, text: location.locationName};
+          });
+        } else {
+          let array = [];
+          array.push(locations);
+          return array.map((location) => {
+            return {id: location.id, text: location.locationName};
+          });
+        }
       })
   }
-
+  // getLocationByUniId(data):Observable<any>{
+  //   return this._http.get(this.constant.GET_LOCATION_UNIVERSITY+"?universityId="+data)
+  //     .map((response: Response) => response.json())
+  //     .map((locations) => {
+  //       majors.unshift({id:'0',name:''});
+  //       return majors.map((major) => {
+  //         return {id: major.id, text: major.majorName};
+  //       });
+  //     });
+  // }
   getBlock(): Observable<Select2OptionData[]>{
     return this._http.get(this.constant.BLOCK)
       .map((response: Response) => response.json())

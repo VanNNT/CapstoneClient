@@ -56,7 +56,7 @@ export class EditUniversityComponent implements OnInit {
     this.sub = this.activateRoute.params.subscribe(params=>{
       this.id = params['id'];
     });
-    this.listLocation = this.searchService.getLocation();
+    this.listLocation = this.searchService.getLocation(this.constant.LOCATION);
    this.getUniversity();
     this.options = {
       multiple: true
@@ -70,7 +70,7 @@ export class EditUniversityComponent implements OnInit {
         $('#summernote').summernote('code', this.university.description);
         this.logoSrc = university.logo;
         this.imageSrc = university.image;
-        this.searchService.getMajor()
+        this.searchService.getMajor(this.constant.MAJOR)
           .subscribe((value: any) => {
               this.listMajor = value;
             }, (err) => console.log(err),

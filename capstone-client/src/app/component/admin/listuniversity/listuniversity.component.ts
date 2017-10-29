@@ -27,7 +27,7 @@ export class ListuniversityComponent implements OnInit {
   public selectIndex: number;
   ngOnInit() {
     this.universityService.broadcastTextChange("DANH SÁCH TRƯỜNG");
-    this.listUniNameSelect2 = this.searchService.getList();
+    this.listUniNameSelect2 = this.searchService.getList(this.constant.UNIVERSITY);
     this.searchService.getListUniName().subscribe((response: any) => {
         if (response) {
           this.listUniName = response;

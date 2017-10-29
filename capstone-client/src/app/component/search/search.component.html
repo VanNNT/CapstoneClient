@@ -7,11 +7,11 @@
             <h1 class="text-center"><b>Tìm kiếm  ngôi trường mơ ước của bạn cùng UniStart</b></h1>
           </div>
           <div class="search-page" style="padding-bottom: 30px">
-              <select2 class="form-group" [data]="listMajor| async" (valueChanged)="changedMajor($event)"
+              <select2 class="form-group major" [data]="listMajor| async" (valueChanged)="changedMajor($event)"
                        [options]="optionMajor" style="padding: 15px"></select2>
-              <select2 class="form-group" [data]="listLocation| async" (valueChanged)="changedLocation($event)"
+              <select2 class="form-group location" [data]="listLocation| async" (valueChanged)="changedLocation($event)"
                        [options]="optionLocation" style="padding: 15px"></select2>
-              <select2 class="form-group" [data]="listUniName| async" (valueChanged)="changedUniversity($event)"
+              <select2 class="form-group university" [data]="listUniName| async" (valueChanged)="changedUniversity($event)"
                        [options]="optionUni" style="padding: 15px"></select2>
           </div>
         </div>
