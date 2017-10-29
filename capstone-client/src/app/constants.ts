@@ -6,7 +6,7 @@ export class Constants{
   public SERVER_IP = 'localhost';
   public SERVER_PORT = ':8080';
   public SERVER_PATH= '/unistart';
-
+  public CLIENT_PORT = ':4200'
   // API
   public REGISTER = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/user/register";
   public LOGIN = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/user/check-login";
@@ -42,6 +42,10 @@ export class Constants{
   public SAVE_REVIEW_MAJOR_UNI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/save-review-major-uni";
   public CHECK_REVIEWED_UNI_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/check-reviewed-uni-major";
   public CHECK_REVIEWED_UNI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/check-reviewed-uni";
+  public GET_MAJOR_UNIVERSITY = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-major-uni";
+  public GET_LOCATION_UNIVERSITY = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-location-by-uni";
+
+
   //ERROR
   public UNAUTHORIZED = 401;
   public CONFLICT = 409;

@@ -11,7 +11,7 @@ export class CheckRoleGuard implements CanActivate {
     const role = this.loginService.checkRole();
     if (role != 1) {
       console.log(role);
-      this.toastr.error('Vui lòng đăng nhập với vai trò người dùng', 'Thất bại',{showCloseButton: true});
+      this.toastr.warning('Vui lòng đăng nhập với vai trò người dùng', 'Thất bại',{showCloseButton: true});
       return false;
     }
     return true;

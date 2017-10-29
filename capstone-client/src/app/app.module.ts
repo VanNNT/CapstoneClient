@@ -51,7 +51,7 @@ import { EditMajorComponent } from './component/admin/edit-major/edit-major.comp
 import {DecimalPipe} from "@angular/common";
 import { MajorDetailComponent } from './component/major-detail/major-detail.component';
 
-
+import {MatTooltipModule} from '@angular/material'
 const providers = {
   'google': {
     'clientId': '525175435249-fcon5618ugd00jij2o066g7k3266n3mb.apps.googleusercontent.com'
@@ -84,7 +84,7 @@ const providers = {
     ApproveReivewComponent,
     OrderByPipe,
     EditMajorComponent,
-    MajorDetailComponent,
+    MajorDetailComponent
   ],
   imports: [
     Select2Module,
@@ -93,6 +93,7 @@ const providers = {
     appRoutes,
     FormsModule,
     MdRadioModule,
+    MatTooltipModule,
     ReactiveFormsModule,
     HttpModule,
     Angular2SocialLoginModule,

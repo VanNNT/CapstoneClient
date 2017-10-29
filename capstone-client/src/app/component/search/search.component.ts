@@ -4,6 +4,7 @@ import {SearchService} from "../../service/base-service/search.service";
 import * as $ from 'jquery';
 import {Observable} from "rxjs/Observable";
 import {Select2OptionData} from "ng2-select2";
+import {Constants} from "../../constants";
 
 @Component({
   selector: 'app-search',
@@ -16,7 +17,7 @@ export class SearchComponent implements OnInit {
   public optionUni: Select2Options;
   public optionLocation: Select2Options;
   public valueCurrent: any;
-  constructor(private searchService: SearchService) {
+  constructor(private searchService: SearchService, private contant: Constants) {
   }
 
   public listMajor: Observable<Select2OptionData[]>;
@@ -30,9 +31,7 @@ export class SearchComponent implements OnInit {
   isActive: boolean = false;
 
   ngOnInit() {
-    this.listMajor = this.searchService.getMajor();
-    this.listLocation = this.searchService.getLocation();
-    this.listUniName = this.searchService.getList();
+    this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
 
     //Placeholder search input
     this.optionMajor = {
@@ -98,8 +97,24 @@ export class SearchComponent implements OnInit {
   changedLocation(value){
     this.valueLocation = value.value;
   }
+  // getA(locationMajor): Observable<Select2OptionData[]>{
+  //   return locationMajor.map((majors) => {
+  //     majors.majorUnis.unshift({id:'0',name:''});
+  //     return majors.majorUnis.map((major) => {
+  //       return {id: major.id, text: major.id};
+  //     });
+  //   });
+  // }
   changedUniversity(value){
     this.valueUniversity = value.value;
+    if(value.value){
+      this.listMajor = this.searchService.getMajor(this.contant.GET_MAJOR_UNIVERSITY+"?universityId="+ parseInt(value.value));
+      this.listLocation = this.searchService.getLocation(this.contant.GET_LOCATION_UNIVERSITY+"?universityId="+parseInt(value.value));
+      console.log(this.listLocation);
+    }else{
+      this.listMajor = this.searchService.getMajor(this.contant.MAJOR);
+      this.listLocation = this.searchService.getLocation(this.contant.LOCATION);
+    }
   }
 }
 
