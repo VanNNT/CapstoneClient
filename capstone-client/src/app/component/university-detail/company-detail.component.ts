@@ -69,7 +69,6 @@ public currentUrl;
           this.valueMajor.push(this.university.majorUniversities[i]);
         }
       }
-      console.log((this.valueMajor))
     });
     this.reviewService.getStarPoint(this.id).subscribe((res: any) => {
       if (res) {
@@ -117,7 +116,6 @@ public currentUrl;
     //Top Corrlate University
     this.universityService.topCorrlateUni(this.id).subscribe((res: any)=>{
       this.topCorrlateUni = res;
-      console.log(this.topCorrlateUni);
     })
   }
   getCommentFB() {
