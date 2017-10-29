@@ -39,12 +39,22 @@
           <!--<div class="text-center">-->
             <!--<div>-->
               <p style="font-size: 18px; text-transform: uppercase; text-align: center; margin-bottom: 30px"><strong>Gợi Ý Ngành phù hợp</strong></p>
-          <ul>
-                <li *ngFor="let major of majorResult"
-                class="box-title bold text-highlight list-major">
-                  {{major.major.majorName}}
-                </li>
-          </ul>
+          <div *ngFor="let majorGroup of majorResult | groupBy">
+                <span style="font-size: 20px"
+                      [mdTooltip]="majorGroup.resources[0].major.groupMajor.name">Khối Ngành  {{majorGroup.name}}</span>
+            <br>
+            <ul>
+              <li  *ngFor="let resource of majorGroup.resources"  class="box-title bold text-highlight list-major">
+                {{resource.major.majorName}}
+              </li>
+            </ul>
+          </div>
+          <!--<ul>-->
+                <!--<li *ngFor="let major of majorResult"-->
+                <!--class="box-title bold text-highlight list-major">-->
+                  <!--{{major.major.majorName}}-->
+                <!--</li>-->
+          <!--</ul>-->
             <!--</div>-->
           <!--</div>-->
         </div>
