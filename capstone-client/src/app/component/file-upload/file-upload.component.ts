@@ -53,6 +53,7 @@ export class FileUploadComponent implements OnInit{
     var pattern = /image-*/;
     var reader = new FileReader();
     if (!file.type.match(pattern)) {
+      this.toastr.warning("Sai kiểu dự liệu. Chỉ chấp nhận hình ảnh", "Sai");
       alert('invalid format');
       return;
     }

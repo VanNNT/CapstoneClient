@@ -12,6 +12,7 @@ declare var google: any;
 @Component({
   selector: 'app-company-detail',
   templateUrl: './company-detail.component.html',
+
   styleUrls: ['./company-detail.component.less']
 })
 
@@ -31,7 +32,7 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     blockYear1: [],
     blockYear2: [],
   };
-public check = true;
+
 public currentUrl;
   constructor(private activateRoute: ActivatedRoute,
               private universityService: UniversityService,
@@ -41,7 +42,6 @@ public currentUrl;
   }
 
   ngOnInit() {
-    this.check = true;
     localStorage.removeItem("MAJOR_UNI");
     $.getScript('../../../assets/file.js');
     $(window).scroll(function () {
@@ -68,6 +68,7 @@ public currentUrl;
           this.valueMajor.push(this.university.majorUniversities[i]);
         }
       }
+      console.log((this.valueMajor))
     });
     this.reviewService.getStarPoint(this.id).subscribe((res: any) => {
       if (res) {

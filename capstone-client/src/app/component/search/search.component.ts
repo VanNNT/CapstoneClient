@@ -72,7 +72,7 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  // Click search university
+  // Click Search University
   searchUniversity(){
     this.listSearch = [];
     let data = {

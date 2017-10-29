@@ -216,7 +216,7 @@ export class EditUniversityComponent implements OnInit {
     var pattern = /image-*/;
     var reader = new FileReader();
     if (!file.type.match(pattern)) {
-      alert('invalid format');
+      this.toastr.warning("Sai kiểu dự liệu. Chỉ chấp nhận hình ảnh", "Sai");
       return;
     }
     this.loaded = false;
