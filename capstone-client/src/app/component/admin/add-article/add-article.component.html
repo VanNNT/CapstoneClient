@@ -1,0 +1,54 @@
+<div class="x_content">
+  <form #form="ngForm" (ngSubmit)="onSave(form)" class="form-horizontal form-label-left">
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12">Code<span class="required">*</span>
+      </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <input name="code" ngModel required #code="ngModel" class="form-control">
+        <div *ngIf="code.errors && code.touched" class="alert alert-danger">
+          <div [hidden]="!code.errors.required">
+            Vui lòng nhập code
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12">Tiêu đề<span class="required">*</span>
+      </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <input name="name" type="text"  ngModel #title="ngModel" required class="form-control">
+        <div *ngIf="title.errors && title.touched" class="alert alert-danger">
+          <div [hidden]="!title.errors.required">
+            Vui lòng nhập tiêu đề
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12">Mô tả</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <textarea required name="des" id="summernote" ngModel="" style="height: 150px" class="form-control" type="text"> </textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12">Tên trường</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <select2 class="form-group" [data]="listUniName| async"
+                 [options]="options" style="padding: 15px" (valueChanged)="changedUniversity($event)" required></select2>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12">Hình ảnh</label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <file-uploader [name]=""></file-uploader>
+      </div>
+    </div>
+
+    <div class="ln_solid"></div>
+    <div class="form-group" style="text-align: center">
+      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+        <button type="summit" [disabled]="!form.valid" class="btn btn-success">Lưu</button>
+      </div>
+    </div>
+  </form>
+</div>

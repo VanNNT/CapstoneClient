@@ -52,4 +52,8 @@ export class ReviewService {
     return this._http.post(this.contant.CHECK_REVIEWED_UNI,data).map((res: Response)=>res.json());
   }
 
+  getArticle(){
+    return this._http.get("http://59f6a960d85fbd0012ee21b4.mockapi.io/News").map((res: Response) => res.json());
+  }
+
 }
