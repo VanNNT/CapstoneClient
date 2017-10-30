@@ -44,4 +44,7 @@ export class UniversityService {
   deleteBlockMajorUni(data): Observable<any>{
     return this._http.post(this.contant.DELETE_BLOCK_SCORE,data).map((response:Response) => response.json());
   }
+  topCorrlateUni(data): Observable<any>{
+    return this._http.get(this.contant.TOP_CORRLATE_UNI+"?universityId="+data).map((res: Response)=> res.json());
+  }
 }
