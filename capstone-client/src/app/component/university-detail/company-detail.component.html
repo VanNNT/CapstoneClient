@@ -187,11 +187,11 @@
     </div>
     <div class="box-group-header">
       <div class="row">
-        <div *ngIf="check" class="box-group-title col-xs-8"><a><strong>Bình luận</strong></a></div>
+        <div class="box-group-title col-xs-8"><a><strong>Bình luận</strong></a></div>
       </div>
     </div>
     <div class="box box-white">
-      <div class="fb-comments" [attr.data-href]="currentUrl" data-numposts="5" data-width="1000"></div>
+      <div class="fb-comments" [attr.data-href]="currentUrl" [attr.data-numposts]="5" data-width="1000"></div>
     </div>
   </div>
 

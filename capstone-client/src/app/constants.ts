@@ -7,6 +7,7 @@ export class Constants{
   public SERVER_PORT = ':8080';
   public SERVER_PATH= '/unistart';
   public CLIENT_PORT = ':4200'
+  
   // API
   public REGISTER = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/user/register";
   public LOGIN = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/user/check-login";
@@ -45,7 +46,11 @@ export class Constants{
   public TOP_CORRLATE_UNI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/corrlate/top-corrlate-uni";
   public GET_MAJOR_UNIVERSITY = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-major-uni";
   public GET_LOCATION_UNIVERSITY = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-location-by-uni";
+  public GET_UIVERSITY_BY_LOCATION = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-uni-by-location";
+  public GET_UIVERSITY_BY_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-by-major-id";
+  public GET_BY_LOCATION_AND_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-by-location-and-major";
   public TOP_UNI_MBTI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/corrlate/top-uni-mbti";
+
   //ERROR
   public UNAUTHORIZED = 401;
   public CONFLICT = 409;
