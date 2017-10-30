@@ -85,7 +85,6 @@ public currentUrl;
     });
     //Check review
     this.checkIsReview();
-    this.getCommentFB();
     // var uluru = {lat: 10.8048138, lng: 106.6257448};
     // var map = new google.maps.Map(document.getElementById('map'), {
     //   zoom: 10,
@@ -113,18 +112,6 @@ public currentUrl;
         this.checkReviewUni = res;
       })
     }
-  }
-  getCommentFB() {
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id) && window.FB) {
-        window.FB.XFBML.parse();
-      }
-      js = d.createElement(s);
-      js.id = id;
-      js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.10&appId=1947926578821346';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'))
   }
   ngAfterViewInit() {
 

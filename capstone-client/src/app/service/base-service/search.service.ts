@@ -16,31 +16,27 @@ export class SearchService {
       .map((majors) => {
         if (majors.length > 1) {
           majors.unshift({id: '0', name: ''});
-          return majors.map((major) => {
-            return {id: major.id, text: major.majorName};
-          });
-        } else {
-          let array = [];
-          array.push(majors);
-          return array.map((major) => {
-            return {id: major.id, text: major.locationName};
-          });
         }
-      })
-  }
-
-  getList(url): Observable<Select2OptionData[]>{
-      return this._http.get(url)
-        .map((response: Response) => response.json())
-        .map((users) => {
-          users.unshift({id:'0', name: 'ahihi'});
-          return users.map((user) => {
-              return {id : user.id , text : user.name};
+        return majors.map((major) => {
+          return {id: major.id, text: major.majorName};
         });
       })
   }
 
-  getLocation(url): Observable<Select2OptionData[]>{
+  getList(url): Observable<Select2OptionData[]> {
+    return this._http.get(url)
+      .map((response: Response) => response.json())
+      .map((universitys) => {
+        if (universitys.length > 1) {
+          universitys.unshift({id: '0', name: ''});
+        }
+        return universitys.map((university) => {
+          return {id: university.id, text: university.name};
+        });
+      })
+  }
+
+  getLocation(url): Observable<Select2OptionData[]> {
     return this._http.get(url)
       .map((response: Response) => response.json())
       .map((locations) => {

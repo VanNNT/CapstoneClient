@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {CompleterData, CompleterService} from "ng2-completer";
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {SearchService} from "../../service/base-service/search.service";
 import * as $ from 'jquery';
 import {Observable} from "rxjs/Observable";
@@ -17,22 +16,28 @@ export class SearchComponent implements OnInit {
   public optionUni: Select2Options;
   public optionLocation: Select2Options;
   public valueCurrent: any;
-  constructor(private searchService: SearchService, private contant: Constants) {
+  public isCheckForUni : boolean = false;
+  public isCheckForMajor : boolean = false;
+  public isCheckForLocation : boolean = false;
+  public isFirst: boolean = true;
+  constructor(private searchService: SearchService, private contant: Constants,
+              private cef : ChangeDetectorRef) {
   }
 
   public listMajor: Observable<Select2OptionData[]>;
   public listLocation: Observable<Select2OptionData[]>;
   public listUniName: Observable<Select2OptionData[]>;
-  public valueMajor: string;
-  public valueLocation: string;
-  public valueUniversity: string;
+  public valueMajor: number = 0;
+  public valueLocation: number = 0;
+  public valueUniversity: number = 0;
   public listSearch: any[] = [];
   public searchMajor: any[];
   isActive: boolean = false;
 
   ngOnInit() {
+    //this.changedUniversity({value:null});
     this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
-
+    //setTimeout(()=> this.valueUniversity = 3,1000);
     //Placeholder search input
     this.optionMajor = {
       allowClear: true,
@@ -92,28 +97,123 @@ export class SearchComponent implements OnInit {
   }
 
   changedMajor(value){
-    this.valueMajor = value.value;
-  }
-  changedLocation(value){
-    this.valueLocation = value.value;
-  }
-  // getA(locationMajor): Observable<Select2OptionData[]>{
-  //   return locationMajor.map((majors) => {
-  //     majors.majorUnis.unshift({id:'0',name:''});
-  //     return majors.majorUnis.map((major) => {
-  //       return {id: major.id, text: major.id};
-  //     });
-  //   });
-  // }
-  changedUniversity(value){
-    this.valueUniversity = value.value;
-    if(value.value){
-      this.listMajor = this.searchService.getMajor(this.contant.GET_MAJOR_UNIVERSITY+"?universityId="+ parseInt(value.value));
-      this.listLocation = this.searchService.getLocation(this.contant.GET_LOCATION_UNIVERSITY+"?universityId="+parseInt(value.value));
-      console.log(this.listLocation);
-    }else{
+    if(value.value && value.value != 0 && this.valueMajor != value.value && this.valueLocation == 0){
+      this.valueMajor = value.value;
+      this.listUniName = this.searchService.getList(this.contant.GET_UIVERSITY_BY_MAJOR+"?majorId="+ parseInt(value.value));
+      let data = this.valueUniversity;
+      this.valueUniversity = -1;
+       setTimeout(()=>{
+         this.valueUniversity = data;
+         this.cef.detectChanges();
+       },10);
+    }else if(value.value && value.value != 0 && this.valueMajor != value.value && this.valueLocation != 0){
+      this.valueMajor = value.value;
+      this.listUniName = this.searchService.getList(this.contant.GET_BY_LOCATION_AND_MAJOR + "?majorId=" + parseInt(value.value) +
+        "&locationId=" + this.valueLocation);
+      let data = this.valueUniversity;
+      this.valueUniversity = -1;
+      setTimeout(() => {
+        this.valueUniversity = data;
+        this.cef.detectChanges();
+      }, 10);
+    }else if(value.value == 0 && this.valueLocation == 0 && !this.isCheckForMajor && !this.isFirst){
+      this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
       this.listMajor = this.searchService.getMajor(this.contant.MAJOR);
       this.listLocation = this.searchService.getLocation(this.contant.LOCATION);
+      this.isCheckForMajor = false;
+      this.isCheckForUni = false;
+      this.isCheckForLocation = false;
+      this.isFirst = true;
+    }
+
+    if(!value.value || this.valueMajor == -1){
+      this.isCheckForMajor = true;
+      this.isFirst = false;
+    }else{
+      this.isCheckForMajor = false;
+      this.isFirst = true;
+    }
+  }
+  changedLocation(value){
+    if(value.value && value.value != 0 && this.valueLocation != value.value && this.valueMajor == 0){
+      // setTimeout(() => {
+      //   this.valueLocation = value.value;
+      //   this.cef.detectChanges();
+      // }, 10);
+      this.valueLocation = value.value;
+      this.listUniName = this.searchService.getList(this.contant.GET_UIVERSITY_BY_LOCATION+"?locationId="+ parseInt(value.value));
+      let data = this.valueUniversity;
+      this.valueUniversity = -1;
+      setTimeout(()=>{
+        this.valueUniversity = data;
+        this.cef.detectChanges();
+      },10);
+    }else if(value.value && value.value != 0 && this.valueLocation != value.value && this.valueMajor != 0){
+      this.valueLocation = value.value;
+      this.listUniName = this.searchService.getList(this.contant.GET_BY_LOCATION_AND_MAJOR + "?majorId=" + this.valueMajor +
+        "&locationId=" + parseInt(value.value));
+      let data = this.valueUniversity;
+      this.valueUniversity = -1;
+      setTimeout(() => {
+        this.valueUniversity = data;
+        this.cef.detectChanges();
+      }, 10);
+    }
+    else if(value.value == 0 && this.valueMajor == 0 && !this.isCheckForLocation && !this.isFirst){
+      this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
+       this.listMajor = this.searchService.getMajor(this.contant.MAJOR);
+       this.listLocation = this.searchService.getLocation(this.contant.LOCATION);
+       this.isCheckForMajor = false;
+       this.isCheckForUni = false;
+       this.isCheckForLocation = false;
+       this.isFirst = true;
+    }
+
+    if(!value.value || this.valueLocation == -1){
+      this.isCheckForLocation = true;
+      this.isFirst = false;
+    }else{
+      this.isCheckForLocation = false;
+      this.isFirst = true;
+    }
+  }
+
+  changedUniversity(value){
+    if(value.value && value.value != 0 && this.valueUniversity != value.value && !this.isCheckForUni){
+      this.valueUniversity = value.value;
+      this.valueLocation =0;
+      //this.valueMajor = 0;
+      setTimeout(()=> this.listLocation = this.searchService.getLocation(this.contant.GET_LOCATION_UNIVERSITY+"?universityId="+parseInt(value.value)),0);
+      this.listMajor = this.searchService.getMajor(this.contant.GET_MAJOR_UNIVERSITY+"?universityId="+ parseInt(value.value));
+      if(this.valueMajor != 0){
+        let data = this.valueMajor;
+        this.valueMajor = -1;
+        setTimeout(() => {
+          this.valueMajor = data;
+          this.cef.detectChanges();
+        }, 10);
+      }
+    }else if(value.value == 0 && !this.isCheckForUni){
+      this.valueUniversity = 0;
+      this.listMajor = this.searchService.getMajor(this.contant.MAJOR);
+      this.listLocation = this.searchService.getLocation(this.contant.LOCATION);
+      if(this.valueMajor != 0 || this.valueLocation != 0){
+        this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
+        this.valueMajor = 0;
+        this.valueLocation =0;
+      }
+    }
+    // if((value.value == null || value.value == 0 ) && this.isCheckForUni == true){
+    //   this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
+    // }
+    // (this.valueLocation == 0 && this.valueMajor == 0 && this.isCheckForUni && !this.isFirst)
+    console.log(value.value);
+    console.log(this.valueLocation);
+    console.log(this.valueMajor);
+    if(value.value == null || this.valueUniversity == -1){
+      this.isCheckForUni = true;
+    }else{
+      this.isCheckForUni = false;
     }
   }
 }

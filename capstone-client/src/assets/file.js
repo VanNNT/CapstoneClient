@@ -14,3 +14,15 @@ window.randomize = function() {
   });
 };
 setTimeout(window.randomize, 200);
+
+getFB = (function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id) && window.FB) {
+    window.FB.XFBML.parse();
+  }
+  js = d.createElement(s);
+  js.id = id;
+  js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.10&appId=1947926578821346';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+setTimeout(getFB, 200);

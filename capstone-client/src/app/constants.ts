@@ -44,6 +44,9 @@ export class Constants{
   public CHECK_REVIEWED_UNI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/check-reviewed-uni";
   public GET_MAJOR_UNIVERSITY = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-major-uni";
   public GET_LOCATION_UNIVERSITY = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-location-by-uni";
+  public GET_UIVERSITY_BY_LOCATION = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-uni-by-location";
+  public GET_UIVERSITY_BY_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-by-major-id";
+  public GET_BY_LOCATION_AND_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-by-location-and-major";
 
 
   //ERROR
