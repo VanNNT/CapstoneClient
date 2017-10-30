@@ -91,7 +91,6 @@ export class MajorDetailComponent implements OnInit, OnDestroy {
           this.valueMajor.push(this.university.majorUniversities[i]);
         }
       }
-      console.log(this.valueMajor);
     });
 
     //End List Major
@@ -118,7 +117,6 @@ export class MajorDetailComponent implements OnInit, OnDestroy {
     this.reviewService.getStarReviewMajor(this.majorUniversity.id).subscribe((res:any)=>{
       if(res){
         this.starPoint = res;
-        // console.log(this.starPoint);
         localStorage.setItem('STAR_POINT', JSON.stringify(res));
         this.totalStar = (res.starTeaching + res.starCareer)/2;
         this.recommentPoint = res.recommentPoint;

@@ -2,8 +2,8 @@
   <!--//<img src="../../../assets/image/logo.png" height="152" width="200"/>-->
   <img class="img-major" src="../../../assets/image/baim.jpg"/>
   <div class="major-title">
-    <h3>{{university?.name}}</h3>
-    <h1>{{majorDetail.majorName}}</h1>
+    <h1>{{university?.name}}</h1>
+    <h3>{{majorDetail.majorName}}</h3>
   </div>
   <div class="row" style="padding-left: 15px;">
     <div class="col-md-2 col-sm-1"></div>
@@ -251,7 +251,7 @@
           <div class="fixed-box-logo pull-left" *ngIf="university?.logo">
             <img src="{{university?.logo}}" alt="">
           </div>
-          <div id="fixed-box-name">{{majorDetail.majorName}}</div>
+          <div id="fixed-box-name">{{majorDetail?.majorName}}</div>
         </div>
         <div class="col-md-3 col-md-offset-1 col-xs-12 text-center">
           <!--<a [routerLink]="['/new-review',id]">-->

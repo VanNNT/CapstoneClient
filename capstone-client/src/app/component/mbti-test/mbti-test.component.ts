@@ -21,6 +21,7 @@ export class MbtiTestComponent implements OnInit {
   public mbtiResult: any;
   public majorResult: any;
   public update: boolean = false;
+  public topUniMBTI;
   private scores = {
     E: 0,
     I: 0,
@@ -37,14 +38,25 @@ export class MbtiTestComponent implements OnInit {
     this.toastr.setRootViewContainerRef(vcr)
   }
 
+  //Top University MBTI
+  getUniMBTI(data){
+    this.mbtiService.getTopUniMBTI(data).subscribe((res: any) => {
+      this.topUniMBTI = res;
+      console.log(data)
+      console.log(this.topUniMBTI);
+    });
+  }
+
   ngOnInit() {
     this.tested = false;
     this.questions = [];
 
     this.mbtiService.getMbtiresult(this.baseService.getUser().id).subscribe((response: any) => {
       this.mbtiResult = response;
-      console.log(this.mbtiResult);
       this.majorResult = response.mbtitype.majorMbtis;
+      this.getUniMBTI(response.mbtitype.id);
+
+
       if (this.mbtiResult != []) {
         this.tested = true;
       }
@@ -59,10 +71,14 @@ export class MbtiTestComponent implements OnInit {
         this.questions.push(new MBTIQuestion(x));
       });
     });
+
+
   }
 
+
+
   public onChoose(item, option) {
-    if((option == 'a' || option == 'b')&& !item.isChecked){
+    if ((option == 'a' || option == 'b') && !item.isChecked) {
       item.fullChecked = true;
     }
     if (option == 'a' && !item.isChecked) {
@@ -93,62 +109,64 @@ export class MbtiTestComponent implements OnInit {
 
   public onSubmit(form: NgForm) {
 
-    for(let i = 0; i < this.questions.length;i++){
-      if(this.questions[i].fullChecked==false){
-        this.toastr.error("Vui lòng hoàn thành tất cả câu hỏi",'',{showCloseButton: true});
+    for (let i = 0; i < this.questions.length; i++) {
+      if (this.questions[i].fullChecked == false) {
+        this.toastr.error("Vui lòng hoàn thành tất cả câu hỏi", '', {showCloseButton: true});
         return;
       }
     }
-      if (this.scores.E >= 5) {
-        this.MBTIresult = 'E';
-      } else {
-        this.MBTIresult = 'I';
+    if (this.scores.E >= 5) {
+      this.MBTIresult = 'E';
+    } else {
+      this.MBTIresult = 'I';
+    }
+    if (this.scores.S >= 10) {
+      this.MBTIresult = this.MBTIresult + 'S';
+    } else {
+      this.MBTIresult = this.MBTIresult + 'N';
+    }
+    if (this.scores.T >= 10) {
+      this.MBTIresult = this.MBTIresult + 'T';
+    } else {
+      this.MBTIresult = this.MBTIresult + 'F';
+    }
+    if (this.scores.J >= 10) {
+      this.MBTIresult = this.MBTIresult + 'J';
+    } else {
+      this.MBTIresult = this.MBTIresult + 'P';
+    }
+    console.log(this.MBTIresult);
+    form.onReset();
+    let data = {
+      mbtiType: {
+        "mbtitypeName": this.MBTIresult
+      },
+      user: {
+        "id": this.baseService.getUser().id,
       }
-      if (this.scores.S >= 10) {
-        this.MBTIresult = this.MBTIresult + 'S';
-      } else {
-        this.MBTIresult = this.MBTIresult + 'N';
-      }
-      if (this.scores.T >= 10) {
-        this.MBTIresult = this.MBTIresult + 'T';
-      } else {
-        this.MBTIresult = this.MBTIresult + 'F';
-      }
-      if (this.scores.J >= 10) {
-        this.MBTIresult = this.MBTIresult + 'J';
-      } else {
-        this.MBTIresult = this.MBTIresult + 'P';
-      }
-      console.log(this.MBTIresult);
-      form.onReset();
-      let data = {
-        mbtiType: {
-          "mbtitypeName": this.MBTIresult
-        },
-        user: {
-          "id": this.baseService.getUser().id,
+    };
+    if (this.update === false) {
+      this.mbtiService.saveMbti(data).subscribe((response: any) => {
+        if (response) {
+          this.mbtiService.getMbtiresult(this.baseService.getUser().id).subscribe((response: any) => {
+            this.mbtiResult = response;
+            this.majorResult = response.mbtitype.majorMbtis;
+            this.getUniMBTI(response.mbtitype.id);
+          })
         }
-      };
-      if (this.update === false) {
-        this.mbtiService.saveMbti(data).subscribe((response: any) => {
-          if (response) {
-            this.mbtiService.getMbtiresult(this.baseService.getUser().id).subscribe((response: any) => {
-              this.mbtiResult = response;
-              this.majorResult = response.mbtitype.majorMbtis;
-            })
-          }
-        });
-      } else {
-        this.mbtiService.updateMbti(data).subscribe((response: any) => {
-          if (response) {
-            this.mbtiService.getMbtiresult(this.baseService.getUser().id).subscribe((response: any) => {
-              this.mbtiResult = response;
-              this.majorResult = response.mbtitype.majorMbtis;
-            })
-          }
-        });
-      }
-      this.tested = true;
+      });
+    } else {
+      this.mbtiService.updateMbti(data).subscribe((response: any) => {
+        if (response) {
+          this.mbtiService.getMbtiresult(this.baseService.getUser().id).subscribe((response: any) => {
+            this.mbtiResult = response;
+            this.majorResult = response.mbtitype.majorMbtis;
+            this.getUniMBTI(response.mbtitype.id);
+          })
+        }
+      });
+    }
+    this.tested = true;
     this.scores = {
       E: 0,
       I: 0,
@@ -159,10 +177,10 @@ export class MbtiTestComponent implements OnInit {
       J: 0,
       P: 0
     };
-      for( let i = 0; i < this.questions.length; i++){
-        this.questions[i].isChecked = false;
-        this.questions[i].fullChecked = false;
-      }
+    for (let i = 0; i < this.questions.length; i++) {
+      this.questions[i].isChecked = false;
+      this.questions[i].fullChecked = false;
     }
   }
+}
 

@@ -27,6 +27,7 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   public totalStar: number;
   public recommentPoint: number;
   public starPoint: any;
+  public topCorrlateUni: any;
   public majorDetail = {
     majorName: '',
     blockYear1: [],
@@ -68,7 +69,6 @@ public currentUrl;
           this.valueMajor.push(this.university.majorUniversities[i]);
         }
       }
-      console.log((this.valueMajor))
     });
     this.reviewService.getStarPoint(this.id).subscribe((res: any) => {
       if (res) {
@@ -113,6 +113,10 @@ public currentUrl;
         this.checkReviewUni = res;
       })
     }
+    //Top Corrlate University
+    this.universityService.topCorrlateUni(this.id).subscribe((res: any)=>{
+      this.topCorrlateUni = res;
+    })
   }
   getCommentFB() {
     (function (d, s, id) {
