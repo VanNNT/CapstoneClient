@@ -6,7 +6,7 @@
           <div class="box-title title-mbit text-highlight">
             Bài trắc nghiệm MBTI
           </div>
-          <form #fMBTI="ngForm" id="form-quiz-mbti" (ngSubmit)="onSubmit(fMBTI)">
+          <form #fMBTI="ngForm" id="form-quiz-mbti">
             <div *ngFor="let item of questions; let i=index" class="question" style="margin-bottom: 25px">
               <span><strong>{{item.id}}.</strong></span>
               <span><strong>{{item.question}}</strong></span>
@@ -22,7 +22,8 @@
               </div>
             </div>
             <div style="margin-top: 10px" class="text-center">
-              <button type="submit" id="btn-submit-score" class="btn btn-uni-primary">Xem kết quả</button>
+              <button type="submit" (click)="onSubmit(fMBTI)" id="btn-submit-score" class="btn btn-uni-primary">Xem kết quả</button>
+              <button (click)="cancel()" class="btn btn-default">Hủy bỏ</button>
             </div>
           </form>
         </div>
@@ -31,7 +32,7 @@
             <div>
               <p style="font-size: 18px; text-transform: uppercase;"><strong>Nhóm tính cách của bạn là</strong></p>
               <h2 class="box-title bold text-highlight" style="font-size: 32px; margin: 25px auto;">{{mbtiResult?.mbtitype.mbtitypeName}} - {{mbtiResult?.mbtitype.description}}</h2>
-              <a (click)="tested = !tested; update = true" class="btn btn-topcv-gray btn-sm"><i class="fa fa-pencil"></i> Làm lại Trắc nghiệm</a>
+              <a (click)="tested = !tested; update = true" class="btn btn-topcv-gray btn-md"><i class="fa fa-pencil"></i> Làm lại Trắc nghiệm</a>
             </div>
           </div>
         </div>
@@ -40,14 +41,15 @@
         <!--List Major appropriate-->
         <div *ngIf="tested" class="box box-white">
           <!--<div class="text-center">-->
-            <!--<div>-->
-              <p style="font-size: 18px; text-transform: uppercase; text-align: center; margin-bottom: 30px"><strong>Gợi Ý Ngành phù hợp</strong></p>
+          <!--<div>-->
+          <p style="font-size: 18px; text-transform: uppercase; text-align: center; margin-bottom: 30px">
+            <strong class="text-highlight">Một số ngành phù hợp cho bạn</strong></p>
           <div *ngFor="let majorGroup of majorResult | groupBy">
                 <span style="font-size: 20px"
                       [mdTooltip]="majorGroup.resources[0].major.groupMajor.name">Khối Ngành  {{majorGroup.name}}</span>
             <br>
             <ul>
-              <li  *ngFor="let resource of majorGroup.resources"  class="box-title bold list-major">
+              <li *ngFor="let resource of majorGroup.resources" class="box-title bold list-major text-highlight">
                 {{resource.major.majorName}}
               </li>
             </ul>
@@ -65,7 +67,7 @@
         <!--List Top University Appropriate-->
         <div *ngIf="tested" class="box box-white">
           <p style="font-size: 18px; text-transform: uppercase; text-align: center; margin-bottom: 30px">
-            <strong>Một số trường gợi ý theo tính cách của bạn</strong></p>
+            <strong class="text-highlight">Một số trường gợi ý theo tính cách của bạn</strong></p>
             <div style="display: flex">
             <div style="margin-left: 10px" *ngFor="let topCorrelate of topUniMBTI">
               <a [routerLink]="['/university',topCorrelate.university.id]" *ngIf="topCorrelate.university.logo">

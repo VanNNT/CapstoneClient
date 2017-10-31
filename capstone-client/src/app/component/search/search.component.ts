@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Observable";
 import {Select2OptionData} from "ng2-select2";
 import {Constants} from "../../constants";
 
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -136,20 +137,25 @@ export class SearchComponent implements OnInit {
   }
   changedLocation(value){
     if(value.value && value.value != 0 && this.valueLocation != value.value && this.valueMajor == 0){
-      // setTimeout(() => {
-      //   this.valueLocation = value.value;
-      //   this.cef.detectChanges();
-      // }, 10);
-      this.valueLocation = value.value;
-      this.listUniName = this.searchService.getList(this.contant.GET_UIVERSITY_BY_LOCATION+"?locationId="+ parseInt(value.value));
-      let data = this.valueUniversity;
-      this.valueUniversity = -1;
-      setTimeout(()=>{
-        this.valueUniversity = data;
+      setTimeout(() => {
+        this.valueLocation = value.value;
         this.cef.detectChanges();
-      },10);
+      }, 10);
+      //this.valueLocation = value.value;
+      this.listUniName = this.searchService.getList(this.contant.GET_UIVERSITY_BY_LOCATION+"?locationId="+ parseInt(value.value));
+      if(this.valueUniversity != 0){
+        let data = this.valueUniversity;
+        this.valueUniversity = -1;
+        setTimeout(()=>{
+          this.valueUniversity = data;
+          this.cef.detectChanges();
+        },10);
+      }
     }else if(value.value && value.value != 0 && this.valueLocation != value.value && this.valueMajor != 0){
-      this.valueLocation = value.value;
+      setTimeout(() => {
+        this.valueLocation = value.value;
+        this.cef.detectChanges();
+      }, 10);
       this.listUniName = this.searchService.getList(this.contant.GET_BY_LOCATION_AND_MAJOR + "?majorId=" + this.valueMajor +
         "&locationId=" + parseInt(value.value));
       let data = this.valueUniversity;
@@ -158,6 +164,13 @@ export class SearchComponent implements OnInit {
         this.valueUniversity = data;
         this.cef.detectChanges();
       }, 10);
+      if (this.valueMajor != 0) {
+        let data = this.valueMajor;
+        this.valueMajor = -1;
+        setTimeout(() => {
+          this.valueMajor = data;
+        }, 100);
+      }
     }
     else if(value.value == 0 && this.valueMajor == 0 && !this.isCheckForLocation && !this.isFirst){
       this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
@@ -181,22 +194,26 @@ export class SearchComponent implements OnInit {
   changedUniversity(value){
     if(value.value && value.value != 0 && this.valueUniversity != value.value && !this.isCheckForUni){
       this.valueUniversity = value.value;
-      this.valueLocation =0;
+      if(this.valueLocation != 0){
+          this.isFirst = true;
+      }
+      // this.valueLocation =0;
       //this.valueMajor = 0;
       setTimeout(()=> this.listLocation = this.searchService.getLocation(this.contant.GET_LOCATION_UNIVERSITY+"?universityId="+parseInt(value.value)),0);
-      this.listMajor = this.searchService.getMajor(this.contant.GET_MAJOR_UNIVERSITY+"?universityId="+ parseInt(value.value));
-      if(this.valueMajor != 0){
+      setTimeout(()=> this.listMajor = this.searchService.getMajor(this.contant.GET_MAJOR_UNIVERSITY+"?universityId="+ parseInt(value.value)),0);
+      if (this.valueMajor != 0) {
         let data = this.valueMajor;
         this.valueMajor = -1;
+        this.cef.detectChanges();
         setTimeout(() => {
           this.valueMajor = data;
           this.cef.detectChanges();
-        }, 10);
+        }, 100);
       }
     }else if(value.value == 0 && !this.isCheckForUni){
       this.valueUniversity = 0;
-      this.listMajor = this.searchService.getMajor(this.contant.MAJOR);
-      this.listLocation = this.searchService.getLocation(this.contant.LOCATION);
+     setTimeout(()=> this.listMajor = this.searchService.getMajor(this.contant.MAJOR), 0) ;
+     setTimeout(()=> this.listLocation = this.searchService.getLocation(this.contant.LOCATION), 0) ;
       if(this.valueMajor != 0 || this.valueLocation != 0){
         this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
         this.valueMajor = 0;
@@ -207,9 +224,6 @@ export class SearchComponent implements OnInit {
     //   this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
     // }
     // (this.valueLocation == 0 && this.valueMajor == 0 && this.isCheckForUni && !this.isFirst)
-    console.log(value.value);
-    console.log(this.valueLocation);
-    console.log(this.valueMajor);
     if(value.value == null || this.valueUniversity == -1){
       this.isCheckForUni = true;
     }else{
