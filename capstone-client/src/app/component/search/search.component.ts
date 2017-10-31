@@ -203,13 +203,6 @@ export class SearchComponent implements OnInit {
         this.valueLocation =0;
       }
     }
-    // if((value.value == null || value.value == 0 ) && this.isCheckForUni == true){
-    //   this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
-    // }
-    // (this.valueLocation == 0 && this.valueMajor == 0 && this.isCheckForUni && !this.isFirst)
-    console.log(value.value);
-    console.log(this.valueLocation);
-    console.log(this.valueMajor);
     if(value.value == null || this.valueUniversity == -1){
       this.isCheckForUni = true;
     }else{

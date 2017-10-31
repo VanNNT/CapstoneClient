@@ -20,6 +20,7 @@ import {EditMajorComponent} from "./component/admin/edit-major/edit-major.compon
 import {MajorDetailComponent} from "./component/major-detail/major-detail.component";
 import {AddArticleComponent} from "./component/admin/add-article/add-article.component";
 import {ListArticleComponent} from "./component/admin/list-article/list-article.component";
+import {ArticleComponent} from "./component/article/article.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
@@ -34,6 +35,7 @@ const routing: Routes = [
       {path: 'major-detail/:id', component: MajorDetailComponent},
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]},
+      {path: 'article', component: ArticleComponent},
     ]},
   {path: 'admin', component: AdminComponent,canActivate: [CheckLoginGuard],
     children: [
