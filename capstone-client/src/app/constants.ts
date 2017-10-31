@@ -6,8 +6,8 @@ export class Constants{
   public SERVER_IP = 'localhost';
   public SERVER_PORT = ':8080';
   public SERVER_PATH= '/unistart';
-  public CLIENT_PORT = ':4200'
-  
+  public CLIENT_PORT = ':4200';
+
   // API
   public REGISTER = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/user/register";
   public LOGIN = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/user/check-login";
