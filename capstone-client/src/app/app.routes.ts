@@ -18,6 +18,10 @@ import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
 import {ApproveReivewComponent} from "./component/admin/approve-reivew/approve-reivew.component";
 import {EditMajorComponent} from "./component/admin/edit-major/edit-major.component";
 import {MajorDetailComponent} from "./component/major-detail/major-detail.component";
+import {AddArticleComponent} from "./component/admin/add-article/add-article.component";
+import {ListArticleComponent} from "./component/admin/list-article/list-article.component";
+import {ArticleComponent} from "./component/article/article.component";
+import {EditArticleComponent} from "./component/admin/edit-article/edit-article.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
@@ -32,6 +36,7 @@ const routing: Routes = [
       {path: 'major-detail/:id', component: MajorDetailComponent},
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]},
+      {path: 'article', component: ArticleComponent},
     ]},
   {path: 'admin', component: AdminComponent,canActivate: [CheckLoginGuard],
     children: [
@@ -41,6 +46,9 @@ const routing: Routes = [
       {path: 'edit-detail-major/:id', component: EditScoreComponent},
       {path: 'edit-major/:id', component: EditMajorComponent},
       {path: 'approve-reivew', component: ApproveReivewComponent},
+      {path: 'list-article', component: ListArticleComponent},
+      {path: 'add-article', component: AddArticleComponent},
+      {path: 'edit-article/:id', component: EditArticleComponent},
   ]},
 
 ];

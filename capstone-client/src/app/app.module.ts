@@ -51,6 +51,10 @@ import { OrderByPipe, GroupByPipe } from './pipes/order-by.pipe';
 import { EditMajorComponent } from './component/admin/edit-major/edit-major.component';
 import {DecimalPipe} from "@angular/common";
 import { MajorDetailComponent } from './component/major-detail/major-detail.component';
+import { AddArticleComponent } from './component/admin/add-article/add-article.component';
+import { ListArticleComponent } from './component/admin/list-article/list-article.component';
+import { ArticleComponent } from './component/article/article.component';
+import { EditArticleComponent } from './component/admin/edit-article/edit-article.component';
 const providers = {
   'google': {
     'clientId': '525175435249-fcon5618ugd00jij2o066g7k3266n3mb.apps.googleusercontent.com'
@@ -83,7 +87,11 @@ const providers = {
     ApproveReivewComponent,
     OrderByPipe,GroupByPipe,
     EditMajorComponent,
-    MajorDetailComponent
+    MajorDetailComponent,
+    AddArticleComponent,
+    ListArticleComponent,
+    ArticleComponent,
+    EditArticleComponent
   ],
   imports: [
     Select2Module,
