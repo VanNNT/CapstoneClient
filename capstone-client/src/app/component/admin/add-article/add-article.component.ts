@@ -6,6 +6,10 @@ import {Constants} from "../../../constants";
 import {Observable} from "rxjs/Observable";
 import {Select2OptionData} from "ng2-select2";
 import {RequestOptions,Headers} from "@angular/http";
+import {NgForm} from "@angular/forms";
+import {ReviewService} from "../../../service/review/review.service";
+import {BaseService} from "../../../service/base-service/base.service";
+import {Router} from "@angular/router";
 declare var $: any;
 
 @Component({
@@ -17,7 +21,11 @@ export class AddArticleComponent implements OnInit {
   public listUniName: Observable<Select2OptionData[]>;
   public options: Select2Options;
   public valueUniversity;
-  constructor(private uniService: UniversityService, private searchService: SearchService,
+  public hasError: boolean = false;
+  public isCheck: boolean = false;
+  constructor(private uniService: UniversityService, private router: Router,
+              private searchService: SearchService,
+              private reviewService: ReviewService, private baseService: BaseService,
               private toastr: ToastsManager, private vcr: ViewContainerRef, private constants: Constants) {
     this.toastr.setRootViewContainerRef(vcr)
   }
@@ -75,5 +83,49 @@ export class AddArticleComponent implements OnInit {
   }
   changedUniversity(value){
   this.valueUniversity = value;
+  if(this.valueUniversity.value == 0){
+    this.isCheck = false;
+  } else {
+    this.isCheck = true;
+  }
+  }
+
+  public onSave(form: NgForm){
+    // if($('#summernote').summernote('code').length < 100 || $('#summernote').summernote('code').length > 400){
+    //   this.isCheck = true;
+    // }else{
+    //   this.isCheck = false;
+    // }
+    let content = $('#summernote').summernote('code');
+    if(content == " "){
+      this.hasError = true;
+    }
+    if(form.valid && this.isCheck && !this.hasError){
+    let data = {
+      'code': form.value.code,
+      'title': form.value.title,
+      'description': form.value.des,
+      'contents': $('#summernote').summernote('code'),
+      'image': this.baseService.getLogoUni(),
+      'university': {
+        'id': this.valueUniversity.value
+      },
+    };
+    let seft = this;
+    this.reviewService.saveArticle(data).subscribe((res: any) => {
+      if(res){
+        this.toastr.success('Lưu Thành Công','Thành công', {showCloseButton: true});
+        setTimeout(function () {
+          seft.router.navigate(['/admin/list-article'])
+        }, 1000);
+      }
+    }, (err) => {
+      if(err.status = this.constants.CONFLICT){
+        this.toastr.error('Mã bài báo đã tồn tại', 'Thất bại',{showCloseButton: true});
+      }else{
+        this.toastr.error('Vui lòng kiểm tra kết nối mạng', 'Thất bại',{showCloseButton: true});
+      }
+    })
+  }
   }
 }

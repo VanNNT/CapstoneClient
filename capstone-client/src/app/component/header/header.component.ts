@@ -14,8 +14,7 @@ export class HeaderComponent implements OnInit {
   public user;
   sub: any;
   private url;
-  public logged = false;
-  constructor(private router: Router, private routeCurr:ActivatedRoute,
+  constructor(private router: Router,
               private loginService: LoginService,
               private auth: AuthService,private cdRef:ChangeDetectorRef) {
     router.events.subscribe((data:any) => { this.url = data.url; });

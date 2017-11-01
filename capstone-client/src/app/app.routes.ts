@@ -21,6 +21,7 @@ import {MajorDetailComponent} from "./component/major-detail/major-detail.compon
 import {AddArticleComponent} from "./component/admin/add-article/add-article.component";
 import {ListArticleComponent} from "./component/admin/list-article/list-article.component";
 import {ArticleComponent} from "./component/article/article.component";
+import {EditArticleComponent} from "./component/admin/edit-article/edit-article.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
@@ -47,6 +48,7 @@ const routing: Routes = [
       {path: 'approve-reivew', component: ApproveReivewComponent},
       {path: 'list-article', component: ListArticleComponent},
       {path: 'add-article', component: AddArticleComponent},
+      {path: 'edit-article/:id', component: EditArticleComponent},
   ]},
 
 ];

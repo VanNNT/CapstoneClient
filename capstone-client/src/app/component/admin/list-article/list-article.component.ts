@@ -27,12 +27,22 @@ export class ListArticleComponent implements OnInit {
   }
 
   deleteNews(){
-    for(let i =0 ; i <= this.listArticle.length; i++){
-      if(this.listArticle[i].id == this.selectIndex){
-        this.listArticle.splice(i,1);
-        this.toastr.success("Đã xoá thành công","Thành công",{showCloseButton: true});
-        return ;
+    let deteleArticle = {
+      "id": this.selectIndex
+    };
+    this.reviewService.deleteArticle(deteleArticle).subscribe((res: any)=>{
+      if (res){
+        for(let i =0 ; i <= this.listArticle.length; i++){
+          if(this.listArticle[i].id == this.selectIndex){
+            this.listArticle.splice(i,1);
+            this.toastr.success("Đã xoá thành công","Thành công",{showCloseButton: true});
+            return ;
+          }
+        }
       }
-    }
+    }, error =>{
+      this.toastr.error("Vui lòng kiểm tra lại", "Thất bại",{showCloseButton: true})
+    });
+
   }
 }

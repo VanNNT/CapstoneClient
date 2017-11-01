@@ -4,23 +4,25 @@
     <thead>
     <tr>
       <th style="width: 1%">STT</th>
+      <th style="width: 7%">Code</th>
       <th style="width: 20%">Tiêu đề</th>
       <th style="width: 20%">Ngày đăng</th>
       <th style="width: 20%"></th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let news of listArticle | paginate: { itemsPerPage:10, currentPage: p }">
-      <td>{{news.id}}</td>
-      <td>
-        <a>{{news.title}}</a>
+    <tr *ngFor="let article of listArticle | paginate: { itemsPerPage:10, currentPage: p }; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{article.code}}</td>
+      <td style="white-space: nowrap;">
+        <a>{{article.title}}</a>
       </td>
       <td>
-        {{news.date | date:'medium'}}
+        {{article.createDate | date:'medium'}}
       </td>
       <td>
-        <a [routerLink]="[]" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Sửa </a>
-        <a class="btn btn-danger btn-xs" data-toggle="modal" id="id-button" data-target="#myModal" (click)="selectIndex = news.id">
+        <a [routerLink]="['/admin/edit-article',article.id]" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Sửa </a>
+        <a class="btn btn-danger btn-xs" data-toggle="modal" id="id-button" data-target="#myModal" (click)="selectIndex = article.id">
           <i class="fa fa-trash-o"></i> Xoá </a>
       </td>
     </tr>

@@ -23,18 +23,18 @@ export class ReviewRatingComponent implements OnInit {public sub: Subscription;
  public id;
  public university;
  public review : any[];
- public totalStarOfReivew;
  public user;
  public checkReviewUni: boolean;
   constructor(private activateRoute: ActivatedRoute,
               private baseService : BaseService, private reviewService: ReviewService) { }
 
   ngOnInit() {
-    this.totalStarOfReivew = 2;
+    document.documentElement.scrollTop = 0;
     this.sub = this.activateRoute.params.subscribe(params=>{
       this.id=params['id'];
     });
-    this.university = this.baseService.getUniversity();
+    //this.university = this.baseService.getUniversity();
+    this.university = JSON.parse(localStorage.getItem('UNI'));
     $.getScript('../../../assets/file.js');
     this.starPoint = JSON.parse(localStorage.getItem('STAR_POINT'));
     this.starsFacilities = this.starPoint.starFacilities;

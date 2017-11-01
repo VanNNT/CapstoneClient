@@ -54,6 +54,7 @@ import { MajorDetailComponent } from './component/major-detail/major-detail.comp
 import { AddArticleComponent } from './component/admin/add-article/add-article.component';
 import { ListArticleComponent } from './component/admin/list-article/list-article.component';
 import { ArticleComponent } from './component/article/article.component';
+import { EditArticleComponent } from './component/admin/edit-article/edit-article.component';
 const providers = {
   'google': {
     'clientId': '525175435249-fcon5618ugd00jij2o066g7k3266n3mb.apps.googleusercontent.com'
@@ -89,7 +90,8 @@ const providers = {
     MajorDetailComponent,
     AddArticleComponent,
     ListArticleComponent,
-    ArticleComponent
+    ArticleComponent,
+    EditArticleComponent
   ],
   imports: [
     Select2Module,
