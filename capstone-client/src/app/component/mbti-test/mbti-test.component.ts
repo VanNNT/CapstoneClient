@@ -166,6 +166,7 @@ export class MbtiTestComponent implements OnInit {
         }
       });
     }
+    document.body.scrollTop = 0;
     this.tested = true;
     this.scores = {
       E: 0,

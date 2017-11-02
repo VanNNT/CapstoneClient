@@ -18,6 +18,10 @@ import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
 import {ApproveReivewComponent} from "./component/admin/approve-reivew/approve-reivew.component";
 import {EditMajorComponent} from "./component/admin/edit-major/edit-major.component";
 import {MajorDetailComponent} from "./component/major-detail/major-detail.component";
+import {QuestionComponent} from "./component/question-anwser/question/question.component";
+import {QuestionDetailComponent} from "./component/question-anwser/question-detail/question-detail.component";
+import {NewQuestionComponent} from "./component/question-anwser/new-question/new-question.component";
+import {YourQuestionComponent} from "./component/question-anwser/your-question/your-question.component";
 import {AddArticleComponent} from "./component/admin/add-article/add-article.component";
 import {ListArticleComponent} from "./component/admin/list-article/list-article.component";
 import {ArticleComponent} from "./component/article/article.component";
@@ -36,6 +40,10 @@ const routing: Routes = [
       {path: 'major-detail/:id', component: MajorDetailComponent},
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]},
+      {path: 'question', component: QuestionComponent},
+      {path: 'question-detail/:id', component: QuestionDetailComponent},
+      {path: 'new-question', component: NewQuestionComponent, canActivate: [CheckLoginGuard, CheckRoleGuard]},
+      {path: 'your-question', component: YourQuestionComponent, canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'article', component: ArticleComponent},
     ]},
   {path: 'admin', component: AdminComponent,canActivate: [CheckLoginGuard],

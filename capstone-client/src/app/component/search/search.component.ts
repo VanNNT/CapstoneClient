@@ -108,7 +108,8 @@ export class SearchComponent implements OnInit {
          this.cef.detectChanges();
        },10);
       this.isFirst = false;
-    }else if(value.value && value.value != 0 && this.valueMajor != value.value && this.valueLocation != 0){
+    }else if(value.value && value.value != 0 &&
+      this.valueMajor != value.value && this.valueLocation != 0 && value.value != -1){
       setTimeout(()=>  this.valueMajor = value.value,0);
       this.valueMajor = value.value;
       this.listUniName = this.searchService.getList(this.contant.GET_BY_LOCATION_AND_MAJOR + "?majorId=" + parseInt(value.value) +
@@ -155,7 +156,7 @@ export class SearchComponent implements OnInit {
         },10);
       }
       this.isFirst = false;
-    }else if(value.value && value.value != 0 && this.valueLocation != value.value && this.valueMajor != 0){
+    }else if(value.value && value.value != 0 && this.valueLocation != value.value && this.valueMajor != 0 && this.valueMajor!=-1){
       setTimeout(() => {
         this.valueLocation = value.value;
         this.cef.detectChanges();
@@ -173,6 +174,7 @@ export class SearchComponent implements OnInit {
         this.valueMajor = -1;
         setTimeout(() => {
           this.valueMajor = data;
+          this.cef.detectChanges();
         }, 100);
       }
     }
