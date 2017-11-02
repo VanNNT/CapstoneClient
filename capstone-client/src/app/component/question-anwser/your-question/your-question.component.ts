@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UniversityService} from "../../../service/university/university.service";
+import {BaseService} from "../../../service/base-service/base.service";
 
 @Component({
   selector: 'app-your-question',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class YourQuestionComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private uniService: UniversityService, private baseService: BaseService) { }
+  public questions: any;
   ngOnInit() {
+    let userId = this.baseService.getUser().id;
+    this.uniService.getAllQuestion().subscribe(res=>{
+      this.questions = res;
+    });
   }
 
 }

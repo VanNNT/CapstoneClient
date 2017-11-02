@@ -50,11 +50,21 @@ export class Constants{
   public GET_UIVERSITY_BY_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-by-major-id";
   public GET_BY_LOCATION_AND_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-by-location-and-major";
   public TOP_UNI_MBTI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/corrlate/top-uni-mbti";
-
+  public SAVE_ARTICLE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/save-article";
+  public SHOW_ARTICLE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/show-article";
+  public DELETE_ARTICLE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/delete";
+  public GET_ARTICLE_BY_ID = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/get-article-by-id";
+  public UPDATE_ARTICLE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/update";
+  public SAVE_QUESTION = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/save";
+  public GET_ALL_QUESTION = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/questions";
+  public GET_QUESTION_DETAIL = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/view";
+  public QUESTIONS_BY_USER = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/questions-by-user";
   //ERROR
   public UNAUTHORIZED = 401;
   public CONFLICT = 409;
   public NOT_FOUND = 404;
 
+  public QUESTION = 1;
+  public ANWSER = 2
   constructor(){}
 }

@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
+import {RequestOptions,Headers} from "@angular/http";
+import {UniversityService} from "../../../service/university/university.service";
+import {Constants} from "../../../constants";
+import {BaseService} from "../../../service/base-service/base.service";
+import {ToastsManager} from "ng2-toastr";
+import {Router} from "@angular/router";
 declare var $: any;
 @Component({
   selector: 'app-new-question',
@@ -7,21 +13,73 @@ declare var $: any;
 })
 export class NewQuestionComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private uniService: UniversityService, private baseService: BaseService,private router: Router,
+              private contants : Constants, private toastr: ToastsManager, private vcr: ViewContainerRef ) {
+    this.toastr.setRootViewContainerRef(vcr);
+  }
+  public isCheck;
   ngOnInit() {
+    var seft = this;
     $('#summernote').summernote({
       height: 200,
       toolbar: [
         ['style', ['bold', 'italic', 'underline']],
         ['fontsize', ['fontsize','color']],
         ['para', ['ul', 'ol', 'paragraph']],
-        ['fullscreen',['fullscreen']]
+        ['fullscreen',['picture', 'fullscreen']]
       ],
-      callbacks: {
-
+      callbacks:{
+        onImageUpload: function(files) {
+          var image = $('<img id="load">').attr('src','../../../assets/image/Eclipse.gif' );
+          $('#summernote').summernote("insertNode", image[0]);
+          var file = files[0];
+          var reader = new FileReader();
+          reader.onloadend = function() {
+            let url = "https://api.imgur.com/3/image";
+            var headers = new Headers();
+            headers.append('Authorization', 'Client-ID bf915d4106b6639');
+            let options = new RequestOptions({ headers: headers });
+            let data = {
+              'image': reader.result.split(',')[1]
+            };
+            seft.uniService.uploadFile(url,data,options).subscribe((response:any)=>{
+              $('#load').remove();
+              var image = $('<img>').attr('src', response.data.link);
+              $('#summernote').summernote("insertNode", image[0]);
+            });
+          };
+          reader.readAsDataURL(file);
+        }
       }
     });
   }
 
+  onSave(form) {
+    if($('#summernote').summernote('code').length < 50){
+      this.isCheck = true;
+    }else{
+      this.isCheck = false;
+    }
+    if (form.valid) {
+      console.log(form.value);
+      let data = {
+        'title': form.value.title,
+        "content": $('#summernote').summernote('code'),
+        "type": this.contants.QUESTION,
+        "parentId": 0,
+        "users": {
+          "id": this.baseService.getUser().id
+        }
+      };
+      var seft = this;
+      this.uniService.saveQuestion(data).subscribe(res => {
+        this.toastr.success("Bạn đã đặt câu hỏi thành công", "Thành công", {showCloseButton: true})
+        setTimeout(() => {
+          seft.router.navigate(['/question'])
+        }, 1000);
+      }, (error) => {
+        this.toastr.error("Không thể kết nối với máy chủ. Vui lòng kiểm tra lại", "Thất bại", {showCloseButton: true});
+      });
+    }
+  }
 }

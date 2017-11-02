@@ -88,6 +88,7 @@ export class EditUniversityComponent implements OnInit {
   }
 
   getValueLocation(data) {
+    console.log(data);
     this.valueLocation = data.value;
   }
   getValueMajor(data){

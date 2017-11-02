@@ -99,7 +99,7 @@ export class SearchComponent implements OnInit {
 
   changedMajor(value){
     if(value.value && value.value != 0 && this.valueMajor != value.value && this.valueLocation == 0){
-      this.valueMajor = value.value;
+      setTimeout(()=>  this.valueMajor = value.value,0);
       this.listUniName = this.searchService.getList(this.contant.GET_UIVERSITY_BY_MAJOR+"?majorId="+ parseInt(value.value));
       let data = this.valueUniversity;
       this.valueUniversity = -1;
@@ -107,7 +107,10 @@ export class SearchComponent implements OnInit {
          this.valueUniversity = data;
          this.cef.detectChanges();
        },10);
-    }else if(value.value && value.value != 0 && this.valueMajor != value.value && this.valueLocation != 0){
+      this.isFirst = false;
+    }else if(value.value && value.value != 0 &&
+      this.valueMajor != value.value && this.valueLocation != 0 && value.value != -1){
+      setTimeout(()=>  this.valueMajor = value.value,0);
       this.valueMajor = value.value;
       this.listUniName = this.searchService.getList(this.contant.GET_BY_LOCATION_AND_MAJOR + "?majorId=" + parseInt(value.value) +
         "&locationId=" + this.valueLocation);
@@ -118,6 +121,7 @@ export class SearchComponent implements OnInit {
         this.cef.detectChanges();
       }, 10);
     }else if(value.value == 0 && this.valueLocation == 0 && !this.isCheckForMajor && !this.isFirst){
+      console.log("vao trong major");
       this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
       this.listMajor = this.searchService.getMajor(this.contant.MAJOR);
       this.listLocation = this.searchService.getLocation(this.contant.LOCATION);
@@ -132,7 +136,7 @@ export class SearchComponent implements OnInit {
       this.isFirst = false;
     }else{
       this.isCheckForMajor = false;
-      this.isFirst = true;
+      //this.isFirst = true;
     }
   }
   changedLocation(value){
@@ -151,7 +155,8 @@ export class SearchComponent implements OnInit {
           this.cef.detectChanges();
         },10);
       }
-    }else if(value.value && value.value != 0 && this.valueLocation != value.value && this.valueMajor != 0){
+      this.isFirst = false;
+    }else if(value.value && value.value != 0 && this.valueLocation != value.value && this.valueMajor != 0 && this.valueMajor!=-1){
       setTimeout(() => {
         this.valueLocation = value.value;
         this.cef.detectChanges();
@@ -174,6 +179,7 @@ export class SearchComponent implements OnInit {
       }
     }
     else if(value.value == 0 && this.valueMajor == 0 && !this.isCheckForLocation && !this.isFirst){
+      console.log("vao trong location");
       this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
        this.listMajor = this.searchService.getMajor(this.contant.MAJOR);
        this.listLocation = this.searchService.getLocation(this.contant.LOCATION);
@@ -188,7 +194,7 @@ export class SearchComponent implements OnInit {
       this.isFirst = false;
     }else{
       this.isCheckForLocation = false;
-      this.isFirst = true;
+      //this.isFirst = true;
     }
   }
 

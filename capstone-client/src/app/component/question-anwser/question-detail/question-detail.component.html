@@ -1,23 +1,25 @@
 <div id="main">
-  <div class="container">
+  <div class="container" style="max-width: 800px;">
     <div class="box box-white">
-      <div id="question-header">
+      <div id="question-header" class="bold">
         <h1 itemprop="name">
-          How can I create a method in a service that returns the result of onSnapshot and then using it in my Component or Ionic Page?
+          {{question?.title}}
         </h1>
         <div class="aside-cta" role="navigation" aria-label="ask new question">
-          <a [routerLink]="['/new-question']" class="btn btn-uni-primary">Ask Question</a>
+          <a [routerLink]="['/new-question']" class="btn btn-uni-primary">Đặt câu hỏi</a>
         </div>
       </div>
-      <div class="post-text">
-        I'am using "ionic-angular": "3.7.1" and Firebase Cloud Firestore.
-        I want to get all the documents into the Post collection everytime them are updated, deleted or added. I know that calling the onSnapshot Method I can get it so I defined this method in a service.
-        So, How can I create a method in a service that returns the result of onSnapshot and then using it in my Component or Ionic Page?
-        Documentation
-
-        https://firebase.google.com/docs/reference/js/firebase.firestore.Query?hl=es-419
-
-        https://firebase.google.com/docs/firestore/query-data/listen?hl=es-419
+      <div style="padding: 0px 30px 30px 30px;">
+        <div class="post-text">
+          {{question?.content}}
+        </div>
+        <div class="started">
+          <span class="">{{question?.createdDateTime | date:'dd-MM-yyyy HH:mm'}}</span>
+        </div>
+        <div class="row" style="float: right;padding-right: 50px;">
+          <img style="width: 100%;max-width: 30px;border-radius: 50%;margin-right: 5px;" [src]="question?.users.image"/>
+          <span class="">{{question?.users.username}}</span>
+        </div>
       </div>
       <div id="answers">
         <div id="answers-header">

@@ -52,4 +52,23 @@ export class ReviewService {
     return this._http.post(this.contant.CHECK_REVIEWED_UNI,data).map((res: Response)=>res.json());
   }
 
+  getArticle(){
+    return this._http.get(this.contant.SHOW_ARTICLE).map((res: Response) => res.json());
+  }
+
+  saveArticle(data){
+    return this._http.post(this.contant.SAVE_ARTICLE,data).map((res: Response)=> res.json());
+  }
+
+  deleteArticle(data){
+    return this._http.post(this.contant.DELETE_ARTICLE,data).map((res: Response) => res.json());
+  }
+
+  uploadArticle(data){
+    return this._http.post(this.contant.UPDATE_ARTICLE,data).map((res: Response)=> res.json());
+  }
+
+  getArticleById(data){
+    return this._http.get(this.contant.GET_ARTICLE_BY_ID+"?articleId="+data).map((res: Response) => res.json());
+  }
 }
