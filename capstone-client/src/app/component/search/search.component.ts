@@ -169,6 +169,7 @@ export class SearchComponent implements OnInit {
         this.valueMajor = -1;
         setTimeout(() => {
           this.valueMajor = data;
+          this.cef.detectChanges();
         }, 100);
       }
     }

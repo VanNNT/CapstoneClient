@@ -59,4 +59,7 @@ export class HeaderComponent implements OnInit {
   public clickLink(){
     document.getElementById('linkFake').click();
   }
+  clickLinkQuestion(){
+    document.getElementById('linkFakeQuestion').click();
+  }
 }
