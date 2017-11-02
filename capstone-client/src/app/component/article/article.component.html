@@ -11,7 +11,7 @@
 
 <div class="container">
 
-  <div class="featurette" *ngFor="let article of listArticle; let odd = odd; let even = even; let fst = first" [ngClass]="{'right-text': odd}">
+  <div class="featurette" *ngFor="let article of listArticle | paginate: { itemsPerPage:5, currentPage: p }; let odd = odd; let even = even; let fst = first" [ngClass]="{'right-text': odd}">
     <hr class="featurette-divider">
     <div *ngIf="article.image">
     <img class="featurette-image img-circle img-responsive pull-right" [ngClass] = "{'pull-left': even}" src="{{article.image}}">
@@ -20,11 +20,13 @@
     <img class="featurette-image img-circle img-responsive pull-right" [ngClass] = "{'pull-left': even}" src="../../../assets/image/image-not-found.png">
     </div>
     <h2 class="featurette-heading">{{article.title}}
-      <span class="text-muted">Will Catch Your Eye</span>
-      <h5>{{article.createDate | date: 'short'}}</h5>
+      <!--<span class="text-muted">Will Catch Your Eye</span>-->
+      <h5>{{article.createDate | date: 'shortDate'}}</h5>
     </h2>
     <p class="lead">{{article.description}}</p>
   </div>
+  <div class="text-center"><pagination-controls (pageChange)="p =$event" previousLabel=""
+                                                nextLabel=""></pagination-controls></div>
 
   <!-- First Featurette -->
   <!--<div class="featurette" id="about" style="margin-top: 70px">-->
@@ -57,15 +59,5 @@
     <!--<p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>-->
   <!--</div>-->
 
-  <hr class="featurette-divider">
-
-  <!-- Footer -->
-  <footer>
-    <div class="row">
-      <div class="col-lg-12">
-        <p>Copyright &copy; Your Website 2014</p>
-      </div>
-    </div>
-  </footer>
 
 </div>
