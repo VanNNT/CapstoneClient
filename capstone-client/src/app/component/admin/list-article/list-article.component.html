@@ -18,7 +18,7 @@
         <a>{{article.title}}</a>
       </td>
       <td>
-        {{article.createDate | date:'medium'}}
+        {{article.createDate | date:'shortDate'}}
       </td>
       <td>
         <a [routerLink]="['/admin/edit-article',article.id]" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Sửa </a>

@@ -28,6 +28,7 @@ export class CompanyDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   public recommentPoint: number;
   public starPoint: any;
   public topCorrlateUni: any;
+  public listArticle;
   public majorDetail = {
     majorName: '',
     blockYear1: [],
@@ -84,6 +85,8 @@ public currentUrl;
         this.starPoint = null;
       }
     });
+    this.getNewestArticle(this.id);
+
     //Check review
     this.checkIsReview();
     // var uluru = {lat: 10.8048138, lng: 106.6257448};
@@ -150,6 +153,12 @@ public currentUrl;
     //   }
     //   //document.getElementById('openMajorDetail').click();
     // }
+  }
+
+  public getNewestArticle(data){
+    this.reviewService.getNewestArticle(data).subscribe((res: any)=>{
+      this.listArticle = res;
+    })
   }
 
   ngOnDestroy() {

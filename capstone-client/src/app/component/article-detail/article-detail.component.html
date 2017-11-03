@@ -1,0 +1,15 @@
+<div id="main">
+<div class="container">
+  <div class="box box-white">
+    <h2><b>{{article?.title}}</b></h2>
+    <a style="color: #f05f40" *ngIf="article" [routerLink]="['/university',article?.university?.id]">
+      {{article?.university?.name}}</a>
+    <p><i class="fa fa-clock-o" aria-hidden="true"></i> {{article?.createDate | date: 'shortDate'}}</p>
+    <p><strong>{{article?.description}}</strong></p>
+    <div [innerHTML]="article?.contents"></div>
+  </div>
+
+  </div>
+</div>
+
+

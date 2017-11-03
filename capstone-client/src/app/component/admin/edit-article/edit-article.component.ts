@@ -20,6 +20,7 @@ declare var $: any;
 export class EditArticleComponent implements OnInit {
   public sub: Subscription;
   public id;
+  public uniId;
   public articleById: any;
   public hasError: boolean = false;
   public logoSrc: any = '';
@@ -76,21 +77,21 @@ export class EditArticleComponent implements OnInit {
         this.getArticleById(this.id);
       },0)
     });
+
   }
 
   getArticleById(data: number){
     this.reviewService.getArticleById(data).subscribe((res: any)=>{
       this.articleById = res;
-      console.log(this.articleById);
       $('#summernote').summernote('code', this.articleById.contents);
       this.logoSrc = this.articleById.image;
+      this.baseService.setLogoUni(this.logoSrc);
     });
 
   }
 
   getValueUniversity(data){
-
-
+    this.uniId = data.value;
   }
 
   public onUpdate(editForm: NgForm){
@@ -107,7 +108,7 @@ export class EditArticleComponent implements OnInit {
         'contents': $('#summernote').summernote('code'),
         'image': this.baseService.getLogoUni(),
         'university': {
-          'id': this.id //cho thay đổi trường nha a ok
+          'id': this.uniId //cho thay đổi trường nha a ok
         },
       };
       let seft = this;
