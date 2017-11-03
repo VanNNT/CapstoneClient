@@ -42,7 +42,7 @@ export class EditArticleComponent implements OnInit {
         ['style', ['bold', 'italic', 'underline']],
         ['fontsize', ['fontsize','color']],
         ['para', ['ul', 'ol', 'paragraph']],
-        ['fullscreen',['fullscreen','picture','video']]
+        ['fullscreen',['picture','video','fullscreen']]
       ],
       callbacks:{
         onImageUpload: function(files) {

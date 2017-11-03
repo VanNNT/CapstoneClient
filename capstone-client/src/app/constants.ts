@@ -56,10 +56,19 @@ export class Constants{
   public GET_ARTICLE_BY_ID = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/get-article-by-id";
   public UPDATE_ARTICLE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/update";
   public GET_NEWEST_ARTICLE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/get-newest-article";
+  public SAVE_QUESTION = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/save";
+  public GET_ALL_QUESTION = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/questions";
+  public GET_QUESTION_DETAIL = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/view";
+  public QUESTIONS_BY_USER = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/questions-by-user";
+  public ANSWER_BY_QUESTION = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/answer-by-question";
+  public DELETE_QUESTION_ANSWER = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/delete-question-answer";
+
   //ERROR
   public UNAUTHORIZED = 401;
   public CONFLICT = 409;
   public NOT_FOUND = 404;
 
+  public QUESTION = 1;
+  public ANWSER = 2
   constructor(){}
 }

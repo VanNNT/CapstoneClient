@@ -82,7 +82,7 @@
               <div class="box-group-title col-xs-8"><span><strong>Giới thiệu trường học</strong></span></div>
             </div>
           </div>
-          <div class="box box-white" id="company-about">
+          <div class="box box-white" id="company-about" style="min-height: 900px">
             <div [innerHTML]="university?.description" class="text-dark-gray">
             </div>
           </div>
@@ -208,7 +208,7 @@
       </div>
     </div>
     <div class="box box-white">
-      <div class="fb-comments" [attr.data-href]="currentUrl" [attr.data-numposts]="5" data-width="1000"></div>
+      <div class="fb-comments" [attr.data-href]="currentUrl" [attr.data-numposts]="5" data-width="1000" data-order-by="reverse_time"></div>
     </div>
   </div>
 

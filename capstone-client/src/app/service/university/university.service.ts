@@ -47,4 +47,34 @@ export class UniversityService {
   topCorrlateUni(data): Observable<any>{
     return this._http.get(this.contant.TOP_CORRLATE_UNI+"?universityId="+data).map((res: Response)=> res.json());
   }
+
+  saveQuestionAnswer(data) : Observable<any>{
+    return this._http.post(this.contant.SAVE_QUESTION,data)
+      .map((response: Response) => response.json());
+  }
+
+  getAllQuestion(): Observable<any>{
+    return this._http.get(this.contant.GET_ALL_QUESTION)
+      .map((response: Response) => response.json());
+  }
+
+  getQuestionDetail(qaId,userId):  Observable<any>{
+    return this._http.get(this.contant.GET_QUESTION_DETAIL+"?qaId="+qaId + "&userId="+userId)
+      .map((response: Response) => response.json());
+  }
+
+  getQuestionByUser(userId): Observable<any>{
+    return this._http.get(this.contant.QUESTIONS_BY_USER+"?userId="+userId)
+      .map((response: Response) => response.json());
+  }
+
+  getAnwserByQuestion(questionId): Observable<any>{
+    return this._http.get(this.contant.ANSWER_BY_QUESTION+"?questionId="+questionId)
+      .map((response: Response) => response.json());
+  }
+
+  deleteQA(data): Observable<any>{
+    return this._http.post(this.contant.DELETE_QUESTION_ANSWER,data)
+      .map((response: Response) => response.json());
+  }
 }

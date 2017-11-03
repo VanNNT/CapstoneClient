@@ -44,6 +44,7 @@ public currentUrl;
   }
 
   ngOnInit() {
+    document.documentElement.scrollTop = 0;
     localStorage.removeItem("MAJOR_UNI");
     $.getScript('../../../assets/file.js');
     $(window).scroll(function () {

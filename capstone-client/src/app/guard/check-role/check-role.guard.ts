@@ -6,6 +6,7 @@ import {ToastsManager} from "ng2-toastr/ng2-toastr";
 @Injectable()
 export class CheckRoleGuard implements CanActivate {
   constructor(private loginService: LoginService,public toastr: ToastsManager) {
+    //this.toastr.setRootViewContainerRef(vcr);
   }
   canActivate() {
     const role = this.loginService.checkRole();

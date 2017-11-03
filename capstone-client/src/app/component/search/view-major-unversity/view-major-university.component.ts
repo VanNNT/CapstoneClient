@@ -18,7 +18,7 @@ export class ViewMajorUnversityComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    document.documentElement.scrollTop = 0;
     this.sub = this.activateRoute.params.subscribe(params => {
       this.id = params['id'];
     });
