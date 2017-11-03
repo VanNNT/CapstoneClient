@@ -3,26 +3,28 @@
 <header class="header-image">
   <div class="headline">
     <div class="container">
-      <h1>Trang Tổng Hợp</h1>
-      <h2>Tin Tức Của Các Trường</h2>
+      <h1>Trang Tin Tức</h1>
     </div>
   </div>
 </header>
 
 <div class="container">
 
-  <div class="featurette" *ngFor="let article of listArticle | paginate: { itemsPerPage:5, currentPage: p }; let odd = odd; let even = even; let fst = first" [ngClass]="{'right-text': odd}">
+  <div class="featurette"
+       *ngFor="let article of listArticle | paginate: { itemsPerPage:5, currentPage: p }; let odd = odd; let even = even; let fst = first"
+       [ngClass]="{'right-text': odd}">
     <hr class="featurette-divider">
     <div *ngIf="article.image">
-    <img class="featurette-image img-circle img-responsive pull-right" [ngClass] = "{'pull-left': even}" src="{{article.image}}">
+      <img [routerLink]="['/article-detail',article.id]" class="featurette-image img-circle img-responsive pull-right"
+           [ngClass]="{'pull-left': even}" src="{{article.image}}">
     </div>
     <div *ngIf="!article.image">
-    <img class="featurette-image img-circle img-responsive pull-right" [ngClass] = "{'pull-left': even}" src="../../../assets/image/image-not-found.png">
+      <img [routerLink]="['/article-detail',article.id]" class="featurette-image img-circle img-responsive pull-right"
+           [ngClass]="{'pull-left': even}" src="../../../assets/image/image-not-found.png">
     </div>
-    <h2 class="featurette-heading">{{article.title}}
-      <!--<span class="text-muted">Will Catch Your Eye</span>-->
-      <h5>{{article.createDate | date: 'shortDate'}}</h5>
-    </h2>
+    <h2 [routerLink]="['/article-detail',article.id]" class="featurette-heading">{{article.title}}</h2>
+    <h5>{{article.createDate | date: 'shortDate'}}</h5>
+
     <p class="lead">{{article.description}}</p>
   </div>
   <div class="text-center"><pagination-controls (pageChange)="p =$event" previousLabel=""

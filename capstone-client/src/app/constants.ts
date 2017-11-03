@@ -55,6 +55,7 @@ export class Constants{
   public DELETE_ARTICLE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/delete";
   public GET_ARTICLE_BY_ID = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/get-article-by-id";
   public UPDATE_ARTICLE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/update";
+  public GET_NEWEST_ARTICLE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/get-newest-article";
   //ERROR
   public UNAUTHORIZED = 401;
   public CONFLICT = 409;

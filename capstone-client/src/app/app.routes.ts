@@ -22,6 +22,7 @@ import {AddArticleComponent} from "./component/admin/add-article/add-article.com
 import {ListArticleComponent} from "./component/admin/list-article/list-article.component";
 import {ArticleComponent} from "./component/article/article.component";
 import {EditArticleComponent} from "./component/admin/edit-article/edit-article.component";
+import {ArticleDetailComponent} from "./component/article-detail/article-detail.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
@@ -37,6 +38,7 @@ const routing: Routes = [
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]},
       {path: 'article', component: ArticleComponent},
+      {path: 'article-detail/:id', component: ArticleDetailComponent},
     ]},
   {path: 'admin', component: AdminComponent,canActivate: [CheckLoginGuard],
     children: [
@@ -49,6 +51,7 @@ const routing: Routes = [
       {path: 'list-article', component: ListArticleComponent},
       {path: 'add-article', component: AddArticleComponent},
       {path: 'edit-article/:id', component: EditArticleComponent},
+
   ]},
 
 ];
