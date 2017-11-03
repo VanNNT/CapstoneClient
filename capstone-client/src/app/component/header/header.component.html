@@ -21,7 +21,7 @@
           <li class="text-li"><a routerLink="/question">Câu hỏi</a></li>
           <a id="linkFake" [hidden]="true" routerLink="/profile"></a>
           <a id="linkFakeQuestion" [hidden]="true" [routerLink]="['/your-question']"></a>
-          <div *ngIf="count != 0" style="float: right; padding-top: 17px; outline: none" [routerLink]="['/your-question']">
+          <div *ngIf="count != 0" class="answer-notify" [routerLink]="['/your-question']">
             <span class="badge bg-red">{{count}}</span>
           </div>
           <li *ngIf="user" class="dropdown">
