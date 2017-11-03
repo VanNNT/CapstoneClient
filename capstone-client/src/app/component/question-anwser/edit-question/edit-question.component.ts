@@ -1,25 +1,37 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {RequestOptions,Headers} from "@angular/http";
 import {UniversityService} from "../../../service/university/university.service";
-import {Constants} from "../../../constants";
-import {BaseService} from "../../../service/base-service/base.service";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ToastsManager} from "ng2-toastr";
-import {Router} from "@angular/router";
+import {BaseService} from "../../../service/base-service/base.service";
+import {Constants} from "../../../constants";
+import {Subscription} from "rxjs/Subscription";
 declare var $: any;
-@Component({
-  selector: 'app-new-question',
-  templateUrl: './new-question.component.html',
-  styleUrls: ['./new-question.component.less']
-})
-export class NewQuestionComponent implements OnInit {
 
-  constructor(private uniService: UniversityService, private baseService: BaseService,private router: Router,
-              private contants : Constants, private toastr: ToastsManager, private vcr: ViewContainerRef ) {
+@Component({
+  selector: 'app-edit-question',
+  templateUrl: './edit-question.component.html',
+  styleUrls: ['./edit-question.component.less']
+})
+export class EditQuestionComponent implements OnInit {
+
+  constructor(private uniService: UniversityService, private baseService: BaseService,private router: Router,private activateRoute: ActivatedRoute,
+              private contants : Constants, private toastr: ToastsManager, private vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
+
+  public qaId: number;
+  public sub: Subscription;
+  public userId : number;
+  public question: any;
   public isCheck;
   ngOnInit() {
+    document.documentElement.scrollTop = 0;
+    this.sub = this.activateRoute.params.subscribe(params=>{
+      this.qaId=params['id'];
+    });
     var seft = this;
+    this.userId = this.baseService.getUser().id;
     $('#summernote').summernote({
       height: 200,
       toolbar: [
@@ -52,34 +64,29 @@ export class NewQuestionComponent implements OnInit {
         }
       }
     });
+    this.getQuestionContent();
   }
 
-  onSave(form) {
+  getQuestionContent(){
+    this.uniService.getQuestionDetail(this.qaId, this.userId).subscribe(res => {
+      this.question = res;
+      $('#summernote').summernote('code', this.question.content);
+    });
+  }
+
+  onEdit(form){
+    let seft = this;
     if($('#summernote').summernote('code').length < 50){
       this.isCheck = true;
     }else{
       this.isCheck = false;
     }
     if (form.valid && !this.isCheck) {
-      console.log(form.value);
-      let data = {
-        'title': form.value.title,
-        "content": $('#summernote').summernote('code'),
-        "type": this.contants.QUESTION,
-        "parentId": 0,
-        "users": {
-          "id": this.baseService.getUser().id
-        }
-      };
-      var seft = this;
-      this.uniService.saveQuestionAnswer(data).subscribe(res => {
-        this.toastr.success("Bạn đã đặt câu hỏi thành công", "Thành công", {showCloseButton: true})
-        setTimeout(() => {
-          seft.router.navigate(['/question'])
-        }, 1000);
-      }, (error) => {
-        this.toastr.error("Không thể kết nối với máy chủ. Vui lòng kiểm tra lại", "Thất bại", {showCloseButton: true});
-      });
+      //this.toastr.success("Bạn đã đặt câu hỏi thành công", "Thành công", {showCloseButton: true})
+      setTimeout(() => {
+        seft.router.navigate(['/question-detail/'+ this.qaId]);
+      }, 0);
     }
+
   }
 }

@@ -26,6 +26,7 @@ import {AddArticleComponent} from "./component/admin/add-article/add-article.com
 import {ListArticleComponent} from "./component/admin/list-article/list-article.component";
 import {ArticleComponent} from "./component/article/article.component";
 import {EditArticleComponent} from "./component/admin/edit-article/edit-article.component";
+import {EditQuestionComponent} from "./component/question-anwser/edit-question/edit-question.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
@@ -42,6 +43,7 @@ const routing: Routes = [
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]},
       {path: 'question', component: QuestionComponent},
       {path: 'question-detail/:id', component: QuestionDetailComponent},
+      {path: 'edit-question/:id', component: EditQuestionComponent},
       {path: 'new-question', component: NewQuestionComponent, canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'your-question', component: YourQuestionComponent, canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'article', component: ArticleComponent},

@@ -60,6 +60,7 @@ import { AddArticleComponent } from './component/admin/add-article/add-article.c
 import { ListArticleComponent } from './component/admin/list-article/list-article.component';
 import { ArticleComponent } from './component/article/article.component';
 import { EditArticleComponent } from './component/admin/edit-article/edit-article.component';
+import { EditQuestionComponent } from './component/question-anwser/edit-question/edit-question.component';
 
 const providers = {
   'google': {
@@ -101,7 +102,8 @@ const providers = {
     AddArticleComponent,
     ListArticleComponent,
     ArticleComponent,
-    EditArticleComponent
+    EditArticleComponent,
+    EditQuestionComponent
   ],
   imports: [
     Select2Module,

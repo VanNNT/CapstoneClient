@@ -11,7 +11,7 @@
             </div>
             <div id="qlist-wrapper">
               <div id="question-mini-list">
-                <div class="question-summary narrow" *ngFor="let question of questions | paginate: { itemsPerPage:10, currentPage: p }">
+                <div class="question-summary narrow" *ngFor="let question of questions |orderBy: '-count'| paginate: { itemsPerPage:10, currentPage: p }">
                   <div class="cp">
                     <div class="votes">
                       <div class="mini-counts"><span>0</span></div>
@@ -24,8 +24,8 @@
                       <span class="">{{question?.createdDateTime | date:'dd-MM-yyyy HH:mm'}}</span>
                     </div>
                   </div>
-                  <div style="float: right;padding: 30px 61px 0px 0px;">
-                    <span class="badge bg-red">2</span>
+                  <div style="float: right;padding: 30px 61px 0px 0px;" *ngIf="question?.count">
+                    <span class="badge bg-red">{{question?.count}}</span>
                   </div>
                 </div>
                 <div class="text-center">
