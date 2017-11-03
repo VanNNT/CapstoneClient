@@ -36,6 +36,7 @@ export class SearchComponent implements OnInit {
   isActive: boolean = false;
 
   ngOnInit() {
+    document.documentElement.scrollTop = 0;
     //this.changedUniversity({value:null});
     this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
     //setTimeout(()=> this.valueUniversity = 3,1000);
