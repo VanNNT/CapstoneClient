@@ -27,11 +27,11 @@
             </div>
           </div>
           <div class="box box-white" *ngFor="let majorGroup of valueMajor | groupBy">
-            <label style="font-size: 18px"
+            <label style="font-size: 18px; color: #f05f40"
                   [mdTooltip]="majorGroup.resources[0].major.groupMajor.name">Khối Ngành  {{majorGroup.name}}</label>
             <hr class="featurette-divider">
 
-            <a  style="font-size: 17px; color: black" *ngFor="let resource of majorGroup.resources"
+            <a  style="font-size: 14px; color: #333" *ngFor="let resource of majorGroup.resources"
                 (click)="showDetail(resource)"  href="/major-detail/{{resource.major.id}}">{{resource.major.majorName}}<br></a>
 
           </div>

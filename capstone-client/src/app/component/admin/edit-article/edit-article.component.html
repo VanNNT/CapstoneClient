@@ -27,7 +27,7 @@
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Mô tả chung</label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <textarea placeholder="Mô tả tối đa 100 ký tự" maxlength="100" required rows="3"
+        <textarea placeholder="Mô tả tối đa 100 ký tự" maxlength="250" required rows="3"
                   [ngModel]="articleById?.description" name="des" #des="ngModel" ngModel class="form-control" type="text"> </textarea>
         <div *ngIf="des.errors && (des.touched || editForm.submitted)" class="alert alert-danger">
           <div [hidden]="!des.errors.required">
@@ -40,7 +40,6 @@
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Nội dung<span class="required">*</span></label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         <textarea name="contents" id="summernote" ngModel="" style="height: 150px" class="form-control" type="text"> </textarea>
-        <h4 style="color: red">Chỗ này chưa validate được</h4>
         <div *ngIf="hasError" class="alert alert-danger">
           <div>
             Vui lòng nhập nội dung bài báo
@@ -51,7 +50,7 @@
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Tên trường<span class="required">*</span></label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <select2  [data]="listUniNameSelect2| async"
+        <select2 [data]="listUniNameSelect2| async"
                     [value]="articleById?.university?.id"
                  (valueChanged)="getValueUniversity($event)">
         </select2>
