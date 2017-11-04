@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Pipe({
   name: 'orderBy'
@@ -48,5 +49,13 @@ export class GroupByPipe implements PipeTransform {
     });
     }
     return Object.keys(groups).map(function (key) {return groups[key]});
+  }
+}
+
+@Pipe({ name: 'safeHtml'})
+export class SafeHtmlPipe implements PipeTransform  {
+  constructor(private sanitized: DomSanitizer) {}
+  transform(value) {
+    return this.sanitized.bypassSecurityTrustHtml(value);
   }
 }

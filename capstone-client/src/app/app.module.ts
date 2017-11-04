@@ -47,7 +47,7 @@ import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
 
 import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
 import {Constants} from "./constants";
-import { OrderByPipe, GroupByPipe } from './pipes/order-by.pipe';
+import {OrderByPipe, GroupByPipe, SafeHtmlPipe} from './pipes/order-by.pipe';
 import { EditMajorComponent } from './component/admin/edit-major/edit-major.component';
 import {DecimalPipe} from "@angular/common";
 import { MajorDetailComponent } from './component/major-detail/major-detail.component';
@@ -92,7 +92,7 @@ const providers = {
     EditUniversityComponent,
     ViewMajorUnversityComponent,
     ApproveReivewComponent,
-    OrderByPipe,GroupByPipe,
+    OrderByPipe,GroupByPipe,SafeHtmlPipe,
     EditMajorComponent,
     MajorDetailComponent,
     QuestionComponent,

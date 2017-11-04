@@ -109,8 +109,7 @@ export class SearchComponent implements OnInit {
          this.cef.detectChanges();
        },10);
       this.isFirst = false;
-    }else if(value.value && value.value != 0 &&
-      this.valueMajor != value.value && this.valueLocation != 0 && value.value != -1){
+    }else if(value.value && value.value != 0 && this.valueMajor != value.value && this.valueLocation != 0 && value.value != -1){
       setTimeout(()=>  this.valueMajor = value.value,0);
       this.valueMajor = value.value;
       this.listUniName = this.searchService.getList(this.contant.GET_BY_LOCATION_AND_MAJOR + "?majorId=" + parseInt(value.value) +
@@ -130,6 +129,21 @@ export class SearchComponent implements OnInit {
       this.isCheckForUni = false;
       this.isCheckForLocation = false;
       this.isFirst = true;
+    }else if(value.value == 0 && !this.isFirst){
+      if(!this.isCheckForMajor){
+        setTimeout(() => {this.valueMajor = value.value;}, 10);
+        if(this.valueLocation != 0){
+          this.listUniName = this.searchService.getList(this.contant.GET_UIVERSITY_BY_LOCATION+"?locationId="+ this.valueLocation);
+          if(this.valueUniversity != 0){
+            let data = this.valueUniversity;
+            this.valueUniversity = -1;
+            setTimeout(()=>{
+              this.valueUniversity = data;
+              this.cef.detectChanges();
+            },10);
+          }
+        }
+      }
     }
 
     if(!value.value || this.valueMajor == -1){
@@ -188,6 +202,27 @@ export class SearchComponent implements OnInit {
        this.isCheckForUni = false;
        this.isCheckForLocation = false;
        this.isFirst = true;
+    }else if(value.value == 0 && !this.isFirst){
+      if(!this.isCheckForLocation){
+        setTimeout(() => {this.valueLocation = value.value;}, 10);
+        if(this.valueMajor != 0){
+          this.listUniName = this.searchService.getList(this.contant.GET_UIVERSITY_BY_MAJOR+"?majorId="+ this.valueMajor);
+          if(this.valueUniversity != 0){
+            let data = this.valueUniversity;
+            this.valueUniversity = -1;
+            setTimeout(()=>{
+              this.valueUniversity = data;
+              this.cef.detectChanges();
+            },10);
+          }
+          let data = this.valueMajor;
+          this.valueMajor = -1;
+          setTimeout(() => {
+            this.valueMajor = data;
+            this.cef.detectChanges();
+          }, 100);
+        }
+      }
     }
 
     if(!value.value || this.valueLocation == -1){

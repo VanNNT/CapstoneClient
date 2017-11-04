@@ -31,13 +31,15 @@ export class HeaderComponent implements OnInit {
     if(this.url == '/'){
       this.router.navigate(['home'])
     }
-    this.uniService.getQuestionByUser(this.user.id).subscribe(res=>{
-      if(res){
-        for(let i = 0; i<res.length; i++){
-          this.count = this.count + res[i].count;
+    if(this.user){
+      this.uniService.getQuestionByUser(this.user.id).subscribe(res=>{
+        if(res){
+          for(let i = 0; i<res.length; i++){
+            this.count = this.count + res[i].count;
+          }
         }
-      }
-    });
+      });
+    }
   }
   public getUser(): void {
     this.loginService.space.subscribe(value => {
