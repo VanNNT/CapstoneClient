@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import {User} from "../../model/User";
 import {University} from "../../model/University";
-import {Review} from "../../model/Review";
-
 
 declare var $: any;
 
@@ -35,9 +33,7 @@ export class BaseService {
   getUniversity(){
     return this.university;
   }
-  setReview(data){
-    this.review = new Review(data);
-  }
+
   setLogoUni(data){
     this.logo = data;
   }

@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {BaseService} from "../../../service/base-service/base.service";
 import {Constants} from "../../../constants";
 import {ToastsManager} from "ng2-toastr";
+import {Answer} from "../../../model/Answer";
+import {RequestOptions,Headers} from "@angular/http";
 declare var $: any;
 @Component({
   selector: 'app-question-detail',
@@ -16,7 +18,7 @@ export class QuestionDetailComponent implements OnInit {
   public sub: Subscription;
   private qaId: number;
   public question: any;
-  public anwsers: any;
+  public anwsers: Answer[];
   public userId : number;
   public selectIndex: number;
   constructor(private uniService: UniversityService,private activateRoute: ActivatedRoute, private router: Router,
@@ -33,6 +35,7 @@ export class QuestionDetailComponent implements OnInit {
     this.uniService.getQuestionDetail(this.qaId, this.userId).subscribe(res => {
       this.question = res;
     });
+    var seft = this;
     setTimeout(() => {
       $('#summnernote').summernote({
         height: 200,
@@ -40,9 +43,32 @@ export class QuestionDetailComponent implements OnInit {
           ['style', ['bold', 'italic', 'underline']],
           ['fontsize', ['fontsize', 'color']],
           ['para', ['ul', 'ol', 'paragraph']],
-          ['fullscreen', ['fullscreen']]
+          ['fullscreen', ['picture','fullscreen']]
         ],
-        callbacks: {}
+        callbacks: {
+          onImageUpload: function(files) {
+            var image = $('<img id="load">').attr('src','../../../assets/image/Eclipse.gif' );
+            $('#summnernote').summernote("insertNode", image[0]);
+            var file = files[0];
+            var reader = new FileReader();
+            reader.onloadend = function() {
+              console.log('RESULT', reader)
+              let url = "https://api.imgur.com/3/image";
+              var headers = new Headers();
+              headers.append('Authorization', 'Client-ID bf915d4106b6639');
+              let options = new RequestOptions({ headers: headers });
+              let data = {
+                'image': reader.result.split(',')[1]
+              };
+              seft.uniService.uploadFile(url,data,options).subscribe((response:any)=>{
+                $('#load').remove();
+                var image = $('<img>').attr('src', response.data.link);
+                $('#summnernote').summernote("insertNode", image[0]);
+              });
+            };
+            reader.readAsDataURL(file);
+          }
+        }
       });
     }, 0);
     this.getAnswer();
@@ -55,7 +81,11 @@ export class QuestionDetailComponent implements OnInit {
 
   getAnswer(){
      this.uniService.getAnwserByQuestion(this.qaId).subscribe(res=>{
-       this.anwsers = res;
+       this.anwsers = [];
+       res.forEach(x => {
+         console.log(x);
+         this.anwsers.push(new Answer(x));
+       });
      });
   }
   onSummit(){
@@ -73,17 +103,65 @@ export class QuestionDetailComponent implements OnInit {
          let data = {
            'content' : $('#summnernote').summernote('code'),
            'users': {
-             'id': this.userId
+             'id': this.userId,
+             'name': this.baseService.getUser().name,
+             'image': this.baseService.getUser().image
            }
          }
-         this.anwsers.push(data);
+         this.anwsers.push(new Answer(data));
         $('#summnernote').summernote('code', " ");
       }, (error) => {
         this.toastr.error("Không thể kết nối với máy chủ. Vui lòng kiểm tra lại", "Thất bại", {showCloseButton: true});
       });
     }
   }
-
+  setSummernote(value){
+      var seft = this;
+      setTimeout(()=>{
+        $('#edit-summernote').summernote({
+          height: 100,
+          toolbar: [
+            ['style', ['bold', 'italic', 'underline']],
+            ['fontsize', ['fontsize', 'color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['fullscreen', ['picture','fullscreen']]
+          ],
+          callbacks: {
+            onImageUpload: function(files) {
+              var image = $('<img id="load">').attr('src','../../../assets/image/Eclipse.gif' );
+              $('#edit-summernote').summernote("insertNode", image[0]);
+              var file = files[0];
+              var reader = new FileReader();
+              reader.onloadend = function() {
+                console.log('RESULT', reader)
+                let url = "https://api.imgur.com/3/image";
+                var headers = new Headers();
+                headers.append('Authorization', 'Client-ID bf915d4106b6639');
+                let options = new RequestOptions({ headers: headers });
+                let data = {
+                  'image': reader.result.split(',')[1]
+                };
+                seft.uniService.uploadFile(url,data,options).subscribe((response:any)=>{
+                  $('#load').remove();
+                  var image = $('<img>').attr('src', response.data.link);
+                  $('#edit-summernote').summernote("insertNode", image[0]);
+                });
+              };
+              reader.readAsDataURL(file);
+            }
+          }
+        });
+        $('#edit-summernote').summernote('code',value.content);
+      });
+  }
+  onEditAnswer(value){
+   for(let i =0; i<this.anwsers.length;i++){
+     if(this.anwsers[i].id == value){
+       this.anwsers[i].content = $('#edit-summernote').summernote('code');
+       this.anwsers[i].isEdit = false;
+     }
+   }
+  }
   deleteQA(){
      let data = {
          "id": this.selectIndex

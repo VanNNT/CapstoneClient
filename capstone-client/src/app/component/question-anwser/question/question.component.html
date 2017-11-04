@@ -25,7 +25,8 @@
                     </div>
                     <div class="row" style="float: right;padding-right: 50px;">
                       <img style="width: 100%;max-width: 30px;border-radius: 50%;margin-right: 5px;" [src]="question?.users.image"/>
-                      <span class="">{{question?.users.username}}</span>
+                      <span *ngIf="!question?.users.name" class="">{{question?.users.username}}</span>
+                      <span *ngIf="question?.users.name" class="">{{question?.users.name}}</span>
                     </div>
                   </div>
                 </div>

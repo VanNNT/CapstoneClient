@@ -10,8 +10,7 @@
         </div>
       </div>
       <div style="padding: 0px 30px 30px 30px;">
-        <div class="post-text" [innerHTML]="question?.content">
-        </div>
+        <div class="post-text" [innerHTML]="question?.content | safeHtml"></div>
         <div class="started">
           <span class="">{{question?.createdDateTime | date:'dd-MM-yyyy HH:mm'}}</span>
         </div>
@@ -21,7 +20,8 @@
         </div>
         <div class="row" style="float: right;padding-right: 50px;">
           <img style="width: 100%;max-width: 30px;border-radius: 50%;margin-right: 5px;" [src]="question?.users.image"/>
-          <span class="">{{question?.users.username}}</span>
+          <span *ngIf="!question?.users.name" class="">{{question?.users.username}}</span>
+          <span *ngIf="question?.users.name" class="">{{question?.users.name}}</span>
         </div>
       </div>
       <div id="answers" *ngIf="anwsers">
@@ -40,19 +40,26 @@
                 </div>
               </td>
               <td class="answercell">
-                <div class="post-text" [innerHTML]="a.content"></div>
+                <div class="post-text" [innerHTML]="a.content | safeHtml"></div>
               </td>
             </tr>
             </tbody>
           </table>
-          <div class="row">
-            <div *ngIf="userId == a.users?.id" class="row started"  style="float: left; cursor: pointer">
-              <span style="padding-right: 10px" [routerLink]="['/edit-question', question?.id]">Sửa</span>
+          <div *ngIf="a.isEdit" class="row">
+            <textarea id="edit-summernote"></textarea>
+            <button class="btn btn-primary" (click)="onEditAnswer(a.id)">Cập nhật</button>
+          </div>
+          <div class="row" style="margin-left: 0px; margin-right: 0px;">
+            <div class="started">
+              <span class="">{{a.createdDateTime | date:'dd-MM-yyyy HH:mm'}}</span>
+            </div>
+            <div *ngIf="userId == a.userId" class="row started"  style="float: left; cursor: pointer">
+              <span style="padding-right: 10px" id="btnEdit" (click)= "setSummernote(a); a.isEdit = true" >Sửa</span>
               <span data-toggle="modal" data-target="#myModal" (click)="selectIndex = a.id">Xóa</span>
             </div>
             <div class="row" style="float: right;padding-right: 50px;">
-              <img style="width: 100%;max-width: 30px;border-radius: 50%;margin-right: 5px;" [src]="a?.users.image"/>
-              <span class="">{{a?.users.username}}</span>
+              <img style="width: 100%;max-width: 30px;border-radius: 50%;margin-right: 5px;" [src]="a.userImage"/>
+              <span class="">{{a.userName}}</span>
             </div>
           </div>
         </div>
