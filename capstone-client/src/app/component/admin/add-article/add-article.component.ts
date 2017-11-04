@@ -99,6 +99,8 @@ export class AddArticleComponent implements OnInit {
     let content = $('#summernote').summernote('code');
     if(content == " "){
       this.hasError = true;
+    }else{
+      this.hasError = false;
     }
     if(form.valid && this.isCheck && !this.hasError){
     let data = {
