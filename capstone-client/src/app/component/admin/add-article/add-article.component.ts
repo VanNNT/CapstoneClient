@@ -21,6 +21,9 @@ export class AddArticleComponent implements OnInit {
   public listUniName: Observable<Select2OptionData[]>;
   public options: Select2Options;
   public valueUniversity;
+  public valueMajorName: any[];
+  public tagMajorName: any[];
+  public testTag: any;
   public hasError: boolean = false;
   public isCheck: boolean = false;
   constructor(private uniService: UniversityService, private router: Router,
@@ -47,7 +50,7 @@ export class AddArticleComponent implements OnInit {
           var file = files[0];
           var reader = new FileReader();
           reader.onloadend = function() {
-            console.log('RESULT', reader)
+            // console.log('RESULT', reader)
             let url = "https://api.imgur.com/3/image";
             var headers = new Headers();
             headers.append('Authorization', 'Client-ID bf915d4106b6639');
@@ -81,16 +84,36 @@ export class AddArticleComponent implements OnInit {
   getUniversity(){
     this.listUniName = this.searchService.getList(this.constants.UNIVERSITY);
   }
-  changedUniversity(value){
-  this.valueUniversity = value;
-  if(this.valueUniversity.value == 0){
-    this.isCheck = false;
-  } else {
-    this.isCheck = true;
+  getMajorUniversity(value){
+    this.uniService.getMajorUniversity(value).subscribe((res: any)=>{
+      this.valueMajorName = res;
+      console.log(this.valueMajorName);
+    })
   }
+
+  changedUniversity(value) {
+    this.valueUniversity = value;
+    if(this.valueUniversity.value != 0){
+      this.getMajorUniversity(this.valueUniversity.value);
+    }
+    if (this.valueUniversity.value == 0) {
+      this.isCheck = false;
+    } else {
+      this.isCheck = true;
+    }
   }
 
   public onSave(form: NgForm){
+
+      console.log(form.value);
+    if(form.value.tagMajor != null){
+      this.tagMajorName = [];
+      for(let i = 0; i < form.value.tagMajor.length; i++){
+        this.tagMajorName.push(form.value.tagMajor[i].id);
+      }
+    }
+
+
     // if($('#summernote').summernote('code').length < 100 || $('#summernote').summernote('code').length > 400){
     //   this.isCheck = true;
     // }else{
@@ -99,8 +122,11 @@ export class AddArticleComponent implements OnInit {
     let content = $('#summernote').summernote('code');
     if(content == " "){
       this.hasError = true;
+    }else{
+      this.hasError = false;
     }
     if(form.valid && this.isCheck && !this.hasError){
+      console.log("form valid !!!!!!!!!!!!!");
     let data = {
       'code': form.value.code,
       'title': form.value.title,
@@ -110,7 +136,9 @@ export class AddArticleComponent implements OnInit {
       'university': {
         'id': this.valueUniversity.value
       },
+      'tags': this.tagMajorName,
     };
+    console.log(data);
     let seft = this;
     this.reviewService.saveArticle(data).subscribe((res: any) => {
       if(res){

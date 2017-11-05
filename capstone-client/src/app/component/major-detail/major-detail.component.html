@@ -1,3 +1,4 @@
+
 <div>
   <!--//<img src="../../../assets/image/logo.png" height="152" width="200"/>-->
   <img class="img-major" src="../../../assets/image/baim.jpg"/>
@@ -14,10 +15,16 @@
   </div>
 </div>
 
+
 <div id="main" style="margin-top: 0px;">
   <!--Major -->
   <div class="container" id="company-detail">
     <!--img page-->
+    <div class="row text-center ">
+      <h2 class="uni-title" [routerLink]="['/university',university?.id]">
+        <b>{{university?.name}}</b>
+      </h2>
+    </div>
     <div class="row">
       <div class="col-md-3">
         <div class="company-profile">

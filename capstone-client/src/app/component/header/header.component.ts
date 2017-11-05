@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
   public getCount(): void {
     this.uniService.title.subscribe(value=>{
       this.count = value;
-      this.cdRef.detectChanges();
+      this.cdRef.markForCheck();
     })
   }
   public logout(value) {

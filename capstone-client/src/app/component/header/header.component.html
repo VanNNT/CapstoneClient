@@ -17,11 +17,11 @@
           <li class="text-li"><a routerLink="/home">Trang chủ</a>
           <li class="text-li"><a routerLink="/article">Tin tức</a>
           <li class="text-li"><a routerLink="/search-university">Tìm trường</a></li>
-          <li class="text-li"><a routerLink="/mbti-test">Trắc nghiệm tính cách MBTI</a></li>
+          <li class="text-li"><a routerLink="/mbti-test">MBTI</a></li>
           <li class="text-li"><a routerLink="/question">Câu hỏi</a></li>
           <a id="linkFake" [hidden]="true" routerLink="/profile"></a>
           <a id="linkFakeQuestion" [hidden]="true" [routerLink]="['/your-question']"></a>
-          <div *ngIf="count != 0" class="answer-notify" [routerLink]="['/your-question']">
+          <div *ngIf="count && count != 0" class="answer-notify" [routerLink]="['/your-question']">
             <span class="badge bg-red">{{count}}</span>
           </div>
           <li *ngIf="user" class="dropdown">

@@ -100,6 +100,9 @@ export class QuestionDetailComponent implements OnInit {
         }
       };
       this.uniService.saveQuestionAnswer(data).subscribe(res => {
+        if(!this.anwsers){
+          this.anwsers = [] ;
+        }
          let data = {
            'content' : $('#summnernote').summernote('code'),
            'users': {

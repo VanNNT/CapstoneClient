@@ -21,7 +21,10 @@ export class EditArticleComponent implements OnInit {
   public sub: Subscription;
   public id;
   public uniId;
+  public valueMajorName: any[];
   public articleById: any;
+  public tagArticleById; //Set lai ID = majorUniId hien tags da add
+  public tagMajorName: any[]; //List value tag from updateForm (id)
   public hasError: boolean = false;
   public logoSrc: any = '';
   public isLoadImage: any='';
@@ -75,14 +78,28 @@ export class EditArticleComponent implements OnInit {
       this.id = params['id'];
       setTimeout(()=>{
         this.getArticleById(this.id);
+        this.getTagArticle(this.id);
       },0)
     });
 
+  }
+  //Set value tag input khi moi vao
+  getTagArticle(data){
+    this.reviewService.getTagArticle(data).subscribe((res: any)=>{
+      this.tagArticleById = [];
+      for(let i = 0; i < res.length; i++){
+        this.tagArticleById.push({
+          'id': res[i].majorUniId,
+          'majorName': res[i].majorName,
+        })
+      }
+    })
   }
 
   getArticleById(data: number){
     this.reviewService.getArticleById(data).subscribe((res: any)=>{
       this.articleById = res;
+      console.log(res);
       $('#summernote').summernote('code', this.articleById.contents);
       this.logoSrc = this.articleById.image;
       this.baseService.setLogoUni(this.logoSrc);
@@ -92,9 +109,20 @@ export class EditArticleComponent implements OnInit {
 
   getValueUniversity(data){
     this.uniId = data.value;
+    this.uniService.getMajorUniversity(data.value).subscribe((res: any)=>{
+      this.valueMajorName = res;
+    })
   }
 
   public onUpdate(editForm: NgForm){
+
+    if(editForm.value.tagMajor != null){
+      this.tagMajorName = [];
+      for(let i = 0; i < editForm.value.tagMajor.length; i++){
+        this.tagMajorName.push(editForm.value.tagMajor[i].id);
+      }
+    }
+
     let content = $('#summernote').summernote('code');
     if(content == " "){
       this.hasError = true;
@@ -110,7 +138,9 @@ export class EditArticleComponent implements OnInit {
         'university': {
           'id': this.uniId //cho thay đổi trường nha a ok
         },
+        'tags': this.tagMajorName,
       };
+      console.log(data);
       let seft = this;
       this.reviewService.uploadArticle(data).subscribe((res: Response) => {
         if(res){
