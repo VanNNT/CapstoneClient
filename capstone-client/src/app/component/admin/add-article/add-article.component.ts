@@ -21,6 +21,9 @@ export class AddArticleComponent implements OnInit {
   public listUniName: Observable<Select2OptionData[]>;
   public options: Select2Options;
   public valueUniversity;
+  public valueMajorName: any[];
+  public tagMajorName: any[];
+  public testTag: any;
   public hasError: boolean = false;
   public isCheck: boolean = false;
   constructor(private uniService: UniversityService, private router: Router,
@@ -47,7 +50,7 @@ export class AddArticleComponent implements OnInit {
           var file = files[0];
           var reader = new FileReader();
           reader.onloadend = function() {
-            console.log('RESULT', reader)
+            // console.log('RESULT', reader)
             let url = "https://api.imgur.com/3/image";
             var headers = new Headers();
             headers.append('Authorization', 'Client-ID bf915d4106b6639');
@@ -81,16 +84,49 @@ export class AddArticleComponent implements OnInit {
   getUniversity(){
     this.listUniName = this.searchService.getList(this.constants.UNIVERSITY);
   }
-  changedUniversity(value){
-  this.valueUniversity = value;
-  if(this.valueUniversity.value == 0){
-    this.isCheck = false;
-  } else {
-    this.isCheck = true;
+  getMajorUniversity(value){
+    this.uniService.getMajorUniversity(value).subscribe((res: any)=>{
+      this.valueMajorName = res;
+      // this.tagMajorName = [];
+      //console.log(res);
+      // for(let i = 0; i < res.majorUniversities.length; i++){
+      //   if(res.majorUniversities[i].isActive){
+      //     this.valueMajorName.push({
+      //       display: res.majorUniversities[i].major.majorName,
+      //       value: res.majorUniversities[i].major.id,          });
+      //     //res.majorUniversities[i].major.majorName
+      //     // this.testTag = {
+      //     //   value: res.majorUniversities[i].major.majorName,
+      //     //   id: res.majorUniversities[i].major.id,
+      //     // };
+      //     // this.tagMajorName.push(this.testTag);
+      //   }
+      // }
+      console.log(this.valueMajorName);
+      // console.log(this.tagMajorName);
+    })
   }
+
+  changedUniversity(value) {
+    this.valueUniversity = value;
+    if(this.valueUniversity.value != 0){
+      this.getMajorUniversity(this.valueUniversity.value);
+    }
+    if (this.valueUniversity.value == 0) {
+      this.isCheck = false;
+    } else {
+      this.isCheck = true;
+    }
   }
 
   public onSave(form: NgForm){
+    //Tag input major
+    //Object or Array [modelAsStrings]="true or false"
+    console.log(form.value);
+    //consolelog nay ne@@
+
+
+
     // if($('#summernote').summernote('code').length < 100 || $('#summernote').summernote('code').length > 400){
     //   this.isCheck = true;
     // }else{
@@ -103,6 +139,7 @@ export class AddArticleComponent implements OnInit {
       this.hasError = false;
     }
     if(form.valid && this.isCheck && !this.hasError){
+      console.log("form valid !!!!!!!!!!!!!");
     let data = {
       'code': form.value.code,
       'title': form.value.title,
