@@ -87,23 +87,7 @@ export class AddArticleComponent implements OnInit {
   getMajorUniversity(value){
     this.uniService.getMajorUniversity(value).subscribe((res: any)=>{
       this.valueMajorName = res;
-      // this.tagMajorName = [];
-      //console.log(res);
-      // for(let i = 0; i < res.majorUniversities.length; i++){
-      //   if(res.majorUniversities[i].isActive){
-      //     this.valueMajorName.push({
-      //       display: res.majorUniversities[i].major.majorName,
-      //       value: res.majorUniversities[i].major.id,          });
-      //     //res.majorUniversities[i].major.majorName
-      //     // this.testTag = {
-      //     //   value: res.majorUniversities[i].major.majorName,
-      //     //   id: res.majorUniversities[i].major.id,
-      //     // };
-      //     // this.tagMajorName.push(this.testTag);
-      //   }
-      // }
       console.log(this.valueMajorName);
-      // console.log(this.tagMajorName);
     })
   }
 
@@ -120,11 +104,14 @@ export class AddArticleComponent implements OnInit {
   }
 
   public onSave(form: NgForm){
-    //Tag input major
-    //Object or Array [modelAsStrings]="true or false"
-    console.log(form.value);
-    //consolelog nay ne@@
 
+      console.log(form.value);
+    if(form.value.tagMajor != null){
+      this.tagMajorName = [];
+      for(let i = 0; i < form.value.tagMajor.length; i++){
+        this.tagMajorName.push(form.value.tagMajor[i].id);
+      }
+    }
 
 
     // if($('#summernote').summernote('code').length < 100 || $('#summernote').summernote('code').length > 400){
@@ -149,7 +136,9 @@ export class AddArticleComponent implements OnInit {
       'university': {
         'id': this.valueUniversity.value
       },
+      'tags': this.tagMajorName,
     };
+    console.log(data);
     let seft = this;
     this.reviewService.saveArticle(data).subscribe((res: any) => {
       if(res){

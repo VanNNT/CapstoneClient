@@ -16,7 +16,7 @@
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Tiêu đề<span class="required">*</span>
       </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <input required name="title" type="text"  ngModel #title="ngModel"  class="form-control">
+        <input required name="title" type="text" maxlength="70" ngModel #title="ngModel"  class="form-control">
         <div *ngIf="title.errors && (title.touched || form.submitted)" class="alert alert-danger">
           <div [hidden]="!title.errors.required">
             Vui lòng nhập tiêu đề
@@ -27,7 +27,7 @@
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12">Mô tả</label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <textarea placeholder="Mô tả tối đa 100 ký tự" maxlength="250" name="des" #des="ngModel" ngModel rows="3" class="form-control" type="text"> </textarea>
+        <textarea placeholder="Mô tả tối đa 250 ký tự" maxlength="250" name="des" #des="ngModel" ngModel rows="3" class="form-control" type="text"> </textarea>
         <div *ngIf="des.errors && (des.touched || form.submitted)" class="alert alert-danger">
           <div [hidden]="!des.errors.required">
             Vui lòng nhập mô tả chung
@@ -73,7 +73,7 @@
                               [identifyBy]="'id'"
                               [autocompleteItems]="valueMajorName">
             <ng-template let-item="item" let-index="index">
-              ({{ index }}) {{ item.id }}:
+              <!--({{ index }}) {{ item.id }}:-->
               {{ item.majorName }}
             </ng-template>
           </tag-input-dropdown>
