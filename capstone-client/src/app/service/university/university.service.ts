@@ -68,13 +68,28 @@ export class UniversityService {
       .map((response: Response) => response.json());
   }
 
-  getAnwserByQuestion(questionId): Observable<any>{
-    return this._http.get(this.contant.ANSWER_BY_QUESTION+"?questionId="+questionId)
+  getAnwserByQuestion(questionId,userId): Observable<any>{
+    return this._http.get(this.contant.ANSWER_BY_QUESTION+"?qaId="+questionId + "&userId="+ userId)
       .map((response: Response) => response.json());
   }
 
   deleteQA(data): Observable<any>{
     return this._http.post(this.contant.DELETE_QUESTION_ANSWER,data)
+      .map((response: Response) => response.json());
+  }
+
+  updateQA(data): Observable<any>{
+    return this._http.post(this.contant.UPDATE_QUESTION_ANSWER,data).map((response: Response) => response.json());
+  }
+
+
+  getCountAnwser(qaId): Observable<any>{
+    return this._http.get(this.contant.COUNT_ANSWER+"?qaId="+qaId)
+      .map((response: Response) => response.json());
+  }
+
+  voteAnswer(data): Observable<any>{
+    return this._http.post(this.contant.VOTE,data)
       .map((response: Response) => response.json());
   }
 }

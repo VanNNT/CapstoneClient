@@ -62,6 +62,9 @@ export class Constants{
   public QUESTIONS_BY_USER = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/questions-by-user";
   public ANSWER_BY_QUESTION = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/answer-by-question";
   public DELETE_QUESTION_ANSWER = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/delete-question-answer";
+  public UPDATE_QUESTION_ANSWER = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/update";
+  public COUNT_ANSWER = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/count-answer";
+  public VOTE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/vote/save";
 
   //ERROR
   public UNAUTHORIZED = 401;
