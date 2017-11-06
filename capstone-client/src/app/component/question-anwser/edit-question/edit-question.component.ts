@@ -82,10 +82,22 @@ export class EditQuestionComponent implements OnInit {
       this.isCheck = false;
     }
     if (form.valid && !this.isCheck) {
-      //this.toastr.success("Bạn đã đặt câu hỏi thành công", "Thành công", {showCloseButton: true})
-      setTimeout(() => {
-        seft.router.navigate(['/question-detail/'+ this.qaId]);
-      }, 0);
+      let data = {
+        'title': form.value.title,
+        'content': $('#summernote').summernote('code'),
+        'id': this.qaId,
+        'users':{
+          'id': this.userId
+        }
+      };
+      this.uniService.updateQA(data).subscribe(res=>{
+        this.toastr.success("Bạn đã đặt câu hỏi thành công", "Thành công", {showCloseButton: true});
+        setTimeout(() => {
+          seft.router.navigate(['/question-detail/'+ this.qaId]);
+        }, 100);
+      },(error)=>{
+        this.toastr.error("Không thể kết nối với máy chủ. Vui lòng kiểm tra lại", "Thất bại", {showCloseButton: true});
+      });
     }
 
   }

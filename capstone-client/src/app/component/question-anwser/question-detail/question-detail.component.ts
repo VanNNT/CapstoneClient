@@ -80,16 +80,15 @@ export class QuestionDetailComponent implements OnInit {
   }
 
   getAnswer(){
-     this.uniService.getAnwserByQuestion(this.qaId).subscribe(res=>{
+     this.uniService.getAnwserByQuestion(this.qaId,this.userId).subscribe(res=>{
        this.anwsers = [];
        res.forEach(x => {
-         console.log(x);
          this.anwsers.push(new Answer(x));
        });
      });
   }
   onSummit(){
-    if($('#summnernote').summernote('code').length > 0){
+    if(!$('#summnernote').summernote('isEmpty')){
       let data = {
         'title': '',
         "content": $('#summnernote').summernote('code'),
@@ -104,7 +103,9 @@ export class QuestionDetailComponent implements OnInit {
           this.anwsers = [] ;
         }
          let data = {
+           'id': res,
            'content' : $('#summnernote').summernote('code'),
+           'vote': 0,
            'users': {
              'id': this.userId,
              'name': this.baseService.getUser().name,
@@ -158,12 +159,43 @@ export class QuestionDetailComponent implements OnInit {
       });
   }
   onEditAnswer(value){
-   for(let i =0; i<this.anwsers.length;i++){
-     if(this.anwsers[i].id == value){
-       this.anwsers[i].content = $('#edit-summernote').summernote('code');
-       this.anwsers[i].isEdit = false;
-     }
-   }
+    if(!$('#edit-summernote').summernote('isEmpty')){
+      let data = {
+        'title': '',
+        'content': $('#edit-summernote').summernote('code'),
+        'id': value,
+        'users':{
+          'id': this.userId
+        }
+      };
+      this.uniService.updateQA(data).subscribe(res=>{
+        for(let i =0; i<this.anwsers.length;i++){
+          if(this.anwsers[i].id == value){
+            this.anwsers[i].content = $('#edit-summernote').summernote('code');
+            this.anwsers[i].isEdit = false;
+            $('#edit-summernote').summernote('code', '');
+          }
+        }
+      },(error)=>{
+        this.toastr.error("Không thể kết nối với máy chủ. Vui lòng kiểm tra lại", "Thất bại", {showCloseButton: true});
+      });
+    }
+  }
+  setVote(value){
+    if(value.userId != this.userId && !value.isVote){
+      let data = {
+        'user': {
+          'id': this.userId
+        },
+        'questionAnswer':{
+          'id': value.id
+        }
+      };
+        this.uniService.voteAnswer(data).subscribe(res=>{
+            value.isVote = true;
+            value.vote = value.vote + 1;
+        });
+    }
   }
   deleteQA(){
      let data = {

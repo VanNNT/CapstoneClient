@@ -1,18 +1,19 @@
 export class Answer {
   id: number;
   content: string;
-  createdDateTime: string;
+  lastUpdatedTime: string;
   parentId: number;
   userId: number;
   userName: string;
   userImage: string;
-  vote: number;
+  vote: number = 0;
   isEdit: boolean;
+  isVote: boolean = false;
   constructor(data: any) {
     if (data) {
      this.id = data.id;
      this.content = data.content;
-     this.createdDateTime = data.createdDateTime;
+     this.lastUpdatedTime = data.lastUpdatedTime;
      this.parentId = data.parentId;
      this.userId = data.users.id;
      if(data.users.name){
@@ -20,8 +21,13 @@ export class Answer {
      }else{
        this.userName = data.users.username;
      }
-     this.userImage = data.users.image;
+     if(data.users.image){
+       this.userImage = data.users.image;
+     }else{
+       this.userImage = '../../../assets/image/avatar-default.jpg';
+     }
      this.vote = data.vote;
+     this.isVote = data.isVoteByUser;
      this.isEdit = false;
     }
   }

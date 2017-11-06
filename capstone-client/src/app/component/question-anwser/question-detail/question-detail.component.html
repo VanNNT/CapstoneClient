@@ -12,7 +12,7 @@
       <div style="padding: 0px 30px 30px 30px;">
         <div class="post-text" [innerHTML]="question?.content | safeHtml"></div>
         <div class="started">
-          <span class="">{{question?.createdDateTime | date:'dd-MM-yyyy HH:mm'}}</span>
+          <span class="">{{question?.lastUpdatedTime | date:'dd-MM-yyyy HH:mm'}}</span>
         </div>
         <div *ngIf="userId == question?.users.id" class="row started"  style="float: left; cursor: pointer">
           <span style="padding-right: 10px" [routerLink]="['/edit-question', question?.id]">Sửa</span>
@@ -30,13 +30,13 @@
             <h2>{{anwsers?.length}} Câu trả lời</h2>
           </div>
         </div>
-        <div class="answer" *ngFor="let a of anwsers">
+        <div class="answer" *ngFor="let a of anwsers | orderBy: '-vote'">
           <table>
             <tbody><tr>
               <td class="votecell">
                 <div class="vote">
-                  <div class="fa fa-thumbs-o-up"></div>
-                  <span class="vote-count-post ">0</span>
+                  <div [ngClass]="{'isActive': a.isVote}" class="fa fa-thumbs-o-up" (click)="setVote(a)"></div>
+                  <span class="vote-count-post" [ngClass]="{'isActive': a.isVote}">{{a.vote}}</span>
                 </div>
               </td>
               <td class="answercell">
@@ -51,10 +51,10 @@
           </div>
           <div class="row" style="margin-left: 0px; margin-right: 0px;">
             <div class="started">
-              <span class="">{{a.createdDateTime | date:'dd-MM-yyyy HH:mm'}}</span>
+              <span class="">{{a.lastUpdatedTime | date:'dd-MM-yyyy HH:mm'}}</span>
             </div>
-            <div *ngIf="userId == a.userId" class="row started"  style="float: left; cursor: pointer">
-              <span style="padding-right: 10px" id="btnEdit" (click)= "setSummernote(a); a.isEdit = true" >Sửa</span>
+            <div *ngIf="userId == a.userId && a.id" class="row started"  style="float: left; cursor: pointer">
+              <span style="padding-right: 10px" id="btnEdit" (click)= "setSummernote(a); a.isEdit = true">Sửa</span>
               <span data-toggle="modal" data-target="#myModal" (click)="selectIndex = a.id">Xóa</span>
             </div>
             <div class="row" style="float: right;padding-right: 50px;">
