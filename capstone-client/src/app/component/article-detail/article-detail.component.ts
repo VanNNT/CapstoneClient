@@ -12,6 +12,7 @@ export class ArticleDetailComponent implements OnInit {
   public id;
   public sub: Subscription;
   public article;
+  public articleUni;
   constructor(private activatedRoute: ActivatedRoute, private reviewService: ReviewService) { }
 
   ngOnInit() {
@@ -20,12 +21,19 @@ export class ArticleDetailComponent implements OnInit {
       this.id = params['id'];
     });
     this.getArticle(this.id);
-    console.log(this.article);
   }
 
   getArticle(data){
     this.reviewService.getArticleById(data).subscribe((res: any)=>{
       this.article = res;
+      console.log(this.article);
+      this.getArticleUni(this.article.university.id);
+    })
+  }
+
+  getArticleUni(data){
+    this.reviewService.getNewestArticle(data).subscribe((res: any)=>{
+      this.articleUni = res;
     })
   }
 

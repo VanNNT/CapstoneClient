@@ -62,6 +62,8 @@ import { ArticleComponent } from './component/article/article.component';
 import { EditArticleComponent } from './component/admin/edit-article/edit-article.component';
 import { ArticleDetailComponent } from './component/article-detail/article-detail.component';
 import { EditQuestionComponent } from './component/question-anwser/edit-question/edit-question.component';
+import { TagInputModule } from 'ngx-chips';
+
 const providers = {
   'google': {
     'clientId': '525175435249-fcon5618ugd00jij2o066g7k3266n3mb.apps.googleusercontent.com'
@@ -122,6 +124,7 @@ const providers = {
     ToastModule.forRoot(),
     NgbModule,
     MatTooltipModule,
+    TagInputModule,
   ],
   providers: [LoginService, BaseService, CheckLoginGuard,
     CheckRoleGuard, SearchService,Constants,

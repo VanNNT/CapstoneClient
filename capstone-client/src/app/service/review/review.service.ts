@@ -74,4 +74,7 @@ export class ReviewService {
   getNewestArticle(data){
     return this._http.get(this.contant.GET_NEWEST_ARTICLE+"?universityId="+data).map((res: Response)=> res.json());
   }
+  getTagArticle(data){
+    return this._http.get(this.contant.GET_TAG_ARTICLE+"?articleId="+data).map((res: Response)=>res.json());
+  }
 }
