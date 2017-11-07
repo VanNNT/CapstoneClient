@@ -77,4 +77,17 @@ export class ReviewService {
   getTagArticle(data){
     return this._http.get(this.contant.GET_TAG_ARTICLE+"?articleId="+data).map((res: Response)=>res.json());
   }
+
+  saveFavorite(data){
+    return this._http.post(this.contant.SAVE_FAVORITE,data).map((res: Response)=>res.json());
+  }
+  checkFavorite(data){
+    return this._http.post(this.contant.CHECK_FAVORITE,data).map((res: Response)=>res.json());
+  }
+  deleteFavorite(data){
+    return this._http.post(this.contant.DELETE_FAVORITE,data).map((res: Response)=> res.json());
+  }
+  getYourArticle(data){
+    return this._http.get(this.contant.GET_YOUR_ARTICLE+"?userId="+data).map((res: Response)=> res.json());
+  }
 }

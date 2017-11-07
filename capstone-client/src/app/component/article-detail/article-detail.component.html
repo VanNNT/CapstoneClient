@@ -2,14 +2,21 @@
 <div class="container">
   <div class="box box-white">
     <h2><b>{{article?.title}}</b></h2>
-    <a style="color: #f05f40" *ngIf="article" [routerLink]="['/university',article?.university?.id]">
-      {{article?.university?.name}}</a>
+    <a style="color: #f05f40" *ngIf="article" [routerLink]="['/university',article?.universityId]">
+      {{article?.universityName}}</a>
     <p><i class="fa fa-clock-o" aria-hidden="true"></i> {{article?.createDate | date: 'shortDate'}}</p>
     <p><strong>{{article?.description}}</strong></p>
     <div [innerHTML]="article?.contents"></div>
-    <div><a style="color: #f05f40; text-decoration: none; font-size: 25px" *ngIf="article" [routerLink]="['/university',article?.university?.id]">
+    <div style="margin-bottom: 20px; margin-top: 20px"><a style="color: #f05f40; text-decoration: none; font-size: 25px" *ngIf="article" [routerLink]="['/university',article?.universityId]">
       <i class="fa fa-forward" aria-hidden="true"></i>
-      {{article?.university?.name}}</a></div>
+      {{article?.universityName}}</a>
+    </div>
+    <div style="margin-bottom: 10px">
+      <strong>Tags:</strong>
+      <span *ngFor="let tag of tagArticle" style="padding: 7px; margin: 7px; border-radius: 15px; background: rgba(0, 0, 0, 0.05);">
+      {{tag.majorName}}
+      </span>
+    </div>
   </div>
   <div class="company-profile">
     <div class="box-group-header">

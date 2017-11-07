@@ -36,6 +36,8 @@ export class MajorDetailComponent implements OnInit, OnDestroy {
   public showStarCareer;
   public checkReviewUniMajor: boolean;
   public valueMajor;
+  public checkFavoriteMajor: boolean;
+  public dataSaveFavorite: any;
 
   constructor(private baseService: BaseService, private reviewService: ReviewService, private router: Router,
               private toastr: ToastsManager, private activateRoute: ActivatedRoute, private constants: Constants,
@@ -109,10 +111,13 @@ export class MajorDetailComponent implements OnInit, OnDestroy {
           "id": this.user.id
         }
     };
-
+      this.dataSaveFavorite = data;
+    this.reviewService.checkFavorite(data).subscribe((res: any)=>{
+      this.checkFavoriteMajor = res;
+    });
     this.reviewService.checkReviewUniMajor(data).subscribe((res: any)=>{
       this.checkReviewUniMajor = res;
-    })
+    });
     }
     this.reviewService.getStarReviewMajor(this.majorUniversity.id).subscribe((res:any)=>{
       if(res){
@@ -165,6 +170,17 @@ export class MajorDetailComponent implements OnInit, OnDestroy {
     localStorage.setItem("MAJOR_UNI",JSON.stringify(value));
     //this.router.navigate(['/major-detail',value.major.id]);
   }
+  saveFavorite(){
+    this.reviewService.saveFavorite(this.dataSaveFavorite).subscribe((res: any)=>{
+      this.checkFavoriteMajor = res;
+      if(res){
+        this.toastr.success('Đã thêm vào danh sách', 'Thành công',{showCloseButton: true});
+      }
+    },(error =>{
+      this.toastr.error('Đã xảy ra lỗi vui lòng thử lại', 'Thất bại',{showCloseButton: true});
+    }));
+  }
+
   ngOnDestroy(){
   }
 

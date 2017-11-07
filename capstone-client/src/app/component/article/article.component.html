@@ -9,8 +9,13 @@
 </header>
 
 <div class="container">
+  <div class="type-article">
+    <button style="min-width: 250px" type="button" class="btn btn-info" (click)="getListArticle()">Tin Tức Tổng Hợp</button>
+    <button style="min-width: 250px" type="button" class="btn btn-info"(click)="getYourArticle()">Tin Tức Dành Cho Bạn</button>
+  </div>
 
-  <div class="featurette"
+  <div *ngIf="listArticle?.length > 0">
+    <div class="featurette"
        *ngFor="let article of listArticle | paginate: { itemsPerPage:5, currentPage: p }; let odd = odd; let even = even; let fst = first"
        [ngClass]="{'right-text': odd}">
     <hr class="featurette-divider">
@@ -29,5 +34,10 @@
   </div>
   <div class="text-center"><pagination-controls (pageChange)="p =$event" previousLabel=""
                                                 nextLabel=""></pagination-controls></div>
+  </div>
+  <div *ngIf="listArticle?.length == 0" class="text-center" style="margin-top: 80px">
 
+      <h1 style="color:red;">Không tìm thấy bài phù hợp</h1>
+
+  </div>
 </div>

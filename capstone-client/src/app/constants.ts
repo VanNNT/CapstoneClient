@@ -64,6 +64,10 @@ export class Constants{
   public ANSWER_BY_QUESTION = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/answer-by-question";
   public DELETE_QUESTION_ANSWER = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/delete-question-answer";
   public GET_TAG_ARTICLE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/get-tag-article";
+  public SAVE_FAVORITE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/favorite/save-favorite";
+  public CHECK_FAVORITE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/favorite/check-favorite";
+  public DELETE_FAVORITE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/favorite/delete";
+   public GET_YOUR_ARTICLE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/get-your-article";
   //ERROR
   public UNAUTHORIZED = 401;
   public CONFLICT = 409;

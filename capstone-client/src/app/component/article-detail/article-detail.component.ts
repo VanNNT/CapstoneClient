@@ -13,6 +13,7 @@ export class ArticleDetailComponent implements OnInit {
   public sub: Subscription;
   public article;
   public articleUni;
+  public tagArticle;
   constructor(private activatedRoute: ActivatedRoute, private reviewService: ReviewService) { }
 
   ngOnInit() {
@@ -21,13 +22,14 @@ export class ArticleDetailComponent implements OnInit {
       this.id = params['id'];
     });
     this.getArticle(this.id);
+    this.getTagArticle(this.id);
   }
 
   getArticle(data){
     this.reviewService.getArticleById(data).subscribe((res: any)=>{
       this.article = res;
       console.log(this.article);
-      this.getArticleUni(this.article.university.id);
+      this.getArticleUni(this.article.universityId);
     })
   }
 
@@ -36,5 +38,10 @@ export class ArticleDetailComponent implements OnInit {
       this.articleUni = res;
     })
   }
-
+  getTagArticle(data){
+    this.reviewService.getTagArticle(data).subscribe((res: any)=>{
+      this.tagArticle = res;
+      console.log(this.tagArticle);
+    })
+  }
 }
