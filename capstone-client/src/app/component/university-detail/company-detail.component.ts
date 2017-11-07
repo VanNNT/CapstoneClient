@@ -71,6 +71,7 @@ public currentUrl;
           this.valueMajor.push(this.university.majorUniversities[i]);
         }
       }
+      console.log(this.valueMajor);
     });
     this.reviewService.getStarPoint(this.id).subscribe((res: any) => {
       if (res) {

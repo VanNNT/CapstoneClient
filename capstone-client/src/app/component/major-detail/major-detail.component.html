@@ -48,7 +48,11 @@
         <div class="company-profile">
           <div class="box-group-header">
             <div class="row">
-              <div class="box-group-title col-xs-8"><a><strong>Giới thiệu ngành học: {{majorDetail.majorName}}</strong></a></div>
+              <div class="box-group-title col-xs-8">
+                <a><strong>Giới thiệu ngành học: {{majorDetail.majorName}}</strong></a>
+                <button *ngIf="!checkFavoriteMajor" type="button" class="btn btn-warning" (click)="saveFavorite()">Yêu Thích</button>
+                <button *ngIf="checkFavoriteMajor" type="button" class="btn btn-success">Đã Thích</button>
+              </div>
             </div>
           </div>
           <div class="box box-white" id="company-about">
