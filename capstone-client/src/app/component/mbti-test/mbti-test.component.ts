@@ -6,7 +6,7 @@ import {MbtiService} from "../../service/mbti/mbti.service";
 import {BaseService} from "../../service/base-service/base.service";
 import {Constants} from "../../constants";
 import {ToastsManager} from "ng2-toastr";
-
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-mbti-test',
@@ -166,6 +166,7 @@ export class MbtiTestComponent implements OnInit {
         }
       });
     }
+    document.body.scrollTop = 0;
     this.tested = true;
     this.scores = {
       E: 0,
@@ -180,6 +181,16 @@ export class MbtiTestComponent implements OnInit {
     for (let i = 0; i < this.questions.length; i++) {
       this.questions[i].isChecked = false;
       this.questions[i].fullChecked = false;
+    }
+  }
+
+  public cancel(){
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    if(this.update){
+      this.tested = true;
+    }else{
+      this.router.navigate(['/search-university']);
     }
   }
 }

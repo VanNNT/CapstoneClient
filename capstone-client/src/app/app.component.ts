@@ -7,6 +7,7 @@ import {Constants} from "./constants";
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import {User} from "./model/User";
 import {BaseService} from "./service/base-service/base.service";
+import {UniversityService} from "./service/university/university.service";
 
 
 
@@ -21,7 +22,8 @@ export class AppComponent implements OnInit, OnDestroy {
   sub: any;
   public title;
   public content;
-  constructor(private auth: AuthService, private loginService: LoginService, private baseService: BaseService,
+  constructor(private auth: AuthService, private loginService: LoginService,
+              private baseService: BaseService, private uniService : UniversityService,
               private contants: Constants,public toastr: ToastsManager, vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
@@ -55,6 +57,13 @@ export class AppComponent implements OnInit, OnDestroy {
             this.loginService.setLogin(true);
             this.loginService.setRole(this.user.role.id);
             this.loginService.broadcastTextChange(this.user);
+            this.uniService.getQuestionByUser(this.user.id).subscribe(res=>{
+              let count = 0;
+              for(let i = 0; i<res.length; i++){
+                count = count + res[i].count;
+              }
+              this.uniService.broadcastTextChange(count);
+            });
             localStorage.setItem('currentUser', JSON.stringify(this.user));
           }
         });
@@ -102,6 +111,15 @@ export class AppComponent implements OnInit, OnDestroy {
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
         this.loginService.broadcastTextChange(this.user);
+        this.uniService.getQuestionByUser(this.user.id).subscribe(res=>{
+          if(res){
+            let count = 0;
+            for(let i = 0; i<res.length; i++){
+              count = count + res[i].count;
+            }
+            this.uniService.broadcastTextChange(count);
+          }
+        });
       }
     },error=>{
       if(error.status==this.contants.UNAUTHORIZED){

@@ -15,14 +15,20 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li class="text-li"><a routerLink="/home">Trang chủ</a>
+          <li class="text-li"><a routerLink="/article">Tin tức</a>
           <li class="text-li"><a routerLink="/search-university">Tìm trường</a></li>
-          <li class="text-li"><a routerLink="/mbti-test">Trắc nghiệm tính cách MBTI</a></li>
+          <li class="text-li"><a routerLink="/mbti-test">MBTI</a></li>
+          <li class="text-li"><a routerLink="/question">Câu hỏi</a></li>
           <a id="linkFake" [hidden]="true" routerLink="/profile"></a>
+          <a id="linkFakeQuestion" [hidden]="true" [routerLink]="['/your-question']"></a>
+          <div *ngIf="count && count != 0" class="answer-notify" [routerLink]="['/your-question']">
+            <span class="badge bg-red">{{count}}</span>
+          </div>
           <li *ngIf="user" class="dropdown">
-            <a class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-              <img src="{{user.image}}">
-              <span class="caret"></span>
-            </a>
+              <a class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                <img src="{{user.image}}">
+                <span class="caret"></span>
+              </a>
             <ul class="dropdown-menu">
               <li>
                 <a *ngIf="user.role && user.role.id==2" routerLink="/admin">{{user.name}}</a> <!--role admin-->
@@ -30,6 +36,7 @@
               </li>
               <li role="separator" class="divider"></li>
               <li><a (click)="clickLink()" >Chỉnh sửa thông tin</a></li>
+              <li><a *ngIf="user.role && user.role.id==1" (click)="clickLinkQuestion()" >Câu hỏi của bạn</a></li>
               <li role="separator" class="divider"></li>
               <li><a (click)="logout(user.provider)">Thoát tài khoản</a></li>
             </ul>
