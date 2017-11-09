@@ -101,6 +101,7 @@ export class SearchComponent implements OnInit {
 
   changedMajor(value){
     if(value.value && value.value != 0 && this.valueMajor != value.value && this.valueLocation == 0){
+      this.isInto = true;
       setTimeout(()=>  this.valueMajor = value.value,0);
       this.listUniName = this.searchService.getList(this.contant.GET_UIVERSITY_BY_MAJOR+"?majorId="+ parseInt(value.value));
       let data = this.valueUniversity;
@@ -116,8 +117,9 @@ export class SearchComponent implements OnInit {
       this.valueUniversity = -1;
       setTimeout(() => {this.valueUniversity = data;}, 10);
       this.isFirst = false;
-    }else if(value.value == 0 && this.valueLocation == 0 && !this.isCheckForMajor && !this.isFirst && this.isInto){
+    }else if(this.valueMajor == 0 && this.isCheckForLocation && this.valueLocation == 0 && !this.isCheckForMajor && !this.isFirst && this.isInto){
       console.log("vao trong major");
+      console.log(this.isCheckForLocation);
       this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
       this.listMajor = this.searchService.getMajor(this.contant.MAJOR);
       this.listLocation = this.searchService.getLocation(this.contant.LOCATION);
@@ -156,6 +158,7 @@ export class SearchComponent implements OnInit {
   }
   changedLocation(value){
     if(value.value && value.value != 0 && this.valueLocation != value.value && this.valueMajor == 0 && this.isFirst){
+      this.isInto = true;
       setTimeout(() => {this.valueLocation = value.value;}, 10);
       //this.valueLocation = value.value;
       this.listUniName = this.searchService.getList(this.contant.GET_UIVERSITY_BY_LOCATION+"?locationId="+ parseInt(value.value));
@@ -222,7 +225,7 @@ export class SearchComponent implements OnInit {
     if(value.value && value.value != 0 && this.valueUniversity != value.value && !this.isCheckForUni){
       this.valueUniversity = value.value;
       if(this.valueLocation != 0){
-          this.isFirst = true;
+          //this.isFirst = true;
       }
       // this.valueLocation =0;
       //this.valueMajor = 0;
@@ -231,7 +234,7 @@ export class SearchComponent implements OnInit {
       if (this.valueMajor != 0) {
         let data = this.valueMajor;
         this.valueMajor = -1;
-        setTimeout(() => {this.valueMajor = data;}, 100);
+        setTimeout(() => {this.valueMajor = data;}, 200);
       }
     }else if(value.value == 0 && !this.isCheckForUni && this.isInto){
       if(!this.isFirst){
