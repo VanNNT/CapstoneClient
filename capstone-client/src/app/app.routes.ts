@@ -28,6 +28,7 @@ import {ArticleComponent} from "./component/article/article.component";
 import {EditArticleComponent} from "./component/admin/edit-article/edit-article.component";
 import {ArticleDetailComponent} from "./component/article-detail/article-detail.component";
 import {EditQuestionComponent} from "./component/question-anwser/edit-question/edit-question.component";
+import {UserFavoriteComponent} from "./component/user-favorite/user-favorite.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
@@ -43,6 +44,7 @@ const routing: Routes = [
       {path: 'mbti-test', component: MbtiTestComponent,canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'profile', component: UserDetailComponent, canActivate: [CheckLoginGuard]},
       {path: 'question', component: QuestionComponent},
+      {path: 'favorite', component: UserFavoriteComponent},
       {path: 'question-detail/:id', component: QuestionDetailComponent},
       {path: 'edit-question/:id', component: EditQuestionComponent},
       {path: 'new-question', component: NewQuestionComponent, canActivate: [CheckLoginGuard, CheckRoleGuard]},

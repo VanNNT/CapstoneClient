@@ -20,6 +20,7 @@
           <li class="text-li"><a routerLink="/mbti-test">MBTI</a></li>
           <li class="text-li"><a routerLink="/question">Câu hỏi</a></li>
           <a id="linkFake" [hidden]="true" routerLink="/profile"></a>
+          <a id="linkFakeFavorite" [hidden]="true" routerLink="/favorite"></a>
           <a id="linkFakeQuestion" [hidden]="true" [routerLink]="['/your-question']"></a>
           <div *ngIf="count && count != 0" class="answer-notify" [routerLink]="['/your-question']">
             <span class="badge bg-red">{{count}}</span>
@@ -36,6 +37,7 @@
               </li>
               <li role="separator" class="divider"></li>
               <li><a (click)="clickLink()" >Chỉnh sửa thông tin</a></li>
+              <li><a (click)="clickLinkFavorite()" >Danh sách yêu thích</a></li>
               <li><a *ngIf="user.role && user.role.id==1" (click)="clickLinkQuestion()" >Câu hỏi của bạn</a></li>
               <li role="separator" class="divider"></li>
               <li><a (click)="logout(user.provider)">Thoát tài khoản</a></li>

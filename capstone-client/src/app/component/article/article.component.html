@@ -7,7 +7,7 @@
     </div>
   </div>
 </header>
-
+<div id="main">
 <div class="container">
   <div class="type-article">
     <button style="min-width: 250px" type="button" class="btn btn-info" (click)="getListArticle()">Tin Tức Tổng Hợp</button>
@@ -20,15 +20,15 @@
        [ngClass]="{'right-text': odd}">
     <hr class="featurette-divider">
     <div *ngIf="article.image">
-      <img [routerLink]="['/article-detail',article.id]" class="featurette-image img-circle img-responsive pull-right"
-           [ngClass]="{'pull-left': even}" src="{{article.image}}">
+      <img [routerLink]="['/article-detail',article.id]" class="featurette-image img-circle img-responsive pull-left"
+           [ngClass]="{'pull-leftt': even}" src="{{article.image}}">
     </div>
     <div *ngIf="!article.image">
-      <img [routerLink]="['/article-detail',article.id]" class="featurette-image img-circle img-responsive pull-right"
-           [ngClass]="{'pull-left': even}" src="../../../assets/image/image-not-found.png">
+      <img [routerLink]="['/article-detail',article.id]" class="featurette-image img-circle img-responsive pull-left"
+           [ngClass]="{'pull-leftt': even}" src="../../../assets/image/image-not-found.png">
     </div>
     <h2 [routerLink]="['/article-detail',article.id]" class="featurette-heading">{{article.title}}</h2>
-    <h5>{{article.createDate | date: 'shortDate'}}</h5>
+    <h5><i class="fa fa-clock-o" aria-hidden="true"></i> {{article.createDate | date: 'shortDate'}}</h5>
 
     <p class="lead">{{article.description}}</p>
   </div>
@@ -40,4 +40,5 @@
       <h1 style="color:red;">Không tìm thấy bài phù hợp</h1>
 
   </div>
+</div>
 </div>

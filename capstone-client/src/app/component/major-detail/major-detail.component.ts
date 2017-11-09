@@ -36,8 +36,9 @@ export class MajorDetailComponent implements OnInit, OnDestroy {
   public showStarCareer;
   public checkReviewUniMajor: boolean;
   public valueMajor;
-  public checkFavoriteMajor: boolean;
+  public checkFavoriteMajor: number = -1;
   public dataSaveFavorite: any;
+
 
   constructor(private baseService: BaseService, private reviewService: ReviewService, private router: Router,
               private toastr: ToastsManager, private activateRoute: ActivatedRoute, private constants: Constants,
@@ -113,7 +114,9 @@ export class MajorDetailComponent implements OnInit, OnDestroy {
     };
       this.dataSaveFavorite = data;
     this.reviewService.checkFavorite(data).subscribe((res: any)=>{
-      this.checkFavoriteMajor = res;
+
+        this.checkFavoriteMajor = res;
+
     });
     this.reviewService.checkReviewUniMajor(data).subscribe((res: any)=>{
       this.checkReviewUniMajor = res;
@@ -172,15 +175,24 @@ export class MajorDetailComponent implements OnInit, OnDestroy {
   }
   saveFavorite(){
     this.reviewService.saveFavorite(this.dataSaveFavorite).subscribe((res: any)=>{
-      this.checkFavoriteMajor = res;
       if(res){
+        this.checkFavoriteMajor = res;
         this.toastr.success('Đã thêm vào danh sách', 'Thành công',{showCloseButton: true});
       }
     },(error =>{
       this.toastr.error('Đã xảy ra lỗi vui lòng thử lại', 'Thất bại',{showCloseButton: true});
     }));
   }
-
+  deleteFavorite(){
+    let data = {
+      'id': this.checkFavoriteMajor
+    }
+    this.reviewService.deleteFavorite(data).subscribe((res: any) => {
+      if(res){
+        this.checkFavoriteMajor = -1;
+      }
+    });
+  }
   ngOnDestroy(){
   }
 

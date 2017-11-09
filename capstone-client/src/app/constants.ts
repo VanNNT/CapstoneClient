@@ -71,6 +71,7 @@ export class Constants{
   public CHECK_FAVORITE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/favorite/check-favorite";
   public DELETE_FAVORITE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/favorite/delete";
    public GET_YOUR_ARTICLE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/get-your-article";
+   public GET_USER_FAVORITE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/favorite/get-user-favorite";
   //ERROR
   public UNAUTHORIZED = 401;
   public CONFLICT = 409;
