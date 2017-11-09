@@ -90,4 +90,7 @@ export class ReviewService {
   getYourArticle(data){
     return this._http.get(this.contant.GET_YOUR_ARTICLE+"?userId="+data).map((res: Response)=> res.json());
   }
+  getYourFavorite(data){
+    return this._http.get(this.contant.GET_USER_FAVORITE+"?userId="+data).map((res: Response)=> res.json());
+  }
 }

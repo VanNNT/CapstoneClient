@@ -63,6 +63,7 @@ import { EditArticleComponent } from './component/admin/edit-article/edit-articl
 import { ArticleDetailComponent } from './component/article-detail/article-detail.component';
 import { EditQuestionComponent } from './component/question-anwser/edit-question/edit-question.component';
 import { TagInputModule } from 'ngx-chips';
+import { UserFavoriteComponent } from './component/user-favorite/user-favorite.component';
 
 const providers = {
   'google': {
@@ -106,7 +107,8 @@ const providers = {
     ArticleComponent,
     EditArticleComponent,
     ArticleDetailComponent,
-    EditQuestionComponent
+    EditQuestionComponent,
+    UserFavoriteComponent
   ],
   imports: [
     Select2Module,

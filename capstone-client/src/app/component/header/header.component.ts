@@ -78,6 +78,9 @@ export class HeaderComponent implements OnInit {
   public clickLink(){
     document.getElementById('linkFake').click();
   }
+  public clickLinkFavorite(){
+    document.getElementById('linkFakeFavorite').click();
+  }
   clickLinkQuestion(){
     document.getElementById('linkFakeQuestion').click();
   }
