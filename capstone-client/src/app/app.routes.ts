@@ -29,6 +29,7 @@ import {EditArticleComponent} from "./component/admin/edit-article/edit-article.
 import {ArticleDetailComponent} from "./component/article-detail/article-detail.component";
 import {EditQuestionComponent} from "./component/question-anwser/edit-question/edit-question.component";
 import {UserFavoriteComponent} from "./component/user-favorite/user-favorite.component";
+import {ApproveQuestionComponent} from "./component/admin/approve-question/approve-question.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
@@ -60,6 +61,7 @@ const routing: Routes = [
       {path: 'edit-detail-major/:id', component: EditScoreComponent},
       {path: 'edit-major/:id', component: EditMajorComponent},
       {path: 'approve-reivew', component: ApproveReivewComponent},
+      {path: 'approve-question', component: ApproveQuestionComponent},
       {path: 'list-article', component: ListArticleComponent},
       {path: 'add-article', component: AddArticleComponent},
       {path: 'edit-article/:id', component: EditArticleComponent},

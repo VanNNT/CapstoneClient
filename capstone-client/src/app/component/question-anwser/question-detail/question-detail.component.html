@@ -15,7 +15,7 @@
           <span class="">{{question?.lastUpdatedTime | date:'dd-MM-yyyy HH:mm'}}</span>
         </div>
         <div *ngIf="userId == question?.users.id" class="row started"  style="float: left; cursor: pointer">
-          <span style="padding-right: 10px" [routerLink]="['/edit-question', question?.id]">Sửa</span>
+          <!--<span style="padding-right: 10px" [routerLink]="['/edit-question', question?.id]">Sửa</span>-->
           <span data-toggle="modal" data-target="#myModal" (click)="selectIndex = question.id">Xóa</span>
         </div>
         <div class="row" style="float: right;padding-right: 50px;">
@@ -65,7 +65,7 @@
         </div>
       </div>
 
-      <div *ngIf="userId != question?.users.id">
+      <div>
         <div>
           <h2>Câu trả lời của bạn </h2>
         </div>

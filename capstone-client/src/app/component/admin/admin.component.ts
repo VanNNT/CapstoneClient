@@ -14,6 +14,7 @@ import {ReviewService} from "../../service/review/review.service";
 export class AdminComponent implements OnInit {
    title: string;
    public numberOfReview: number;
+   public numberOfQuestion: number;
   constructor(private router: Router, private baseService: BaseService,
               private uniService: UniversityService, private reviewService: ReviewService) { }
  public user;
@@ -28,6 +29,14 @@ export class AdminComponent implements OnInit {
     });
     this.reviewService.numberOfReview.subscribe(value=>{
       this.numberOfReview = this.numberOfReview + value ;
+    })
+
+
+    this.reviewService.numberOfQuestionNeedApprove().subscribe(res=>{
+      this.numberOfQuestion = res;
+    });
+    this.reviewService.numberOfQuestion.subscribe(value=>{
+      this.numberOfQuestion = this.numberOfQuestion + value ;
     })
   }
 }

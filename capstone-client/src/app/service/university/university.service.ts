@@ -78,8 +78,8 @@ export class UniversityService {
       .map((response: Response) => response.json());
   }
 
-  deleteQA(data): Observable<any>{
-    return this._http.post(this.contant.DELETE_QUESTION_ANSWER,data)
+  changeStatusQA(data): Observable<any>{
+    return this._http.post(this.contant.CHANGE_STATUS_QUESTION_ANSWER,data)
       .map((response: Response) => response.json());
   }
 

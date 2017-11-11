@@ -199,9 +199,11 @@ export class QuestionDetailComponent implements OnInit {
   }
   deleteQA(){
      let data = {
-         "id": this.selectIndex
-     }
-     this.uniService.deleteQA(data).subscribe(res=>{
+       "id": this.selectIndex,
+       "status": false,
+       "isActive": false
+     };
+     this.uniService.changeStatusQA(data).subscribe(res=>{
        if(this.selectIndex == this.qaId){
          this.router.navigate(['/question'])
        }else{

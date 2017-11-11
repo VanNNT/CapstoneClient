@@ -9,9 +9,14 @@ export class ReviewService {
 
   constructor(private _http: Http, private contant: Constants) { }
   public numberOfReview = new BehaviorSubject<any>(null);
+  public numberOfQuestion = new BehaviorSubject<any>(null);
 
   public numberReviewChange(value:any) {
     this.numberOfReview.next(value);
+  }
+
+  public numberQuestionChange(value:any){
+    this.numberOfQuestion.next(value);
   }
   saveReview(data){
     return this._http.post(this.contant.SAVE_REVIEW,data).map((res:Response) => res.json());
@@ -29,8 +34,16 @@ export class ReviewService {
     return this._http.get(this.contant.GET_REVIEW_NEED_APPROVE).map((res:Response)=>res.json());
   }
 
+  getQuestionNeedApprove(){
+    return this._http.get(this.contant.QUESTION_NEED_TO_APPROVE).map((res:Response)=>res.json());
+  }
+
   numberOfReviewNeedApprove(){
     return this._http.get(this.contant.GET_NUMBER_REVIEW_NEED_APPROVE).map((res:Response)=>res.json());
+  }
+
+  numberOfQuestionNeedApprove(){
+    return this._http.get(this.contant.GET_NUMBER_QUESTION_NEED_APPROVE).map((res:Response)=>res.json());
   }
 
   changeReviewStatus(data){
