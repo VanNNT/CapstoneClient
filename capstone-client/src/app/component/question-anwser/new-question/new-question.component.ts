@@ -5,6 +5,7 @@ import {Constants} from "../../../constants";
 import {BaseService} from "../../../service/base-service/base.service";
 import {ToastsManager} from "ng2-toastr";
 import {Router} from "@angular/router";
+import {ReviewService} from "../../../service/review/review.service";
 declare var $: any;
 @Component({
   selector: 'app-new-question',
@@ -12,13 +13,15 @@ declare var $: any;
   styleUrls: ['./new-question.component.less']
 })
 export class NewQuestionComponent implements OnInit {
-
-  constructor(private uniService: UniversityService, private baseService: BaseService,private router: Router,
+  public listTagName;
+  public tagName: any[];
+  constructor(private uniService: UniversityService, private baseService: BaseService,private router: Router, private reviewService: ReviewService,
               private contants : Constants, private toastr: ToastsManager, private vcr: ViewContainerRef ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public isCheck;
   ngOnInit() {
+    this.getUniversity();
     var seft = this;
     $('#summernote').summernote({
       height: 200,
@@ -53,15 +56,29 @@ export class NewQuestionComponent implements OnInit {
       }
     });
   }
-
+  getUniversity(){
+    this.reviewService.getAllTag().subscribe((res: any)=>{
+      this.listTagName = res;
+    });
+  }
   onSave(form) {
+
     if($('#summernote').summernote('code').length < 50){
       this.isCheck = true;
     }else{
       this.isCheck = false;
     }
     if (form.valid && !this.isCheck) {
-      console.log(form.value);
+
+      //Tag list
+      if(form.value.tagUni != null){
+        this.tagName = [];
+        for(let i = 0; i < form.value.tagUni.length; i++){
+            this.tagName.push(form.value.tagUni[i].id);
+        }
+      }
+      //End tag
+
       let data = {
         'title': form.value.title,
         "content": $('#summernote').summernote('code'),
@@ -69,8 +86,10 @@ export class NewQuestionComponent implements OnInit {
         "parentId": 0,
         "users": {
           "id": this.baseService.getUser().id
-        }
+        },
+        'tagUniversity': this.tagName,
       };
+      console.log(data);
       var seft = this;
       this.uniService.saveQuestionAnswer(data).subscribe(res => {
         this.toastr.success("Bạn đã đặt câu hỏi thành công", "Thành công", {showCloseButton: true})

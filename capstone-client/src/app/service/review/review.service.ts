@@ -93,4 +93,7 @@ export class ReviewService {
   getYourFavorite(data){
     return this._http.get(this.contant.GET_USER_FAVORITE+"?userId="+data).map((res: Response)=> res.json());
   }
+  getAllTag(){
+    return this._http.get(this.contant.GET_ALL_TAG).map((res: Response)=> res.json());
+  }
 }
