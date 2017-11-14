@@ -85,6 +85,8 @@ export class QuestionDetailComponent implements OnInit {
        res.forEach(x => {
          this.anwsers.push(new Answer(x));
        });
+       console.log(res);
+       console.log(this.anwsers);
      });
   }
   onSummit(){
@@ -195,6 +197,23 @@ export class QuestionDetailComponent implements OnInit {
             value.isVote = true;
             value.vote = value.vote + 1;
         });
+    }
+  }
+  setReport(value){
+    console.log(value);
+    if(value.userId != this.userId && !value.isReport){
+      let data = {
+        'user': {
+          'id': this.userId
+        },
+        'questionAnswer':{
+          'id': value.id
+        }
+      };
+      this.uniService.reportAnswer(data).subscribe(res=>{
+        value.isReport = true;
+        value.report = value.report + 1;
+      });
     }
   }
   deleteQA(){

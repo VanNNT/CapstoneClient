@@ -97,4 +97,7 @@ export class UniversityService {
     return this._http.post(this.contant.VOTE,data)
       .map((response: Response) => response.json());
   }
+  reportAnswer(data): Observable<any>{
+    return this._http.post(this.contant.REPORT,data).map((res: Response)=> res.json());
+  }
 }

@@ -134,7 +134,7 @@ export class SearchComponent implements OnInit {
       setTimeout(() => {this.valueMajor = value.value;}, 10);
       if(!this.isCheckForMajor){
         if(this.valueLocation != 0){
-          this.isInto = true;
+          //this.isInto = true;
           this.listUniName = this.searchService.getList(this.contant.GET_UIVERSITY_BY_LOCATION+"?locationId="+ this.valueLocation);
           if(this.valueUniversity != 0){
             let data = this.valueUniversity;
@@ -157,7 +157,7 @@ export class SearchComponent implements OnInit {
     }
   }
   changedLocation(value){
-    if(value.value && value.value != 0 && this.valueLocation != value.value && this.valueMajor == 0 && this.isFirst){
+    if(value.value && value.value != 0 && this.valueLocation != value.value && this.valueMajor == 0){
       this.isInto = true;
       setTimeout(() => {this.valueLocation = value.value;}, 10);
       //this.valueLocation = value.value;
@@ -198,7 +198,7 @@ export class SearchComponent implements OnInit {
       setTimeout(() => {this.valueLocation = value.value;}, 10);
       if(!this.isCheckForLocation){
         if(this.valueMajor != 0){
-          this.isInto = true;
+          //this.isInto = true;
           this.listUniName = this.searchService.getList(this.contant.GET_UIVERSITY_BY_MAJOR+"?majorId="+ this.valueMajor);
           if(this.valueUniversity != 0){
             let data = this.valueUniversity;
@@ -237,8 +237,11 @@ export class SearchComponent implements OnInit {
         setTimeout(() => {this.valueMajor = data;}, 200);
       }
     }else if(value.value == 0 && !this.isCheckForUni && this.isInto){
+      console.log("vao univer");
+      console.log(this.isInto);
       if(!this.isFirst){
         this.isInto = false;
+        console.log(this.isInto);
       }
       //this.isFirst = true;
       this.valueUniversity = 0;

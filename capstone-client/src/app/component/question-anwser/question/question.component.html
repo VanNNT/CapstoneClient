@@ -20,6 +20,11 @@
                   </div>
                   <div class="summary">
                     <h3><a [routerLink]="['/question-detail', question.id]" class="bold">{{question?.title}}</a></h3>
+                        <ul style="display: table-row">
+                          <li class="tag" *ngFor="let t of question.tags">
+                            {{t.tag.tagName}}
+                          </li>
+                        </ul>
                     <div class="started">
                        <span class="">{{question?.lastUpdatedTime | date:'dd-MM-yyyy HH:mm'}}</span>
                     </div>
@@ -35,6 +40,9 @@
                 <pagination-controls (pageChange)="p =$event" previousLabel=""
                                      nextLabel=""></pagination-controls>
               </div>
+              <!--<div *ngFor="let a of question.tags">-->
+                <!--{{a.tag.tagName}}-->
+              <!--</div>-->
             </div>
           </div>
         </div>
