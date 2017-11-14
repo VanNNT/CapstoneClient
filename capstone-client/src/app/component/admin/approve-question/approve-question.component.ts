@@ -11,6 +11,7 @@ import {ToastsManager} from "ng2-toastr";
 export class ApproveQuestionComponent implements OnInit {
   public listQuestion: any[];
   public question;
+  public tags;
   private currentId: number;
   constructor(private reviewService: ReviewService,
               private universityService: UniversityService,
@@ -34,6 +35,9 @@ export class ApproveQuestionComponent implements OnInit {
         console.log(x);
         this.question = x;
       }
+    });
+    this.reviewService.getTagQuestion(value).subscribe(res=>{
+        this.tags = res;
     });
   }
   approveQuestion(){
@@ -69,7 +73,7 @@ export class ApproveQuestionComponent implements OnInit {
         for (let i = 0; i < this.listQuestion.length; i++) {
           if (this.currentId == this.listQuestion[i].id) {
             this.listQuestion.splice(i, 1);
-            this.toastr.warning('Đánh giá này không được chấp nhận', 'Thông báo', {showCloseButton: true});
+            this.toastr.warning('Câu hỏi này đã không được chấp nhận', 'Thông báo', {showCloseButton: true});
             this.reviewService.numberQuestionChange(-1);
             return;
           }

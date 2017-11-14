@@ -91,6 +91,9 @@ export class ReviewService {
     return this._http.get(this.contant.GET_TAG_ARTICLE+"?articleId="+data).map((res: Response)=>res.json());
   }
 
+  getTagQuestion(data){
+    return this._http.get(this.contant.GET_TAG_QUESTION+"?qaId="+data).map((res: Response)=>res.json());
+  }
   saveFavorite(data){
     return this._http.post(this.contant.SAVE_FAVORITE,data).map((res: Response)=>res.json());
   }

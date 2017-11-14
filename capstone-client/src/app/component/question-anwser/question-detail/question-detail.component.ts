@@ -200,7 +200,7 @@ export class QuestionDetailComponent implements OnInit {
   deleteQA(){
      let data = {
        "id": this.selectIndex,
-       "status": false,
+       "status": true,
        "isActive": false
      };
      this.uniService.changeStatusQA(data).subscribe(res=>{

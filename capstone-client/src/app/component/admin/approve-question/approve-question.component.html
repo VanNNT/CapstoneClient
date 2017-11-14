@@ -42,7 +42,13 @@
           {{question?.title}}
         </div>
         <h4>Nội dung</h4>
-        <div [innerHTML]="question?.content">
+        <div [innerHTML]="question?.content | safeHtml">
+        </div>
+        <h4>Thẻ</h4>
+        <div style="display: inline-block">
+           <span class="tag" *ngFor="let t of tags">
+          {{t.tag.tagName}}
+        </span>
         </div>
       </div>
       <div class="modal-footer">

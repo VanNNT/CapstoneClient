@@ -67,6 +67,7 @@ export class Constants{
   public QUESTION_NEED_TO_APPROVE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/question-need-accept";
   public UPDATE_QUESTION_ANSWER = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/update";
   public COUNT_ANSWER = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/count-answer";
+  public GET_TAG_QUESTION = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/get-tag-question";
   public VOTE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/vote/save";
   public GET_TAG_ARTICLE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/get-tag-article";
   public SAVE_FAVORITE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/favorite/save-favorite";
