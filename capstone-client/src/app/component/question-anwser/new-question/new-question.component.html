@@ -26,6 +26,29 @@
                   </div>
                 </div>
               </div>
+              <!--tag-->
+              <div class="form-group">
+                <label>Thẻ bài báo</label>
+
+                  <tag-input [ngModel]="" name="tagUni"
+                             [onlyFromAutocomplete]="true"
+                             [displayBy]="'tagName'"
+                             [identifyBy]="'id'"
+                             [secondaryPlaceholder]="'Nhập thẻ cho bài báo'">
+                    <tag-input-dropdown [showDropdownIfEmpty]="true"
+                                        [focusFirstElement]="true"
+                                        [displayBy]="'tagName'"
+                                        [identifyBy]="'id'"
+                                        [autocompleteItems]="listTagName">
+                      <ng-template let-item="item" let-index="index">
+                        <!--({{ index }}) {{ item.id }}:-->
+                        {{ item.tagName }}
+                      </ng-template>
+                    </tag-input-dropdown>
+                  </tag-input>
+                </div>
+                <br><br><br>
+
               <div style="text-align: center">
                 <button class="btn btn-uni-primary" type="submit">Đặt câu hỏi</button>
               </div>

@@ -145,27 +145,37 @@ export class MbtiTestComponent implements OnInit {
         "id": this.baseService.getUser().id,
       }
     };
-    if (this.update === false) {
-      this.mbtiService.saveMbti(data).subscribe((response: any) => {
-        if (response) {
-          this.mbtiService.getMbtiresult(this.baseService.getUser().id).subscribe((response: any) => {
-            this.mbtiResult = response;
-            this.majorResult = response.mbtitype.majorMbtis;
-            this.getUniMBTI(response.mbtitype.id);
-          })
-        }
-      });
-    } else {
-      this.mbtiService.updateMbti(data).subscribe((response: any) => {
-        if (response) {
-          this.mbtiService.getMbtiresult(this.baseService.getUser().id).subscribe((response: any) => {
-            this.mbtiResult = response;
-            this.majorResult = response.mbtitype.majorMbtis;
-            this.getUniMBTI(response.mbtitype.id);
-          })
-        }
-      });
-    }
+    // if (this.update === false) {
+    //   this.mbtiService.saveMbti(data).subscribe((response: any) => {
+    //     if (response) {
+    //       this.mbtiService.getMbtiresult(this.baseService.getUser().id).subscribe((response: any) => {
+    //         this.mbtiResult = response;
+    //         this.majorResult = response.mbtitype.majorMbtis;
+    //         this.getUniMBTI(response.mbtitype.id);
+    //       })
+    //     }
+    //   });
+    // } else {
+    //   this.mbtiService.updateMbti(data).subscribe((response: any) => {
+    //     if (response) {
+    //       this.mbtiService.getMbtiresult(this.baseService.getUser().id).subscribe((response: any) => {
+    //         this.mbtiResult = response;
+    //         this.majorResult = response.mbtitype.majorMbtis;
+    //         this.getUniMBTI(response.mbtitype.id);
+    //       })
+    //     }
+    //   });
+    // }
+    this.mbtiService.saveMbti(data).subscribe((response: any) => {
+          if (response) {
+            this.mbtiService.getMbtiresult(this.baseService.getUser().id).subscribe((response: any) => {
+              this.mbtiResult = response;
+              this.majorResult = response.mbtitype.majorMbtis;
+              this.getUniMBTI(response.mbtitype.id);
+              document.body.scrollTop = 0;
+            })
+          }
+        });
     document.body.scrollTop = 0;
     this.tested = true;
     this.scores = {
