@@ -9,6 +9,8 @@ export class Answer {
   vote: number = 0;
   isEdit: boolean;
   isVote: boolean = false;
+  report: number = 0;
+  isReport: boolean = false;
   constructor(data: any) {
     if (data) {
      this.id = data.id;
@@ -28,6 +30,8 @@ export class Answer {
      }
      this.vote = data.vote;
      this.isVote = data.isVoteByUser;
+     this.report = data.numberOfReport;
+     this.isReport = data.isReportByUser;
      this.isEdit = false;
     }
   }

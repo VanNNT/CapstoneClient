@@ -65,6 +65,7 @@ import { EditQuestionComponent } from './component/question-anwser/edit-question
 import { TagInputModule } from 'ngx-chips';
 import { UserFavoriteComponent } from './component/user-favorite/user-favorite.component';
 import { ApproveQuestionComponent } from './component/admin/approve-question/approve-question.component';
+import { ListReportComponent } from './component/admin/list-report/list-report.component';
 
 const providers = {
   'google': {
@@ -110,7 +111,8 @@ const providers = {
     ArticleDetailComponent,
     EditQuestionComponent,
     UserFavoriteComponent,
-    ApproveQuestionComponent
+    ApproveQuestionComponent,
+    ListReportComponent
   ],
   imports: [
     Select2Module,

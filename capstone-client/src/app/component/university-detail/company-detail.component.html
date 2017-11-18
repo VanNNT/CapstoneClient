@@ -31,9 +31,9 @@
             </div>
           </div>
           <div class="col-xs-3 pull-right">
-            <!--<a>-->
-              <!--<button class="btn btn-default pull-right btn-follow">Theo dõi</button>-->
-            <!--</a>-->
+            <a>
+              <button class="btn btn-default pull-right btn-follow">Theo dõi</button>
+            </a>
             <a  [routerLink]="['/new-review',id]" *ngIf="!checkReviewUni">
               <button class="btn btn-uni-primary pull-right">Đánh giá</button>
             </a>
@@ -111,7 +111,7 @@
                 <i rating-value="4" class="fa fa-star" style="font-size: 30px; background-color: rgb(204, 204, 204);"></i>
                 <i rating-value="5" class="fa fa-star" style="font-size: 30px; background-color: rgb(204, 204, 204);"></i>
               </div>
-              <span>Đánh giá của bạn về công ty này?</span></div>
+              <span>Đánh giá của bạn về trường này?</span></div>
           </div>
           <br>
           <div class="text-center">

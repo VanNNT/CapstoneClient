@@ -10,6 +10,7 @@ export class ReviewService {
   constructor(private _http: Http, private contant: Constants) { }
   public numberOfReview = new BehaviorSubject<any>(null);
   public numberOfQuestion = new BehaviorSubject<any>(null);
+  public numberOfReport = new BehaviorSubject<any>(null);
 
   public numberReviewChange(value:any) {
     this.numberOfReview.next(value);
@@ -18,6 +19,10 @@ export class ReviewService {
   public numberQuestionChange(value:any){
     this.numberOfQuestion.next(value);
   }
+  public numberReportChange(value:any){
+    this.numberOfReport.next(value);
+  }
+
   saveReview(data){
     return this._http.post(this.contant.SAVE_REVIEW,data).map((res:Response) => res.json());
   }

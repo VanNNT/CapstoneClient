@@ -43,6 +43,5 @@ export class ListArticleComponent implements OnInit {
     }, error =>{
       this.toastr.error("Vui lòng kiểm tra lại", "Thất bại",{showCloseButton: true})
     });
-
   }
 }
