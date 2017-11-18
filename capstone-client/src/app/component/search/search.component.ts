@@ -117,9 +117,8 @@ export class SearchComponent implements OnInit {
       this.valueUniversity = -1;
       setTimeout(() => {this.valueUniversity = data;}, 10);
       this.isFirst = false;
-    }else if(this.valueMajor == 0 && this.isCheckForLocation && this.valueLocation == 0 && !this.isCheckForMajor && !this.isFirst && this.isInto){
+    }else if(this.valueMajor == 0 && this.isCheckForLocation && this.valueLocation == 0 && !this.isFirst && this.isInto){
       console.log("vao trong major");
-      console.log(this.isCheckForLocation);
       this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
       this.listMajor = this.searchService.getMajor(this.contant.MAJOR);
       this.listLocation = this.searchService.getLocation(this.contant.LOCATION);
@@ -130,6 +129,7 @@ export class SearchComponent implements OnInit {
       this.isCheckForUni = false;
       this.isCheckForLocation = false;
       this.isFirst = true;
+      //this.isInto = true;
     }else if(value.value == 0 && !this.isFirst){
       setTimeout(() => {this.valueMajor = value.value;}, 10);
       if(!this.isCheckForMajor){
@@ -182,7 +182,7 @@ export class SearchComponent implements OnInit {
       }
       this.isFirst = false;
     }
-    else if(value.value == 0 && this.valueMajor == 0 && !this.isCheckForLocation && !this.isFirst && this.isInto){
+    else if(value.value == 0 && this.valueMajor == 0 && !this.isFirst && this.isInto){
       console.log("vao trong location");
       this.listUniName = this.searchService.getList(this.contant.UNIVERSITY);
        this.listMajor = this.searchService.getMajor(this.contant.MAJOR);
@@ -194,6 +194,7 @@ export class SearchComponent implements OnInit {
        this.isCheckForUni = false;
        this.isCheckForLocation = false;
        this.isFirst = true;
+       //this.isInto = true;
     }else if(value.value == 0 && !this.isFirst){
       setTimeout(() => {this.valueLocation = value.value;}, 10);
       if(!this.isCheckForLocation){
@@ -236,14 +237,11 @@ export class SearchComponent implements OnInit {
         this.valueMajor = -1;
         setTimeout(() => {this.valueMajor = data;}, 200);
       }
-    }else if(value.value == 0 && !this.isCheckForUni && this.isInto){
+    }else if(value.value == 0 && !this.isCheckForUni && this.isInto && this.isFirst){
       console.log("vao univer");
-      console.log(this.isInto);
-      if(!this.isFirst){
-        this.isInto = false;
-        console.log(this.isInto);
-      }
-      //this.isFirst = true;
+      // console.log(this.isInto);
+      this.isInto = false;
+      //his.isFirst = false;
       this.valueUniversity = 0;
      setTimeout(()=> this.listMajor = this.searchService.getMajor(this.contant.MAJOR), 0) ;
      setTimeout(()=> this.listLocation = this.searchService.getLocation(this.contant.LOCATION), 0) ;

@@ -15,7 +15,7 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.baseService.getUser();
-    console.log(this.user.id);
+    // console.log(this.user.id);
     this.reviewService.getArticle().subscribe((res: any) => {
       this.listArticle = res;
       // console.log(this.listArticle)
@@ -28,9 +28,11 @@ export class ArticleComponent implements OnInit {
     });
   }
   getYourArticle() {
+    if(this.user){
     this.reviewService.getYourArticle(this.user.id).subscribe((res: any) => {
       this.listArticle = res;
     });
+    }
   }
 
 }

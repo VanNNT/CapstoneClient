@@ -14,7 +14,7 @@
                 <div class="question-summary narrow" *ngFor="let question of questions |orderBy: '-count'| paginate: { itemsPerPage:10, currentPage: p }">
                   <div class="cp">
                     <div class="votes">
-                      <div class="mini-counts"><span>0</span></div>
+                      <div class="mini-counts"><span>{{question.totalAnswer}}</span></div>
                       <div>trả lời</div>
                     </div>
                   </div>

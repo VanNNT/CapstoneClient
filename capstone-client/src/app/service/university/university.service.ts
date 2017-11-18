@@ -100,4 +100,10 @@ export class UniversityService {
   reportAnswer(data): Observable<any>{
     return this._http.post(this.contant.REPORT,data).map((res: Response)=> res.json());
   }
+  getAllReport(): Observable<any>{
+    return this._http.get(this.contant.GET_ALL_REPORT).map((res: Response)=> res.json());
+  }
+  deleteReport(data): Observable<any>{
+    return this._http.post(this.contant.CHANGE_REPORT_STATUS,data).map((res: Response)=>res.json());
+  }
 }

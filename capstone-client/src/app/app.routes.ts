@@ -30,6 +30,7 @@ import {ArticleDetailComponent} from "./component/article-detail/article-detail.
 import {EditQuestionComponent} from "./component/question-anwser/edit-question/edit-question.component";
 import {UserFavoriteComponent} from "./component/user-favorite/user-favorite.component";
 import {ApproveQuestionComponent} from "./component/admin/approve-question/approve-question.component";
+import {ListReportComponent} from "./component/admin/list-report/list-report.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
@@ -65,7 +66,7 @@ const routing: Routes = [
       {path: 'list-article', component: ListArticleComponent},
       {path: 'add-article', component: AddArticleComponent},
       {path: 'edit-article/:id', component: EditArticleComponent},
-
+      {path: 'list-report', component: ListReportComponent},
   ]},
 
 ];

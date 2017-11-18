@@ -77,6 +77,8 @@ export class Constants{
   public GET_USER_FAVORITE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/favorite/get-user-favorite";
   public GET_ALL_TAG = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/get-all-tag";
   public REPORT = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/report/save";
+  public GET_ALL_REPORT = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/get-all-report";
+  public CHANGE_REPORT_STATUS = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/change-report-status";
 
   //ERROR
   public UNAUTHORIZED = 401;

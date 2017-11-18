@@ -21,6 +21,7 @@ export class QuestionDetailComponent implements OnInit {
   public anwsers: Answer[];
   public userId : number;
   public selectIndex: number;
+  public role;
   constructor(private uniService: UniversityService,private activateRoute: ActivatedRoute, private router: Router,
               private baseService: BaseService, private contants : Constants,private toastr: ToastsManager, private vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
@@ -32,6 +33,7 @@ export class QuestionDetailComponent implements OnInit {
       this.qaId=params['id'];
     });
     this.userId = this.baseService.getUser().id;
+    this.role = this.baseService.getUser().role.id;
     this.uniService.getQuestionDetail(this.qaId, this.userId).subscribe(res => {
       this.question = res;
     });
@@ -85,8 +87,6 @@ export class QuestionDetailComponent implements OnInit {
        res.forEach(x => {
          this.anwsers.push(new Answer(x));
        });
-       console.log(res);
-       console.log(this.anwsers);
      });
   }
   onSummit(){
@@ -184,7 +184,7 @@ export class QuestionDetailComponent implements OnInit {
     }
   }
   setVote(value){
-    if(value.userId != this.userId && !value.isVote){
+    if(value.userId != this.userId && !value.isVote && this.role != 2){
       let data = {
         'user': {
           'id': this.userId
@@ -200,8 +200,7 @@ export class QuestionDetailComponent implements OnInit {
     }
   }
   setReport(value){
-    console.log(value);
-    if(value.userId != this.userId && !value.isReport){
+    if(value.userId != this.userId && !value.isReport && this.role != 2){
       let data = {
         'user': {
           'id': this.userId

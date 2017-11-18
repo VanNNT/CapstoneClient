@@ -46,7 +46,8 @@
                   <div [ngClass]="{'isActive': a.isVote}" class="fa fa-thumbs-o-up" (click)="setVote(a)"></div>
                   <span class="vote-count-post" [ngClass]="{'isActive': a.isVote}">{{a.vote}}</span>
                 </div>
-                <div class="vote" *ngIf="userId != a.userId && a.id">
+                <div class="vote">
+                  <!--*ngIf="userId != a.userId && a.id"-->
                 <div [ngClass]="{'isActiveRP': a.isReport}" class="fa fa-exclamation-triangle" (click)="setReport(a)"></div>
                 <span [ngClass]="{'isActiveRP': a.isReport}">{{a.report}}</span>
                 </div>
