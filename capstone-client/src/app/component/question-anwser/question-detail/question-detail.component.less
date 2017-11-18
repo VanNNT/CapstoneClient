@@ -1,6 +1,7 @@
 @color-uni-primary: #f05f40;
+
 #question-header {
-  display: flex;
+  display: flow-root;
   flex-flow: row nowrap;
   justify-content: space-between;
   clear: both;
@@ -45,12 +46,13 @@
 }
 .votecell {
   vertical-align: top;
-  padding-right: 30px;
+  //padding-right: 30px;
 }
 .votecell .vote {
   color: #6a737c;
   font-size: 25px;
   cursor: pointer;
+  width: 70px;
 }
 td.answercell {
   vertical-align: top;
@@ -64,5 +66,19 @@ td.answercell {
   color: #6a737c;
 }
 .isActive{
-  color:#f05f40
+  color:#0E5535;
+}
+.isActiveRP{
+  color: #c40a0a;
+}
+.tag {
+  font-size: 12px;
+  //margin: 5px auto;
+  display: inline-block;
+  border: 1px solid #d5d5d5;
+  padding: 5px 15px;
+  border-radius: 20px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  background: #d5d5d5;
 }

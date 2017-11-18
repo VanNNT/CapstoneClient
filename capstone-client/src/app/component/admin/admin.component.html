@@ -37,14 +37,17 @@
                   <span class="fa fa-chevron-right"></span></a>
               </li>
               <li>
-                <a routerLink="approve-question"><i class="fa fa-desktop"></i> Duyệt câu hỏi
+                <a routerLink="approve-question"><i class="fa fa-question-circle-o"></i> Duyệt câu hỏi
                   <span *ngIf="numberOfQuestion != 0" class="badge bg-green">{{numberOfQuestion}}</span>
                   <span class="fa fa-chevron-right"></span></a>
               </li>
+              <li><a routerLink="list-report"><i class="fa fa-exclamation-triangle"></i> Báo Cáo
+                <span *ngIf="numberOfReport != 0" class="badge bg-green">{{numberOfReport}}</span>
+                <span class="fa fa-chevron-right"></span></a></li>
               <!--<li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-right"></span></a></li>-->
               <!--<li><a><i class="fa fa-bar-chart-o"></i> Cài Đặt <span class="fa fa-chevron-right"></span></a></li>-->
               <!--<li><a><i class="fa fa-clone"></i> Thùng Rác <span class="fa fa-chevron-right"></span></a></li>-->
-              <li><a routerLink="list-article"><i class="fa fa-newspaper-o"></i> Bài Báo <span class="fa fa-chevron-right"></span></a></li>
+              <li><a routerLink="list-article"><i class="fa fa-newspaper-o"></i> Quản Lý Bài Báo <span class="fa fa-chevron-right"></span></a></li>
               <li><a routerLink="add-article"><i class="fa fa-plus-square"></i> Thêm Bài Báo <span class="fa fa-chevron-right"></span></a></li>
 
             </ul>

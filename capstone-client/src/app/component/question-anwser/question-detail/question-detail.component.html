@@ -5,10 +5,18 @@
         <h1 itemprop="name" class="bold">
           {{question?.title}}
         </h1>
+
+        <ul style="display: table-row">
+          <li class="tag" *ngFor="let t of question?.tags">
+            {{t.tag.tagName}}
+          </li>
+        </ul>
+
         <div class="aside-cta" role="navigation" aria-label="ask new question">
-          <a [routerLink]="['/new-question']" class="btn btn-uni-primary">Đặt câu hỏi</a>
+          <a [routerLink]="['/new-question']" class="btn btn-uni-primary pull-right">Đặt câu hỏi</a>
         </div>
       </div>
+
       <div style="padding: 0px 30px 30px 30px;">
         <div class="post-text" [innerHTML]="question?.content | safeHtml"></div>
         <div class="started">
@@ -37,6 +45,11 @@
                 <div class="vote">
                   <div [ngClass]="{'isActive': a.isVote}" class="fa fa-thumbs-o-up" (click)="setVote(a)"></div>
                   <span class="vote-count-post" [ngClass]="{'isActive': a.isVote}">{{a.vote}}</span>
+                </div>
+                <div class="vote">
+                  <!--*ngIf="userId != a.userId && a.id"-->
+                <div [ngClass]="{'isActiveRP': a.isReport}" class="fa fa-exclamation-triangle" (click)="setReport(a)"></div>
+                <span [ngClass]="{'isActiveRP': a.isReport}">{{a.report}}</span>
                 </div>
               </td>
               <td class="answercell">
