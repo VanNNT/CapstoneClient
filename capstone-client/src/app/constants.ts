@@ -79,7 +79,7 @@ export class Constants{
   public REPORT = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/report/save";
   public GET_ALL_REPORT = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/get-all-report";
   public CHANGE_REPORT_STATUS = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/change-report-status";
-
+  public NUMBER_REPORT = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/number-report";
   //ERROR
   public UNAUTHORIZED = 401;
   public CONFLICT = 409;

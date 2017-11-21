@@ -27,7 +27,6 @@ export class ListReportComponent implements OnInit {
     this.universityService.getAllReport().subscribe((res: any)=> {
       this.listReport = res;
       console.log(this.listReport);
-      this.reviewService.numberReportChange(this.listReport.length);
     })
   }
 
@@ -43,6 +42,7 @@ export class ListReportComponent implements OnInit {
         if(this.listReport[i].id == this.selectIndex){
           this.listReport.splice(i,1);
           this.toastr.success("Đã xoá thành công","Thành công",{showCloseButton: true});
+          this.reviewService.numberReportChange(-1);
           return ;
         }
       }
@@ -64,6 +64,7 @@ export class ListReportComponent implements OnInit {
           if(this.listReport[i].id == this.selectIndex){
             this.listReport.splice(i,1);
             this.toastr.success("Giữ lại bài này","Thành công",{showCloseButton: true});
+            this.reviewService.numberReportChange(-1);
             return ;
           }
         }

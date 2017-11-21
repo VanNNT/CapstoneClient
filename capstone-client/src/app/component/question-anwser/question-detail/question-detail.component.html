@@ -46,10 +46,21 @@
                   <div [ngClass]="{'isActive': a.isVote}" class="fa fa-thumbs-o-up" (click)="setVote(a)"></div>
                   <span class="vote-count-post" [ngClass]="{'isActive': a.isVote}">{{a.vote}}</span>
                 </div>
-                <div class="vote">
+                <!--Da report-->
+                <div class="vote" *ngIf="a.isReport || userId == a.userId || role == 2 || userId == 0">
                   <!--*ngIf="userId != a.userId && a.id"-->
-                <div [ngClass]="{'isActiveRP': a.isReport}" class="fa fa-exclamation-triangle" (click)="setReport(a)"></div>
-                <span [ngClass]="{'isActiveRP': a.isReport}">{{a.report}}</span>
+                  <div [ngClass]="{'isActiveRP': a.isReport}" class="fa fa-exclamation-triangle"> </div>
+                  <span [ngClass]="{'isActiveRP': a.isReport}" *ngIf="a.report != 0 || !a.isReport">{{a.report}}</span>
+                </div>
+
+
+                <!--Chua report-->
+                <div class="vote" *ngIf="!a.isReport && userId != a.userId && role != 2 && userId != 0">
+                  <!--*ngIf="userId != a.userId && a.id"-->
+                <div data-toggle="modal" data-target="#myModalReport"
+                  [ngClass]="{'isActiveRP': a.isReport}" class="fa fa-exclamation-triangle" (click)="setValueReport(a)"> </div>
+
+                <span [ngClass]="{'isActiveRP': a.isReport}" *ngIf="a.report != 0 || !a.isReport">{{a.report}}</span>
                 </div>
               </td>
               <td class="answercell">
@@ -68,7 +79,7 @@
             </div>
             <div *ngIf="userId == a.userId && a.id" class="row started"  style="float: left; cursor: pointer">
               <span style="padding-right: 10px" id="btnEdit" (click)= "setSummernote(a); a.isEdit = true">Sửa</span>
-              <span data-toggle="modal" data-target="#myModal" (click)="selectIndex = a.id">Xóa</span>
+              <span data-toggle="modal" data-target="#myModalDelete" (click)="selectIndex = a.id">Xóa</span>
             </div>
             <div class="row" style="float: right;padding-right: 50px;">
               <img style="width: 100%;max-width: 30px;border-radius: 50%;margin-right: 5px;" [src]="a.userImage"/>
@@ -78,7 +89,7 @@
         </div>
       </div>
 
-      <div>
+      <div *ngIf="userId != 0 && role != 2">
         <div>
           <h2>Câu trả lời của bạn </h2>
         </div>
@@ -87,10 +98,12 @@
           <button (click)="onSummit()" class="btn btn-primary">Đăng câu trả lời</button>
         </div>
       </div>
+
+
     </div>
   </div>
 </div>
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="myModalDelete" role="dialog">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -103,6 +116,30 @@
       <div class="modal-footer">
         <button style="width: 70px" type="button" class="btn btn-danger" id="yes" data-dismiss="modal" (click)="deleteQA()" >Ok</button>
         <button style="width: 70px" type="button" class="btn btn-success" data-dismiss="modal">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal-->
+<div class="modal fade" id="myModalReport" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Xác nhận</h4>
+      </div>
+      <!--<div class="modal-body">-->
+      <!--<p>Bạn muốn xoá mục này</p>-->
+      <!--</div>-->
+      <div class="modal-body">
+        <div>
+          <h5>Bạn muốn báo cáo nội dung này !</h5>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button style="min-width: 70px" type="button" class="btn btn-danger" id="yes" data-dismiss="modal" (click)="setReport()">Báo cáo</button>
+
+        <button style="min-width: 70px" type="button" class="btn btn-success" data-dismiss="modal">Huỷ</button>
       </div>
     </div>
   </div>

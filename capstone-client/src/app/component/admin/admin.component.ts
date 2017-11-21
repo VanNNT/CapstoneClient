@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit {
    title: string;
    public numberOfReview: number;
    public numberOfQuestion: number;
-   public numberOfReport: number = 0;
+   public numberOfReport: number;
   constructor(private router: Router, private baseService: BaseService,
               private uniService: UniversityService, private reviewService: ReviewService) { }
  public user;
@@ -38,6 +38,10 @@ export class AdminComponent implements OnInit {
     });
     this.reviewService.numberOfQuestion.subscribe(value=>{
       this.numberOfQuestion = this.numberOfQuestion + value ;
+    });
+
+    this.reviewService.numberOfReportNeedApprove().subscribe(res=>{
+      this.numberOfReport = res;
     });
     this.reviewService.numberOfReport.subscribe(value=>{
       this.numberOfReport = this.numberOfReport + value ;

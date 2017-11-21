@@ -19,9 +19,10 @@ export class QuestionDetailComponent implements OnInit {
   private qaId: number;
   public question: any;
   public anwsers: Answer[];
-  public userId : number;
+  public userId : number = 0;
   public selectIndex: number;
-  public role;
+  public role = 0;
+  public valueReport;
   constructor(private uniService: UniversityService,private activateRoute: ActivatedRoute, private router: Router,
               private baseService: BaseService, private contants : Constants,private toastr: ToastsManager, private vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
@@ -32,8 +33,11 @@ export class QuestionDetailComponent implements OnInit {
     this.sub = this.activateRoute.params.subscribe(params=>{
       this.qaId=params['id'];
     });
+    if(this.baseService.getUser()){
     this.userId = this.baseService.getUser().id;
     this.role = this.baseService.getUser().role.id;
+    }
+
     this.uniService.getQuestionDetail(this.qaId, this.userId).subscribe(res => {
       this.question = res;
     });
@@ -184,7 +188,7 @@ export class QuestionDetailComponent implements OnInit {
     }
   }
   setVote(value){
-    if(value.userId != this.userId && !value.isVote && this.role != 2){
+    if(value.userId != this.userId && !value.isVote && this.role != 2 && this.userId != 0){
       let data = {
         'user': {
           'id': this.userId
@@ -199,19 +203,24 @@ export class QuestionDetailComponent implements OnInit {
         });
     }
   }
-  setReport(value){
-    if(value.userId != this.userId && !value.isReport && this.role != 2){
+
+  setValueReport(data){
+    this.valueReport = data;
+  }
+
+  setReport(){
+    if(this.valueReport.userId != this.userId && !this.valueReport.isReport && this.role != 2 && this.userId != 0){
       let data = {
         'user': {
           'id': this.userId
         },
         'questionAnswer':{
-          'id': value.id
+          'id': this.valueReport.id
         }
       };
       this.uniService.reportAnswer(data).subscribe(res=>{
-        value.isReport = true;
-        value.report = value.report + 1;
+        this.valueReport.isReport = true;
+        this.valueReport.report = this.valueReport.report + 1;
       });
     }
   }
