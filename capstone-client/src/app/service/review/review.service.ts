@@ -50,6 +50,9 @@ export class ReviewService {
   numberOfQuestionNeedApprove(){
     return this._http.get(this.contant.GET_NUMBER_QUESTION_NEED_APPROVE).map((res:Response)=>res.json());
   }
+  numberOfReportNeedApprove(){
+    return this._http.get(this.contant.NUMBER_REPORT).map((res:Response)=>res.json());
+  }
 
   changeReviewStatus(data){
     return this._http.post(this.contant.CHANGE_REVIEW_STATUS,data).map((res:Response)=>res.json());
