@@ -21,8 +21,8 @@ export class BaseService {
   showLoginForm() {
     document.getElementById('openModalButton').click();
   }
-  setUser(data){
-    this.user = new User(data);
+  setUser(data,providerName){
+    this.user = new User(data,providerName);
   }
   getUser(){
     return this.user;

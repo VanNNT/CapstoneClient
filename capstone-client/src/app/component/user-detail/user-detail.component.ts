@@ -4,6 +4,9 @@ import {User} from "../../model/User";
 import {BaseService} from "../../service/base-service/base.service";
 import {RequestOptions, Headers} from "@angular/http";
 import {UniversityService} from "../../service/university/university.service";
+import {Constants} from "../../constants";
+import {LoginService} from "../../service/login/login.service";
+import {ToastsManager} from "ng2-toastr";
 
 @Component({
   selector: 'app-user-detail',
@@ -14,11 +17,13 @@ export class UserDetailComponent implements OnInit {
   private user : User;
   public imageSrc;
   public isLoadImage: boolean = false;
-  constructor(private baseService: BaseService, private uniService: UniversityService) {}
+  constructor(private baseService: BaseService, private uniService: UniversityService, private constant: Constants,
+              private loginService: LoginService, public toastr: ToastsManager) {}
 
   ngOnInit(){
     this.user = this.baseService.getUser();
     this.imageSrc = this.user.image;
+    console.log(this.user.providerName);
   }
   handleInputChange(e){
     var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
@@ -49,6 +54,22 @@ export class UserDetailComponent implements OnInit {
   }
 
   onSubmit(form: NgForm){
-
+      let data = {
+        'name': form.value.name,
+        'email': form.value.email,
+        'password': form.value.password,
+        'image': this.imageSrc,
+        'id': this.user.id
+      };
+      this.loginService.editProfile(this.constant.EDIT_PROFILE,data).subscribe(res=>{
+          this.toastr.success('Bạn đã chỉnh sửa thông tin thành công','Thành công');
+        this.baseService.setUser(res,this.user.providerName);
+      },error=>{
+        if(error.status = this.constant.UNAUTHORIZED){
+          this.toastr.error('Đã xãy ra lỗi. Vui lòng kiểm tra lại','Lỗi');
+        }else{
+          this.toastr.error('Không thể kết nối máy chủ. Vui lòng kiểm tra lại.','Thất bại');
+        }
+      });
   }
 }

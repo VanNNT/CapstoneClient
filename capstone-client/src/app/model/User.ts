@@ -4,11 +4,11 @@ export class User {
   name: string;
   email: string;
   id: string;
-  providerName: string;
+  providerName: string = null;
   role = {
     id: ''
   };
-  constructor(data: any) {
+  constructor(data: any, provider: string) {
     if (data) {
      if(data.image){
        this.image = data.image;
@@ -28,8 +28,8 @@ export class User {
      if(data.uid){
        this.id = data.uid;
      }
-     if(data.provider){
-       this.providerName = data.provider;
+     if(data.provider || provider){
+       this.providerName = provider;
      }
      this.email = data.email;
      if(data.role){

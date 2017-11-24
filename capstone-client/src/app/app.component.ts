@@ -31,14 +31,14 @@ export class AppComponent implements OnInit, OnDestroy {
       this.user = JSON.parse(localStorage.getItem('currentUser'));
       if(this.user){
         this.loginService.setRole(this.user.role.id);
-        this.baseService.setUser(this.user);
+        this.baseService.setUser(this.user,this.user.providerName);
         this.loginService.setLogin(true);
       }
   }
   public login(provider) {
     this.sub = this.auth.login(provider).subscribe(
       (data) => {
-        this.baseService.setUser(data);
+        this.baseService.setUser(data,provider);
         this.user = this.baseService.getUser();
         $('#myModal').hide();
         $('body').removeClass('modal-open');
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
         };
         this.loginService.loginProvider(this.contants.LOGIN_PROVIDER,dataLogin).subscribe((res:Response)=>{
           if(res){
-            this.baseService.setUser(res);
+            this.baseService.setUser(res,this.user.providerName);
             this.user = this.baseService.getUser();
             this.loginService.setLogin(true);
             this.loginService.setRole(this.user.role.id);
@@ -103,7 +103,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.loginService.login(this.contants.LOGIN,data).subscribe((response:any)=>{
       if(response){
         this.loginService.setLogin(true);
-        this.baseService.setUser(response);
+        this.baseService.setUser(response,null);
         this.user = this.baseService.getUser();
         this.loginService.setRole(this.user.role.id);
         localStorage.setItem('currentUser', JSON.stringify(this.user));

@@ -45,14 +45,14 @@
                     </div>
                   </div>
                 </div>
-                <div  class="form-group">
+                <div  *ngIf="!user.providerName" class="form-group">
                   <label class="col-sm-4 control-label text-dark-gray" style="text-align:center; margin-top: 30px">Mật
                     khẩu mới</label>
                   <div  class="col-sm-6" style="margin-top: 22px">
                     <input  class="form-control" name="password" ngModel #password="ngModel" type="password">
                   </div>
                 </div>
-                <div  class="form-group">
+                <div  *ngIf="!user.providerName" class="form-group">
                   <label  class="col-sm-4 control-label text-dark-gray" style="text-align:center; margin-top: 30px">Nhập
                     lại mật khẩu mới</label>
                   <div  class="col-sm-6" style="margin-top: 20px">
@@ -68,7 +68,7 @@
                   </div>
                 </div>
                 <div class="text-center col-sm-8" style="    margin-top: 20px;width: 100%;">
-                  <button  class="btn btn-uni-primary" type="summit" [disabled]="!fDetail.valid">Cập nhật</button>
+                  <button  class="btn btn-uni-primary" type="summit" [disabled]="!fDetail.valid || !fDetail.dirty">Cập nhật</button>
                 </div>
               </form>
             </div>

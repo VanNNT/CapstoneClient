@@ -36,4 +36,8 @@ export class LoginService {
   loginProvider(apiUrl,data): Observable<any>{
     return this._http.post(apiUrl,data).map((res:Response)=>res.json());
   }
+
+  editProfile(apiUrl,data): Observable<any>{
+    return this._http.post(apiUrl,data).map((res:Response)=>res.json());
+  }
 }
