@@ -62,13 +62,13 @@ export class UserDetailComponent implements OnInit {
         'id': this.user.id
       };
       this.loginService.editProfile(this.constant.EDIT_PROFILE,data).subscribe(res=>{
-          this.toastr.success('Bạn đã chỉnh sửa thông tin thành công','Thành công');
+          this.toastr.success('Bạn đã chỉnh sửa thông tin thành công','Thành công', {showCloseButton: true});
         this.baseService.setUser(res,this.user.providerName);
       },error=>{
         if(error.status = this.constant.UNAUTHORIZED){
-          this.toastr.error('Đã xãy ra lỗi. Vui lòng kiểm tra lại','Lỗi');
+          this.toastr.error('Đã xãy ra lỗi. Vui lòng kiểm tra lại','Lỗi', {showCloseButton: true});
         }else{
-          this.toastr.error('Không thể kết nối máy chủ. Vui lòng kiểm tra lại.','Thất bại');
+          this.toastr.error('Không thể kết nối máy chủ. Vui lòng kiểm tra lại.','Thất bại', {showCloseButton: true});
         }
       });
   }
