@@ -67,12 +67,16 @@
                 <tr>
                   <td>Khối ngành</td>
                   <td>Điểm chuẩn</td>
+                  <td>Thang điểm</td>
+                  <td>Ghi chú</td>
                 </tr>
                 </thead>
                 <tbody>
                 <tr *ngFor="let i of majorDetail?.blockYear1">
                   <td>{{i.blockName}}</td>
                   <td>{{i.score}}</td>
+                  <td>{{i.barem}}</td>
+                  <td>{{i.description}}</td>
                 </tr>
                 </tbody>
               </table>
@@ -84,12 +88,16 @@
                 <tr>
                   <td>Khối ngành</td>
                   <td>Điểm chuẩn</td>
+                  <td>Thang điểm</td>
+                  <td>Ghi chú</td>
                 </tr>
                 </thead>
                 <tbody>
                 <tr *ngFor="let j of majorDetail?.blockYear2">
                   <td>{{j.blockName}}</td>
                   <td>{{j.score}}</td>
+                  <td>{{j.barem}}</td>
+                  <td>{{j.description}}</td>
                 </tr>
                 </tbody>
               </table>

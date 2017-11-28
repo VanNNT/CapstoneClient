@@ -112,16 +112,24 @@
       </div>
     </div>
     <div class="form-group" *ngFor="let item of currentMajor">
-      <label style="padding-top: 30px" class="control-label col-md-3 col-sm-3 col-xs-12">{{item.blockName}}</label>
-      <div class="row">
-        <form #scoreForm="ngForm">
+      <label style="padding-top: 30px" class="control-label col-md-2 col-sm-2 col-xs-12">{{item.blockName}}</label>
+      <div class="">
+        <form #scoreForm="ngForm" style="display: grid;">
           <div *ngFor="let scoreItem of item.scoreHistories[0] | orderBy: '+year'">
-            <div class="col-md-2">
-              <label>{{scoreItem.year}}</label>
-              <input class="form-control" [(ngModel)]="scoreItem.score" [name]="'A' + scoreItem.year"/>
-            </div>
+              <div class="col-md-2">
+                <label>{{scoreItem.year}}</label>
+                <input class="form-control" [(ngModel)]="scoreItem.score" [name]="'A' + scoreItem.year"/>
+              </div>
+              <div class="col-md-2">
+                <label>Thang điểm</label>
+                <input class="form-control" [(ngModel)]="scoreItem.barem" [name]="'barem' + scoreItem.year"/>
+              </div>
+              <div class="col-md-4">
+                <label>Ghi chú</label>
+                <textarea class="form-control" [(ngModel)]="scoreItem.description" [name]="'des' + scoreItem.year"></textarea>
+              </div>
           </div>
-          <div style="padding-top: 24px;">
+          <div style="padding-bottom: 20px;padding-left: 11px;border-bottom: 1px solid;">
             <button type="submit" (click)="onSaveScore(scoreForm,item.blockName)" [disabled]="!scoreForm.dirty || scoreForm.submitted" class="btn btn-primary">Lưu</button>
             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteScore" (click)="selectIndex = item.id">Xóa</button>
           </div>
@@ -129,18 +137,38 @@
       </div>
     </div>
     <div class="form-group" *ngFor="let item of listMajorBlock">
-      <label style="padding-top: 30px" class="control-label col-md-3 col-sm-3 col-xs-12">{{item}}</label>
+      <label style="padding-top: 30px" class="control-label col-md-2 col-sm-2 col-xs-12">{{item}}</label>
       <div class="row">
-        <form #scoreForm="ngForm" (ngSubmit)="onSaveScore(scoreForm,item)">
-          <div class="col-md-2">
-            <label>2016</label>
-            <input type="number" class="form-control" ngModel name="A2016" [required]="true" />
+        <form #scoreForm="ngForm" (ngSubmit)="onSaveScore(scoreForm,item)" style="display: grid;">
+          <div>
+            <div class="col-md-2">
+              <label>2016</label>
+              <input type="number" class="form-control" ngModel name="A2016" [required]="true" />
+            </div>
+            <div class="col-md-2">
+              <label>Thang điểm</label>
+              <input class="form-control" ngModel name="barem2016"/>
+            </div>
+            <div class="col-md-4">
+              <label>Ghi chú</label>
+              <textarea class="form-control" ngModel name="des2016"></textarea>
+            </div>
           </div>
-          <div class="col-md-2">
-            <label>2017</label>
-            <input type="number" class="form-control" ngModel name="A2017" [required]="true"/>
+          <div>
+            <div class="col-md-2">
+              <label>2017</label>
+              <input type="number" class="form-control" ngModel name="A2017" [required]="true" />
+            </div>
+            <div class="col-md-2">
+              <label>Thang điểm</label>
+              <input class="form-control" ngModel name="barem2017"/>
+            </div>
+            <div class="col-md-4">
+              <label>Ghi chú</label>
+              <textarea class="form-control" ngModel name="des2017"></textarea>
+            </div>
           </div>
-          <div style="padding-top: 24px;">
+          <div style="padding-bottom: 20px;padding-left: 11px;border-bottom: 1px solid;">
             <button type="submit" [disabled]="!scoreForm.dirty || scoreForm.submitted || scoreForm.invalid" class="btn btn-primary">Lưu</button>
           </div>
         </form>

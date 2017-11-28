@@ -69,13 +69,17 @@ export class MajorDetailComponent implements OnInit, OnDestroy {
             if(this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].year == 2016){
               let year1 = {
                 blockName: this.majorUniversity.blockMajorUniversities[i].block.blockName,
-                score: this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].score
+                score: this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].score,
+                barem : this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].barem == 30? "": this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].barem,
+                description : this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].description
               };
               this.majorDetail.blockYear1.push(year1);
             }else{
               let year2 = {
                 blockName: this.majorUniversity.blockMajorUniversities[i].block.blockName,
-                score: this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].score
+                score: this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].score,
+                barem : this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].barem == 30? "" : this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].barem,
+                description : this.majorUniversity.blockMajorUniversities[i].scoreHistories[j].description
               };
               this.majorDetail.blockYear2.push(year2);
             }

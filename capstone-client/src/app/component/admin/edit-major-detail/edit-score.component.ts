@@ -98,9 +98,13 @@ export class EditScoreComponent implements OnInit {
       "majorScore": [
         {
           "score": form.value.A2016,
+          "barem": form.value.barem2016? form.value.barem2016 : 30,
+          "description": form.value.des2016? form.value.des2016 : "",
           "year": 2016
         }, {
           "score": form.value.A2017,
+          "barem": form.value.barem2017? form.value.barem2017 : 30,
+          "description": form.value.des2017? form.value.des2017 : "",
           "year": 2017
         }
       ]
