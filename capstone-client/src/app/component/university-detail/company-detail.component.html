@@ -25,6 +25,7 @@
           <div class="col-xs-9">
             <p class="company-name text-highlight">{{university?.name}}</p>
             <div class="row">
+              <div class="col-xs-12 detail-item"><i class="fa fa-location-arrow detail-icon"></i>{{university?.location.locationName}}</div>
               <div class="col-xs-12 detail-item"><i class="fa fa-phone detail-icon"></i>{{university?.phone}}</div>
               <div class="col-xs-12 detail-item"><i class="fa fa-envelope-open detail-icon"></i>{{university?.email}}</div>
               <!--<div class="col-xs-6 detail-item"><i class="fa fa-map-marker detail-icon"></i>1000+ nhân viên</div>-->
@@ -196,13 +197,18 @@
           <div class="box-group-title col-xs-8"><span><strong>Tin Tức</strong></span></div>
         </div>
       </div>
-      <div class="box box-white">
+      <div class="box box-white" *ngIf="listArticle?.length != 0">
         <ul>
           <li *ngFor="let article of listArticle" class="list-article" [routerLink]="['/article-detail',article.id]">
             <img src="{{article.image}}">
             <b style="font-size: 14px; text-align: justify;">{{article.title}}</b>
           </li>
         </ul>
+        <a [routerLink]="['/uni-article',id]"
+           class="pull-right" style="font-size: 16px; margin-top: -20px">Xem Thêm</a>
+      </div>
+      <div class="box box-white" *ngIf="listArticle?.length == 0">
+        <h3>Hiện chưa có bài viết</h3>
       </div>
     </div>
 

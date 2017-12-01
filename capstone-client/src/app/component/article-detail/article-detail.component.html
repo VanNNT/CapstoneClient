@@ -6,7 +6,7 @@
       {{article?.universityName}}</a>
     <p><i class="fa fa-clock-o" aria-hidden="true"></i> {{article?.createDate | date: 'shortDate'}}</p>
     <p><strong>{{article?.description}}</strong></p>
-    <div [innerHTML]="article?.contents"></div>
+    <div [innerHTML]="article?.contents | safeHtml"></div>
     <div style="margin-bottom: 20px; margin-top: 20px"><a style="color: #f05f40; text-decoration: none; font-size: 25px" *ngIf="article" [routerLink]="['/university',article?.universityId]">
       <i class="fa fa-forward" aria-hidden="true"></i>
       {{article?.universityName}}</a>
@@ -33,6 +33,8 @@
           </a>
         </li>
       </ul>
+      <a [routerLink]="['/uni-article',uniId]"
+         class="pull-right" style="font-size: 16px; margin-top: -20px">Xem Thêm</a>
     </div>
   </div>
   </div>
