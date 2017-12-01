@@ -197,13 +197,18 @@
           <div class="box-group-title col-xs-8"><span><strong>Tin Tức</strong></span></div>
         </div>
       </div>
-      <div class="box box-white">
+      <div class="box box-white" *ngIf="listArticle?.length != 0">
         <ul>
           <li *ngFor="let article of listArticle" class="list-article" [routerLink]="['/article-detail',article.id]">
             <img src="{{article.image}}">
             <b style="font-size: 14px; text-align: justify;">{{article.title}}</b>
           </li>
         </ul>
+        <a [routerLink]="['/uni-article',id]"
+           class="pull-right" style="font-size: 16px; margin-top: -20px">Xem Thêm</a>
+      </div>
+      <div class="box box-white" *ngIf="listArticle?.length == 0">
+        <h3>Hiện chưa có bài viết</h3>
       </div>
     </div>
 

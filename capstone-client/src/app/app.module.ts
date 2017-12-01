@@ -66,6 +66,7 @@ import { TagInputModule } from 'ngx-chips';
 import { UserFavoriteComponent } from './component/user-favorite/user-favorite.component';
 import { ApproveQuestionComponent } from './component/admin/approve-question/approve-question.component';
 import { ListReportComponent } from './component/admin/list-report/list-report.component';
+import { UniArticleComponent } from './component/uni-article/uni-article.component';
 
 const providers = {
   'google': {
@@ -112,7 +113,8 @@ const providers = {
     EditQuestionComponent,
     UserFavoriteComponent,
     ApproveQuestionComponent,
-    ListReportComponent
+    ListReportComponent,
+    UniArticleComponent
   ],
   imports: [
     Select2Module,
