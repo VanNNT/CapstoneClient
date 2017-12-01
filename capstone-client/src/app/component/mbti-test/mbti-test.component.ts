@@ -177,10 +177,10 @@ export class MbtiTestComponent implements OnInit {
             this.mbtiResult = response;
             this.majorResult = response.mbtitype.majorMbtis;
             this.getUniMBTI(response.mbtitype.id);
-            document.body.scrollTop = 0;
+            // document.body.scrollTop = 0;
           }
         });
-    document.body.scrollTop = 0;
+    // document.body.scrollTop = 0;
     this.tested = true;
     this.scores = {
       E: 0,
@@ -199,7 +199,7 @@ export class MbtiTestComponent implements OnInit {
   }
 
   public cancel(){
-    document.body.scrollTop = 0;
+    // document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
     if(this.update){
       this.tested = true;

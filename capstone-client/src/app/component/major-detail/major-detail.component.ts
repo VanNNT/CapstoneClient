@@ -45,6 +45,8 @@ export class MajorDetailComponent implements OnInit, OnDestroy {
               private universityService: UniversityService) { }
 
   ngOnInit() {
+    // document.body.scrollTo(0,0);
+    document.documentElement.scrollTop = 0;
     $.getScript('../../../assets/file.js');
     this.sub = this.activateRoute.params.subscribe(params=>{
       this.id=params['id'];
