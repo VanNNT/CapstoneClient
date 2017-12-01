@@ -82,15 +82,16 @@ export class AppComponent implements OnInit, OnDestroy {
            $('#myModal').hide();
            $('body').removeClass('modal-open');
            $('.modal-backdrop').remove();
-           this.toastr.success('Bạn đã đăng ký thành công', 'Thành công!');
+           this.toastr.success('Bạn đã đăng ký thành công', 'Thành công!',{showCloseButton: true});
            registerForm.onReset();
+           this.onLogin(data);
          }
       },error=>{
         if(error.status==this.contants.CONFLICT){
-          this.toastr.error('Tài khoản này đã tồn tại. Vui lòng thử lại', 'Thất bại');
+          this.toastr.error('Tài khoản này đã tồn tại. Vui lòng thử lại', 'Thất bại',{showCloseButton: true});
           registerForm.onReset();
         }else{
-          this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
+          this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
         };
       });
     registerForm.onReset();
@@ -123,9 +124,9 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     },error=>{
       if(error.status==this.contants.UNAUTHORIZED){
-        this.toastr.error('Username/Password không đúng. Vui lòng thử lại.', 'Thất bại!');
+        this.toastr.error('Username/Password không đúng. Vui lòng thử lại.', 'Thất bại!',{showCloseButton: true});
       }else{
-        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại');
+        this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});
       };
     });
   }

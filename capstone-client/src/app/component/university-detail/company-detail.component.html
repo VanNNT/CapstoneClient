@@ -172,17 +172,20 @@
 
         <div class="box-group-header">
           <div class="row">
-            <div class="box-group-title col-xs-8"><span><strong>Trường Tương Quan</strong></span></div>
+            <div class="box-group-title col-xs-8" *ngIf="topCorrlateUni"><span><strong>Trường Tương Quan</strong></span></div>
           </div>
         </div>
-        <div class="box box-white" style="text-align: center" *ngFor="let topCorrelate of topCorrlateUni">
-                <a href="/university/{{topCorrelate.university.id}}" class="top-correlate" *ngIf="!topCorrelate.university.logo">
-                  <img src="../../../assets/image/image-not-found.png" class="thumb"> <br>
-                </a>
-          <a href="/university/{{topCorrelate.university.id}}" class="top-correlate" *ngIf="topCorrelate.university.logo">
-            <img src="{{topCorrelate.university.logo}}" class="thumb"> <br>
-          </a>
+        <div style="overflow-y: auto;
+                    height: 900px;">
+          <div class="box box-white" style="text-align: center" *ngFor="let topCorrelate of topCorrlateUni">
+            <a href="/university/{{topCorrelate.university.id}}" class="top-correlate" *ngIf="!topCorrelate.university.logo">
+              <img src="../../../assets/image/image-not-found.png" class="thumb"> <br>
+            </a>
+            <a href="/university/{{topCorrelate.university.id}}" class="top-correlate" *ngIf="topCorrelate.university.logo">
+              <img src="{{topCorrelate.university.logo}}" class="thumb"> <br>
+            </a>
             <a href="/university/{{topCorrelate.university.id}}" style="color: black"><b>{{topCorrelate.university.name}}</b></a>
+          </div>
         </div>
       </div>
     </div>
