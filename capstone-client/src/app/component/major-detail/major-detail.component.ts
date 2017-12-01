@@ -58,7 +58,6 @@ export class MajorDetailComponent implements OnInit, OnDestroy {
       return;
     }
 
-
     this.university =  JSON.parse(localStorage.getItem("UNI"));
     this.majorDetail.blockYear1 = [];
     this.majorDetail.blockYear2 = [];
@@ -107,31 +106,34 @@ export class MajorDetailComponent implements OnInit, OnDestroy {
     //check Review University Major
     this.user = this.baseService.getUser();
 
-    if(this.user){
-    let data = {
-      "majorUniversity":
-        {
-          "id": this.majorUniversity.id
-        },
-      "users":
-        {
-          "id": this.user.id
-        }
-    };
+    if (this.user) {
+      let data = {
+        "majorUniversity":
+          {
+            "id": this.majorUniversity.id
+          },
+        "users":
+          {
+            "id": this.user.id
+          }
+      };
       this.dataSaveFavorite = data;
-    this.reviewService.checkFavorite(data).subscribe((res: any)=>{
+      this.reviewService.checkFavorite(data).subscribe((res: any) => {
 
         this.checkFavoriteMajor = res;
 
-    });
-    this.reviewService.checkReviewUniMajor(data).subscribe((res: any)=>{
-      this.checkReviewUniMajor = res;
-    });
+      });
+      this.reviewService.checkReviewUniMajor(data).subscribe((res: any) => {
+        this.checkReviewUniMajor = res;
+      });
     }
+    this.getStarReview();
+  }
+
+  getStarReview(){
     this.reviewService.getStarReviewMajor(this.majorUniversity.id).subscribe((res:any)=>{
       if(res){
         this.starPoint = res;
-        localStorage.setItem('STAR_POINT', JSON.stringify(res));
         this.totalStar = (res.starTeaching + res.starCareer)/2;
         this.recommentPoint = res.recommentPoint;
         this.showStarsTeaching = res.starTeaching;
@@ -142,9 +144,7 @@ export class MajorDetailComponent implements OnInit, OnDestroy {
         this.starPoint = null;
       }
     });
-
   }
-
   public onSubmit(form: NgForm){
       if(this.user.role.id == 1){
         if(form.valid && !this.isCheck){
@@ -163,7 +163,8 @@ export class MajorDetailComponent implements OnInit, OnDestroy {
       this.reviewService.saveMajorReview(data).subscribe((res:Response)=>{
         if(res){
           this.checkReviewUniMajor = true;
-          this.toastr.success('Vui lòng chờ chúng tôi xem xét đánh giá của bạn', 'Thành công',{showCloseButton: true});
+          this.getStarReview();
+          this.toastr.success('Bạn đã đánh giá thành công', 'Thành công',{showCloseButton: true});
         }
       },(error=>{
         this.toastr.error('Trường học hoặc user này không tồn tại', 'Thất bại',{showCloseButton: true});
