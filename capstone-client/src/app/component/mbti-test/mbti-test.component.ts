@@ -42,7 +42,6 @@ export class MbtiTestComponent implements OnInit {
   getUniMBTI(data){
     this.mbtiService.getTopUniMBTI(data).subscribe((res: any) => {
       this.topUniMBTI = res;
-      console.log(data)
       console.log(this.topUniMBTI);
     });
   }
@@ -77,42 +76,60 @@ export class MbtiTestComponent implements OnInit {
 
 
 
-  public onChoose(item, option) {
+  public onChoose(item,i,option) {
     if ((option == 'a' || option == 'b') && !item.isChecked) {
       item.fullChecked = true;
     }
-    if (option == 'a' && !item.isChecked) {
-      if (item.MBTIGroup == 'EI') {
-        this.scores.E = this.scores.E + 1;
-      } else if (item.MBTIGroup == 'SN') {
-        this.scores.S = this.scores.S + 1;
-      } else if (item.MBTIGroup == 'TF') {
-        this.scores.T = this.scores.T + 1;
-      } else {
-        this.scores.J = this.scores.J + 1;
-      }
-      item.isChecked = true;
+    if(option == 'a'){
+      this.questions[i].checkA = true;
+      this.questions[i].checkB = false;
+    }else{
+      this.questions[i].checkB = true;
+      this.questions[i].checkA = false;
     }
-    if (option == 'b' && item.isChecked) {
-      if (item.MBTIGroup == 'EI') {
-        this.scores.E = this.scores.E - 1;
-      } else if (item.MBTIGroup == 'SN') {
-        this.scores.S = this.scores.S - 1;
-      } else if (item.MBTIGroup == 'TF') {
-        this.scores.T = this.scores.T - 1;
-      } else {
-        this.scores.J = this.scores.J - 1;
-      }
-      item.isChecked = false;
-    }
+    // if (option == 'a' && !item.isChecked) {
+    //   if (item.MBTIGroup == 'EI') {
+    //     this.scores.E = this.scores.E + 1;
+    //   } else if (item.MBTIGroup == 'SN') {
+    //     this.scores.S = this.scores.S + 1;
+    //   } else if (item.MBTIGroup == 'TF') {
+    //     this.scores.T = this.scores.T + 1;
+    //   } else {
+    //     this.scores.J = this.scores.J + 1;
+    //   }
+    //   item.isChecked = true;
+    // }
+    // if (option == 'b' && item.isChecked) {
+    //   if (item.MBTIGroup == 'EI') {
+    //     this.scores.E = this.scores.E - 1;
+    //   } else if (item.MBTIGroup == 'SN') {
+    //     this.scores.S = this.scores.S - 1;
+    //   } else if (item.MBTIGroup == 'TF') {
+    //     this.scores.T = this.scores.T - 1;
+    //   } else {
+    //     this.scores.J = this.scores.J - 1;
+    //   }
+    //   item.isChecked = false;
+    // }
   }
 
   public onSubmit(form: NgForm) {
-
     for (let i = 0; i < this.questions.length; i++) {
       if (this.questions[i].fullChecked == false) {
         this.toastr.error("Vui lòng hoàn thành tất cả câu hỏi", '', {showCloseButton: true});
         return;
+      }else{
+        if(this.questions[i].checkA == true){
+          if(this.questions[i].MBTIGroup == 'EI'){
+            this.scores.E = this.scores.E + 1;
+          }else if(this.questions[i].MBTIGroup == 'SN'){
+            this.scores.S = this.scores.S + 1;
+          }else if(this.questions[i].MBTIGroup == 'TF'){
+            this.scores.T = this.scores.T + 1;
+          }else{
+            this.scores.J = this.scores.J + 1;
+          }
+        }
       }
     }
     if (this.scores.E >= 5) {
@@ -195,14 +212,32 @@ export class MbtiTestComponent implements OnInit {
     for (let i = 0; i < this.questions.length; i++) {
       this.questions[i].isChecked = false;
       this.questions[i].fullChecked = false;
+      this.questions[i].checkA = false;
+      this.questions[i].checkB = false;
     }
   }
-
+  public clickAuto(){
+    for (let i = 0; i < this.questions.length; i++) {
+      var x = Math.floor((Math.random() * 10) + 1);
+      if(x % 2 == 0){
+        this.questions[i].checkA = true;
+        this.questions[i].fullChecked = true;
+      }else{
+        this.questions[i].checkB = true;
+        this.questions[i].fullChecked = true;
+      }
+    }
+  }
   public cancel(){
-    document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
     if(this.update){
       this.tested = true;
+      for (let i = 0; i < this.questions.length; i++) {
+        this.questions[i].isChecked = false;
+        this.questions[i].fullChecked = false;
+        this.questions[i].checkA = false;
+        this.questions[i].checkB = false;
+      }
     }else{
       this.router.navigate(['/search-university']);
     }

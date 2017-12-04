@@ -7,6 +7,8 @@ export class MBTIQuestion {
   MBTIGroup: string;
   isChecked: boolean;
   fullChecked: boolean;
+  checkA: boolean;
+  checkB: boolean
 
   constructor(data: any) {
     if (data) {
@@ -18,6 +20,8 @@ export class MBTIQuestion {
       this.MBTIGroup = data.mbtigroup.mbtigroupName;
       this.isChecked = false;
       this.fullChecked = false;
+      this.checkA = false;
+      this.checkB = false;
     }
   }
 }
