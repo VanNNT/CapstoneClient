@@ -62,6 +62,7 @@ public currentUrl;
     this.currentUrl = this.constant.HTTP + this.constant.SERVER_IP + this.constant.CLIENT_PORT + '/university/' + this.id;
     this.universityService.getUniversityById(this.id).subscribe((university: any) => {
       this.university = university;
+
       this.baseService.setUniversity(university);
       localStorage.setItem("UNI",JSON.stringify(university));
       this.des = university.description;

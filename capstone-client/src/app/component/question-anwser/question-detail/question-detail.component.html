@@ -24,7 +24,7 @@
         </div>
         <div *ngIf="userId == question?.users.id" class="row started"  style="float: left; cursor: pointer">
           <!--<span style="padding-right: 10px" [routerLink]="['/edit-question', question?.id]">Sửa</span>-->
-          <span data-toggle="modal" data-target="#myModal" (click)="selectIndex = question.id">Xóa</span>
+          <span data-toggle="modal" data-target="#myModalDelete" (click)="selectIndex = question.id">Xóa</span>
         </div>
         <div class="row" style="float: right;padding-right: 50px;">
           <img style="width: 100%;height: 30px; max-width: 30px;border-radius: 50%;margin-right: 5px;" [src]="question?.users.image"/>

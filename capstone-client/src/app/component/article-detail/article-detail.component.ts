@@ -14,6 +14,7 @@ export class ArticleDetailComponent implements OnInit {
   public article;
   public articleUni;
   public tagArticle;
+  public uniId;
   constructor(private activatedRoute: ActivatedRoute, private reviewService: ReviewService) { }
 
   ngOnInit() {
@@ -29,6 +30,7 @@ export class ArticleDetailComponent implements OnInit {
     this.reviewService.getArticleById(data).subscribe((res: any)=>{
       this.article = res;
       console.log(this.article);
+      this.uniId = this.article.universityId;
       this.getArticleUni(this.article.universityId);
     })
   }
@@ -41,7 +43,7 @@ export class ArticleDetailComponent implements OnInit {
   getTagArticle(data){
     this.reviewService.getTagArticle(data).subscribe((res: any)=>{
       this.tagArticle = res;
-      console.log(this.tagArticle);
+      // console.log(this.tagArticle);
     })
   }
 }

@@ -120,4 +120,7 @@ export class ReviewService {
   getAllTag(){
     return this._http.get(this.contant.GET_ALL_TAG).map((res: Response)=> res.json());
   }
+  getAllArticleByUni(data){
+    return this._http.get(this.contant.GET_ALL_ARTICLE+"?universityId="+data).map((res: Response)=> res.json());
+  }
 }

@@ -31,6 +31,7 @@ import {EditQuestionComponent} from "./component/question-anwser/edit-question/e
 import {UserFavoriteComponent} from "./component/user-favorite/user-favorite.component";
 import {ApproveQuestionComponent} from "./component/admin/approve-question/approve-question.component";
 import {ListReportComponent} from "./component/admin/list-report/list-report.component";
+import {UniArticleComponent} from "./component/uni-article/uni-article.component";
 
 const routing: Routes = [
   {path: '', component: HeaderComponent,
@@ -53,6 +54,8 @@ const routing: Routes = [
       {path: 'your-question', component: YourQuestionComponent, canActivate: [CheckLoginGuard, CheckRoleGuard]},
       {path: 'article', component: ArticleComponent},
       {path: 'article-detail/:id', component: ArticleDetailComponent},
+      {path: 'uni-article/:id', component: UniArticleComponent},
+
     ]},
   {path: 'admin', component: AdminComponent,canActivate: [CheckLoginGuard],
     children: [
