@@ -223,6 +223,10 @@ export class QuestionDetailComponent implements OnInit {
         this.uniService.voteAnswer(data).subscribe(res=>{
             value.isVote = true;
             value.vote = value.vote + 1;
+        },(error)=>{
+          if(error.status = this.contants.CONFLICT){
+            this.toastr.error("Câu trả lời này đã bị xoá!!!", '', {showCloseButton: true});
+          }
         });
     }
   }
@@ -244,6 +248,10 @@ export class QuestionDetailComponent implements OnInit {
       this.uniService.reportAnswer(data).subscribe(res=>{
         this.valueReport.isReport = true;
         this.valueReport.report = this.valueReport.report + 1;
+      },(error)=>{
+        if(error.status = this.contants.CONFLICT){
+          this.toastr.error("Câu trả lời này đã bị xoá!!!", '', {showCloseButton: true});
+        }
       });
     }
   }
