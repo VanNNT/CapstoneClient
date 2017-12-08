@@ -52,17 +52,19 @@ export class HeaderComponent implements OnInit {
     this.stompClient = Stomp.over(ws);
     let that = this;
     this.stompClient.connect({}, function(frame) {
-      that.stompClient.subscribe("/notify/" + that.user.id, (message) => {
-        if(message.body) {
-          var answer = JSON.parse(message.body);
-          var str = '/question-detail/' + answer.parentId;
-          console.log(str);
-          if(that.url != str){
-            that.count = that.count + 1;
-            that.cdRef.detectChanges();
+      if(that.user){
+        that.stompClient.subscribe("/notify/" + that.user.id, (message) => {
+          if(message.body) {
+            var answer = JSON.parse(message.body);
+            var str = '/question-detail/' + answer.parentId;
+            console.log(str);
+            if(that.url != str){
+              that.count = that.count + 1;
+              that.cdRef.detectChanges();
+            }
           }
-        }
-      });
+        });
+      }
     });
   }
 
@@ -70,6 +72,7 @@ export class HeaderComponent implements OnInit {
     this.loginService.space.subscribe(value => {
       this.user = value;
       this.cdRef.detectChanges();
+      this.initializeWebSocketConnection();
     });
   }
 
