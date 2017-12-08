@@ -43,7 +43,7 @@ import {UniversityService} from "./service/university/university.service";
 
 // Guard
 import {CheckLoginGuard} from './guard/check-login/check-login.guard';
-import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
+import {CheckAdminGuard, CheckRoleGuard} from "./guard/check-role/check-role.guard";
 
 import { EqualValidatorDirective } from './directive/equal-validatior/equal-validator.directive';
 import {Constants} from "./constants";
@@ -135,7 +135,7 @@ const providers = {
     TagInputModule,
   ],
   providers: [LoginService, BaseService, CheckLoginGuard,
-    CheckRoleGuard, SearchService,Constants,
+    CheckRoleGuard, SearchService,Constants, CheckAdminGuard,
     UniversityService, MbtiService, ReviewService,NgbRatingConfig,DecimalPipe],
   bootstrap: [AppComponent]
 })

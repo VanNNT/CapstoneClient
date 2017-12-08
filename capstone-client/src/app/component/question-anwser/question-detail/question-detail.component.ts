@@ -112,7 +112,9 @@ export class QuestionDetailComponent implements OnInit {
            'id': res,
            'content' : $('#summnernote').summernote('code'),
            'vote': 0,
-           'users': {
+           'lastUpdatedTime': Date.now().toString(),
+
+        'users': {
              'id': this.userId,
              'name': this.baseService.getUser().name,
              'image': this.baseService.getUser().image
@@ -180,6 +182,7 @@ export class QuestionDetailComponent implements OnInit {
             this.anwsers[i].content = $('#edit-summernote').summernote('code');
             this.anwsers[i].isEdit = false;
             $('#edit-summernote').summernote('code', '');
+            this.anwsers[i].lastUpdatedTime = Date.now().toString();
           }
         }
       },(error)=>{

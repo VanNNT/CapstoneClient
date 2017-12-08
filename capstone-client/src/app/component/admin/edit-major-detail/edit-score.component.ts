@@ -28,6 +28,8 @@ export class EditScoreComponent implements OnInit {
   public valueBlock: number[] = [];
   public university: any;
   public selectIndex: number;
+  public isCheckprospects: boolean;
+  public isCheckDes: boolean;
   constructor( private universityService: UniversityService,
                private activateRoute: ActivatedRoute,
                private searchService: SearchService,
@@ -49,6 +51,15 @@ export class EditScoreComponent implements OnInit {
         ['fullscreen',['fullscreen']]
       ]
     });
+    $('#prospects').summernote({
+      height: 150,
+      toolbar: [
+        ['style', ['bold', 'italic', 'underline']],
+        ['fontsize', ['fontsize','color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['fullscreen',['fullscreen']]
+      ]
+    });
     this.universityService.broadcastTextChange("CHỈNH SỬA THÔNG TIN NGÀNH");
     this.sub = this.activateRoute.params.subscribe(params=>{
       this.id = params['id'];
@@ -57,9 +68,11 @@ export class EditScoreComponent implements OnInit {
     if(this.majorDetail){
       localStorage.setItem('MAJOR_DETAIL',JSON.stringify(this.majorDetail));
       $('#summernote').summernote('code', this.majorDetail.description);
+      $('#prospects').summernote('code',this.majorDetail.prospects);
     }else{
       this.majorDetail = JSON.parse(localStorage.getItem('MAJOR_DETAIL'));
       $('#summernote').summernote('code', this.majorDetail.description);
+      $('#prospects').summernote('code',this.majorDetail.prospects);
     }
     this.valueBlock = [];
     if(this.majorDetail.blockMajorUniversities.length != 0){
@@ -87,11 +100,9 @@ export class EditScoreComponent implements OnInit {
           }
         });
     }
-    console.log(this.listMajorBlock);
   }
 
   onSaveScore(form:NgForm,blockName){
-    console.log(form.value);
     let data = {
       "majorUniId": this.id,
       "blockName": blockName,
@@ -119,13 +130,18 @@ export class EditScoreComponent implements OnInit {
   }
 
   onSaveMajorUni(form: NgForm){
-    console.log(form.value);
+    if($('#summernote').summernote('code').length == 0){
+      this.isCheckDes = true;
+    }
+    if($('#prospects').summernote('code').length == 0){
+      this.isCheckprospects = true;
+    }
     if(form.valid){
       let data = {
         'id': this.id,
         'numberOfYear': form.value.numberOfYear,
         'requirement': form.value.requirement,
-        'prospects': form.value.prospects,
+        'prospects': $('#prospects').summernote('code'),
         'description': $('#summernote').summernote('code')
       };
       this.universityService.saveMajorUniDetail(data).subscribe(res=>{
