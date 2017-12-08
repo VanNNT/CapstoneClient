@@ -55,7 +55,7 @@ import { QuestionComponent } from './component/question-anwser/question/question
 import { QuestionDetailComponent } from './component/question-anwser/question-detail/question-detail.component';
 import { NewQuestionComponent } from './component/question-anwser/new-question/new-question.component';
 import { YourQuestionComponent } from './component/question-anwser/your-question/your-question.component';
-
+import { StompService } from 'ng2-stomp-service';
 import { AddArticleComponent } from './component/admin/add-article/add-article.component';
 import { ListArticleComponent } from './component/admin/list-article/list-article.component';
 import { ArticleComponent } from './component/article/article.component';
@@ -135,7 +135,7 @@ const providers = {
     TagInputModule,
   ],
   providers: [LoginService, BaseService, CheckLoginGuard,
-    CheckRoleGuard, SearchService,Constants,
+    CheckRoleGuard, SearchService,Constants, StompService,
     UniversityService, MbtiService, ReviewService,NgbRatingConfig,DecimalPipe],
   bootstrap: [AppComponent]
 })

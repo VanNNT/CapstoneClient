@@ -1,11 +1,11 @@
-import {Component, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
-import * as $ from 'jquery';
+import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import {AuthService} from 'angular2-social-login';
 import {LoginService} from '../../service/login/login.service';
-import {NgForm} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
 import {UniversityService} from "../../service/university/university.service";
-
+import { StompService } from 'ng2-stomp-service';
+import Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -16,12 +16,17 @@ export class HeaderComponent implements OnInit {
   sub: any;
   private url;
   public count = 0;
+  private serverUrl = 'http://localhost:8080/unistart/socket';
+  private title = 'WebSockets chat';
+  private stompClient;
   constructor(private router: Router, private uniService: UniversityService,
               private loginService: LoginService,
               private auth: AuthService,private cdRef:ChangeDetectorRef) {
     router.events.subscribe((data:any) => { this.url = data.url; });
   }
+
   ngOnInit() {
+    this.initializeWebSocketConnection();
     this.getUser();
     this.getCount();
     if(!this.user){
@@ -41,6 +46,26 @@ export class HeaderComponent implements OnInit {
       });
     }
   }
+  initializeWebSocketConnection(){
+    let ws = new SockJS(this.serverUrl);
+    console.log(this.serverUrl);
+    this.stompClient = Stomp.over(ws);
+    let that = this;
+    this.stompClient.connect({}, function(frame) {
+      that.stompClient.subscribe("/notify/" + that.user.id, (message) => {
+        if(message.body) {
+          var answer = JSON.parse(message.body);
+          var str = '/question-detail/' + answer.parentId;
+          console.log(str);
+          if(that.url != str){
+            that.count = that.count + 1;
+            that.cdRef.detectChanges();
+          }
+        }
+      });
+    });
+  }
+
   public getUser(): void {
     this.loginService.space.subscribe(value => {
       this.user = value;

@@ -7,6 +7,8 @@ import {Constants} from "../../../constants";
 import {ToastsManager} from "ng2-toastr";
 import {Answer} from "../../../model/Answer";
 import {RequestOptions,Headers} from "@angular/http";
+import Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
 declare var $: any;
 @Component({
   selector: 'app-question-detail',
@@ -14,7 +16,8 @@ declare var $: any;
   styleUrls: ['./question-detail.component.less']
 })
 export class QuestionDetailComponent implements OnInit {
-
+  private serverUrl = 'http://localhost:8080/unistart/socket';
+  private stompClient;
   public sub: Subscription;
   private qaId: number;
   public question: any;
@@ -29,6 +32,7 @@ export class QuestionDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initializeWebSocketConnection();
     document.documentElement.scrollTop = 0;
     this.sub = this.activateRoute.params.subscribe(params=>{
       this.qaId=params['id'];
@@ -40,6 +44,9 @@ export class QuestionDetailComponent implements OnInit {
 
     this.uniService.getQuestionDetail(this.qaId, this.userId).subscribe(res => {
       this.question = res;
+      if(this.question.users.id == this.userId){
+        this.uniService.broadcastTextChange(0);
+      }
     });
     var seft = this;
     setTimeout(() => {
@@ -84,7 +91,20 @@ export class QuestionDetailComponent implements OnInit {
     //   }
     // ]
   }
-
+  initializeWebSocketConnection(){
+    let ws = new SockJS(this.serverUrl);
+    console.log(this.serverUrl);
+    this.stompClient = Stomp.over(ws);
+    let that = this;
+    this.stompClient.connect({}, function(frame) {
+      console.log(that.userId);
+      that.stompClient.subscribe("/notify/" + that.userId, (message) => {
+        if(message.body) {
+          that.anwsers.push(new Answer(JSON.parse(message.body)));
+        }
+      });
+    });
+  }
   getAnswer(){
      this.uniService.getAnwserByQuestion(this.qaId,this.userId).subscribe(res=>{
        this.anwsers = [];
