@@ -58,7 +58,6 @@ export class AppComponent implements OnInit, OnDestroy {
             this.loginService.setLogin(true);
             this.loginService.setRole(this.user.role.id);
             this.loginService.broadcastTextChange(this.user);
-            this.router.navigate([this.loginService.getUrl()]);
             this.uniService.getQuestionByUser(this.user.id).subscribe(res=>{
               let count = 0;
               for(let i = 0; i<res.length; i++){
@@ -67,6 +66,9 @@ export class AppComponent implements OnInit, OnDestroy {
               this.uniService.broadcastTextChange(count);
             });
             localStorage.setItem('currentUser', JSON.stringify(this.user));
+            if(this.loginService.getUrl()){
+              this.router.navigate([this.loginService.getUrl()]);
+            }
           }
         });
       }
@@ -116,7 +118,6 @@ export class AppComponent implements OnInit, OnDestroy {
           $('.modal-backdrop').remove();
           this.loginService.broadcastTextChange(this.user);
           console.log(this.loginService.getUrl());
-          this.router.navigate([this.loginService.getUrl()]);
           this.uniService.getQuestionByUser(this.user.id).subscribe(res => {
             if (res) {
               let count = 0;
@@ -126,6 +127,9 @@ export class AppComponent implements OnInit, OnDestroy {
               this.uniService.broadcastTextChange(count);
             }
           });
+          if(this.loginService.getUrl()){
+            this.router.navigate([this.loginService.getUrl()]);
+          }
         }
       }, error => {
         if (error.status == this.contants.UNAUTHORIZED) {

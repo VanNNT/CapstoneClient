@@ -97,9 +97,10 @@ export class QuestionDetailComponent implements OnInit {
     this.stompClient = Stomp.over(ws);
     let that = this;
     this.stompClient.connect({}, function(frame) {
-      console.log(that.userId);
-      that.stompClient.subscribe("/notify/" + that.userId, (message) => {
+      that.stompClient.subscribe("/get-answer/" + that.qaId, (message) => {
         if(message.body) {
+          var anwser = JSON.parse(message.body);
+          console.log(message.body);
           that.anwsers.push(new Answer(JSON.parse(message.body)));
         }
       });
@@ -140,7 +141,7 @@ export class QuestionDetailComponent implements OnInit {
              'image': this.baseService.getUser().image
            }
          }
-         this.anwsers.push(new Answer(data));
+        // this.anwsers.push(new Answer(data));
         $('#summnernote').summernote('code', " ");
       }, (error) => {
         this.toastr.error("Không thể kết nối với máy chủ. Vui lòng kiểm tra lại", "Thất bại", {showCloseButton: true});
