@@ -121,7 +121,7 @@
           <div class="box box-white" id="company-about">
             <p><b>Yêu Cầu Đầu Vào: </b></p>         <span>{{majorUniversity?.requirement}}</span>               <br><br>
             <p><b>Thời gian học: </b>               <span>{{majorUniversity?.numberOfYear}} năm</span></p>      <br>
-            <p><b>Triển vọng nghề nghiệp: </b></p>  <span>{{majorUniversity?.prospects}}</span>                 <br><br>
+            <p><b>Triển vọng nghề nghiệp: </b></p>    <div [innerHTML]="majorUniversity?.prospects"></div>            <br><br>
             <p><b>Tổng Quan Về Ngành: </b></p>        <div [innerHTML]="majorUniversity?.description"></div>    <br>
 
           </div>

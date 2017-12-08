@@ -23,7 +23,11 @@ export class AdminComponent implements OnInit {
     this.user = this.baseService.getUser();
     this.router.navigate(['admin/list-university']);
     this.uniService.title.subscribe(value=>{
-      this.title = value;
+      if(value == 0){
+        this.title = "DANH SÁCH TRƯỜNG";
+      }else{
+        this.title = value;
+      }
     });
     this.reviewService.numberOfReviewNeedApprove().subscribe(res=>{
       this.numberOfReview = res;
