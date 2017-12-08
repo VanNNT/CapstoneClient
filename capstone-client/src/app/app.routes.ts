@@ -14,7 +14,7 @@ import {NewReviewComponent} from "./component/new-review/new-review.component";
 import {EditUniversityComponent} from "./component/admin/edit-university/edit-university.component";
 import {ViewMajorUnversityComponent} from "./component/search/view-major-unversity/view-major-university.component";
 import {EditScoreComponent} from "./component/admin/edit-major-detail/edit-score.component";
-import {CheckRoleGuard} from "./guard/check-role/check-role.guard";
+import {CheckAdminGuard, CheckRoleGuard} from "./guard/check-role/check-role.guard";
 import {ApproveReivewComponent} from "./component/admin/approve-reivew/approve-reivew.component";
 import {EditMajorComponent} from "./component/admin/edit-major/edit-major.component";
 import {MajorDetailComponent} from "./component/major-detail/major-detail.component";
@@ -57,7 +57,7 @@ const routing: Routes = [
       {path: 'uni-article/:id', component: UniArticleComponent},
 
     ]},
-  {path: 'admin', component: AdminComponent,canActivate: [CheckLoginGuard],
+  {path: 'admin', component: AdminComponent,canActivate: [CheckLoginGuard, CheckAdminGuard],
     children: [
       {path: 'list-university', component: ListuniversityComponent},
       {path: 'add-university', component: AdduniversityComponent},

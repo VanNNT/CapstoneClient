@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 export class LoginService {
   public isLoggedIn = false;
   public isRole: any;
+  private currentUrl: any;
   constructor(private _http: Http) { }
   public space = new BehaviorSubject<any>(null);
 
@@ -15,6 +16,12 @@ export class LoginService {
     this.space.next(value);
   }
 
+  public setUrl(url: any){
+    this.currentUrl = url;
+  }
+  public getUrl(){
+    return this.currentUrl;
+  }
   public checkLogged(): boolean {
     return this.isLoggedIn;
   }

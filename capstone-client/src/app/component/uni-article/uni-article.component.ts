@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Subscription} from "rxjs/Subscription";
 import {ActivatedRoute} from "@angular/router";
 import {ReviewService} from "../../service/review/review.service";
+import {UniversityService} from "../../service/university/university.service";
 
 @Component({
   selector: 'app-uni-article',
@@ -13,7 +14,7 @@ export class UniArticleComponent implements OnInit {
   public sub: Subscription;
   public uniArticle;
   public university;
-  constructor(private activateRoute: ActivatedRoute, private reviewService: ReviewService) { }
+  constructor(private activateRoute: ActivatedRoute, private reviewService: ReviewService, private universityService: UniversityService) { }
 
   ngOnInit() {
     document.documentElement.scrollTop = 0;
@@ -23,8 +24,11 @@ export class UniArticleComponent implements OnInit {
     this.reviewService.getAllArticleByUni(this.id).subscribe((res: any)=>{
       this.uniArticle = res;
       console.log(this.uniArticle);
+    });
+    this.universityService.getUniversityById(this.id).subscribe((res: any)=>{
+      this.university = res;
     })
-    this.university =  JSON.parse(localStorage.getItem("UNI"));
+    // this.university =  JSON.parse(localStorage.getItem("UNI"));
   }
 
 }
