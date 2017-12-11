@@ -62,8 +62,8 @@ export class NewReviewComponent implements OnInit {
           var t = e.currentTarget.innerText;
           var bufferText = ((e.originalEvent || e).clipboardData).getData('Text');
           e.preventDefault();
-          var all = t + bufferText;
-          document.execCommand('insertText', false, all.substring(0, 400));
+          //var all = t + bufferText;
+          document.execCommand('insertText', false, bufferText.substring(0, 400));
           $('#maxContentPost').text(400 - t.length);
         }
       }
