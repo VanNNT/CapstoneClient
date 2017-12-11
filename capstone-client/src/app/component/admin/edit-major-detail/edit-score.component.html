@@ -124,11 +124,11 @@
           <div *ngFor="let scoreItem of item.scoreHistories[0] | orderBy: '+year'">
               <div class="col-md-2">
                 <label>{{scoreItem.year}}</label>
-                <input class="form-control" [(ngModel)]="scoreItem.score" [name]="'A' + scoreItem.year"/>
+                <input type="number" pattern="^\d+$" required class="form-control" [(ngModel)]="scoreItem.score" [name]="'A' + scoreItem.year"/>
               </div>
               <div class="col-md-2">
                 <label>Thang điểm</label>
-                <input class="form-control" [(ngModel)]="scoreItem.barem" [name]="'barem' + scoreItem.year"/>
+                <input type="number" pattern="^\d+$" class="form-control" [(ngModel)]="scoreItem.barem" [name]="'barem' + scoreItem.year"/>
               </div>
               <div class="col-md-4">
                 <label>Ghi chú</label>
@@ -136,7 +136,7 @@
               </div>
           </div>
           <div style="padding-bottom: 20px;padding-left: 11px;border-bottom: 1px solid;">
-            <button type="submit" (click)="onSaveScore(scoreForm,item.blockName)" [disabled]="!scoreForm.dirty || scoreForm.submitted" class="btn btn-primary">Lưu</button>
+            <button type="submit" (click)="onSaveScore(scoreForm,item.blockName)" [disabled]="!scoreForm.dirty || scoreForm.invalid" class="btn btn-primary">Lưu</button>
             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteScore" (click)="selectIndex = item.id">Xóa</button>
           </div>
         </form>
@@ -149,11 +149,11 @@
           <div>
             <div class="col-md-2">
               <label>2016</label>
-              <input type="number" class="form-control" ngModel name="A2016" [required]="true" />
+              <input type="number" pattern="^\d+$"  class="form-control" ngModel name="A2016" required />
             </div>
             <div class="col-md-2">
               <label>Thang điểm</label>
-              <input class="form-control" ngModel name="barem2016"/>
+              <input type="number" pattern="^\d+$" class="form-control" ngModel name="barem2016"/>
             </div>
             <div class="col-md-4">
               <label>Ghi chú</label>
@@ -163,11 +163,11 @@
           <div>
             <div class="col-md-2">
               <label>2017</label>
-              <input type="number" class="form-control" ngModel name="A2017" [required]="true" />
+              <input type="number" pattern="^\d+$" class="form-control" ngModel name="A2017" required />
             </div>
             <div class="col-md-2">
               <label>Thang điểm</label>
-              <input class="form-control" ngModel name="barem2017"/>
+              <input type="number" pattern="^\d+$" class="form-control" ngModel name="barem2017"/>
             </div>
             <div class="col-md-4">
               <label>Ghi chú</label>
@@ -175,7 +175,7 @@
             </div>
           </div>
           <div style="padding-bottom: 20px;padding-left: 11px;border-bottom: 1px solid;">
-            <button type="submit" [disabled]="!scoreForm.dirty || scoreForm.submitted || scoreForm.invalid" class="btn btn-primary">Lưu</button>
+            <button type="submit" [disabled]="!scoreForm.dirty || scoreForm.invalid" class="btn btn-primary">Lưu</button>
           </div>
         </form>
       </div>

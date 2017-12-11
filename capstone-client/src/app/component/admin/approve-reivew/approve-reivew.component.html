@@ -1,3 +1,5 @@
+<button style="float: right" *ngIf="all" class="btn btn-primary" (click)="showAllReview()">Đánh giá đã được duyệt</button>
+<button style="float: right" *ngIf="!all" class="btn btn-warning" (click)="ngOnInit()">Đánh giá đang đợi duyệt</button>
 <div *ngIf="listReview?.length != 0">
   <table class="table" id="myTable">
     <thead>
@@ -48,7 +50,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" (click)="approveReview()" data-dismiss="modal">Duyệt</button>
+        <button type="button" class="btn btn-success" *ngIf="all" (click)="approveReview()" data-dismiss="modal">Duyệt</button>
         <button type="button" class="btn btn-danger" (click)="notApproveReview()" data-dismiss="modal">Không Duyệt</button>
       </div>
     </div>

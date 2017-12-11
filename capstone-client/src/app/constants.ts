@@ -43,6 +43,7 @@ export class Constants{
   public SAVE_REVIEW_MAJOR_UNI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/save-review-major-uni";
   public CHECK_REVIEWED_UNI_MAJOR = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/check-reviewed-uni-major";
   public CHECK_REVIEWED_UNI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/check-reviewed-uni";
+  public GET_ALL_REVIEW = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/review/get-all-review";
   public TOP_CORRLATE_UNI = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/corrlate/top-corrlate-uni";
   public GET_MAJOR_UNIVERSITY = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-major-uni";
   public GET_FOR_TAG = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH +"/university/get-major-for-tag";
@@ -59,6 +60,7 @@ export class Constants{
   public GET_NEWEST_ARTICLE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/article/get-newest-article";
   public SAVE_QUESTION = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/save";
   public GET_ALL_QUESTION = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/questions";
+  public QUESTIONS_NOT_APPROVE = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/questions-not-approve";
   public GET_QUESTION_DETAIL = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/view";
   public QUESTIONS_BY_USER = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/questions-by-user";
   public ANSWER_BY_QUESTION = this.HTTP + this.SERVER_IP + this.SERVER_PORT + this.SERVER_PATH + "/qa/answer-by-question";

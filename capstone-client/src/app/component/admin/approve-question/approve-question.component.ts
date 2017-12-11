@@ -13,6 +13,8 @@ export class ApproveQuestionComponent implements OnInit {
   public question;
   public tags;
   private currentId: number;
+  public all = true;
+  public show = true;
   constructor(private reviewService: ReviewService,
               private universityService: UniversityService,
               public toastr: ToastsManager, vcr: ViewContainerRef) {
@@ -20,10 +22,12 @@ export class ApproveQuestionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.universityService.broadcastTextChange("DANH SÁCH CÂU HỎI");
+    this.universityService.broadcastTextChange("DANH SÁCH CÂU HỎI ĐỢI DUYỆT");
     this.reviewService.getQuestionNeedApprove().subscribe(res=>{
       if(res){
         this.listQuestion = res;
+        this.all = true;
+        this.show = true;
       }
     });
   }
@@ -52,7 +56,9 @@ export class ApproveQuestionComponent implements OnInit {
           if (this.currentId == this.listQuestion[i].id) {
             this.listQuestion.splice(i, 1);
             this.toastr.success('Câu hỏi này đã được chấp nhận', 'Thành công', {showCloseButton: true});
-            this.reviewService.numberQuestionChange(-1);
+            if(this.show == true){
+              this.reviewService.numberQuestionChange(-1);
+            }
             return;
           }
         }
@@ -61,7 +67,6 @@ export class ApproveQuestionComponent implements OnInit {
       this.toastr.error('Không thể kết nối tới máy chủ. Vui lòng kiểm tra lại', 'Thất bại',{showCloseButton: true})
     });
   }
-
   notApproveQuestion(){
     let data={
       'id': this.currentId,
@@ -74,7 +79,9 @@ export class ApproveQuestionComponent implements OnInit {
           if (this.currentId == this.listQuestion[i].id) {
             this.listQuestion.splice(i, 1);
             this.toastr.warning('Câu hỏi này đã không được chấp nhận', 'Thông báo', {showCloseButton: true});
-            this.reviewService.numberQuestionChange(-1);
+            if(this.show == true){
+              this.reviewService.numberQuestionChange(-1);
+            }
             return;
           }
         }
@@ -82,5 +89,22 @@ export class ApproveQuestionComponent implements OnInit {
     },err=>{
       this.toastr.error('Không thể kết nối tới máy chủ. Vui lòng kiểm tra lại', 'Thất bại',{showCloseButton: true})
     });
+  }
+
+  showAllQuestion(){
+    this.universityService.getAllQuestion().subscribe(res=>{
+      this.universityService.broadcastTextChange("DANH SÁCH CÂU HỎI ĐÃ DUYỆT");
+      this.listQuestion = res;
+      this.all = false;
+      this.show = false;
+    })
+  }
+  showQuestionNot(){
+    this.universityService.getQuestionNotApprove().subscribe(res=>{
+      this.universityService.broadcastTextChange("DANH SÁCH CÂU HỎI KHÔNG DUYỆT");
+      this.listQuestion = res;
+      this.all = true;
+      this.show = false;
+    })
   }
 }
