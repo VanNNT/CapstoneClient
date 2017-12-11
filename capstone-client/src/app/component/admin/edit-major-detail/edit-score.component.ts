@@ -123,6 +123,7 @@ export class EditScoreComponent implements OnInit {
     this.universityService.updateScore(data).subscribe((res:any)=>{
       if(res){
         this.toastr.success("Đã cập nhật điểm",'Thành công',{showCloseButton: true});
+        form.form.markAsPristine();
       }
     },(error)=>{
       this.toastr.error('Vui lòng kiểm tra lại kết nối mạng', 'Thất bại',{showCloseButton: true});

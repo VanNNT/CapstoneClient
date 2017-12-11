@@ -13,6 +13,7 @@ export class ApproveReivewComponent implements OnInit {
   public listReview: any[];
   public review;
   private currentId: number;
+  public all = true;
   constructor(private reviewService: ReviewService,
               private universityService: UniversityService,
               public toastr: ToastsManager, vcr: ViewContainerRef) {
@@ -20,11 +21,11 @@ export class ApproveReivewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.universityService.broadcastTextChange("DANH SÁCH ĐÁNH GIÁ");
+    this.universityService.broadcastTextChange("DANH SÁCH ĐÁNH GIÁ ĐỢI DUYỆT");
       this.reviewService.getReivewNeedApprove().subscribe(res=>{
         if(res){
           this.listReview = res;
-          console.log(this.listReview);
+          this.all = true;
         }
       });
   }
@@ -73,7 +74,9 @@ export class ApproveReivewComponent implements OnInit {
           if (this.currentId == this.listReview[i].id) {
             this.listReview.splice(i, 1);
             this.toastr.warning('Đánh giá này không được chấp nhận', 'Thông báo', {showCloseButton: true});
-            this.reviewService.numberReviewChange(-1);
+            if(this.all == true){
+              this.reviewService.numberReviewChange(-1);
+            }
             return;
           }
         }
@@ -81,5 +84,13 @@ export class ApproveReivewComponent implements OnInit {
     },err=>{
       this.toastr.error('Không thể kết nối tới máy chủ. Vui lòng kiểm tra lại', 'Thất bại',{showCloseButton: true})
     });
+  }
+
+  showAllReview(){
+    this.reviewService.getAllReview().subscribe(res=>{
+      this.universityService.broadcastTextChange("DANH SÁCH ĐÁNH GIÁ ĐÃ DUYỆT");
+      this.listReview = res;
+      this.all = false;
+    })
   }
 }

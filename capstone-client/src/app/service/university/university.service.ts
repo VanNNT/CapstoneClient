@@ -62,7 +62,10 @@ export class UniversityService {
     return this._http.get(this.contant.GET_ALL_QUESTION)
       .map((response: Response) => response.json());
   }
-
+  getQuestionNotApprove(): Observable<any>{
+    return this._http.get(this.contant.QUESTIONS_NOT_APPROVE)
+      .map((response: Response) => response.json());
+  }
   getQuestionDetail(qaId,userId):  Observable<any>{
     return this._http.get(this.contant.GET_QUESTION_DETAIL+"?qaId="+qaId + "&userId="+userId)
       .map((response: Response) => response.json());

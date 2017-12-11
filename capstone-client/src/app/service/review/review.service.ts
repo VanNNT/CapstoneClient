@@ -73,6 +73,9 @@ export class ReviewService {
     return this._http.post(this.contant.CHECK_REVIEWED_UNI,data).map((res: Response)=>res.json());
   }
 
+  getAllReview(){
+    return this._http.get(this.contant.GET_ALL_REVIEW).map((res: Response) => res.json());
+  }
   getArticle(){
     return this._http.get(this.contant.SHOW_ARTICLE).map((res: Response) => res.json());
   }

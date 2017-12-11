@@ -14,7 +14,6 @@ export class QuestionComponent implements OnInit {
   ngOnInit() {
     this.uniService.getAllQuestion().subscribe(res=>{
       this.questions = res;
-      console.log(res);
     })
   }
 

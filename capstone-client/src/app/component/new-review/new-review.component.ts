@@ -63,6 +63,7 @@ export class NewReviewComponent implements OnInit {
           var bufferText = ((e.originalEvent || e).clipboardData).getData('Text');
           e.preventDefault();
           //var all = t + bufferText;
+          //var all = t;
           document.execCommand('insertText', false, bufferText.substring(0, 400));
           $('#maxContentPost').text(400 - t.length);
         }
@@ -71,7 +72,7 @@ export class NewReviewComponent implements OnInit {
   }
 
   public onSubmit(form: NgForm){
-    if($('#summernote').summernote('code').length < 100 || $('#summernote').summernote('code').length > 400){
+    if($('#summernote').summernote('code').length < 50 || $('#summernote').summernote('code').length > 400){
       this.isCheck = true;
     }else{
       this.isCheck = false;

@@ -1,3 +1,6 @@
+<button style="float: right"  class="btn btn-danger" (click)="showQuestionNot()">Không được duyệt</button>
+<button style="float: right"  class="btn btn-primary" (click)="showAllQuestion()">Đã được duyệt</button>
+<button style="float: right"  class="btn btn-warning" (click)="ngOnInit()">Đang đợi duyệt</button>
 <div *ngIf="listQuestion?.length != 0">
   <table class="table" id="myTable">
     <thead>
@@ -25,8 +28,6 @@
 <div *ngIf="listQuestion?.length == 0">
   Hiện không có câu hỏi nào đang chờ duyệt
 </div>
-
-
 <div class="modal fade" id="reviewDetail" role="dialog">
   <div class="modal-dialog">
 
@@ -52,8 +53,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" (click)="approveQuestion()" data-dismiss="modal">Duyệt</button>
-        <button type="button" class="btn btn-danger" (click)="notApproveQuestion()" data-dismiss="modal">Không Duyệt</button>
+        <button type="button" class="btn btn-success" *ngIf="all || show" (click)="approveQuestion()" data-dismiss="modal">Duyệt</button>
+        <button type="button" class="btn btn-danger" *ngIf="!all || show" (click)="notApproveQuestion()" data-dismiss="modal">Không Duyệt</button>
       </div>
     </div>
 
